@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HowToPlayController">
+   <children>
+      <ImageView fitHeight="364.0" fitWidth="462.0" layoutX="118.0" layoutY="18.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/Toys_Games_Chess_board-512.png" />
+         </image>
+         <effect>
+            <GaussianBlur radius="9.0" />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="196.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="How To Play ?" wrappingWidth="208.13670349121094">
+         <font>
+            <Font name="Cooper Black" size="28.0" />
+         </font>
+      </Text>
+      <Text fill="#783131" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use ARROW KEYS/Mouse to move your soldier" wrappingWidth="259.4368896484375">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="82.0" fitWidth="106.0" layoutX="14.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/keys.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="61.0" fitWidth="106.0" layoutX="120.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/mouse-.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="313.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your GOAL is to move and finish your turn as soon as possible" wrappingWidth="259.4368896484375">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="21.0" fitWidth="40.0" layoutX="313.0" layoutY="127.0" opacity="0.56" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/icon.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="345.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60 sec + : -1 point for every extra second." wrappingWidth="259.4368896484375">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="21.0" fitWidth="40.0" layoutX="313.0" layoutY="164.0" opacity="0.61" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/icon.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="345.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="60 sec - : +1 point for every spare second." wrappingWidth="259.4368896484375">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="14.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/yellow.png" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="35.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Popped Questions:" wrappingWidth="122.77020263671875">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="35.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/correct.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="62.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy: +100p ,Medum: +200p ,Hard: +500p" wrappingWidth="268.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="21.0" fitWidth="17.0" layoutX="35.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/wrong.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="62.0" layoutY="281.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Easy: -200p ,Medum: -100p ,Hard: -50p" wrappingWidth="268.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <Text fill="#783131" layoutX="354.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="If you move there you'll:" wrappingWidth="164.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="363.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/red.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="385.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gain another turn using the same soldier" wrappingWidth="164.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="363.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/green.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="385.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gain 50p." wrappingWidth="164.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="362.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/blue.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="385.0" layoutY="321.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Return one dead soldier." wrappingWidth="164.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="362.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/orange.jpg" />
+         </image>
+         <effect>
+            <DropShadow />
+         </effect>
+      </ImageView>
+      <Text fill="#783131" layoutX="385.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learn where you can move." wrappingWidth="164.10357666015625">
+         <font>
+            <Font name="Cooper Black" size="13.0" />
+         </font>
+      </Text>
+      <Button fx:id="HomePageButton" layoutX="7.0" layoutY="373.0" mnemonicParsing="false" onAction="#OpenHomePage" prefHeight="22.0" prefWidth="90.0" style="-fx-background-color: peru;" text=" Home page" textFill="#783131" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="Cooper Black" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="ExitButton" layoutX="551.0" layoutY="373.0" mnemonicParsing="false" onAction="#Exit" style="-fx-background-color: peru;" text="Exit" textFill="#783131" textOverrun="WORD_ELLIPSIS">
+         <font>
+            <Font name="Cooper Black" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>
