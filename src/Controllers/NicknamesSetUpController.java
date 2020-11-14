@@ -1,7 +1,5 @@
 package Controllers;
 
-
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -12,13 +10,25 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class NicknamesController implements Initializable {
+public class NicknamesSetUpController implements Initializable {
 
-	@FXML
-	void openHomePage(ActionEvent event) {
-		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+    @FXML
+    private Button exitbutton;
+
+    @FXML
+    private Button homePageButton;
+
+    @FXML
+    void exit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void openHomePage(ActionEvent event) {
+    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		MainBoardController temp=new MainBoardController();
 		try {
 		temp.start(stage);	
@@ -26,20 +36,17 @@ public class NicknamesController implements Initializable {
 			// TODO: handle exception
 		}
 
-	}
-
-	
-
-	public void start(Stage primaryStage) {
+    }
+    public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/view/NicknamesScreen.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/view/NicknamesSetupScreen.fxml"));
 			Scene scene = new Scene(root);
-			// scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@Override
@@ -47,4 +54,5 @@ public class NicknamesController implements Initializable {
 		// TODO Auto-generated method stub
 		
 	}
+
 }

@@ -6,9 +6,25 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SettingsController {
+	 @FXML
+	    private Pane pane;
+
+	 @FXML
+	    private Button exitbutton;
+
+	    @FXML
+	    private Button homepageButton;
+
+	    @FXML
+	    void exit(ActionEvent event) {
+			((Stage) pane.getScene().getWindow()).close();
+
+	    }
 
 	@FXML
 	void openHomePage(ActionEvent event) {
