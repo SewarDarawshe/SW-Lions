@@ -91,7 +91,7 @@ public class MainBoardController implements Initializable {
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		}//test
 
 	}
 }
