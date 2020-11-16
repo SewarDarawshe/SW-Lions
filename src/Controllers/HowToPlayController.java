@@ -25,6 +25,7 @@ public class HowToPlayController implements Initializable{
     void Exit(ActionEvent event) {
 
     }
+    //sss
 
     @FXML
     void OpenHomePage(ActionEvent event) {
