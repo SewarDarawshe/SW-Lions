@@ -2,25 +2,30 @@ package Model;
 
 public class Square {
 	
+	// -------------------------------Class Members------------------------------
+
 	private int Number;
 	private int X;
 	private int Y;
 	
 	
+	// -------------------------------Constructors-------------------------------
 
 	public Square(int number, int x, int y) {
 		super();
-		Number = number;
-		X = x;
-		Y = y;
+		this.Number = number;
+		this.X = x;
+		this.Y = y;
 	}
+
+	// -------------------------------Getters And Setters-------------------------
 
 	public int getNumber() {
 		return Number;
 	}
 
 	public void setNumber(int number) {
-		Number = number;
+		this.Number = number;
 	}
 
 
@@ -30,7 +35,7 @@ public class Square {
 
 
 	public void setX(int x) {
-		X = x;
+		this.X = x;
 	}
 
 
@@ -40,7 +45,7 @@ public class Square {
 	
 
 	public void setY(int y) {
-		Y = y;
+		this.Y = y;
 	}
 	
 
