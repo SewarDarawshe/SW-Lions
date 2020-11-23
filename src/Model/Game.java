@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Game {
 	
-	private Square[][] Board=new Square[8][8];
+	private Soldier[][] Board=new Soldier[8][8];
 	private ArrayList<Player> Players=new ArrayList<>();
 	private Questions[] Questions=new Questions[32];
 	private Time GameTime;
@@ -19,7 +19,7 @@ public class Game {
 //---------------------------Constructor----------------------
 	
 	
-	public Game(Square[][] board, ArrayList<Player> players, Model.Questions[] questions, Time gameTime, int pPoint1,
+	public Game(Soldier[][] board, ArrayList<Player> players, Model.Questions[] questions, Time gameTime, int pPoint1,
 			int pPoint2, Time queueTime, Soldier[] soldier1, Soldier[] soldier2, Square[] blackSquares) {
 		super();
 		Board = board;
@@ -35,10 +35,10 @@ public class Game {
 	}
 	//---------------Getters and Setters--------------------------
 	
-	public Square[][] getBoard() {
+	public Soldier[][] getBoard() {
 		return Board;
 	}
-	public void setBoard(Square[][] board) {
+	public void setBoard(Soldier[][] board) {
 		Board = board;
 	}
 	public ArrayList<Player> getPlayers() {
