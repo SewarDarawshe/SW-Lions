@@ -1,5 +1,5 @@
 package Model;
-
+//test for class
 public class Answer {
 	// -------------------------------Class Members------------------------------
 private String text;
