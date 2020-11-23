@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.HowToPlayController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HowToPlayController">
    <children>
       <ImageView fitHeight="364.0" fitWidth="462.0" layoutX="118.0" layoutY="18.0" opacity="0.4" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/Toys_Games_Chess_board-512.png" />
+            <Image url="@../resources/Toys_Games_Chess_board-512.png" />
          </image>
          <effect>
             <GaussianBlur radius="9.0" />
@@ -31,7 +31,7 @@
       </Text>
       <ImageView fitHeight="82.0" fitWidth="106.0" layoutX="14.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/keys.png" />
+            <Image url="@../resources/keys.png" />
          </image>
          <effect>
             <DropShadow />
@@ -39,7 +39,7 @@
       </ImageView>
       <ImageView fitHeight="61.0" fitWidth="106.0" layoutX="120.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/mouse-.png" />
+            <Image url="@../resources/mouse-.png" />
          </image>
          <effect>
             <DropShadow />
@@ -52,7 +52,7 @@
       </Text>
       <ImageView fitHeight="21.0" fitWidth="40.0" layoutX="313.0" layoutY="127.0" opacity="0.56" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/icon.png" />
+            <Image url="@../resources/icon.png" />
          </image>
          <effect>
             <DropShadow />
@@ -65,7 +65,7 @@
       </Text>
       <ImageView fitHeight="21.0" fitWidth="40.0" layoutX="313.0" layoutY="164.0" opacity="0.61" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/icon.png" />
+            <Image url="@../resources/icon.png" />
          </image>
          <effect>
             <DropShadow />
@@ -78,7 +78,7 @@
       </Text>
       <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="14.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/yellow.png" />
+            <Image url="@../resources/yellow.png" />
          </image>
          <effect>
             <DropShadow />
@@ -91,7 +91,7 @@
       </Text>
       <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="35.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/correct.jpg" />
+            <Image url="@../resources/correct.jpg" />
          </image>
          <effect>
             <DropShadow />
@@ -104,7 +104,7 @@
       </Text>
       <ImageView fitHeight="21.0" fitWidth="17.0" layoutX="35.0" layoutY="269.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/wrong.jpg" />
+            <Image url="@../resources/wrong.jpg" />
          </image>
          <effect>
             <DropShadow />
@@ -122,7 +122,7 @@
       </Text>
       <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="363.0" layoutY="241.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/red.jpg" />
+            <Image url="@../resources/red.jpg" />
          </image>
          <effect>
             <DropShadow />
@@ -135,7 +135,7 @@
       </Text>
       <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="363.0" layoutY="278.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/green.jpg" />
+            <Image url="@../resources/green.jpg" />
          </image>
          <effect>
             <DropShadow />
@@ -148,7 +148,7 @@
       </Text>
       <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="362.0" layoutY="309.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/blue.jpg" />
+            <Image url="@../resources/blue.jpg" />
          </image>
          <effect>
             <DropShadow />
@@ -161,7 +161,7 @@
       </Text>
       <ImageView fitHeight="15.0" fitWidth="20.0" layoutX="362.0" layoutY="346.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../pic/orange.jpg" />
+            <Image url="@../resources/orange.jpg" />
          </image>
          <effect>
             <DropShadow />

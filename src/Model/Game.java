@@ -6,19 +6,19 @@ import java.util.ArrayList;
 public class Game {
 	private Square[][] Board=new Square[8][8];
 	private ArrayList<Player> Players=new ArrayList<>();
-	private Questions[] Questions=new Questions[32];
+	private Question[] Questions=new Question[32];
 	private Time GameTime;
 	private int PPoint1;
 	private int PPoint2;
 	private Time QueueTime;
-	private Soldier[] Soldier1=new Soldier[12];
-	private Soldier[] Soldier2=new Soldier[12];
+	private Soldier[] WhitePieces=new Soldier[12];
+	private Soldier[] BlackPieces=new Soldier[12];
 	private Square[] BlackSquares=new Square[32];
 
 //---------------------------Constructor----------------------
 	
 	
-	public Game(Square[][] board, ArrayList<Player> players, Model.Questions[] questions, Time gameTime, int pPoint1,
+	public Game(Square[][] board, ArrayList<Player> players, Model.Question[] questions, Time gameTime, int pPoint1,
 			int pPoint2, Time queueTime, Soldier[] soldier1, Soldier[] soldier2, Square[] blackSquares) {
 		super();
 		Board = board;
@@ -28,8 +28,8 @@ public class Game {
 		PPoint1 = pPoint1;
 		PPoint2 = pPoint2;
 		QueueTime = queueTime;
-		Soldier1 = soldier1;
-		Soldier2 = soldier2;
+		WhitePieces = soldier1;
+		BlackPieces = soldier2;
 		BlackSquares = blackSquares;
 	}
 	//---------------Getters and Setters--------------------------
@@ -46,10 +46,10 @@ public class Game {
 	public void setPlayers(ArrayList<Player> players) {
 		Players = players;
 	}
-	public Questions[] getQuestions() {
+	public Question[] getQuestions() {
 		return Questions;
 	}
-	public void setQuestions(Questions[] questions) {
+	public void setQuestions(Question[] questions) {
 		Questions = questions;
 	}
 	public Time getGameTime() {
@@ -77,16 +77,16 @@ public class Game {
 		QueueTime = queueTime;
 	}
 	public Soldier[] getSoldier1() {
-		return Soldier1;
+		return WhitePieces;
 	}
 	public void setSoldier1(Soldier[] soldier1) {
-		Soldier1 = soldier1;
+		WhitePieces = soldier1;
 	}
 	public Soldier[] getSoldier2() {
-		return Soldier2;
+		return BlackPieces;
 	}
 	public void setSoldier2(Soldier[] soldier2) {
-		Soldier2 = soldier2;
+		BlackPieces = soldier2;
 	}
 	public Square[] getBlackSquares() {
 		return BlackSquares;

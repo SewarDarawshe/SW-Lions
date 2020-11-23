@@ -1,4 +1,4 @@
-package Controllers;
+package view;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,21 +13,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class ResultsBoardController implements Initializable{
+public class NicknamesSetUpController implements Initializable {
 
     @FXML
-    private Button HomePageButton;
+    private Button exitbutton;
 
     @FXML
-    private Button ExitButton;
+    private Button homePageButton;
 
     @FXML
-    void Exit(ActionEvent event) {
+    void exit(ActionEvent event) {
 
     }
 
     @FXML
-    void OpneHomePage(ActionEvent event) {
+    void openHomePage(ActionEvent event) {
     	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		MainBoardController temp=new MainBoardController();
 		try {
@@ -35,23 +35,24 @@ public class ResultsBoardController implements Initializable{
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-    }
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void start(Stage primaryStage) {
+    }
+    public void start(Stage primaryStage) {
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/view/ResultsBoardScreen.fxml"));
+			Parent root = FXMLLoader.load(getClass().getResource("/view/NicknamesSetupScreen.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Results Board");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

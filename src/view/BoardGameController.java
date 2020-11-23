@@ -1,4 +1,4 @@
-package Controllers;
+package view;
 
 public class BoardGameController {
 

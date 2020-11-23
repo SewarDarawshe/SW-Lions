@@ -1,8 +1,7 @@
 package Model;
 
-public class Questions {
+public class Question {
 	// -------------------------------Class Members------------------------------
-
 	private static int number=0;
 	private String text;
 	private int difficulty;
@@ -10,7 +9,7 @@ public class Questions {
 	
 	// -------------------------------Constructors-------------------------------
 
-		public Questions(String text, int difficulty, String[]answers ) {
+		public Question(String text, int difficulty, String[]answers ) {
 			super();
 			number++;
 			this.text=text;
