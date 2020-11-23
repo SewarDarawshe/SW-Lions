@@ -47,18 +47,5 @@ public class Questions {
 		public void setAnswers(String[] answers) {
 			this.answers = answers;
 		}
-		
-		// -------------------------------Methods-------------------------
-		
-		public void addAnswer() {
-			//To Do
-		}
-		
-		public void deleteAnswer() {
-			//To Do
-		}
 
-	
 }
-
-

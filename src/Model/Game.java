@@ -4,7 +4,6 @@ import java.sql.Time;
 import java.util.ArrayList;
 
 public class Game {
-	
 	private Soldier[][] Board=new Soldier[8][8];
 	private ArrayList<Player> Players=new ArrayList<>();
 	private Questions[] Questions=new Questions[32];
@@ -165,5 +164,5 @@ public class Game {
 		return false;
 	}
 	
-	
+
 }
