@@ -32,5 +32,10 @@ public void setIsCorrect(boolean iscorrect) {
 
 }
 
+@Override
+public String toString() {
+	return "Answer [text=" + text + ", isCorrect=" + isCorrect + "]";
+}
+
 
 }
