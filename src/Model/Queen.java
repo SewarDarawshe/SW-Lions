@@ -11,6 +11,8 @@ public class Queen extends Soldier {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
 	// -------------------------------Getters And Setters-------------------------
 
 	public Soldier getQueen() {

@@ -2,6 +2,8 @@ package Model;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import Model.Player;
+import utils.E_Difficulty;
 
 public class Game {
 	private Square[][] Board=new Square[8][8];
@@ -102,9 +104,12 @@ public class Game {
 		//To do
 	}
 	
-	public void AddPlayer()
+	public void AddPlayer(String wp,String bp)
 	{
-		//To do
+		Player whitePlayer = new Player(wp,0);
+		Player blackPlayer = new Player(bp,0);
+
+
 	}
 	
 	public void StartGame()
@@ -132,19 +137,23 @@ public class Game {
 		//To do
 	}
 	
-	public void removeSoldier()
+	public void removeSoldier(Soldier[] s, int index)
 	{
-		//To do
+	if(s==null)
+		return;
+	s[index]=null;
+	return;
 	}
 	
-	public void soldierTurnToQueen()
+	public void soldierTurnToQueen(Soldier s)
 	{
-		//To do
+		Queen q= new Queen(s.isIsAlive(),true,s.getLocation());
 	}
 	
-	public void chooseQuestion()
+	public void chooseQuestion(E_Difficulty diff)
 	{
-		//To do
+	//To do
+	
 	}
 	
 	public void removeQuestion()
