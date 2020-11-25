@@ -6,7 +6,7 @@ import utils.E_Difficulty;
 
 public class Question {
 // -------------------------------Class Members------------------------------
-	private static int number=0;
+	private int number;
 	private String text;
 	private E_Difficulty difficulty;
 	private ArrayList<Answer> answers;
@@ -16,9 +16,9 @@ public class Question {
 	private int penalty; 
 	
 // -------------------------------Constructors-------------------------------
-   public Question(String text, E_Difficulty difficulty, ArrayList<Answer> answers, int correct_ans, String team) {
+   public Question(int Number,String text, E_Difficulty difficulty, ArrayList<Answer> answers, int correct_ans) {
 		super();
-		number++;
+		this.number=Number;
 		this.text = text;
 		this.difficulty = difficulty;
 		this.answers = answers;
@@ -38,12 +38,12 @@ public class Question {
 		}
 		}
 // -------------------------------Getters And Setters-------------------------------
-   public static int getNumber() {
+   public  int getNumber() {
 		return number;
 	}
 
-	public static void setNumber(int number) {
-		Question.number = number;
+	public  void setNumber(int number) {
+		this.number = number;
 	}
 
 	public String getText() {

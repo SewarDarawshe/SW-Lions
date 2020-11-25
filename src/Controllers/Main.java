@@ -1,5 +1,6 @@
 package Controllers;
 	
+import Model.Question;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -17,6 +18,13 @@ public class Main extends Application {
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			for(Question q:Sysdata.getInstance().getQuestionsarr())
+			{
+				System.out.println("hi");
+
+				System.out.println(q);
+			}
+				
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

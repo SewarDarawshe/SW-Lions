@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -64,7 +65,8 @@ public class Sysdata {
 		 * list containing them.
 		 */
 		public ArrayList<Question> getQuestionsarr() {
-		//	readQuestionsJSON();
+			readQuestionsJSON();
+
 			return QuestionsArray;
 		}
 	
@@ -74,7 +76,6 @@ public class Sysdata {
 		 * This method reads the questions written in JSON file and saves them in an
 		 * array list.
 		 */
-		@SuppressWarnings("deprecation")
 		private void readQuestionsJSON() {
 			QuestionsArray = new ArrayList<Question>();
 			try {
@@ -83,6 +84,7 @@ public class Sysdata {
 						QuestionsArray.remove(i);
 					}
 				int k = 1;
+
 				Object obj = new JSONParser().parse(new FileReader("questionsJSON.json"));
 				JSONObject jo = (JSONObject) obj;
 				JSONArray arr = (JSONArray) jo.get("questions");
@@ -107,12 +109,11 @@ public class Sysdata {
 						i++;
 					}
 					E_Difficulty difficulty = E_Difficulty.returnEnum((String) jsonQObjt.get("level"));
-				/*	
-				 * check the json questions build!!!!!! 
-				 * we have to change it ! 
-				 * Question q = new Question(k, context, difficulty, arrlista, correct_ans);
+			
+				  Question q = new Question(k, context, difficulty, arrlista, correct_ans);
 					k++;
-					QuestionsArray.add(q);*/
+					System.out.println("aa");
+					QuestionsArray.add(q);
 				}
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
