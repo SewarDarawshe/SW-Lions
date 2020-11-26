@@ -11,6 +11,8 @@ public class Game {
 	
 	public static final char BLACK='1';	//represents a black piece
 	public static final char WHITE='2';	//represents a white piece
+	public static final char QUEEN='3';	//represents a queen piece
+
 	public static final char EMPTY='0';	//board position is empty
 
 	public static final char LEFT='l';	//a left move
