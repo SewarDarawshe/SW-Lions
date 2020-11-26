@@ -50,15 +50,103 @@ public class Soldier {
 	
 	// -------------------------------Methods------------------------------------
 
-	//To Do
-	public void UPright() {
-		return;
+	//function that check if the player can move his soldier or not.
+	public boolean legalMove(int x, int y, char direction, char colour)
+    {
+      if (direction == 'l') {
+          if(x==0) {
+              return false;
+          }
+        
+
+      }
+
+      if (direction == 'r') {
+          if(x==7) {
+              return false;
+          }          
+      }
+
+      return true;
+    }
+	//function that moves the black soldier
+	public int moveBlack(int x, int y, char direction, Square[][] Board)
+	{
+            //check if its possible    
+
+            // x,y,left
+
+            boolean checkMove = legalMove(x,y,direction,'b');
+
+
+            if (checkMove==true)
+            {
+                if (direction=='l')
+                {
+                    int xDirection=x;
+                    Board[x][y].setNumber(0);
+                    xDirection--;
+                    Board[xDirection][y-1].setNumber(1);
+                }
+
+
+                if (direction=='r')
+                {
+                    int xDirection=x;
+                    Board[x][y].setNumber(0);
+                    xDirection++;
+                    Board[xDirection][y-1].setNumber(1);   //issue on line
+                }
+            } else 
+            {
+                System.out.println("Error: You have tried to move in an incorrect position.");
+            }
+
+
+	  	
+
+	  	return 0;
+
 	}
+
 	
-	//To Do
-	public void Upleft() {
-		return;
+	//function that Moves a white piece in a specified direction
+	public int moveWhite(int x, int y, char direction,Square[][] Board)
+	{
+
+            boolean checkMove = legalMove(x,y,direction,'w');
+
+
+            if (checkMove==true)
+            {
+                if (direction=='l')
+                {
+                    int xDirection=x;
+                    Board[x][y].setNumber(0);
+                    xDirection--;
+                    Board[xDirection][y+1].setNumber(2);
+
+                }
+
+
+                if (direction=='r')
+                {
+                    int xDirection=x;
+                    Board[x][y].setNumber(0);
+                    xDirection++;
+                    Board[xDirection][y+1].setNumber(2); //issue on line
+                }
+            } else 
+            {
+                System.out.println("Error: You have tried to move in an incorrect position.");
+            }
+
+	  	
+
+	  	return 0;
+
 	}
+
 	
 
 }
