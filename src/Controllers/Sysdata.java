@@ -4,13 +4,19 @@ import java.io.FileNotFoundException;
 
 
 
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -242,6 +248,125 @@ public class Sysdata {
 					choosenQuestions.add(q);
 			}
 			return choosenQuestions;
+		}
+		
+		
+		/*
+		 * getHistory reads the JSON file with the previous games and returns an array
+		 * list containing them.
+		 */
+		public ArrayList<Game> getHistory() {
+			readHistoryJSON();
+			return GamesHistory;
+		}
+
+		/*
+		 * given a player instance which holds a game that ended adds it to the data set
+		 * of history games and to JSON file by rewriting it.
+		 */
+		public boolean addGameHistory(Player white,Player black,Date Date) {
+			getHistory();
+			if (white != null && black !=null) {
+				Game g=new Game(Date, white, black);
+				GamesHistory.add(g);
+				writeHistoryToJSON();
+				readHistoryJSON();
+			}
+			return false;
+		}
+
+		/*
+		 * Deletes all game history from the data set and JSON file.
+		 */
+		public void deleteGameHistory() {
+			for (int i = GamesHistory.size(); i > 0; i--)
+				GamesHistory.remove(i - 1);
+			writeHistoryToJSON();
+		}
+		/*
+		 * This method reads the history games written in JSON file and saves them in an
+		 * array list.
+		 */
+		@SuppressWarnings("deprecation")
+		private void readHistoryJSON() {
+			GamesHistory = new ArrayList<Game>();
+			try {
+				if (GamesHistory.isEmpty())
+					for (int i = 0; i < GamesHistory.size(); i++)
+						GamesHistory.remove(i);
+				Object obj = new JSONParser().parse(new FileReader("GAMEHISTORY.json"));
+				JSONObject jo = (JSONObject) obj;
+				JSONArray arr = (JSONArray) jo.get("games");
+
+				for (Object Obj : arr) {
+					JSONObject jsonQObjt = (JSONObject) Obj;
+					
+					String dateStr = (String) jsonQObjt.get("Date");
+					SimpleDateFormat sdf = new SimpleDateFormat("EE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+					Date gameDate = new java.util.Date(sdf.parse(dateStr).getTime());
+					String whitenic = (String) jsonQObjt.get("WhiteNic");
+					int whitepoint = Integer.parseInt((String) jsonQObjt.get("WhitePoint"));
+					Player Wp = new Player(whitenic, whitepoint);
+					String blacknic = (String) jsonQObjt.get("BlackNic");
+					int blackpoint = Integer.parseInt((String) jsonQObjt.get("BlackPoint"));
+					Player Bp = new Player(blacknic, blackpoint);
+                   Game g=new Game(gameDate, Wp, Bp);
+                   GamesHistory.add(g);
+				}
+				// sort the array
+				Collections.sort(GamesHistory, new Comparator<Game>() {
+					@Override
+					public int compare(Game g1, Game g2) {
+						return (g1.getGameTime() .before(g2.getGameTime())  ? 1 : (g1.getGameTime() == g2.getGameTime() ? 0 : -1));
+					}
+				});
+				// keeping top 15 games only
+				if (GamesHistory.size() > 15) {
+					ArrayList<Game> top15 = new ArrayList<Game>();
+					for (int j = 0; j < 15; j++) {
+						top15.add(GamesHistory.get(j));
+					}
+					GamesHistory = top15;
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		/*
+		 * Given an array list this method overrides the JSON history file with the
+		 * history games in the array list
+		 */
+		@SuppressWarnings({ "unchecked", "deprecation" })
+		private void writeHistoryToJSON() {
+			try {
+				JSONObject jo = new JSONObject();
+				JSONArray ja = new JSONArray();
+				for (Game g : GamesHistory) {
+					@SuppressWarnings("rawtypes")
+					Map m = new LinkedHashMap(5);
+					m.put("Date", g.getGameTime().toString());
+					m.put("WhiteNic",g.getWhitePlayer().getNickName());
+					m.put("WhitePoint", ""+ g.getWhitePlayer().getPoints());
+					m.put("BlackNic",g.getBlackPlayer().getNickName());
+					m.put("BlackPoint", ""+ g.getBlackPlayer().getPoints());
+					ja.add(m);
+				}
+				jo.put("games", ja);
+				PrintWriter pw = new PrintWriter("GAMEHISTORY.json");
+				pw.write(jo.toJSONString());
+				pw.flush();
+				pw.close();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 }
