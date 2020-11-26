@@ -18,7 +18,6 @@ public class Game {
 
 	
 	private Square[][] Board=new Square[8][8];
-	private Question[] Questions=new Question[32];
 	private Date GameDate;
 	private Player whitePlayer;
 	private Player blackPlayer;
@@ -30,10 +29,9 @@ public class Game {
 //---------------------------Constructor----------------------
 	
 	
-	public Game(Square[][] board,Player white,Player black, Model.Question[] questions, Date gamedate, Time queueTime, Soldier[] soldier1, Soldier[] soldier2, Square[] blackSquares) {
+	public Game(Square[][] board,Player white,Player black, Date gamedate, Time queueTime, Soldier[] soldier1, Soldier[] soldier2, Square[] blackSquares) {
 		super();
 		Board = board;
-		Questions = questions;
 		GameDate = gamedate;
 		QueueTime = queueTime;
 		WhitePieces = soldier1;
@@ -51,12 +49,7 @@ public class Game {
 		Board = board;
 	}
 	
-	public Question[] getQuestions() {
-		return Questions;
-	}
-	public void setQuestions(Question[] questions) {
-		Questions = questions;
-	}
+	
 	public Date getGameTime() {
 		return GameDate;
 	}
@@ -168,8 +161,8 @@ public class Game {
 	
 	public void AddPlayer(String wp,String bp)
 	{
-		Player whitePlayer = new Player(wp,0);
-		Player blackPlayer = new Player(bp,0);
+		 this.whitePlayer = new Player(wp,0);
+		 this. blackPlayer = new Player(bp,0);
 
 
 	}
@@ -209,19 +202,9 @@ public class Game {
 	
 	public void soldierTurnToQueen(Soldier s)
 	{
-		Queen q= new Queen(s.isIsAlive(),true,s.getLocation());
+		s.setIsQueen(true);
 	}
 	
-	public void chooseQuestion(E_Difficulty diff)
-	{
-	//To do
-	
-	}
-	
-	public void removeQuestion()
-	{
-		//To do
-	}
 	
 	public boolean IsEatable()
 	{

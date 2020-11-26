@@ -1,5 +1,7 @@
 package Model;
 
+import utils.Soldier_COLOR;
+
 public class Soldier {
 	
 	// -------------------------------Class Members------------------------------
@@ -7,17 +9,27 @@ public class Soldier {
 	private boolean IsAlive;
 	private boolean IsQueen;
 	private Square Location;
+	private Soldier_COLOR Color;
 	
 	// -------------------------------Constructors-------------------------------
 
-	public Soldier(boolean isAlive, boolean isQueen, Square location) {
+	public Soldier(boolean isAlive, Square location, Soldier_COLOR color) {
 		super();
 		this.IsAlive = isAlive;
-		this.IsQueen = isQueen;
+		this.IsQueen = false;
 		this.Location = location;
+		this.Color=color;
 	}
 	
 	// -------------------------------Getters And Setters-------------------------
+
+	public Soldier_COLOR getColor() {
+		return Color;
+	}
+
+	public void setColor(Soldier_COLOR color) {
+		Color = color;
+	}
 
 	public boolean isIsAlive() {
 		return IsAlive;
@@ -43,12 +55,15 @@ public class Soldier {
 		this.Location = location;
 	}
 
-	@Override
-	public String toString() {
-		return "Soldier [IsAlive=" + IsAlive + ", IsQueen=" + IsQueen + ", Location=" + Location + "]";
-	}
+	
 	
 	// -------------------------------Methods------------------------------------
+
+	@Override
+	public String toString() {
+		return "Soldier [IsAlive=" + IsAlive + ", IsQueen=" + IsQueen + ", Location=" + Location + ", Color=" + Color
+				+ "]";
+	}
 
 	//function that check if the player can move his soldier or not.
 	public boolean legalMove(int x, int y, char direction)
@@ -125,6 +140,7 @@ public class Soldier {
                     Board[x][y].setNumber(0);
                     xDirection--;
                     Board[xDirection][y+1].setNumber(2);
+                    return 0;
 
                 }
 
@@ -135,17 +151,45 @@ public class Soldier {
                     Board[x][y].setNumber(0);
                     xDirection++;
                     Board[xDirection][y+1].setNumber(2); //issue on line
+                    return 0;
                 }
             } else 
             {
                 System.out.println("Error: You have tried to move in an incorrect position.");
+                return -1;
             }
 
 	  	
 
-	  	return 0;
+	  	return -1;
 
 	}
+	
+	// returns -1 if the solder is not a queen 
+public int QueenMove(int x,int y,Square[][] Board,char dir) {
+		if(isIsQueen()==true)
+		{
+		if(dir=='r' & x==7)
+		{
+			
+			Board[x][y].setNumber(0);
+			Board[0][y].setNumber(3);
+		}
+		
+		if(dir=='l' & x==0)
+		{
+			Board[x][y].setNumber(0);
+			Board[7][y].setNumber(3);
+		}
+		
+		return 0;
+		
+	}
+		else return -1;
+	
+		
+}
+	
 
 	
 
