@@ -12,18 +12,16 @@ public class Game {
 	public static final char BLACK='1';	//represents a black piece
 	public static final char WHITE='2';	//represents a white piece
 	public static final char QUEEN='3';	//represents a queen piece
-
 	public static final char EMPTY='0';	//board position is empty
-
 	public static final char LEFT='l';	//a left move
 	public static final char RIGHT='r';	//a right move
 
+	
 	private Square[][] Board=new Square[8][8];
-	private ArrayList<Player> Players=new ArrayList<>();
 	private Question[] Questions=new Question[32];
-	private Time GameTime;
-	private int PPoint1;
-	private int PPoint2;
+	private Date GameDate;
+	private Player whitePlayer;
+	private Player blackPlayer;
 	private Time QueueTime;
 	private Soldier[] WhitePieces=new Soldier[12];
 	private Soldier[] BlackPieces=new Soldier[12];
@@ -32,60 +30,78 @@ public class Game {
 //---------------------------Constructor----------------------
 	
 	
-	public Game(Square[][] board, ArrayList<Player> players, Model.Question[] questions, Time gameTime, int pPoint1,
-			int pPoint2, Time queueTime, Soldier[] soldier1, Soldier[] soldier2, Square[] blackSquares) {
+	public Game(Square[][] board,Player white,Player black, Model.Question[] questions, Date gamedate, Time queueTime, Soldier[] soldier1, Soldier[] soldier2, Square[] blackSquares) {
 		super();
 		Board = board;
-		Players = players;
 		Questions = questions;
-		GameTime = gameTime;
-		PPoint1 = pPoint1;
-		PPoint2 = pPoint2;
+		GameDate = gamedate;
 		QueueTime = queueTime;
 		WhitePieces = soldier1;
 		BlackPieces = soldier2;
 		BlackSquares = blackSquares;
+		whitePlayer=white;
+		blackPlayer=black;
 	}
 	//---------------Getters and Setters--------------------------
 	
-	
-
 	public Square[][] getBoard() {
 		return Board;
 	}
 	public void setBoard(Square[][] board) {
 		Board = board;
 	}
-	public ArrayList<Player> getPlayers() {
-		return Players;
-	}
-	public void setPlayers(ArrayList<Player> players) {
-		Players = players;
-	}
+	
 	public Question[] getQuestions() {
 		return Questions;
 	}
 	public void setQuestions(Question[] questions) {
 		Questions = questions;
 	}
-	public Time getGameTime() {
-		return GameTime;
+	public Date getGameTime() {
+		return GameDate;
 	}
 	public void setGameTime(Time gameTime) {
-		GameTime = gameTime;
+		GameDate = gameTime;
 	}
-	public int getPPoint1() {
-		return PPoint1;
+	
+	public Game(Date gameDate, Player whitePlayer, Player blackPlayer) {
+		super();
+		GameDate = gameDate;
+		this.whitePlayer = whitePlayer;
+		this.blackPlayer = blackPlayer;
 	}
-	public void setPPoint1(int pPoint1) {
-		PPoint1 = pPoint1;
+	public Player getWhitePlayer() {
+		return whitePlayer;
 	}
-	public int getPPoint2() {
-		return PPoint2;
+
+	public void setWhitePlayer(Player whitePlayer) {
+		this.whitePlayer = whitePlayer;
 	}
-	public void setPPoint2(int pPoint2) {
-		PPoint2 = pPoint2;
+
+	public Player getBlackPlayer() {
+		return blackPlayer;
 	}
+
+	public void setBlackPlayer(Player blackPlayer) {
+		this.blackPlayer = blackPlayer;
+	}
+
+	public Soldier[] getWhitePieces() {
+		return WhitePieces;
+	}
+
+	public void setWhitePieces(Soldier[] whitePieces) {
+		WhitePieces = whitePieces;
+	}
+
+	public Soldier[] getBlackPieces() {
+		return BlackPieces;
+	}
+
+	public void setBlackPieces(Soldier[] blackPieces) {
+		BlackPieces = blackPieces;
+	}
+
 	public Time getQueueTime() {
 		return QueueTime;
 	}
@@ -116,47 +132,46 @@ public class Game {
 	public void initiateGame()
 	{
 		//To do
-		for(int i=0;i<WhitePieces.length;i++)
-		{
-			WhitePieces[i].setIsAlive(true);			
-			
-		}
-		
-		for(int i=0;i<BlackPieces.length;i++)
-		{
-			BlackPieces[i].setIsAlive(true);			
-			
-		}
-        Player player1=new Player(null, 0);
-        Player player2=new Player(null, 0);
-        Players.add(player1);
-        Players.add(player2);
+				for(int i=0;i<WhitePieces.length;i++)
+				{
+					WhitePieces[i].setIsAlive(true);			
+					
+				}
+				
+				for(int i=0;i<BlackPieces.length;i++)
+				{
+					BlackPieces[i].setIsAlive(true);			
+					
+				}
 
-        
-     
-        for (int x=0; x<8; x++)
-         
-        	for (int z=0; z<8; z++)
-          
-            Board[x][z].setNumber(EMPTY);
-          
-        	
+		        whitePlayer.setPoints(0);
+		        blackPlayer.setPoints(0);
+		        
+		     
+		        for (int x=0; x<8; x++)
+		         
+		        	for (int z=0; z<8; z++)
+		          
+		            Board[x][z].setNumber(EMPTY);
+		          
+		        	
 
-	  	Board[0][0].setNumber(WHITE);Board[2][0].setNumber(WHITE);Board[4][0].setNumber(WHITE);Board[6][0].setNumber(WHITE);
-	  	Board[1][1].setNumber(WHITE);Board[3][1].setNumber(WHITE);Board[5][1].setNumber(WHITE);Board[7][1].setNumber(WHITE);
-	  	Board[0][2].setNumber(WHITE);Board[2][2].setNumber(WHITE);Board[4][2].setNumber(WHITE);Board[6][2].setNumber(WHITE);
+			  	Board[0][0].setNumber(WHITE);Board[2][0].setNumber(WHITE);Board[4][0].setNumber(WHITE);Board[6][0].setNumber(WHITE);
+			  	Board[1][1].setNumber(WHITE);Board[3][1].setNumber(WHITE);Board[5][1].setNumber(WHITE);Board[7][1].setNumber(WHITE);
+			  	Board[0][2].setNumber(WHITE);Board[2][2].setNumber(WHITE);Board[4][2].setNumber(WHITE);Board[6][2].setNumber(WHITE);
 
-	  	Board[1][7].setNumber(BLACK);Board[3][7].setNumber(BLACK);Board[5][7].setNumber(BLACK);Board[7][7].setNumber(BLACK);
-	  	Board[0][6].setNumber(BLACK);Board[2][6].setNumber(BLACK);Board[4][6].setNumber(BLACK);Board[6][6].setNumber(BLACK);
-	  	Board[1][5].setNumber(BLACK);Board[3][5].setNumber(BLACK);Board[5][5].setNumber(BLACK);Board[7][5].setNumber(BLACK);
+			  	Board[1][7].setNumber(BLACK);Board[3][7].setNumber(BLACK);Board[5][7].setNumber(BLACK);Board[7][7].setNumber(BLACK);
+			  	Board[0][6].setNumber(BLACK);Board[2][6].setNumber(BLACK);Board[4][6].setNumber(BLACK);Board[6][6].setNumber(BLACK);
+			  	Board[1][5].setNumber(BLACK);Board[3][5].setNumber(BLACK);Board[5][5].setNumber(BLACK);Board[7][5].setNumber(BLACK);
+
 	}
 	
 	public void AddPlayer(String wp,String bp)
 	{
-		new Player(wp,0);
-		new Player(bp,0);
+		Player whitePlayer = new Player(wp,0);
+		Player blackPlayer = new Player(bp,0);
 
-        
+
 	}
 	
 	public void StartGame()
@@ -194,7 +209,7 @@ public class Game {
 	
 	public void soldierTurnToQueen(Soldier s)
 	{
-		new Queen(s.isIsAlive(),true,s.getLocation());
+		Queen q= new Queen(s.isIsAlive(),true,s.getLocation());
 	}
 	
 	public void chooseQuestion(E_Difficulty diff)
@@ -218,6 +233,11 @@ public class Game {
 	{
 		//To do
 		return false;
+	}
+
+	@Override
+	public String toString() {
+		return "Game [GameDate=" + GameDate + ", whitePlayer=" + whitePlayer + ", blackPlayer=" + blackPlayer + "]";
 	}
 	
 

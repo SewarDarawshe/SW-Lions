@@ -51,7 +51,7 @@ public class Soldier {
 	// -------------------------------Methods------------------------------------
 
 	//function that check if the player can move his soldier or not.
-	public boolean legalMove(int x, int y, char direction, char colour)
+	public boolean legalMove(int x, int y, char direction)
     {
       if (direction == 'l') {
           if(x==0) {
@@ -76,7 +76,7 @@ public class Soldier {
 
             // x,y,left
 
-            boolean checkMove = legalMove(x,y,direction,'b');
+            boolean checkMove = legalMove(x,y,direction);
 
 
             if (checkMove==true)
@@ -114,7 +114,7 @@ public class Soldier {
 	public int moveWhite(int x, int y, char direction,Square[][] Board)
 	{
 
-            boolean checkMove = legalMove(x,y,direction,'w');
+            boolean checkMove = legalMove(x,y,direction);
 
 
             if (checkMove==true)
