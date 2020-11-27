@@ -104,6 +104,7 @@ public class Game {
 	public Soldier[] getSoldier1() {
 		return WhitePieces;
 	}
+	
 	public void setSoldier1(Soldier[] soldier1) {
 		WhitePieces = soldier1;
 	}
@@ -187,9 +188,8 @@ public class Game {
 		//To do
 	}
 	
-	public void returnSoldier()
+	public void returnSoldier(Player p)
 	{
-		//To do
 	}
 	
 	public void removeSoldier(Soldier[] s, int index)
