@@ -4,18 +4,20 @@ public class Square {
 	
 	// -------------------------------Class Members------------------------------
 
-	private int Number;
+	private static int Number=0;
 	private int X;
 	private int Y;
+	private boolean isIsOccupied;
 	
 	
 	// -------------------------------Constructors-------------------------------
 
-	public Square(int number, int x, int y) {
+	public Square(int x, int y) {
 		super();
-		this.Number = number;
+		this.Number++;
 		this.X = x;
 		this.Y = y;
+		this.isIsOccupied=false;
 	}
 
 	// -------------------------------Getters And Setters-------------------------
@@ -48,15 +50,20 @@ public class Square {
 		this.Y = y;
 	}
 	
+	
+
+	public boolean isIsOccupied() {
+		return isIsOccupied;
+	}
+
+	public void setIsOccupied(boolean isIsOccupied) {
+		this.isIsOccupied = isIsOccupied;
+	}
 
 	@Override
 	public String toString() {
 		return "Square [Number=" + Number + ", X=" + X + ", Y=" + Y + "]";
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

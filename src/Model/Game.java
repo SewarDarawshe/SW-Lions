@@ -212,12 +212,101 @@ public class Game {
 		return false;
 	}
 	
-	public boolean IsBlocked()
-	{
-		//To do
-		return false;
-	}
-
+	// this function return true if all the reval solider is blocked
+	// Player p is the rival player
+	// Queen not chekied
+		public boolean IsBlocked(Player p)
+		{
+			int countBlockedSoldier=0;
+			int countSolidersinGame=0;
+			int x=0;
+			int y=0;
+			
+			if(p.equals(blackPlayer)) {
+				for(int i=0;i<BlackPieces.length;i++) {
+					if(BlackPieces[i]!=null)
+						countSolidersinGame++;
+						}
+			
+					for(int i=0;i<BlackPieces.length;i++) {
+						if(BlackPieces[i]!=null)
+						{
+						x=BlackPieces[i].getLocation().getX();
+						y=BlackPieces[i].getLocation().getY();
+						
+						if(x==0 && y==7) {
+							if(Board[x+1][y-1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else if(x==7 && y==0) {
+							if(Board[x-1][y+1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else if(y==0) {
+							//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
+							if(Board[x-1][y+1].isIsOccupied()==true && Board[x+1][y+1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else if(y==7) {
+							//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
+							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else {
+							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true 
+							&& Board[x-1][y+1].isIsOccupied()==true &&Board[x+1][y+1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						
+					}
+				}
+				
+			}
+			if(p.equals(whitePlayer)) {
+				for(int i=0;i<WhitePieces.length;i++) {
+					if(WhitePieces[i]!=null)
+						countSolidersinGame++;
+						}
+			
+					for(int i=0;i<WhitePieces.length;i++) {
+						if(WhitePieces[i]!=null)
+						{
+						x=WhitePieces[i].getLocation().getX();
+						y=WhitePieces[i].getLocation().getY();
+						
+						if(x==0 && y==7) {
+							if(Board[x+1][y-1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else if(x==7 && y==0) {
+							if(Board[x-1][y+1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else if(y==0) {
+							//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
+							if(Board[x-1][y+1].isIsOccupied()==true && Board[x+1][y+1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else if(y==7) {
+							//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
+							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						else {
+							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true 
+							&& Board[x-1][y+1].isIsOccupied()==true &&Board[x+1][y+1].isIsOccupied()==true)
+								countBlockedSoldier++;
+							}
+						
+					}
+				}
+				
+			}
+	    if(countBlockedSoldier==countSolidersinGame)
+	    	return true;
+	    return false;
+		}
+			
 	@Override
 	public String toString() {
 		return "Game [GameDate=" + GameDate + ", whitePlayer=" + whitePlayer + ", blackPlayer=" + blackPlayer + "]";
