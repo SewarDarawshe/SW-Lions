@@ -6,20 +6,20 @@ public class Square {
 	
 	// -------------------------------Class Members------------------------------
 
-	private static int Number=0;
+	private static int Number=0;//0-empty,1-black,2-white
 	private int X;
 	private int Y;
 	private Soldier_COLOR Color;// this color is the color of the soldier that stand at this square
 	
 	
 	// -------------------------------Constructors-------------------------------
+	
 
-	public Square(int x, int y, Soldier_COLOR Color) {
+	public Square(int x, int y) {
 		super();
 		this.Number++;
 		this.X = x;
 		this.Y = y;
-		this.Color=Color;
 	}
 
 	// -------------------------------Getters And Setters-------------------------

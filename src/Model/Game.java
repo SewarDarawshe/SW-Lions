@@ -1,5 +1,5 @@
 package Model;
-
+import  java.util.Scanner;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -189,10 +189,10 @@ public class Game {
 		//To do
 	}
 	
-	public boolean returnSoldier(Player p)
+	public boolean returnSoldier(Soldier s)
 	{
+	return false;
 		
-		return false;
 	}
 	
 	public void removeSoldier(Soldier[] s, int index)
@@ -211,7 +211,6 @@ public class Game {
 	
 	public boolean IsEatable()
 	{
-		//To do
 		return false;
 	}
 	
