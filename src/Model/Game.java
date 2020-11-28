@@ -6,6 +6,7 @@ import java.util.Date;
 
 import Model.Player;
 import utils.E_Difficulty;
+import utils.Soldier_COLOR;
 
 public class Game {
 	
@@ -188,8 +189,10 @@ public class Game {
 		//To do
 	}
 	
-	public void returnSoldier(Player p)
+	public boolean returnSoldier(Player p)
 	{
+		
+		return false;
 	}
 	
 	public void removeSoldier(Soldier[] s, int index)
@@ -235,26 +238,26 @@ public class Game {
 						y=BlackPieces[i].getLocation().getY();
 						
 						if(x==0 && y==7) {
-							if(Board[x+1][y-1].isIsOccupied()==true)
+							if(Board[x+1][y-1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else if(x==7 && y==0) {
-							if(Board[x-1][y+1].isIsOccupied()==true)
+							if(Board[x-1][y+1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else if(y==0) {
 							//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
-							if(Board[x-1][y+1].isIsOccupied()==true && Board[x+1][y+1].isIsOccupied()==true)
+							if(Board[x-1][y+1].getColor()!=null && Board[x+1][y+1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else if(y==7) {
 							//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
-							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true)
+							if(Board[x-1][y-1].getColor()!=null && Board[x+1][y-1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else {
-							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true 
-							&& Board[x-1][y+1].isIsOccupied()==true &&Board[x+1][y+1].isIsOccupied()==true)
+							if(Board[x-1][y-1].getColor()!=null && Board[x+1][y-1].getColor()!=null 
+							&& Board[x-1][y+1].getColor()!=null &&Board[x+1][y+1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						
@@ -275,26 +278,26 @@ public class Game {
 						y=WhitePieces[i].getLocation().getY();
 						
 						if(x==0 && y==7) {
-							if(Board[x+1][y-1].isIsOccupied()==true)
+							if(Board[x+1][y-1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else if(x==7 && y==0) {
-							if(Board[x-1][y+1].isIsOccupied()==true)
+							if(Board[x-1][y+1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else if(y==0) {
 							//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
-							if(Board[x-1][y+1].isIsOccupied()==true && Board[x+1][y+1].isIsOccupied()==true)
+							if(Board[x-1][y+1].getColor()!=null && Board[x+1][y+1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else if(y==7) {
 							//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
-							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true)
+							if(Board[x-1][y-1].getColor()!=null && Board[x+1][y-1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						else {
-							if(Board[x-1][y-1].isIsOccupied()==true && Board[x+1][y-1].isIsOccupied()==true 
-							&& Board[x-1][y+1].isIsOccupied()==true &&Board[x+1][y+1].isIsOccupied()==true)
+							if(Board[x-1][y-1].getColor()!=null && Board[x+1][y-1].getColor()!=null 
+							&& Board[x-1][y+1].getColor()!=null &&Board[x+1][y+1].getColor()!=null)
 								countBlockedSoldier++;
 							}
 						

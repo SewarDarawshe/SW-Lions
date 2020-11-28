@@ -1,5 +1,7 @@
 package Model;
 
+import utils.Soldier_COLOR;
+
 public class Square {
 	
 	// -------------------------------Class Members------------------------------
@@ -7,17 +9,17 @@ public class Square {
 	private static int Number=0;
 	private int X;
 	private int Y;
-	private boolean isIsOccupied;
+	private Soldier_COLOR Color;// this color is the color of the soldier that stand at this square
 	
 	
 	// -------------------------------Constructors-------------------------------
 
-	public Square(int x, int y) {
+	public Square(int x, int y, Soldier_COLOR Color) {
 		super();
 		this.Number++;
 		this.X = x;
 		this.Y = y;
-		this.isIsOccupied=false;
+		this.Color=Color;
 	}
 
 	// -------------------------------Getters And Setters-------------------------
@@ -49,21 +51,22 @@ public class Square {
 	public void setY(int y) {
 		this.Y = y;
 	}
-	
-	
 
-	public boolean isIsOccupied() {
-		return isIsOccupied;
+	public Soldier_COLOR getColor() {
+		return Color;
 	}
 
-	public void setIsOccupied(boolean isIsOccupied) {
-		this.isIsOccupied = isIsOccupied;
+	public void setColor(Soldier_COLOR color) {
+		Color = color;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Square [Number=" + Number + ", X=" + X + ", Y=" + Y + "]";
+		return "Square [X=" + X + ", Y=" + Y + ", Color=" + Color + "]";
 	}
+
+	
 
 
 }
