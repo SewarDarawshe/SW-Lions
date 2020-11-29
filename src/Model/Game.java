@@ -334,10 +334,10 @@ public class Game {
 	
 	public void removeSoldier(Soldier[] s, int index)
 	{
-	if(s==null)
+		if(s==null)
+			return;
+		s[index]=null;
 		return;
-	s[index]=null;
-	return;
 	}
 	
 	public void soldierTurnToQueen(Soldier s)
@@ -346,8 +346,220 @@ public class Game {
 	}
 	
 	
-	public boolean IsEatable()
+	public boolean IsEatable(Player p)
 	{
+		if(p.getColor()==Soldier_COLOR.WHITE) {
+			
+			for(int i=0;i<WhitePieces.length; i++) {
+				int x=WhitePieces[i].getLocation().getX();
+				int y=WhitePieces[i].getLocation().getY();
+				if(WhitePieces[i].isIsQueen()==false)
+				{
+					
+					if(y==0||y==1) {
+						if((Board[x-1][y+1].getColor())==(Soldier_COLOR.BLACK) && Board[x-2][y+2].getColor()==null) {
+							
+							return true;
+						}
+							
+					}
+					if(y==6||y==7) {
+						if((Board[x-1][y-1].getColor())==(Soldier_COLOR.BLACK) && Board[x-2][y-2].getColor()==null) {
+							
+							return true;
+						}
+							
+					}
+					else {
+						if(((Board[x-1][y+1].getColor())==(Soldier_COLOR.BLACK) && Board[x-2][y+2].getColor()==null)|| ((Board[x-1][y-1].getColor())==(Soldier_COLOR.BLACK) && Board[x-2][y-2].getColor()==null)) {
+							return true;
+						}
+					}
+				}
+				else if(WhitePieces[i].isIsQueen()==true) {
+					//case the queen is moving up right
+					while(Board[x-1][y+1].getColor()==null) {
+						x--;
+						y++;
+						// case the queen arrived the edge of the board
+						if(y==7 && x==0) {
+							y=0;
+							x=7;
+						}
+						else if(y==7 && x!=0) {
+							y=0;
+							x--;
+						}
+						else if(x==0) {
+							x=7;
+							y++;
+						}
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.BLACK && Board[x-1][y+1].getColor()==null)
+						return true;
+					//case the queen is moving up left
+					while(Board[x-1][y-1].getColor()==null) {
+						x--;
+						y--;
+						// case the queen arrived the edge of the board
+						if(y==0) {
+							y=7;
+							x--;
+						}else if(x==0) {
+							y--;
+							x=7;
+						}
+			
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.BLACK && Board[x-1][y-1].getColor()==null)
+						return true;
+					//case the queen is moving right down
+					while(Board[x+1][y+1].getColor()==null) {
+						x++;
+						y++;
+						
+						// case the queen arrived the edge of the board
+						if(x==7) {
+							y++;
+							x=0;
+						}else if(y==7) {
+							y=0;
+							x++;
+						}
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.BLACK && Board[x+1][y+1].getColor()==null)
+						return true;
+					//case the queen is moving left down
+					while(Board[x+1][y-1].getColor()==null) {
+						x++;
+						y--;
+						
+						// case the queen arrived the edge of the board
+						if(x==7 && y==0) {
+							y=7;
+							x=0;
+						}else if(x==7 && y!=0) {
+							y--;
+							x=0;
+						}else if(y==0) {
+							y=7;
+							x++;
+						}
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.BLACK && Board[x+1][y-1].getColor()==null)
+						return true;
+				}
+				
+			}
+			
+		}
+		if(p.getColor()==Soldier_COLOR.BLACK) {
+			
+			for(int i=0;i<BlackPieces.length; i++) {
+				int x=BlackPieces[i].getLocation().getX();
+				int y=BlackPieces[i].getLocation().getY();
+				if(BlackPieces[i].isIsQueen()==false)
+				{
+					
+					if(y==0||y==1) {
+						if((Board[x+1][y+1].getColor())==(Soldier_COLOR.WHITE) && Board[x+2][y+2].getColor()==null) {
+							
+							return true;
+						}
+							
+					}
+					if(y==6||y==7) {
+						if((Board[x+1][y-1].getColor())==(Soldier_COLOR.WHITE) && Board[x+2][y-2].getColor()==null) {
+							
+							return true;
+						}
+							
+					}
+					else {
+						if(((Board[x+1][y-1].getColor())==(Soldier_COLOR.WHITE) && Board[x+2][y-2].getColor()==null)|| ((Board[x+1][y+1].getColor())==(Soldier_COLOR.WHITE) && Board[x+2][y+2].getColor()==null)) {
+							return true;
+						}
+					}
+				}
+				
+				else if(BlackPieces[i].isIsQueen()==true) {
+					//case the queen is moving up right
+					while(Board[x-1][y+1].getColor()==null) {
+						x--;
+						y++;
+						// case the queen arrived the edge of the board
+						if(y==7 && x==0) {
+							y=0;
+							x=7;
+						}
+						else if(y==7 && x!=0) {
+							y=0;
+							x--;
+						}
+						else if(x==0) {
+							x=7;
+							y++;
+						}
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.WHITE && Board[x-1][y+1].getColor()==null)
+						return true;
+					//case the queen is moving up left
+					while(Board[x-1][y-1].getColor()==null) {
+						x--;
+						y--;
+						// case the queen arrived the edge of the board
+						if(y==0) {
+							y=7;
+							x--;
+						}else if(x==0) {
+							y--;
+							x=7;
+						}
+			
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.WHITE && Board[x-1][y-1].getColor()==null)
+						return true;
+					//case the queen is moving right down
+					while(Board[x+1][y+1].getColor()==null) {
+						x++;
+						y++;
+						
+						// case the queen arrived the edge of the board
+						if(x==7) {
+							y++;
+							x=0;
+						}else if(y==7) {
+							y=0;
+							x++;
+						}
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.WHITE && Board[x+1][y+1].getColor()==null)
+						return true;
+					//case the queen is moving left down
+					while(Board[x+1][y-1].getColor()==null) {
+						x++;
+						y--;
+						
+						// case the queen arrived the edge of the board
+						if(x==7 && y==0) {
+							y=7;
+							x=0;
+						}else if(x==7 && y!=0) {
+							y--;
+							x=0;
+						}else if(y==0) {
+							y=7;
+							x++;
+						}
+					}
+					if(Board[x][y].getColor()==Soldier_COLOR.WHITE && Board[x+1][y-1].getColor()==null)
+						return true;
+					
+				}
+				
+			}
+			
+		}
 		return false;
 	}
 	
