@@ -1,5 +1,10 @@
 package Model;
 import utils.E_COLOR;
+
+
+/*
+ * @author Maisa Mansour
+ */
 public class Player {
 	// -------------------------------Class Members------------------------------
 	

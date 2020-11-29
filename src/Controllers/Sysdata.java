@@ -136,17 +136,20 @@ public class Sysdata {
 			}
 		}
 
-		/*
-		 * given a question adds it to the data set of questions (the questionarr) and
+		/* given a question adds it to the data set of questions (the QuestionsArray) and
 		 * to the JSON file by rewriting it iff we don't already have the same question.
 		 */
 		public boolean addQuestion(Question q) {
+			if(QuestionsArray!=null) {
 			for (Question question : QuestionsArray) {
 				if (question.equals(q)) {
+
 					System.out.println("we already have this question");
 					return false;
 				}
+				}}
 				QuestionsArray.add(q);
+
 				try {
 					writeQuestionsToJSON();
 					return true;
@@ -154,14 +157,12 @@ public class Sysdata {
 					e.printStackTrace();
 					return false;
 				}
-			}
-			return false;
 		}
 		/*
 		 * Given an array list this method overrides the JSON questions file with the
 		 * questions in the array list
 		 */
-		@SuppressWarnings({ "deprecation", "unchecked" })
+		
 		private void writeQuestionsToJSON() {
 			try {
 				JSONObject jo = new JSONObject();
@@ -267,10 +268,12 @@ public class Sysdata {
 		public boolean addGameHistory(Player white,Player black,Date Date) {
 			getHistory();
 			if (white != null && black !=null) {
+			
 				Game g=new Game(Date, white, black);
 				GamesHistory.add(g);
 				writeHistoryToJSON();
 				readHistoryJSON();
+				return true;
 			}
 			return false;
 		}
@@ -278,10 +281,11 @@ public class Sysdata {
 		/*
 		 * Deletes all game history from the data set and JSON file.
 		 */
-		public void deleteGameHistory() {
+		public boolean deleteGameHistory() {
 			for (int i = GamesHistory.size(); i > 0; i--)
 				GamesHistory.remove(i - 1);
 			writeHistoryToJSON();
+			return true;
 		}
 		/*
 		 * This method reads the history games written in JSON file and saves them in an

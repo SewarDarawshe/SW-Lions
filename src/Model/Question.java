@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 import utils.E_Difficulty;
 
+
+/*
+ * @author Maisa Mansour
+ */
 public class Question {
 // -------------------------------Class Members------------------------------
 	private int number;
