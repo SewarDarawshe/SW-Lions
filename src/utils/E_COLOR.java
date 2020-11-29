@@ -1,0 +1,6 @@
+package utils;
+
+public enum E_COLOR {
+	BLACK,WHITE,BLACKSQUARE,WHITESQUARE,EMPTY;
+
+}

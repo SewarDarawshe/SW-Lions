@@ -1,36 +1,33 @@
 package Model;
 
-import utils.Soldier_COLOR;
+import utils.E_COLOR;
 
 public class Square {
 	
 	// -------------------------------Class Members------------------------------
 
-	private static int Number=0;//0-empty,1-black,2-white
+	
 	private int X;
 	private int Y;
-	private Soldier_COLOR Color;// this color is the color of the soldier that stand at this square
+	private boolean isIsOccupied;
+	private E_COLOR Color;
 	
 	
-	// -------------------------------Constructors-------------------------------
 	
 
-	public Square(int x, int y) {
+	// -------------------------------Constructors-------------------------------
+
+	public Square(int x, int y, boolean isIsOccupied, E_COLOR color) {
 		super();
-		this.Number++;
-		this.X = x;
-		this.Y = y;
+		X = x;
+		Y = y;
+		this.isIsOccupied = isIsOccupied;
+		Color = color;
 	}
 
 	// -------------------------------Getters And Setters-------------------------
 
-	public int getNumber() {
-		return Number;
-	}
-
-	public void setNumber(int number) {
-		this.Number = number;
-	}
+	
 
 
 	public int getX() {
@@ -51,21 +48,35 @@ public class Square {
 	public void setY(int y) {
 		this.Y = y;
 	}
+	
+	
 
-	public Soldier_COLOR getColor() {
+	public boolean isIsOccupied() {
+		return isIsOccupied;
+	}
+
+	public void setIsOccupied(boolean isIsOccupied) {
+		this.isIsOccupied = isIsOccupied;
+	}
+
+	@Override
+	public String toString() {
+		return "Square [X=" + X + ", Y=" + Y + ", isIsOccupied=" + isIsOccupied + ", Color=" + Color + "]";
+	}
+
+	public Square(int x, int y) {
+		super();
+		X = x;
+		Y = y;
+	}
+
+	public E_COLOR getColor() {
 		return Color;
 	}
 
-	public void setColor(Soldier_COLOR color) {
+	public void setColor(E_COLOR color) {
 		Color = color;
 	}
-
-	
-	@Override
-	public String toString() {
-		return "Square [X=" + X + ", Y=" + Y + ", Color=" + Color + "]";
-	}
-
 	
 
 

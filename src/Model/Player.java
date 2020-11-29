@@ -1,11 +1,11 @@
 package Model;
-import utils.Soldier_COLOR;
+import utils.E_COLOR;
 public class Player {
 	// -------------------------------Class Members------------------------------
 	
 	private String NickName;
 	private int Points;
-	private Soldier_COLOR Color;
+	private E_COLOR Color;
 
 	
 	// -------------------------------Constructors-------------------------------
@@ -36,11 +36,11 @@ public class Player {
 	
 
 
-	public Soldier_COLOR getColor() {
+	public E_COLOR getColor() {
 		return Color;
 	}
 
-	public void setColor(Soldier_COLOR color) {
+	public void setColor(E_COLOR color) {
 		Color = color;
 	}
 
