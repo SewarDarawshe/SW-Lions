@@ -23,7 +23,7 @@ import utils.E_Difficulty;
 public class Game {
 
 	// -------------------------------Class Members------------------------------
-	
+
 	private Square[][] Board=new Square[8][8];
 	private Date GameDate;
 	private Player whitePlayer;
@@ -190,7 +190,7 @@ public class Game {
 			int Blacki=0;
 			if(Blacki<BlackPieces.length)
 			{
-			
+
 				for(int row=0;row<3;row++)
 				{
 					if(row%2!=0) {
@@ -213,7 +213,7 @@ public class Game {
 
 					}
 				}			
-			
+
 			}
 			// setting the points to 0 
 			whitePlayer.setPoints(0);
@@ -375,7 +375,7 @@ public class Game {
 				return true;
 
 			}
-			}
+		}
 
 		return false;
 
@@ -709,7 +709,7 @@ public class Game {
 				{
 					x=WhitePieces[i].getLocation().getX();
 					y=WhitePieces[i].getLocation().getY();
-                 
+
 					if(x==0 && y==7) {
 						if(Board[x+1][y-1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
