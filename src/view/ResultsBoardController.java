@@ -11,18 +11,27 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ResultsBoardController implements Initializable{
+
+	
+	 @FXML
+	    private AnchorPane Pane;
 
     @FXML
     private Button HomePageButton;
 
     @FXML
     private Button ExitButton;
+    
+    
 
-    @FXML
+
+      @FXML
     void Exit(ActionEvent event) {
+    	((Stage) Pane.getScene().getWindow()).close();
 
     }
 

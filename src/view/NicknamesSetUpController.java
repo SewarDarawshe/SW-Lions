@@ -11,6 +11,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class NicknamesSetUpController implements Initializable {
@@ -18,11 +20,26 @@ public class NicknamesSetUpController implements Initializable {
     @FXML
     private Button exitbutton;
 
+    
+    @FXML
+    private Button StartGameButton; 
+    
     @FXML
     private Button homePageButton;
+    @FXML
+    private AnchorPane Pane;
+    @FXML
+    private TextField WhiteNickName;
+
+    @FXML
+    private TextField BlackNickName;
+
+
+
 
     @FXML
     void exit(ActionEvent event) {
+    	((Stage) Pane.getScene().getWindow()).close();
 
     }
 
@@ -36,6 +53,19 @@ public class NicknamesSetUpController implements Initializable {
 			// TODO: handle exception
 		}
 
+    }
+    
+    @FXML
+    void StartGame(ActionEvent event)
+    {
+    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		BoardGameController temp=new BoardGameController();
+		try {
+		temp.start(stage);	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+    	
     }
     public void start(Stage primaryStage) {
 		try {

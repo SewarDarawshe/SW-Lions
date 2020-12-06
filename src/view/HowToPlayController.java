@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class HowToPlayController implements Initializable{
@@ -20,12 +21,17 @@ public class HowToPlayController implements Initializable{
 
     @FXML
     private Button ExitButton;
+    @FXML
+    private AnchorPane Pane;
+
+   
 
     @FXML
     void Exit(ActionEvent event) {
+    	((Stage) Pane.getScene().getWindow()).close();
 
     }
-    //sss
+   
 
     @FXML
     void OpenHomePage(ActionEvent event) {

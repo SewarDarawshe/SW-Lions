@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -19,12 +20,12 @@ public class MainBoardController implements Initializable {
 	@FXML
 	private Button letsPlayButton;
 	  @FXML
-	    private Pane pane;
+	    private AnchorPane Pane;
 
 
 	@FXML
 	void Exit(ActionEvent event) {
-		((Stage) pane.getScene().getWindow()).close();
+		((Stage) Pane.getScene().getWindow()).close();
 
 
 	}

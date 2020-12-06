@@ -7,12 +7,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class SettingsController {
 	 @FXML
-	    private Pane pane;
+	    private AnchorPane Pane;
 
 	 @FXML
 	    private Button exitbutton;
@@ -22,7 +23,7 @@ public class SettingsController {
 
 	    @FXML
 	    void exit(ActionEvent event) {
-			((Stage) pane.getScene().getWindow()).close();
+			((Stage) Pane.getScene().getWindow()).close();
 
 	    }
 
