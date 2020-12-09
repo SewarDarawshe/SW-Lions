@@ -218,6 +218,7 @@ public class Game {
 			// setting the points to 0 
 			whitePlayer.setPoints(0);
 			blackPlayer.setPoints(0);
+			
 		}
 
 
