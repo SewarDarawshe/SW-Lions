@@ -58,6 +58,9 @@ public class NicknamesSetUpController implements Initializable {
     @FXML
     void StartGame(ActionEvent event)
     {
+    	
+    	
+    	
     	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		BoardGameController temp=new BoardGameController();
 		try {

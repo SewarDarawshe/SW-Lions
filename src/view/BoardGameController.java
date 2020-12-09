@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 public class BoardGameController {
 
-	
+
   
 	@FXML
     private Label whitepoints;
