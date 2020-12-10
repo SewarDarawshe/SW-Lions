@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import Model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +16,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class NicknamesSetUpController implements Initializable {
+public class NicknamesSetUpController {
+
+    private static String whitename;
+    private static String blackname;
 
     @FXML
     private Button exitbutton;
@@ -37,7 +41,23 @@ public class NicknamesSetUpController implements Initializable {
 
 
 
-    @FXML
+    public static String getWhitename() {
+		return whitename;
+	}
+
+	public void setWhitename(String whitename) {
+		this.whitename = whitename;
+	}
+
+	public static String getBlackname() {
+		return blackname;
+	}
+
+	public void setBlackname(String blackname) {
+		this.blackname = blackname;
+	}
+
+	@FXML
     void exit(ActionEvent event) {
     	((Stage) Pane.getScene().getWindow()).close();
 
@@ -58,13 +78,14 @@ public class NicknamesSetUpController implements Initializable {
     @FXML
     void StartGame(ActionEvent event)
     {
-    	
-    	
-    	
+    	whitename =WhiteNickName.getText();
+    	blackname =BlackNickName.getText();
+
     	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		BoardGameController temp=new BoardGameController();
 		try {
 		temp.start(stage);	
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -76,16 +97,13 @@ public class NicknamesSetUpController implements Initializable {
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-	}
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
