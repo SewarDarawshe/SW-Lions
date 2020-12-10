@@ -16,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class NicknamesSetUpController {
+public class NicknamesSetUpController implements Initializable{
 
     private static String whitename;
     private static String blackname;
@@ -104,6 +104,12 @@ public class NicknamesSetUpController {
 			e.printStackTrace();
 		}
 
+	}
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

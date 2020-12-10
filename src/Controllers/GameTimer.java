@@ -20,7 +20,11 @@ public class GameTimer {
    
 	
 	
-//take the time that the game started	
+public GameTimer() {
+		super();
+	}
+
+	//take the time that the game started	
 	public void start() {
 		
 

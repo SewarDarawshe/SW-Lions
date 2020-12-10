@@ -47,6 +47,13 @@ public class Game {
 		whitePlayer=white;
 		blackPlayer=black;
 	}
+	
+	public Game(Date gameDate, Player whitePlayer, Player blackPlayer) {
+		super();
+		GameDate = gameDate;
+		this.whitePlayer = whitePlayer;
+		this.blackPlayer = blackPlayer;
+	}
 	//---------------Getters and Setters--------------------------
 
 	public Square[][] getBoard() {
@@ -64,12 +71,7 @@ public class Game {
 		GameDate = gameTime;
 	}
 
-	public Game(Date gameDate, Player whitePlayer, Player blackPlayer) {
-		super();
-		GameDate = gameDate;
-		this.whitePlayer = whitePlayer;
-		this.blackPlayer = blackPlayer;
-	}
+
 	public Player getWhitePlayer() {
 		return whitePlayer;
 	}

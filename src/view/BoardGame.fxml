@@ -15,7 +15,7 @@
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="710.0" style="-fx-background-color: peru;">
          <children>
-            <VBox layoutX="241.0" layoutY="38.0" prefHeight="394.0" prefWidth="455.0">
+            <VBox fx:id="boardSquares" layoutX="241.0" layoutY="38.0" prefHeight="394.0" prefWidth="455.0">
                <children>
                   <Pane fx:id="BoardPane" prefHeight="394.0" prefWidth="455.0" style="-fx-background-color: PERU;">
                      <children>
