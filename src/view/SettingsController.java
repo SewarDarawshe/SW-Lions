@@ -2,8 +2,10 @@ package view;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
+import Controllers.Sysdata;
 import Model.Answer;
 import Model.Question;
 import utils.E_Difficulty;
@@ -16,10 +18,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -48,35 +54,38 @@ public class SettingsController  implements Initializable {
 	private Button homepageButton;
 
 	@FXML
-	private TableView<Question> questionsTable=new TableView<>();
+	private TableView<Question> questionsTable;
 
 	@FXML
-	private TableColumn<Question, Integer> questionIDColumn=new TableColumn<>();
+	private TableColumn<Question, Integer> questionIDColumn;
 
 	@FXML
-	private TableColumn<Question, String> questionColumn=new TableColumn<>();
+	private TableColumn<Question, String> questionColumn;
 
 	@FXML
-	private TableColumn<Question, E_Difficulty> questionDifficultyColumn=new TableColumn<>();
+	private TableColumn<Question, E_Difficulty> questionDifficultyColumn;
 
 	@FXML
-	private TableView<Answer> answersTable=new TableView<>();
+	private TableView<Answer> answersTable;
 
 	@FXML
-	private TableColumn<Answer, Integer> answerIDColumn=new TableColumn<>();
+	private TableColumn<Answer, Integer> answerIDColumn;
 
 	@FXML
-	private TableColumn<Answer, String> answerColumn=new TableColumn<>();
+	private TableColumn<Answer, String> answerColumn;
 
 	@FXML
-	private TableColumn<Answer, Boolean> isCorrectColumn=new TableColumn<>();
+	private TableColumn<Answer, Boolean> isCorrectColumn;
 
 
-	protected ArrayList<Question> questions=null;
+	protected ArrayList<Question> questions;
 
-	protected Question question;
+	public Question question;
 
-
+public Question getQue()
+{
+	return this.question;
+}
 	@FXML
 	private Label erorLabel;
 
@@ -114,13 +123,13 @@ public class SettingsController  implements Initializable {
 
 	protected void setQuestionTable() {
 		questions = Controllers.Sysdata.getInstance().getQuestionsarr();
-		for(Question q:questions)
-			System.out.println(q);
+	
 
 		ObservableList<Question> qs = FXCollections.observableArrayList(questions);
 		questionsTable.setItems(qs);
-
 		questionsTable.refresh();
+		
+
 		setAnswerTable();		
 	}
 
@@ -141,18 +150,67 @@ public class SettingsController  implements Initializable {
 
 	@FXML
 	void addQuestion(ActionEvent event) {
+		question = null;
+		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		AddUpdate_QueController temp=new AddUpdate_QueController();
+		try {
+			temp.start(stage,question);	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
 
 	@FXML
 	void deleteQuestion(ActionEvent event) {
-
+		Question q = questionsTable.getSelectionModel().getSelectedItem();
+		// a question wasn't selected
+		if (q == null)
+			erorLabel.setText("Please select a question to delete.");
+		
+		else {
+			// set the alert's properties
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Information Dialog");
+			alert.setHeaderText("Are you sure you want to delete this question?");
+			alert.setContentText("\""+q.getText()+"\"");
+			ButtonType buttonTypeYes = new ButtonType("Yes", ButtonData.YES);
+			ButtonType buttonTypeNo = new ButtonType("No", ButtonData.NO);
+			alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo);
+			Optional<ButtonType> answer = alert.showAndWait();
+		
+			// yes was pressed, so we delete the question
+			if (answer.get().getButtonData() == ButtonData.YES) {
+				try {
+					Sysdata.getInstance().removeQuestion(q);
+					setQuestionTable();
+					erorLabel.setText("Question deleted successfully.");
+				} catch (Exception e) {
+					erorLabel.setText("Question cannot be deleted.");
+				}
+			}
+		}
 	}
 
 
 
 	@FXML
 	void updateQuestion(ActionEvent event) {
+		question = questionsTable.getSelectionModel().getSelectedItem();
+		
+		if (question == null)
+			erorLabel.setText("Please select a question to update.");
+		else
+			{
+			Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+			AddUpdate_QueController temp=new AddUpdate_QueController();
+			try {
+				temp.setq(question);
+				temp.start(stage,question);	
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			}
 
 	}
 
@@ -163,8 +221,8 @@ public class SettingsController  implements Initializable {
 		questionColumn.setCellValueFactory(new PropertyValueFactory<>("text")); // Same here
 		questionDifficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty")); // Same here
 
-		answerIDColumn.setCellValueFactory(new PropertyValueFactory<>("answerID")); // According to variable name
-		answerColumn.setCellValueFactory(new PropertyValueFactory<>("content")); // Same here
+		answerIDColumn.setCellValueFactory(new PropertyValueFactory<>("id")); // According to variable name
+		answerColumn.setCellValueFactory(new PropertyValueFactory<>("text")); // Same here
 		isCorrectColumn.setCellValueFactory(new PropertyValueFactory<>("isCorrect")); // Same here
 
 		// initialize the Question list to appear in the table

@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane fx:id="pane" prefHeight="470.0" prefWidth="710.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane fx:id="pane" prefHeight="470.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AddUpdate_QueController">
    <children>
       <Pane prefHeight="470.0" prefWidth="710.0">
          <children>
@@ -60,6 +59,11 @@
                   <Font name="Cooper Black" size="16.0" />
                </font>
             </Label>
+            <Button fx:id="ReturntoSettingsBTN" layoutX="510.0" layoutY="7.0" mnemonicParsing="false" onAction="#returnSettings" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: peru;" text="Return To Settings" textFill="#783131">
+               <font>
+                  <Font name="Cooper Black" size="17.0" />
+               </font>
+            </Button>
          </children>
       </Pane>
    </children>
