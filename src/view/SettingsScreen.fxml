@@ -62,7 +62,7 @@
                   <TableColumn fx:id="isCorrectColumn" prefWidth="71.33331298828125" text="isCorrect" />
               </columns>
             </TableView>
-            <Label fx:id="erorLabel" layoutX="29.0" layoutY="210.0" prefHeight="15.0" prefWidth="654.0" style="-fx-background-color: #21ffd7;" textAlignment="CENTER" textFill="#bb8b25">
+            <Label fx:id="erorLabel" layoutX="29.0" layoutY="210.0" prefHeight="15.0" prefWidth="654.0" style="-fx-background-color: #21ffd7;" text="erortext" textAlignment="CENTER" textFill="#bb8b25">
                <font>
                   <Font name="Cooper Black" size="17.0" />
                </font>

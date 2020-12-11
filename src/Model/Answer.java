@@ -5,7 +5,6 @@ package Model;
  * 
  */public class Answer {
 	// -------------------------------Class Members------------------------------
-	 int id=0;
 private String text;
 private boolean isCorrect;
 
@@ -13,7 +12,6 @@ private boolean isCorrect;
 
 public Answer(String text, boolean isCorrect) {
 	super();
-	id=id++;
 	this.text=text;
 	this.isCorrect= isCorrect;
 }

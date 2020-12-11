@@ -15,7 +15,7 @@ public class Question {
 	private E_Difficulty difficulty;
 	private ArrayList<Answer> answers;
 	private int correct_ans;
-	private String team="Lions";
+	private String team;
 	private int score;
 	private int penalty; 
 	
@@ -27,7 +27,7 @@ public class Question {
 		this.difficulty = difficulty;
 		this.answers = answers;
 		this.correct_ans = correct_ans;
-	
+		this.team = "Lions";
 		if(difficulty.equals(E_Difficulty.EASY)) {
 			this.score = 100;
 			this.penalty = -250;
@@ -41,16 +41,6 @@ public class Question {
 			this.penalty = -50;
 		}
 		}
-   
-   
-public Question(String text, E_Difficulty difficulty, ArrayList<Answer> answers) {
-	super();
-	this.text = text;
-	this.difficulty = difficulty;
-	this.answers = answers;
-}
-
-
 // -------------------------------Getters And Setters-------------------------------
    public  int getNumber() {
 		return number;
