@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -236,8 +237,26 @@ public class BoardGameController implements Initializable{
     private Rectangle s31= new Rectangle();
 
     
-    
+
     @FXML
+    void moveS(MouseEvent event) {
+    	
+    	Rectangle oldCol=(Rectangle) event.getTarget();
+    	System.out.println(oldCol.getLayoutX());
+    	double oldRow = oldCol.getParent().getLayoutY();
+    	System.out.println(oldRow);
+    	int col=TransForColNum((int) oldCol.getLayoutX());
+    	int row=TransForRowNum((int)oldRow);
+		System.out.printf("the row num is:%d",row);
+		System.out.printf("the col num is:%d",col);
+
+
+
+    }
+
+
+
+	@FXML
     void exit(ActionEvent event) {
     	((Stage) Pane.getScene().getWindow()).close();
     }
@@ -254,7 +273,24 @@ public class BoardGameController implements Initializable{
 
 
     }
-   
+    private int TransForRowNum(int x) {
+    	int rowNum=0;
+		while(x>7) {
+			x=x/49;
+			rowNum++;
+		}
+		return rowNum;
+	}
+    
+    private int TransForColNum(int y) {
+    	int colNum=0;
+
+		while(y>7) {
+			y=y/57;
+			colNum++;
+		}
+		return colNum;
+	}
 	
   public void start(Stage primaryStage) {
 		try {
@@ -292,7 +328,7 @@ public class BoardGameController implements Initializable{
 			g = new Game(white, black,d,t);
 			g.initiateGame();
 			
-			CheckAndDoYellowSquares();
+			//CheckAndDoYellowSquares();
 
 		}
 		
