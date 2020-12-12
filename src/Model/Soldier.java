@@ -77,65 +77,50 @@ public class Soldier {
 				+ "]";
 	}
 
-	//function that check if the player can move his soldier or not.
-	public boolean legalMove(char direction)
-	{
-		int x=Location.getX();
-
-		if (direction == 'l') {
-			if(x==0) {
-				return false;
-			}
-
-
-		}
-
-		if (direction == 'r') {
-			if(x==7) {
-				return false;
-			}          
-		}
-
-		return true;
-	}
+	
 	//function that moves the black soldier
-	public int moveBlack( char direction, Square[][] Board)
+	public int moveBlack( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
 	{
 		//check if its possible    
 
-		// x,y,left
-		int x=Location.getX();
-		int y=Location.getY();
-		boolean checkMove = legalMove(direction);
-
-
-		if (checkMove==true)
+		if(sourceY==0 && targetY==1 && targetX==(sourceX+1) && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY )
 		{
-			if (direction=='l')
-			{
-				int xDirection=x;
-				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-				xDirection++;
-				this.getLocation().setX(xDirection);
-				this.getLocation().setY(this.getLocation().getY()-1);
-				Board[xDirection][y-1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
 
-			}
+		if(sourceY==7 && targetY==6 && targetX==(sourceX+1) && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY )
+		{
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
+		if (sourceY+1==targetY && sourceX+1==targetX && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
+		{
 
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
+		if (sourceY-1==targetY && sourceX+1==targetX && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
+		{
 
-			if (direction=='r')
-			{
-				int xDirection=x;
-				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-				xDirection++;
-				
-			this.getLocation().setX(xDirection);
-			this.getLocation().setY(this.getLocation().getY()+1);
-
-				Board[this.getLocation().getX()][this.getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.BLACK); 
-				
-			}
-		} else 
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
+			
+			
+		 else 
 		{
 			System.out.println("Error: You have tried to move in an incorrect position.");
 		}
@@ -143,49 +128,58 @@ public class Soldier {
 
 
 
-		return 0;
+		return -1;
 
 	}
 
 
 	//function that Moves a white piece in a specified direction
-	public int moveWhite( char direction,Square[][] Board)
+	public int moveWhite( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
 	{
-		int x=Location.getX();
-		int y=Location.getY();
-		boolean checkMove = legalMove(direction);
+		//check if its possible    
 
-
-		if (checkMove==true)
+		if(sourceY==0 && targetY==1 && targetX==(sourceX-1) && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
 		{
-			if (direction=='l')
-			{
-				int xDirection=x;
-				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-				xDirection--;
-				this.getLocation().setX(xDirection);
-				this.getLocation().setY(this.getLocation().getY()-1);
-				Board[xDirection][y-1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-				return 0;
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
 
-			}
+		if(sourceY==7 && targetY==6 && targetX==(sourceX-1) && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
+		{
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
+		if (sourceY+1==targetY && sourceX-1==targetX && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
+		{
 
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
+		if (sourceY-1==targetY && sourceX-1==targetX && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
+		{
 
-			if (direction=='r')
-			{
-				int xDirection=x;
-				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-				xDirection--;
-				this.getLocation().setX(xDirection);
-				this.getLocation().setY(this.getLocation().getY()+1);
-				Board[xDirection][y+1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE); //issue on line
-				return 0;
-			}
-		} else 
+			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            this.getLocation().setX(targetX);
+			this.getLocation().setY(targetY);
+			return 0;
+		}
+			
+			
+		 else 
 		{
 			System.out.println("Error: You have tried to move in an incorrect position.");
-			return -1;
 		}
+
 
 
 
