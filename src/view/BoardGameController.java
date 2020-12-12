@@ -239,18 +239,33 @@ public class BoardGameController implements Initializable{
     
 
     @FXML
-    void moveS(MouseEvent event) {
+    void MoveToSquare(MouseEvent event) {
     	
     	Rectangle oldCol=(Rectangle) event.getTarget();
     	System.out.println(oldCol.getLayoutX());
+    	int col=TransForColNum((int) oldCol.getLayoutX());
+		System.out.printf("the col num is:%d\n",col);
+
     	double oldRow = oldCol.getParent().getLayoutY();
     	System.out.println(oldRow);
-    	int col=TransForColNum((int) oldCol.getLayoutX());
     	int row=TransForRowNum((int)oldRow);
-		System.out.printf("the row num is:%d",row);
-		System.out.printf("the col num is:%d",col);
+		System.out.printf("the row num is:%d\n",row);
 
 
+
+    }
+    
+    @FXML
+    void MoveSoldier(MouseEvent event) {
+    	Circle soldier=(Circle) event.getTarget();
+    	double soldierXSquare=soldier.getParent().getLayoutY();
+    	int row=TransForRowNum((int)soldierXSquare);
+    	System.out.println(row);
+
+    	double soldierYSquare=soldier.getLayoutX();
+    	int col=TransForColNumForSoldier((int)soldierYSquare);
+    	System.out.println(col);
+    	
 
     }
 
@@ -275,8 +290,8 @@ public class BoardGameController implements Initializable{
     }
     private int TransForRowNum(int x) {
     	int rowNum=0;
-		while(x>7) {
-			x=x/49;
+		while(x>=49) {
+			x=x-49;
 			rowNum++;
 		}
 		return rowNum;
@@ -285,12 +300,26 @@ public class BoardGameController implements Initializable{
     private int TransForColNum(int y) {
     	int colNum=0;
 
-		while(y>7) {
-			y=y/57;
+		while(y>=57) {
+			y=y-57;
 			colNum++;
 		}
 		return colNum;
 	}
+    
+    private int TransForColNumForSoldier(int y) {
+    	int colNum=0;
+    	if(y==28)
+    		return 0;
+    	else {
+    		while(y>=57) {
+    			y=y-57;
+    			colNum++;
+ 
+    		}
+	}
+		return colNum;
+    }
 	
   public void start(Stage primaryStage) {
 		try {
