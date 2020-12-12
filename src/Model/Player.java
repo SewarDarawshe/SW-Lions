@@ -1,5 +1,5 @@
 package Model;
-import utils.E_COLOR;
+import utils.Soldier_COLOR_AtSquare;
 
 
 /*
@@ -10,7 +10,7 @@ public class Player {
 	
 	private String NickName;
 	private int Points;
-	private E_COLOR Color;
+	private Soldier_COLOR_AtSquare Color;
 
 	
 	// -------------------------------Constructors-------------------------------
@@ -41,11 +41,11 @@ public class Player {
 	
 
 
-	public E_COLOR getColor() {
+	public Soldier_COLOR_AtSquare getColor() {
 		return Color;
 	}
 
-	public void setColor(E_COLOR color) {
+	public void setColor(Soldier_COLOR_AtSquare color) {
 		Color = color;
 	}
 
