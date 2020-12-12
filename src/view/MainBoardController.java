@@ -16,6 +16,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainBoardController implements Initializable {
+	
+	
+	protected static SettingsController SettingsController;
+	
 
 	@FXML
 	private Button letsPlayButton;

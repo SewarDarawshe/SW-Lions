@@ -68,8 +68,7 @@ public class SettingsController  implements Initializable {
 	@FXML
 	private TableView<Answer> answersTable;
 
-	@FXML
-	private TableColumn<Answer, Integer> answerIDColumn;
+	
 
 	@FXML
 	private TableColumn<Answer, String> answerColumn;
@@ -81,6 +80,8 @@ public class SettingsController  implements Initializable {
 	protected ArrayList<Question> questions;
 
 	public Question question;
+	   @FXML
+	    private Button showAnswers;
 
 public Question getQue()
 {
@@ -130,22 +131,10 @@ public Question getQue()
 		questionsTable.refresh();
 		
 
-		setAnswerTable();		
+				
 	}
 
-	private void setAnswerTable() {
-		question = questionsTable.getSelectionModel().getSelectedItem();
-		if (question != null) {
-
-			ArrayList<Answer> answers = question.getAnswers();
-			ObservableList<Answer> ans = FXCollections.observableArrayList(answers);
-			answersTable.setItems(ans);
-		}
-		else {
-			answersTable.getItems().clear();
-		}
-		answersTable.refresh();
-	}	
+	
 
 
 	@FXML
@@ -203,8 +192,12 @@ public Question getQue()
 		else
 			{
 			Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+			stage.close();
 			AddUpdate_QueController temp=new AddUpdate_QueController();
 			try {
+				
+				
+
 				temp.setq(question);
 				temp.start(stage,question);	
 			} catch (Exception e) {
@@ -216,16 +209,35 @@ public Question getQue()
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-
+      MainBoardController.SettingsController=this;
 		questionIDColumn.setCellValueFactory(new PropertyValueFactory<>("number")); // According to variable name
 		questionColumn.setCellValueFactory(new PropertyValueFactory<>("text")); // Same here
 		questionDifficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty")); // Same here
 
-		answerIDColumn.setCellValueFactory(new PropertyValueFactory<>("id")); // According to variable name
 		answerColumn.setCellValueFactory(new PropertyValueFactory<>("text")); // Same here
-		isCorrectColumn.setCellValueFactory(new PropertyValueFactory<>("isCorrect")); // Same here
+
 
 		// initialize the Question list to appear in the table
 		setQuestionTable();		
 	}
+	
+	
+	  @FXML
+	    void showAnswers(ActionEvent event) {
+		  question = questionsTable.getSelectionModel().getSelectedItem();
+			if (question != null) {
+
+				ArrayList<Answer> answers = question.getAnswers();
+				ObservableList<Answer> ans = FXCollections.observableArrayList(answers);
+				answersTable.setItems(ans);
+			}
+			else {
+				erorLabel.setText("please select a question first!");
+
+				answersTable.getItems().clear();
+			}
+		
+			answersTable.refresh();
+	    }
+
 }

@@ -89,12 +89,12 @@ public class AddUpdate_QueController implements Initializable {
 		try {
 			
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Add-Update_Que.fxml"));
-			Scene scene = new Scene(root);
+		
+			Scene scene = new Scene(root);		
 			primaryStage.setTitle("Add-Update Page");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			this.old=q;
-
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -114,24 +114,24 @@ public class AddUpdate_QueController implements Initializable {
 		// TODO Auto-generated method stub
 		//	old = SettingsController.
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
-
+this.old=MainBoardController.SettingsController.getQue();
 		// initiate to empty values
 		resetFields();
-	
+
 		// update question
 				if (old != null) {
 					QueText.setText(old.getText());
 
-					Ans1RD.setSelected(old.getAnswers().get(0).isCorrect());
+					Ans1RD.setSelected(old.getAnswers().get(0).getisCorrect());
 					Ans1TEXT.setText(old.getAnswers().get(0).getText());
 
-					Ans2RD.setSelected(old.getAnswers().get(1).isCorrect());
+					Ans2RD.setSelected(old.getAnswers().get(1).getisCorrect());
 					Ans2TEXT.setText(old.getAnswers().get(1).getText());
 
-					Ans3RD.setSelected(old.getAnswers().get(2).isCorrect());
+					Ans3RD.setSelected(old.getAnswers().get(2).getisCorrect());
 					Ans3TEXT.setText(old.getAnswers().get(2).getText());
 
-					Ans4RD.setSelected(old.getAnswers().get(3).isCorrect());
+					Ans4RD.setSelected(old.getAnswers().get(3).getisCorrect());
 					Ans4TEXT.setText(old.getAnswers().get(3).getText());
 
 					difficultyCombo.getSelectionModel().select(old.getDifficulty());

@@ -28,7 +28,7 @@ public void setText(String text) {
 
 }
 
-public boolean isCorrect() {
+public boolean getisCorrect() {
 	return isCorrect;
 }
 
