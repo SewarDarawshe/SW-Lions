@@ -2,13 +2,12 @@ package Model;
 
 import java.sql.Time;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
 import Model.Player;
-import utils.Soldier_COLOR_AtSquare;
+import utils.E_COLOR;
 import utils.E_Difficulty;
 
 /**
@@ -25,38 +24,35 @@ public class Game {
 
 	// -------------------------------Class Members------------------------------
 
-	private Square[][] Board;
+	private Square[][] Board=new Square[8][8];
 	private Date GameDate;
 	private Player whitePlayer;
 	private Player blackPlayer;
 	private Time QueueTime;	
-	private Soldier[] WhitePieces;
-	private Soldier[] BlackPieces;
+	private Soldier[] WhitePieces=new Soldier[12];
+	private Soldier[] BlackPieces=new Soldier[12];
 
 
 
 	//---------------------------Constructor----------------------
 
 
-	public Game(Player white,Player black, Date gamedate, Time queueTime) {
+	public Game(Square[][] board,Player white,Player black, Date gamedate, Time queueTime, Soldier[] soldier1, Soldier[] soldier2) {
 		super();
-		Board =new Square[8][8];
+		Board = board;
 		GameDate = gamedate;
 		QueueTime = queueTime;
-		WhitePieces =new Soldier[12];
-		BlackPieces =new Soldier[12];
+		WhitePieces = soldier1;
+		BlackPieces = soldier2;
 		whitePlayer=white;
 		blackPlayer=black;
 	}
 	
 	public Game(Date gameDate, Player whitePlayer, Player blackPlayer) {
 		super();
-		Board =new Square[8][8];
 		GameDate = gameDate;
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
-		WhitePieces =new Soldier[12];
-		BlackPieces =new Soldier[12];
 	}
 	//---------------Getters and Setters--------------------------
 
@@ -146,13 +142,13 @@ public class Game {
 				if(row%2!=0) 
 					for(int col=0;col<8;col++)
 					{
-						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY);
+						Board[row][col]=new Square(row, col,E_COLOR.EMPTY);
 					}
 				else
 				{
 					for(int col=1;col<8;col++)
 					{
-						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY);
+						Board[row][col]=new Square(row, col,E_COLOR.EMPTY);
 					}
 				}
 			}
@@ -160,30 +156,13 @@ public class Game {
 		{
 			// we arrange the basic soldiers to there places 12 black 12 white
 
-			Board[0][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[0][3].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[0][5].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[0][7].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][0].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][4].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][6].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][3].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][5].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][7].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[7][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[7][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[7][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[7][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][3].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][5].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][7].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][5].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+			Board[0][1].setColor(E_COLOR.BLACK);;Board[0][3].setColor(E_COLOR.BLACK);Board[0][5].setColor(E_COLOR.BLACK);Board[0][7].setColor(E_COLOR.BLACK);
+			Board[1][0].setColor(E_COLOR.BLACK);Board[1][2].setColor(E_COLOR.BLACK);Board[1][4].setColor(E_COLOR.BLACK);Board[1][6].setColor(E_COLOR.BLACK);
+			Board[2][1].setColor(E_COLOR.BLACK);Board[2][3].setColor(E_COLOR.BLACK);Board[2][5].setColor(E_COLOR.BLACK);Board[2][7].setColor(E_COLOR.BLACK);
+
+			Board[7][0].setColor(E_COLOR.WHITE);Board[7][2].setColor(E_COLOR.WHITE);Board[7][4].setColor(E_COLOR.WHITE);Board[7][6].setColor(E_COLOR.WHITE);
+			Board[6][1].setColor(E_COLOR.WHITE);Board[6][3].setColor(E_COLOR.WHITE);Board[6][5].setColor(E_COLOR.WHITE);Board[6][7].setColor(E_COLOR.WHITE);
+			Board[5][0].setColor(E_COLOR.WHITE);Board[5][2].setColor(E_COLOR.WHITE);Board[5][4].setColor(E_COLOR.WHITE);Board[5][5].setColor(E_COLOR.WHITE);
 			int whitei=0;
 			if(whitei<WhitePieces.length)
 			{
@@ -192,7 +171,7 @@ public class Game {
 					if(row%2!=0) {
 						for(int j=0;j<8;j+=2)
 						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
+							Soldier s=new Soldier(true,Board[row][j], E_COLOR.WHITE);
 							WhitePieces[whitei]=s;
 							whitei++;
 
@@ -201,7 +180,7 @@ public class Game {
 					else {
 						for(int j=1;j<8;j+=2)
 						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
+							Soldier s=new Soldier(true,Board[row][j], E_COLOR.WHITE);
 
 							WhitePieces[whitei]=s;	
 							whitei++;
@@ -219,7 +198,7 @@ public class Game {
 					if(row%2!=0) {
 						for(int j=0;j<8;j+=2)
 						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
+							Soldier s=new Soldier(true,Board[row][j], E_COLOR.BLACK);
 
 							BlackPieces[Blacki]=s;	
 							Blacki++;
@@ -228,7 +207,7 @@ public class Game {
 					else {
 						for(int j=1;j<8;j+=2)
 						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
+							Soldier s=new Soldier(true,Board[row][j], E_COLOR.BLACK);
 
 							BlackPieces[Blacki]=s;	
 							Blacki++;
@@ -270,131 +249,131 @@ public class Game {
 			System.out.println("Enter your column number that you want to return the soldier in: "); 
 			y = sc.nextInt();
 			//If soldier is White soldier
-			if(s.getColor()==Soldier_COLOR_AtSquare.WHITE) {
+			if(s.getColor()==E_COLOR.WHITE) {
 				if(x==0)
 					return false;
 				else if(x==1 && y==0) {
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK )
+					if(Board[x-1][y+1].getColor()==E_COLOR.BLACK || Board[x][y+2].getColor()==E_COLOR.BLACK || Board[x+1][y+1].getColor()==E_COLOR.BLACK || Board[x+2][y+2].getColor()==E_COLOR.BLACK || Board[x+2][y].getColor()==E_COLOR.BLACK )
 						return false;
 
 				}
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-2][y].getColor()==E_COLOR.BLACK || Board[x-1][y+1].getColor()==E_COLOR.BLACK|| Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK||Board[x+1][y+1].getColor()==E_COLOR.BLACK||Board[x+2][y+2].getColor()==E_COLOR.BLACK|| Board[x+2][y].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==7 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-2][y].getColor()==E_COLOR.BLACK || Board[x-1][y+1].getColor()==E_COLOR.BLACK|| Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-2][y].getColor()==E_COLOR.BLACK || Board[x-1][y+1].getColor()==E_COLOR.BLACK|| Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK||Board[x+1][y+1].getColor()==E_COLOR.BLACK||Board[x+2][y+2].getColor()==E_COLOR.BLACK|| Board[x+2][y].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==7 && y==4) {
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x][y-2].getColor()==E_COLOR.BLACK || Board[x-1][y-1].getColor()==E_COLOR.BLACK|| Board[x-2][y-2].getColor()==E_COLOR.BLACK|| Board[x-2][y].getColor()==E_COLOR.BLACK||Board[x-1][y+1].getColor()==E_COLOR.BLACK||Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==7 && y==6) {
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x][y-2].getColor()==E_COLOR.BLACK || Board[x-1][y-1].getColor()==E_COLOR.BLACK|| Board[x-2][y-2].getColor()==E_COLOR.BLACK|| Board[x-2][y].getColor()==E_COLOR.BLACK||Board[x-1][y+1].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==6 && y==7) {
-					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x+1][y-1].getColor()==E_COLOR.BLACK || Board[x][y-2].getColor()==E_COLOR.BLACK|| Board[x-1][y-1].getColor()==E_COLOR.BLACK|| Board[x-2][y-2].getColor()==E_COLOR.BLACK||Board[x-2][y].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==4 && y==7) {
-					if(Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x+2][y].getColor()==E_COLOR.BLACK || Board[x+1][y-1].getColor()==E_COLOR.BLACK|| Board[x+2][y-2].getColor()==E_COLOR.BLACK|| Board[x-1][y-1].getColor()==E_COLOR.BLACK||Board[x-2][y-2].getColor()==E_COLOR.BLACK||Board[x-2][y].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==6 && y==5) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-2][y].getColor()==E_COLOR.BLACK || Board[x-1][y+1].getColor()==E_COLOR.BLACK|| Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK||Board[x+1][y+1].getColor()==E_COLOR.BLACK||Board[x+1][y-1].getColor()==E_COLOR.BLACK||Board[x][y-2].getColor()==E_COLOR.BLACK||Board[x-1][y-1].getColor()==E_COLOR.BLACK||Board[x-2][y-2].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==6 && y==1) {//10 
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-2][y].getColor()==E_COLOR.BLACK || Board[x-1][y+1].getColor()==E_COLOR.BLACK|| Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK||Board[x+1][y+1].getColor()==E_COLOR.BLACK||Board[x+1][y-1].getColor()==E_COLOR.BLACK||Board[x-1][y-1].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				else if(x==1 && y==6) {//11 
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getColor()==E_COLOR.BLACK || Board[x+1][y+1].getColor()==E_COLOR.BLACK|| Board[x+2][y].getColor()==E_COLOR.BLACK|| Board[x+1][y-1].getColor()==E_COLOR.BLACK||Board[x+2][y-2].getColor()==E_COLOR.BLACK||Board[x][y-2].getColor()==E_COLOR.BLACK||Board[x-1][y-1].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 
 				else if(x==1 && y==2) {//12 
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getColor()==E_COLOR.BLACK || Board[x][y+2].getColor()==E_COLOR.BLACK|| Board[x+1][y+1].getColor()==E_COLOR.BLACK|| Board[x+2][y+2].getColor()==E_COLOR.BLACK||Board[x+2][y].getColor()==E_COLOR.BLACK||Board[x+1][y-1].getColor()==E_COLOR.BLACK||Board[x+2][y-2].getColor()==E_COLOR.BLACK||Board[x][y-2].getColor()==E_COLOR.BLACK||Board[x-1][y-1].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 
 				else{
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-2][y].getColor()==E_COLOR.BLACK || Board[x-1][y+1].getColor()==E_COLOR.BLACK|| Board[x-2][y+2].getColor()==E_COLOR.BLACK|| Board[x][y+2].getColor()==E_COLOR.BLACK||Board[x+1][y+1].getColor()==E_COLOR.BLACK||Board[x+2][y+2].getColor()==E_COLOR.BLACK|| Board[x+2][y].getColor()==E_COLOR.BLACK||Board[x+1][y-1].getColor()==E_COLOR.BLACK||Board[x+2][y-2].getColor()==E_COLOR.BLACK||Board[x][y-2].getColor()==E_COLOR.BLACK||Board[x-1][y-1].getColor()==E_COLOR.BLACK||Board[x-2][y-2].getColor()==E_COLOR.BLACK)
 						return false;
 				}
 				//set the soldier in the location given
-				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+				Board[x][y].setColor(E_COLOR.WHITE);
 				return true;
 			}
 			//If soldier is Black 
-			if(s.getColor()==Soldier_COLOR_AtSquare.BLACK) {
+			if(s.getColor()==E_COLOR.BLACK) {
 				if(x==7)
 					return false;
 				else if(x==1 && y==0) {
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE )
+					if(Board[x-1][y+1].getColor()==E_COLOR.WHITE || Board[x][y+2].getColor()==E_COLOR.WHITE || Board[x+1][y+1].getColor()==E_COLOR.WHITE || Board[x+2][y+2].getColor()==E_COLOR.WHITE || Board[x+2][y].getColor()==E_COLOR.WHITE )
 						return false;
 
 				}
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-2][y].getColor()==E_COLOR.WHITE || Board[x-1][y+1].getColor()==E_COLOR.WHITE|| Board[x-2][y+2].getColor()==E_COLOR.WHITE|| Board[x][y+2].getColor()==E_COLOR.WHITE||Board[x+1][y+1].getColor()==E_COLOR.WHITE||Board[x+2][y+2].getColor()==E_COLOR.WHITE|| Board[x+2][y].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-2][y].getColor()==E_COLOR.WHITE || Board[x-1][y+1].getColor()==E_COLOR.WHITE|| Board[x-2][y+2].getColor()==E_COLOR.WHITE|| Board[x][y+2].getColor()==E_COLOR.WHITE||Board[x+1][y+1].getColor()==E_COLOR.WHITE||Board[x+2][y+2].getColor()==E_COLOR.WHITE|| Board[x+2][y].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 
 				else if(x==6 && y==7) {
-					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getColor()==E_COLOR.WHITE || Board[x][y-2].getColor()==E_COLOR.WHITE|| Board[x-1][y-1].getColor()==E_COLOR.WHITE|| Board[x-2][y-2].getColor()==E_COLOR.WHITE||Board[x-2][y].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==4 && y==7) {
-					if(Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+2][y].getColor()==E_COLOR.WHITE || Board[x+1][y-1].getColor()==E_COLOR.WHITE|| Board[x+2][y-2].getColor()==E_COLOR.WHITE|| Board[x-1][y-1].getColor()==E_COLOR.WHITE||Board[x-2][y-2].getColor()==E_COLOR.WHITE||Board[x-2][y].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==6 && y==5) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-2][y].getColor()==E_COLOR.WHITE || Board[x-1][y+1].getColor()==E_COLOR.WHITE|| Board[x-2][y+2].getColor()==E_COLOR.WHITE|| Board[x][y+2].getColor()==E_COLOR.WHITE||Board[x+1][y+1].getColor()==E_COLOR.WHITE||Board[x+1][y-1].getColor()==E_COLOR.WHITE||Board[x][y-2].getColor()==E_COLOR.WHITE||Board[x-1][y-1].getColor()==E_COLOR.WHITE||Board[x-2][y-2].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==6 && y==1) { 
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-2][y].getColor()==E_COLOR.WHITE || Board[x-1][y+1].getColor()==E_COLOR.WHITE|| Board[x-2][y+2].getColor()==E_COLOR.WHITE|| Board[x][y+2].getColor()==E_COLOR.WHITE||Board[x+1][y+1].getColor()==E_COLOR.WHITE||Board[x+1][y-1].getColor()==E_COLOR.WHITE||Board[x-1][y-1].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==1 && y==6) { 
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getColor()==E_COLOR.WHITE || Board[x+1][y+1].getColor()==E_COLOR.WHITE|| Board[x+2][y].getColor()==E_COLOR.WHITE|| Board[x+1][y-1].getColor()==E_COLOR.WHITE||Board[x+2][y-2].getColor()==E_COLOR.WHITE||Board[x][y-2].getColor()==E_COLOR.WHITE||Board[x-1][y-1].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 
 				else if(x==1 && y==2) {
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getColor()==E_COLOR.WHITE || Board[x][y+2].getColor()==E_COLOR.WHITE|| Board[x+1][y+1].getColor()==E_COLOR.WHITE|| Board[x+2][y+2].getColor()==E_COLOR.WHITE||Board[x+2][y].getColor()==E_COLOR.WHITE||Board[x+1][y-1].getColor()==E_COLOR.WHITE||Board[x+2][y-2].getColor()==E_COLOR.WHITE||Board[x][y-2].getColor()==E_COLOR.WHITE||Board[x-1][y-1].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==0 && y==1) {
-					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getColor()==E_COLOR.WHITE || Board[x+2][y].getColor()==E_COLOR.WHITE|| Board[x+1][y+1].getColor()==E_COLOR.WHITE|| Board[x+2][y+2].getColor()==E_COLOR.WHITE||Board[x][y+2].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==0 && y==3) { 
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE ||Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x][y-2].getColor()==E_COLOR.WHITE || Board[x+1][y-1].getColor()==E_COLOR.WHITE|| Board[x+2][y-2].getColor()==E_COLOR.WHITE|| Board[x+2][y].getColor()==E_COLOR.WHITE||Board[x+1][y+1].getColor()==E_COLOR.WHITE||Board[x+2][y+2].getColor()==E_COLOR.WHITE ||Board[x][y+2].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else if(x==0 && y==7) {
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x][y-2].getColor()==E_COLOR.WHITE || Board[x+1][y-1].getColor()==E_COLOR.WHITE|| Board[x+2][y-2].getColor()==E_COLOR.WHITE|| Board[x+2][y].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				else{
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-2][y].getColor()==E_COLOR.WHITE || Board[x-1][y+1].getColor()==E_COLOR.WHITE|| Board[x-2][y+2].getColor()==E_COLOR.WHITE|| Board[x][y+2].getColor()==E_COLOR.WHITE||Board[x+1][y+1].getColor()==E_COLOR.WHITE||Board[x+2][y+2].getColor()==E_COLOR.WHITE|| Board[x+2][y].getColor()==E_COLOR.WHITE||Board[x+1][y-1].getColor()==E_COLOR.WHITE||Board[x+2][y-2].getColor()==E_COLOR.WHITE||Board[x][y-2].getColor()==E_COLOR.WHITE||Board[x-1][y-1].getColor()==E_COLOR.WHITE||Board[x-2][y-2].getColor()==E_COLOR.WHITE)
 						return false;
 				}
 				//set the soldier in the location given
-				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+				Board[x][y].setColor(E_COLOR.BLACK);
 				return true;
 
 			}
@@ -415,7 +394,7 @@ public class Game {
 		if(s!=null && s.getLocation()!=null)
 		{  
 			//If soldier is Black
-			if(s.getColor().equals(Soldier_COLOR_AtSquare.BLACK))
+			if(s.getColor().equals(E_COLOR.BLACK))
 			{
 				//Delete the solder from the relevant array using setIsAlive as false
 				for(int i=0;i<BlackPieces.length;i++)
@@ -425,7 +404,7 @@ public class Game {
 				}
 			}
 			//If soldier is White
-			if(s.getColor().equals(Soldier_COLOR_AtSquare.WHITE))
+			if(s.getColor().equals(E_COLOR.WHITE))
 			{
 				//Delete the solder from the relevant array using setIsAlive as false
 				for(int i=0;i<WhitePieces.length;i++)
@@ -435,7 +414,7 @@ public class Game {
 				}
 			}
 			//set the location as empty
-			Board[s.getLocation().getX()][s.getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[s.getLocation().getX()][s.getLocation().getY()].setColor(E_COLOR.EMPTY);
 			s.setIsAlive(false);
 		}
 
@@ -456,7 +435,7 @@ public class Game {
 	public boolean IsEatable(Player p)
 	{
 		//case player is White
-		if(p.getColor()==Soldier_COLOR_AtSquare.WHITE) {
+		if(p.getColor()==E_COLOR.WHITE) {
 
 			for(int i=0;i<WhitePieces.length; i++)
 			{
@@ -466,24 +445,24 @@ public class Game {
 				if(WhitePieces[i].isIsQueen()==false)
 				{
 					if(y==0||y==1) {
-						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==null) {
+						if((Board[x-1][y+1].getColor())==(E_COLOR.BLACK) && Board[x-2][y+2].getColor()==null) {
 							return true;
 						}
 					}
 					if(y==6||y==7) {
-						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==null) {
+						if((Board[x-1][y-1].getColor())==(E_COLOR.BLACK) && Board[x-2][y-2].getColor()==null) {
 							return true;
 						}
 					}
 					else {
-						if(((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==null)|| ((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==null)) 
+						if(((Board[x-1][y+1].getColor())==(E_COLOR.BLACK) && Board[x-2][y+2].getColor()==null)|| ((Board[x-1][y-1].getColor())==(E_COLOR.BLACK) && Board[x-2][y-2].getColor()==null)) 
 							return true;	
 					}
 				}
 				//case the soldier is Queen
 				else if(WhitePieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
-					while(Board[x-1][y+1].getSoldierColor()==null) {
+					while(Board[x-1][y+1].getColor()==null) {
 						x--;
 						y++;
 						// case the queen arrived the edge of the board
@@ -501,10 +480,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y+1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.BLACK && Board[x-1][y+1].getColor()==null)
 						return true;
 					//case the queen is moving up left
-					while(Board[x-1][y-1].getSoldierColor()==null) {
+					while(Board[x-1][y-1].getColor()==null) {
 						x--;
 						y--;
 						// case the queen arrived the edge of the board
@@ -518,10 +497,10 @@ public class Game {
 
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y-1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.BLACK && Board[x-1][y-1].getColor()==null)
 						return true;
 					//case the queen is moving right down
-					while(Board[x+1][y+1].getSoldierColor()==null) {
+					while(Board[x+1][y+1].getColor()==null) {
 						x++;
 						y++;
 
@@ -535,10 +514,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y+1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.BLACK && Board[x+1][y+1].getColor()==null)
 						return true;
 					//case the queen is moving left down
-					while(Board[x+1][y-1].getSoldierColor()==null) {
+					while(Board[x+1][y-1].getColor()==null) {
 						x++;
 						y--;
 
@@ -555,7 +534,7 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y-1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.BLACK && Board[x+1][y-1].getColor()==null)
 						return true;
 				}
 
@@ -563,7 +542,7 @@ public class Game {
 
 		}
 		//case player is Black
-		if(p.getColor()==Soldier_COLOR_AtSquare.BLACK) {
+		if(p.getColor()==E_COLOR.BLACK) {
 
 			for(int i=0;i<BlackPieces.length; i++) {
 				//get the location of the soldier
@@ -573,21 +552,21 @@ public class Game {
 				{
 
 					if(y==0||y==1) {
-						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==null) {
+						if((Board[x+1][y+1].getColor())==(E_COLOR.WHITE) && Board[x+2][y+2].getColor()==null) {
 
 							return true;
 						}
 
 					}
 					if(y==6||y==7) {
-						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==null) {
+						if((Board[x+1][y-1].getColor())==(E_COLOR.WHITE) && Board[x+2][y-2].getColor()==null) {
 
 							return true;
 						}
 
 					}
 					else {
-						if(((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==null)|| ((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==null)) {
+						if(((Board[x+1][y-1].getColor())==(E_COLOR.WHITE) && Board[x+2][y-2].getColor()==null)|| ((Board[x+1][y+1].getColor())==(E_COLOR.WHITE) && Board[x+2][y+2].getColor()==null)) {
 							return true;
 						}
 					}
@@ -595,7 +574,7 @@ public class Game {
 
 				else if(BlackPieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
-					while(Board[x-1][y+1].getSoldierColor()==null) {
+					while(Board[x-1][y+1].getColor()==null) {
 						x--;
 						y++;
 						// case the queen arrived the edge of the board
@@ -613,10 +592,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y+1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.WHITE && Board[x-1][y+1].getColor()==null)
 						return true;
 					//case the queen is moving up left
-					while(Board[x-1][y-1].getSoldierColor()==null) {
+					while(Board[x-1][y-1].getColor()==null) {
 						x--;
 						y--;
 						// case the queen arrived the edge of the board
@@ -630,10 +609,10 @@ public class Game {
 
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y-1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.WHITE && Board[x-1][y-1].getColor()==null)
 						return true;
 					//case the queen is moving right down
-					while(Board[x+1][y+1].getSoldierColor()==null) {
+					while(Board[x+1][y+1].getColor()==null) {
 						x++;
 						y++;
 
@@ -647,10 +626,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y+1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.WHITE && Board[x+1][y+1].getColor()==null)
 						return true;
 					//case the queen is moving left down
-					while(Board[x+1][y-1].getSoldierColor()==null) {
+					while(Board[x+1][y-1].getColor()==null) {
 						x++;
 						y--;
 						// case the queen arrived the edge of the board
@@ -665,7 +644,7 @@ public class Game {
 							x++;
 						}
 					}
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y-1].getSoldierColor()==null)
+					if(Board[x][y].getColor()==E_COLOR.WHITE && Board[x+1][y-1].getColor()==null)
 						return true;
 				}
 
@@ -697,26 +676,26 @@ public class Game {
 					x=BlackPieces[i].getLocation().getX();
 					y=BlackPieces[i].getLocation().getY();
 					if(x==0 && y==7) {
-						if(Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x+1][y-1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else if(x==7 && y==0) {
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y+1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else if(y==0) {
 						//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y+1].getColor()!=E_COLOR.EMPTY && Board[x+1][y+1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else if(y==7) {
 						//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y-1].getColor()!=E_COLOR.EMPTY && Board[x+1][y-1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else {
-						if(Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
-								&& Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y-1].getColor()!=E_COLOR.EMPTY && Board[x+1][y-1].getColor()!=E_COLOR.EMPTY 
+								&& Board[x-1][y+1].getColor()!=E_COLOR.EMPTY &&Board[x+1][y+1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 				}
@@ -734,26 +713,26 @@ public class Game {
 					y=WhitePieces[i].getLocation().getY();
 
 					if(x==0 && y==7) {
-						if(Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x+1][y-1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else if(x==7 && y==0) {
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y+1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else if(y==0) {
 						//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y+1].getColor()!=E_COLOR.EMPTY && Board[x+1][y+1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else if(y==7) {
 						//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(Board[x-1][y-1].getColor()!=E_COLOR.EMPTY && Board[x+1][y-1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 					else {  
-						if(y+1<8 &&Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
-								&& Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+						if(y+1<8 &&Board[x-1][y-1].getColor()!=E_COLOR.EMPTY && Board[x+1][y-1].getColor()!=E_COLOR.EMPTY 
+								&& Board[x-1][y+1].getColor()!=E_COLOR.EMPTY &&Board[x+1][y+1].getColor()!=E_COLOR.EMPTY)
 							countBlockedSoldier++;
 					}
 				}

@@ -1,8 +1,7 @@
 package Controllers;
 
 import Model.Player;
-
-import utils.Soldier_COLOR_AtSquare;
+import utils.E_COLOR;
 
 public class GameController {
 	

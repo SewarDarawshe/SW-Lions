@@ -1,7 +1,6 @@
 package Model;
 
-import utils.SQUARE_COLOR;
-import utils.Soldier_COLOR_AtSquare;
+import utils.E_COLOR;
 
 
 /*
@@ -14,20 +13,18 @@ public class Square {
 
 	private int X;
 	private int Y;
-	private Soldier_COLOR_AtSquare SoldierColor;
-	private SQUARE_COLOR squareColor;
+	private E_COLOR Color;
 
 
 
 
 	// -------------------------------Constructors-------------------------------
 
-	public Square(int x, int y, Soldier_COLOR_AtSquare color) {
+	public Square(int x, int y, E_COLOR color) {
 		super();
 		X = x;
 		Y = y;
-		SoldierColor = color;
-		squareColor= SQUARE_COLOR.BLACK;
+		Color = color;
 	}
 
 	// -------------------------------Getters And Setters-------------------------
@@ -63,29 +60,17 @@ public class Square {
 		Y = y;
 	}
 
-	public Soldier_COLOR_AtSquare getSoldierColor() {
-		return SoldierColor;
+	public E_COLOR getColor() {
+		return Color;
 	}
 
-	public void setSoldierColor(Soldier_COLOR_AtSquare color) {
-		SoldierColor = color;
-	}
-
-	
-	
-	public SQUARE_COLOR getSquareColor() {
-		return squareColor;
-	}
-
-	public void setSquareColor(SQUARE_COLOR squareColor) {
-		this.squareColor = squareColor;
+	public void setColor(E_COLOR color) {
+		Color = color;
 	}
 
 	@Override
 	public String toString() {
-		return "Square [X=" + X + ", Y=" + Y + ", SoldierColor=" + SoldierColor + "]";
+		return "Square [X=" + X + ", Y=" + Y + ", Color=" + Color + "]";
 	}
-
-	
 
 }
