@@ -6,7 +6,8 @@ package utils;
  * @author Alaa Khawaled
  */
 
-public enum E_COLOR {
-	BLACK,WHITE,BLACKSQUARE,WHITESQUARE,EMPTY;
+public enum Soldier_COLOR_AtSquare {
+	BLACK,WHITE,EMPTY;
+	
 
 }
