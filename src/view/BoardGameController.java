@@ -292,7 +292,7 @@ public class BoardGameController implements Initializable{
 			g = new Game(white, black,d,t);
 			g.initiateGame();
 			
-			CheckAndDoYellowSquares();
+			//CheckAndDoYellowSquares();
 
 		}
 		
