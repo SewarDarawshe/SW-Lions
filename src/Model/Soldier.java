@@ -1,6 +1,6 @@
 package Model;
 
-import utils.E_COLOR;
+import utils.Soldier_COLOR_AtSquare;
 
 
 /*
@@ -13,13 +13,21 @@ public class Soldier {
 	private boolean IsAlive;
 	private boolean IsQueen;
 	private Square Location;
-	private E_COLOR Color;
+	private Soldier_COLOR_AtSquare Color;
 
 	// -------------------------------Constructors-------------------------------
 
-	public Soldier(boolean isAlive, Square location, E_COLOR color) {
+	public Soldier(boolean isAlive, Square location, Soldier_COLOR_AtSquare color) {
 		super();
 		this.IsAlive = isAlive;
+		this.IsQueen = false;
+		this.Location = location;
+		this.Color=color;
+	}
+	
+	public Soldier( Square location, Soldier_COLOR_AtSquare color) {
+		super();
+		this.IsAlive = true;
 		this.IsQueen = false;
 		this.Location = location;
 		this.Color=color;
@@ -27,11 +35,11 @@ public class Soldier {
 
 	// -------------------------------Getters And Setters-------------------------
 
-	public E_COLOR getColor() {
+	public Soldier_COLOR_AtSquare getColor() {
 		return Color;
 	}
 
-	public void setColor(E_COLOR color) {
+	public void setColor(Soldier_COLOR_AtSquare color) {
 		Color = color;
 	}
 
@@ -106,11 +114,11 @@ public class Soldier {
 			if (direction=='l')
 			{
 				int xDirection=x;
-				Board[x][y].setColor(E_COLOR.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 				xDirection++;
 				this.getLocation().setX(xDirection);
 				this.getLocation().setY(this.getLocation().getY()-1);
-				Board[xDirection][y-1].setColor(E_COLOR.BLACK);
+				Board[xDirection][y-1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 
 			}
 
@@ -118,13 +126,13 @@ public class Soldier {
 			if (direction=='r')
 			{
 				int xDirection=x;
-				Board[x][y].setColor(E_COLOR.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 				xDirection++;
 				
 			this.getLocation().setX(xDirection);
 			this.getLocation().setY(this.getLocation().getY()+1);
 
-				Board[this.getLocation().getX()][this.getLocation().getY()].setColor(E_COLOR.BLACK); 
+				Board[this.getLocation().getX()][this.getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.BLACK); 
 				
 			}
 		} else 
@@ -153,11 +161,11 @@ public class Soldier {
 			if (direction=='l')
 			{
 				int xDirection=x;
-				Board[x][y].setColor(E_COLOR.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 				xDirection--;
 				this.getLocation().setX(xDirection);
 				this.getLocation().setY(this.getLocation().getY()-1);
-				Board[xDirection][y-1].setColor(E_COLOR.WHITE);
+				Board[xDirection][y-1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 				return 0;
 
 			}
@@ -166,11 +174,11 @@ public class Soldier {
 			if (direction=='r')
 			{
 				int xDirection=x;
-				Board[x][y].setColor(E_COLOR.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 				xDirection--;
 				this.getLocation().setX(xDirection);
 				this.getLocation().setY(this.getLocation().getY()+1);
-				Board[xDirection][y+1].setColor(E_COLOR.WHITE); //issue on line
+				Board[xDirection][y+1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE); //issue on line
 				return 0;
 			}
 		} else 
@@ -188,39 +196,39 @@ public class Soldier {
 	// returns -1 if the queen is not dead an 0 if the queen dead
 	//i and j the location that has choosen
 	//color is the color of the queen .
-	public int checkQueenDead(int i,int j,Square[][] Board, E_COLOR color)
+	public int checkQueenDead(int i,int j,Square[][] Board, Soldier_COLOR_AtSquare color)
 	{
 
 		int x=this.Location.getX();
 		int y=this.Location.getY();
 
-		if((Board[x-1][y-1].getColor() != color) && i!= x-1 && j!=y-1)
+		if((Board[x-1][y-1].getSoldierColor() != color) && i!= x-1 && j!=y-1)
 		{
-			Board[x-1][y-1].setColor(E_COLOR.EMPTY);
+			Board[x-1][y-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 			setIsAlive(false);
 			System.out.println("Queen is dead!");
 			return 0;
 
 		}
-		if((Board[x-1][y+1].getColor() != color) && i!= x-1 && j!=y+1)
+		if((Board[x-1][y+1].getSoldierColor() != color) && i!= x-1 && j!=y+1)
 		{
-			Board[x-1][y+1].setColor(E_COLOR.EMPTY);
+			Board[x-1][y+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 			setIsAlive(false);
 			System.out.println("Queen is dead!");
 			return 0;
 
 		}
-		if((Board[x+1][y+1].getColor() != color) && i!= x+1 && j!=y+1)
+		if((Board[x+1][y+1].getSoldierColor() != color) && i!= x+1 && j!=y+1)
 		{
-			Board[x+1][y+1].setColor(E_COLOR.EMPTY);
+			Board[x+1][y+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 			setIsAlive(false);
 			System.out.println("Queen is dead!");
 			return 0;
 
 		}
-		if((Board[x+1][y-1].getColor()!= color) && i!= x+1 && j!=y-1)
+		if((Board[x+1][y-1].getSoldierColor()!= color) && i!= x+1 && j!=y-1)
 		{
-			Board[x+1][y-1].setColor(E_COLOR.EMPTY);
+			Board[x+1][y-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 			setIsAlive(false);
 			System.out.println("Queen is dead!");
 			return 0;
@@ -232,14 +240,14 @@ public class Soldier {
 	//color is the color of the queen its 1 if black and 2 if white.
 	//this method  return -1 if not queen and move the queen and return 0 if queen and moved;
 
-	public int QueenMove(Square[][] Board,String dir, E_COLOR color) {
+	public int QueenMove(Square[][] Board,String dir, Soldier_COLOR_AtSquare color) {
 
 		int x= Location.getX();
 		int y=Location.getY();
 		int x2=x;
 		int y2=y;
 		//if the soldier is queen and the queen is not going to die
-		if(isIsQueen()==true && checkQueenDead(x, y, Board, color)==-1 && color== E_COLOR.WHITE)
+		if(isIsQueen()==true && checkQueenDead(x, y, Board, color)==-1 && color== Soldier_COLOR_AtSquare.WHITE)
 		{
 
 			if(dir == "rup"  )
@@ -264,8 +272,8 @@ public class Soldier {
 
 
 
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.WHITE);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 
 
 				return 0;
@@ -288,8 +296,8 @@ public class Soldier {
 					//in case its did not arrived the edge of the board
 					x--;
 				y--;
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.WHITE);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 				return 0;
 
 			}
@@ -308,8 +316,8 @@ public class Soldier {
 					//in case its did not arrived the edge of the board
 					x++;
 				y++;
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.WHITE);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 				return 0;
 
 
@@ -333,8 +341,8 @@ public class Soldier {
 				y--;
 
 
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.WHITE);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 				return 0;
 
 			}
@@ -343,7 +351,7 @@ public class Soldier {
 
 		}
 
-		if(isIsQueen()==true && checkQueenDead(x, y, Board, color)==-1 && color== E_COLOR.BLACK)
+		if(isIsQueen()==true && checkQueenDead(x, y, Board, color)==-1 && color== Soldier_COLOR_AtSquare.BLACK)
 		{
 
 			// case the queen arrived the edge of the board 
@@ -367,8 +375,8 @@ public class Soldier {
 				y--;
 
 
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.BLACK);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 
 
 				return 0;
@@ -392,8 +400,8 @@ public class Soldier {
 					//in case its did not arrived the edge of the board
 					x--;
 				y--;
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.BLACK);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 				return 0;
 
 			}
@@ -412,8 +420,8 @@ public class Soldier {
 					//in case its did not arrived the edge of the board
 					x++;
 				y++;
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.BLACK);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 				return 0;
 
 
@@ -436,8 +444,8 @@ public class Soldier {
 					x++;
 				y--;
 
-				Board[x2][y2].setColor(E_COLOR.EMPTY);
-				Board[x][y].setColor(E_COLOR.BLACK);
+				Board[x2][y2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+				Board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 				return 0;
 
 			}

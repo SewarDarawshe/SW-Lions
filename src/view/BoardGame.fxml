@@ -23,120 +23,120 @@
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s1" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s2" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fill="#080808" layoutX="85.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="199.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="426.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="312.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Rectangle fx:id="s3" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s0" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Circle fx:id="b0" fill="#080808" layoutX="85.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b1" fill="#080808" layoutX="199.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b3" fill="#080808" layoutX="426.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b2" fill="#080808" layoutX="312.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </Pane>
                         <Pane layoutY="49.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s4" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s5" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s6" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s7" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fill="#080808" layoutX="28.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="142.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="256.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="369.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b4" fill="#080808" layoutX="28.0" layoutY="24.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b5" fill="#080808" layoutX="142.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b6" fill="#080808" layoutX="256.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b7" fill="#080808" layoutX="369.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </Pane>
                         <Pane layoutY="98.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s8" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s9" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s10" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fill="#080808" layoutX="85.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="199.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="312.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="#080808" layoutX="426.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Rectangle fx:id="s11" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Circle fx:id="b8" fill="#080808" layoutX="85.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b9" fill="#080808" layoutX="199.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b10" fill="#080808" layoutX="312.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b11" fill="#080808" layoutX="426.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </Pane>
                         <Pane layoutY="147.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                            </children>
                         </Pane>
                         <Pane layoutY="196.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s16" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s17" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s18" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s19" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                            </children>
                         </Pane>
                         <Pane layoutY="245.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s20" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s21" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s22" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s23" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fill="WHITE" layoutX="369.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="256.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w8" fill="WHITE" layoutX="369.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w9" fill="WHITE" layoutX="256.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fill="WHITE" layoutX="28.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="142.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w10" fill="WHITE" layoutX="142.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </Pane>
                         <Pane layoutY="294.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s24" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s25" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s26" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fill="WHITE" layoutX="426.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="312.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="199.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="85.0" layoutY="23.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Rectangle fx:id="s27" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Circle fx:id="w4" fill="WHITE" layoutX="426.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w5" fill="WHITE" layoutX="312.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w6" fill="WHITE" layoutX="199.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w7" fill="WHITE" layoutX="85.0" layoutY="23.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </Pane>
                         <Pane layoutY="343.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
                            <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s28" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s29" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s30" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
+                              <Rectangle fx:id="s31" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fill="WHITE" layoutX="369.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="28.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="142.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="256.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w0" fill="WHITE" layoutX="369.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w3" fill="WHITE" layoutX="28.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w2" fill="WHITE" layoutX="142.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="w1" fill="WHITE" layoutX="256.0" layoutY="25.0" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                            </children>
                         </Pane>
                      </children>
