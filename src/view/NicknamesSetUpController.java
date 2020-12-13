@@ -112,5 +112,6 @@ public class NicknamesSetUpController implements Initializable{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }
