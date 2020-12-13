@@ -36,6 +36,7 @@ import utils.Soldier_COLOR_AtSquare;
 public class BoardGameController implements Initializable{
 	private Square[][] board;
     private static final String Yellow = null;
+    
 	private int numofYellowSquares=0;
     public Game g;
     private Rectangle r=null;
@@ -291,18 +292,7 @@ public class BoardGameController implements Initializable{
 		}
 		return num;
 	}
-    
-    //this function trasfer the layout cordenate to 0<c<7
-   /* private int TransForCordinateNumforSoldier(int c) {
-    	int num=0;
-		while(c>=30) {
-			c=c-60;
-			num++;
-		}
-		return num;
-	}
-    */
-
+   
     
     private int MoveSoldierToTarget() {
     	if(soldier!=null && target!=null) {
@@ -361,6 +351,18 @@ public class BoardGameController implements Initializable{
 					
 					}
 					
+					if(targetx==7)
+					{
+						this.soldier.setFill(Color.BROWN);
+						for(int j=0;j<g.getBlackPieces().length;j++)
+						{
+							if(g.getBlackPieces()[i].getLocation().getX()== targetx && g.getBlackPieces()[i].getLocation().getY()== targety)
+							{
+								g.getBlackPieces()[i].setIsQueen(true);
+							}
+						}
+					}
+					
 					
 					
 
@@ -406,7 +408,17 @@ public class BoardGameController implements Initializable{
 
 					
 					}
-					
+					if(targetx==0)
+					{
+						this.soldier.setFill(Color.BLUE);
+						for(int j=0;j<g.getWhitePieces().length;j++)
+						{
+							if(g.getWhitePieces()[i].getLocation().getX()== targetx && g.getWhitePieces()[i].getLocation().getY()== targety)
+							{
+								g.getWhitePieces()[i].setIsQueen(true);
+							}
+						}
+					}
 					
 					
 
