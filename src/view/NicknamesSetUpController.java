@@ -90,7 +90,7 @@ public class NicknamesSetUpController implements Initializable{
 
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
+			}
         }
     	
     }

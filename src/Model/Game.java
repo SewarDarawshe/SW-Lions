@@ -12,7 +12,7 @@ import utils.Soldier_COLOR_AtSquare;
 import utils.E_Difficulty;
 
 /**
- *  * Game class -not responsible of game conrollers
+ *  * Game class -not responsible of game controllers
 
  * 
  * @author Maisa Mansour
@@ -250,7 +250,7 @@ public class Game {
 	public boolean AddPlayer(String wp,String bp)
 	{
 		this.whitePlayer = new Player(wp,0);
-		this. blackPlayer = new Player(bp,0);
+		this.blackPlayer = new Player(bp,0);
 		return true;
 
 
