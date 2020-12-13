@@ -5,7 +5,6 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -13,186 +12,150 @@
 
 <AnchorPane fx:id="Pane" prefHeight="470.0" prefWidth="710.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.BoardGameController">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="710.0" style="-fx-background-color: peru;">
+      <Pane layoutX="-11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="767.0" style="-fx-background-color: peru;">
          <children>
-            <VBox fx:id="boardSquares" layoutX="241.0" layoutY="38.0" prefHeight="394.0" prefWidth="455.0">
-               <children>
-                  <Pane fx:id="BoardPane" prefHeight="394.0" prefWidth="455.0" style="-fx-background-color: PERU;">
-                     <children>
-                        <Pane fx:id="Pane0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s1" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s2" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s3" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s0" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="b0" fill="#080808" layoutX="85.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b1" fill="#080808" layoutX="199.0" layoutY="24.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b3" fill="#080808" layoutX="426.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b2" fill="#080808" layoutX="312.0" layoutY="24.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="49.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle fx:id="s4" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s5" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s6" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s7" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="b4" fill="#080808" layoutX="28.0" layoutY="24.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b5" fill="#080808" layoutX="142.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b6" fill="#080808" layoutX="256.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b7" fill="#080808" layoutX="369.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="98.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s8" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s9" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s10" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s11" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="b8" fill="#080808" layoutX="85.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b9" fill="#080808" layoutX="199.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b10" fill="#080808" layoutX="312.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="b11" fill="#080808" layoutX="426.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="147.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="196.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s16" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s17" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s18" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s19" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="245.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle fx:id="s20" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s21" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s22" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s23" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="w8" fill="WHITE" layoutX="369.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w9" fill="WHITE" layoutX="256.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fill="WHITE" layoutX="28.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w10" fill="WHITE" layoutX="142.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="294.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s24" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="114.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s25" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="171.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="228.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s26" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="285.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s27" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="w4" fill="WHITE" layoutX="426.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w5" fill="WHITE" layoutX="312.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w6" fill="WHITE" layoutX="199.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w7" fill="WHITE" layoutX="85.0" layoutY="23.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </Pane>
-                        <Pane layoutY="343.0" prefHeight="49.0" prefWidth="455.0" style="-fx-background-color: white;">
-                           <children>
-                              <Rectangle fx:id="s28" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="57.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s29" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="114.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="171.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s30" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="228.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="285.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle fx:id="s31" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="342.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="399.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="w0" fill="WHITE" layoutX="369.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w3" fill="WHITE" layoutX="28.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w2" fill="WHITE" layoutX="142.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                              <Circle fx:id="w1" fill="WHITE" layoutX="256.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
-                           </children>
-                        </Pane>
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
-            <Label fx:id="BlackTimer" layoutX="444.0" layoutY="2.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
+<Pane fx:id="boardPane" layoutX="273.0" layoutY="39.0" prefHeight="480.0" prefWidth="480.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="60.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="120.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="180.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="300.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="360.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="420.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s0" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="60.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s4" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutY="60.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s5" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="120.0" layoutY="60.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s1" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s6" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="240.0" layoutY="60.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s2" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="300.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s7" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="360.0" layoutY="60.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s3" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="420.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s8" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="60.0" layoutY="120.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s9" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="180.0" layoutY="120.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s10" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="300.0" layoutY="120.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s11" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="420.0" layoutY="120.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="120.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="240.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="360.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="60.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="180.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="300.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="420.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="120.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="240.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="360.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="120.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="240.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="360.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s16" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="60.0" layoutY="240.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s17" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="180.0" layoutY="240.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s18" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="300.0" layoutY="240.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s19" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="420.0" layoutY="240.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="60.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="180.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="300.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="420.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s20" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutY="300.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s21" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="120.0" layoutY="300.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s22" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="240.0" layoutY="300.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s23" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="360.0" layoutY="300.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="360.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="120.0" layoutY="360.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="240.0" layoutY="360.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="360.0" layoutY="360.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s24" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="60.0" layoutY="360.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s25" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="180.0" layoutY="360.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s26" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="300.0" layoutY="360.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s27" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="420.0" layoutY="360.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="60.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="180.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="300.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="420.0" layoutY="420.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s28" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutY="420.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s29" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="120.0" layoutY="420.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s30" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="240.0" layoutY="420.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s31" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="360.0" layoutY="420.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+                  <Circle fx:id="b0" layoutX="90.0" layoutY="30.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b3" layoutX="450.0" layoutY="30.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b2" layoutX="330.0" layoutY="30.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b1" layoutX="210.0" layoutY="30.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b4" layoutX="30.0" layoutY="90.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b5" layoutX="150.0" layoutY="90.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b6" layoutX="270.0" layoutY="90.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b7" layoutX="390.0" layoutY="90.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b8" layoutX="90.0" layoutY="150.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b9" layoutX="210.0" layoutY="150.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b10" layoutX="330.0" layoutY="150.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="b11" layoutX="450.0" layoutY="150.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w0" fill="WHITE" layoutX="30.0" layoutY="330.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w1" fill="WHITE" layoutX="150.0" layoutY="330.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w2" fill="WHITE" layoutX="270.0" layoutY="330.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w3" fill="WHITE" layoutX="390.0" layoutY="330.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w4" fill="WHITE" layoutX="90.0" layoutY="390.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w5" fill="WHITE" layoutX="210.0" layoutY="390.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w6" fill="WHITE" layoutX="330.0" layoutY="390.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w7" fill="WHITE" layoutX="450.0" layoutY="390.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w8" fill="WHITE" layoutX="30.0" layoutY="450.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w9" fill="WHITE" layoutX="150.0" layoutY="450.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w10" fill="WHITE" layoutX="270.0" layoutY="450.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fx:id="w11" fill="WHITE" layoutX="390.0" layoutY="450.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+         </children>
+      </Pane>
+            <Label fx:id="BlackTimer" layoutX="478.0" layoutY="2.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
                <font>
                   <Font name="Cooper Black" size="20.0" />
                </font>
             </Label>
-            <Text fx:id="BlackPlayerNic" fill="#783131" layoutX="53.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Black player " wrappingWidth="90.0">
+            <Text fx:id="BlackPlayerNic" fill="#783131" layoutX="49.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Black player " wrappingWidth="90.0">
                <font>
                   <Font name="Cooper Black" size="13.0" />
                </font>
             </Text>
-            <Text fx:id="WhitePlayerNick" fill="#783131" layoutX="53.0" layoutY="305.0" strokeType="OUTSIDE" strokeWidth="0.0" text="White player" wrappingWidth="89.99999999999989">
+            <Text fx:id="WhitePlayerNick" fill="#783131" layoutX="49.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="White player" wrappingWidth="89.99999999999989">
                <font>
                   <Font name="Cooper Black" size="13.0" />
                </font>
             </Text>
-            <Text fill="#783131" layoutX="38.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full game timer">
+            <Text fill="#783131" layoutX="38.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full game timer">
                <font>
                   <Font name="Cooper Black" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="exitbutton" layoutX="122.0" layoutY="445.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: peru;" text=" Exit game" textFill="#783131" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="exitbutton" layoutX="110.0" layoutY="527.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: peru;" text=" Exit game" textFill="#783131" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Cooper Black" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="Homepagebutton" layoutX="1.0" layoutY="445.0" mnemonicParsing="false" onAction="#openHomepage" prefHeight="22.0" prefWidth="90.0" style="-fx-background-color: peru;" text=" Home page" textFill="#783131" textOverrun="WORD_ELLIPSIS">
+            <Button fx:id="Homepagebutton" layoutX="17.0" layoutY="527.0" mnemonicParsing="false" onAction="#openHomepage" prefHeight="22.0" prefWidth="90.0" style="-fx-background-color: peru;" text=" Home page" textFill="#783131" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Cooper Black" size="12.0" />
                </font>
             </Button>
-            <Label layoutX="53.0" layoutY="183.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
+            <Label layoutX="49.0" layoutY="261.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
                <font>
                   <Font name="Cooper Black" size="20.0" />
                </font>
             </Label>
-            <Label fx:id="BlackPoints" layoutX="71.0" layoutY="74.0" text="Points" textFill="#783131">
+            <Label fx:id="BlackPoints" layoutX="74.0" layoutY="90.0" text="Points" textFill="#783131">
                <font>
                   <Font name="Cooper Black" size="12.0" />
                </font>
             </Label>
-            <Label fx:id="WhitePoints" layoutX="76.0" layoutY="346.0" text="Points" textFill="#783131">
+            <Label fx:id="WhitePoints" layoutX="74.0" layoutY="428.0" text="Points" textFill="#783131">
                <font>
                   <Font name="Cooper Black" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="BlackNickText" layoutX="25.0" layoutY="38.0" prefHeight="22.0" prefWidth="137.0" />
-            <TextField fx:id="WhiteNickText" layoutX="25.0" layoutY="315.0" prefHeight="25.0" prefWidth="137.0" />
-            <TextField fx:id="bPointsValue" layoutX="62.0" layoutY="88.0" prefHeight="25.0" prefWidth="57.0" />
-            <TextField fx:id="wPointsValue" layoutX="65.0" layoutY="360.0" prefHeight="25.0" prefWidth="57.0" />
-            <Label fx:id="WhiteTimer" layoutX="444.0" layoutY="427.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
+            <TextField fx:id="BlackNickText" layoutX="26.0" layoutY="57.0" prefHeight="22.0" prefWidth="137.0" />
+            <TextField fx:id="WhiteNickText" layoutX="25.0" layoutY="390.0" prefHeight="25.0" prefWidth="137.0" />
+            <TextField fx:id="bPointsValue" layoutX="66.0" layoutY="111.0" prefHeight="25.0" prefWidth="57.0" />
+            <TextField fx:id="wPointsValue" layoutX="65.0" layoutY="450.0" prefHeight="25.0" prefWidth="57.0" />
+            <Label fx:id="WhiteTimer" layoutX="461.0" layoutY="519.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
                <font>
                   <Font name="Cooper Black" size="20.0" />
                </font>

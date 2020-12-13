@@ -38,6 +38,7 @@ public class BoardGameController implements Initializable{
     private static final String Yellow = null;
 	private int numofYellowSquares=0;
     public Game g;
+    private Rectangle r=null;
     //soldier that has choosen to be moved
     private Circle soldier=null;
     // target square the soldier want to turn to
@@ -77,9 +78,7 @@ public class BoardGameController implements Initializable{
 
     @FXML
     private Button Homepagebutton= new Button();
-    
-    @FXML
-    private VBox boardSquares= new VBox();
+
     // the circle soldiers
     @FXML
     private Circle b0 = new Circle();
@@ -249,24 +248,7 @@ public class BoardGameController implements Initializable{
     private Rectangle s31= new Rectangle();
 
     @FXML
-    private Pane BoardPane = new Pane();
-
-    @FXML
-    private Pane Pane0= new Pane();
-    @FXML
-    private Pane Pane1= new Pane();
-    @FXML
-    private Pane Pane2= new Pane();
-    @FXML
-    private Pane Pane3= new Pane();
-    @FXML
-    private Pane Pane4= new Pane();
-    @FXML
-    private Pane Pane5= new Pane();
-    @FXML
-    private Pane Pane6= new Pane();
-    @FXML
-    private Pane Pane7= new Pane();
+    private Pane boardPane = new Pane();
 
     @FXML
     void MoveToSquare(MouseEvent event) {
@@ -300,73 +282,55 @@ public class BoardGameController implements Initializable{
 
 
     }
-    private int TransForRowNum(int x) {
-    	int rowNum=0;
-		while(x>=49) {
-			x=x-49;
-			rowNum++;
+    //this function trasfer the layout cordenate to 0<c<7
+    private int TransForCordinateNum(int c) {
+    	int num=0;
+		while(c>=30) {
+			c=c-60;
+			num++;
 		}
-		return rowNum;
+		return num;
 	}
-    
-    private int TransForColNum(int y) {
-    	int colNum=0;
 
-		while(y>=57) {
-			y=y-57;
-			colNum++;
-		}
-		return colNum;
-	}
-    
-    private int TransForColNumForSoldier(int y) {
-    	int colNum=0;
-    	if(y==28)
-    		return 0;
-    	else {
-    		while(y>=57) {
-    			y=y-57;
-    			colNum++;
- 
-    		}
-	}
-		return colNum;
-    }
+
     
     private int MoveSoldierToTarget() {
     	if(soldier!=null && target!=null) {
     	//turns the soldier cordenaties to: 0<x<7 & 0<y<7
-       	double soldierXSquare=soldier.getParent().getLayoutY();
-    	int sourcex=TransForRowNum((int)soldierXSquare);
-    	System.out.println(sourcex);
+       	//double soldierXSquare=soldier.getParent().getLayoutY();
+    	int sourcex=TransForCordinateNum((int) soldier.getLayoutY());
+    	System.out.printf("the row is:",sourcex);
 
     	double soldierYSquare=soldier.getLayoutX();
-    	int sourcey=TransForColNumForSoldier((int)soldierYSquare);
-    	System.out.println(sourcey);
+    	int sourcey=TransForCordinateNum((int)soldierYSquare);
+    	System.out.printf("the col is:",sourcey);
     	
     	
     	//turns the square target cordenaties to: 0<x<7 & 0<y<7
-    	System.out.println(target.getLayoutX());
-    	int targety=TransForColNum((int) target.getLayoutX());
-		System.out.printf("the col num is:%d\n",targety);
+    	//System.out.println(target.getLayoutX());
+    	int targety=TransForCordinateNum((int) target.getLayoutX());
+		System.out.printf("move to col num:%d\n",targety);
 
-    	double oldRow = target.getParent().getLayoutY();
-    	System.out.println(oldRow);
-    	int targetx=TransForRowNum((int)oldRow);
-		System.out.printf("the row num is:%d\n",targetx);
+    	double oldRow = target.getLayoutY();
+    	//System.out.println(oldRow);
+    	int targetx=TransForCordinateNum((int)oldRow);
+		System.out.printf("move to row:%d\n",targetx);
 		//moving the black soldier to target square
 		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK) {
 			for(int i=0; i<g.getBlackPieces().length; i++) {
 				if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey) {
 				int isOk =(g.getBlackPieces()[i]).moveBlackSoldier( sourcex, sourcey, targetx,targety,board);
 				if(isOk==0) {
+					//if(sourcex)
 					// turns the number of the x array to layoutY(the row that the soldier want to go to.
 					//double targetXInView=TurnstheX(targetx);
 					//double targetYInView=TurnstheY(targety);
-					double targetYInView=28;
-					this.soldier.setLayoutX(targetYInView);
-					System.out.printf("y:%f\n",targetYInView);
-					//changing the row num--> changing the parent
+					
+					this.soldier.setLayoutX(60*targety);
+					System.out.printf("y:%f\n",60*targety);
+					
+					this.soldier.setLayoutX(60*targetx);
+					System.out.printf("x:%f\n",60*targetx);
 
 					
 										
@@ -454,237 +418,150 @@ public void start(Stage primaryStage) {
 //
 //				}
 //			}
-			
-			//CheckAndDoYellowSquares();
+//			while(numofYellowSquares<3) {
+//			CheckAndDoYellowSquares();
+//			}
 			
 
 		}
 		
 	}
+	// this function add a new yellow square to the board
+//	public void CheckAndDoYellowSquares() {
+//			Random rand = new Random();
+//			int x = rand.nextInt(8); 
+//	        int y = rand.nextInt(8);
+//	        Rectangle yellowr;
+//	        if(g.getBoard()[x][y]!=null)
+//	        if(g.getBoard()[x][y].getSquareColor()!=null) {
+//	        if(g.getBoard()[x][y].getSquareColor()==SQUARE_COLOR.BLACK && g.getBoard()[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY ) {
+//	        	g.getBoard()[x][y].setSquareColor(SQUARE_COLOR.YELLOW);
+//	        	yellowr=getRectangle(x,y);
+//	        	if(yellowr!=null) {
+//	        	yellowr.setFill(Color.rgb(255,255,0));
+//	    	    numofYellowSquares++;
+//	        	}
+//	        }
+//		}
+//	        
+//		
+//	}
 	
 	
-	// this function checks if the number of the yellow squares is less than 3, if it is so it add one yellow squares
-	public void CheckAndDoYellowSquares() {
-		while(numofYellowSquares<3) {
-			Random rand = new Random();
-			int x = rand.nextInt(8); 
-	        int y = rand.nextInt(8);
-	        Rectangle r=null;
-	        
-	        if(g.getBoard()[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY ) {
-	         g.getBoard()[x][y].setSquareColor(SQUARE_COLOR.YELLOW);
-	        int xviewscene=x*49;//cheks the func	
-	        int yviewscene=	y*57;//cheks the func
-	        
-	        
-	        
-	        if(xviewscene==0) {
-	        	this.rowPane=this.Pane0;
-		        // the square at the rowPane
-	 	       
-	 	       if(r.getLayoutX()==0) {
-		 	       r = ((Rectangle) this.rowPane.getChildren());
-	 	    	   s0.setFill(Color.rgb(255,255,0));
-	 		        numofYellowSquares++;  
-	 	       }
-	 	       else if(r.getLayoutX()==171) {
-		 	       r = ((Rectangle) this.rowPane.getChildren());
-	 	    	   s1.setFill(Color.rgb(255,255,0));
-	 		        numofYellowSquares++;  
-	 	       }
-	 	      else if(r.getLayoutX()==285) {
-	 	    	 r = ((Rectangle) this.rowPane.getChildren());
-	 	    	   s2.setFill(Color.rgb(255,255,0));
-	 		        numofYellowSquares++;  
-	 	       }
-	 	     else if(r.getLayoutX()==399) {
-	 	    	r = ((Rectangle) this.rowPane.getChildren());
-	 	    	   s3.setFill(Color.rgb(255,255,0));
-	 		        numofYellowSquares++;  
-	 	       }
- 
-	        }
-	        if(xviewscene==49) {
-	        	this.rowPane=this.Pane1;
-	        			 	       
-		 	       if(r.getLayoutX()==0) {
-		 	    	  r = ((Rectangle) this.rowPane.getChildren());
-		 	    	   s4.setFill(Color.rgb(255,255,0));
-		 		        numofYellowSquares++;  
-		 	       }
-		 	       else if(r.getLayoutX()==114) {
-		 	    	  r = ((Rectangle) this.rowPane.getChildren());
-		 	    	   s5.setFill(Color.rgb(255,255,0));
-		 		        numofYellowSquares++;  
-		 	       }
-		 	      else if(r.getLayoutX()==228) {
-		 	    	 r = ((Rectangle) this.rowPane.getChildren());
-		 	    	   s6.setFill(Color.rgb(255,255,0));
-		 		        numofYellowSquares++;  
-		 	       }
-		 	     else if(r.getLayoutX()==342) {
-		 	    	r = ((Rectangle) this.rowPane.getChildren());
-		 	    	   s7.setFill(Color.rgb(255,255,0));
-		 		        numofYellowSquares++;  
-		 	       }
-	 
-	        }
-	        if(xviewscene==98) {
-	        	this.rowPane=this.Pane2;
-	    		       
-	     	 	       if(yviewscene==0) {
-	     	 	    	 // the square at the rowPane
-	     	 	    	 r = ((Rectangle) this.rowPane.getChildren());
-	     	 	    	   s8.setFill(Color.rgb(255,255,0));
-	     	 		        numofYellowSquares++;  
-	     	 	       }
-	     	 	       else if(yviewscene==171) {
-	     	 	    	 r = ((Rectangle) this.rowPane.getChildren());
-	     	 	    	   s9.setFill(Color.rgb(255,255,0));
-	     	 		        numofYellowSquares++;  
-	     	 	       }
-	     	 	      else if(yviewscene==285) {
-	     	 	    	r = ((Rectangle) this.rowPane.getChildren());
-	     	 	    	   s10.setFill(Color.rgb(255,255,0));
-	     	 		        numofYellowSquares++;  
-	     	 	       }
-	     	 	     else if(yviewscene==399) {
-	     	 	    	r = ((Rectangle) this.rowPane.getChildren());
-	     	 	    	   s11.setFill(Color.rgb(255,255,0));
-	     	 		        numofYellowSquares++;  
-	     	 	       }
-	        }
-	        if(xviewscene==147) {
-	        	this.rowPane=this.Pane3;
-	        			 	       
-	   		 	       if(yviewscene==0) {
-	   		 	    	r = ((Rectangle) this.rowPane.getChildren());
-	   		 	    	   s12.setFill(Color.rgb(255,255,0));
-	   		 		        numofYellowSquares++;  
-	   		 	       }
-	   		 	       else if(yviewscene==114) {
-	   		 	    	r = ((Rectangle) this.rowPane.getChildren());
-	   		 	    	   s13.setFill(Color.rgb(255,255,0));
-	   		 		        numofYellowSquares++;  
-	   		 	       }
-	   		 	      else if(yviewscene==228) {
-	   		 	    	r = ((Rectangle) this.rowPane.getChildren());
-	   		 	    	   s14.setFill(Color.rgb(255,255,0));
-	   		 		        numofYellowSquares++;  
-	   		 	       }
-	   		 	     else if(yviewscene==342) {
-	   		 	    	r = ((Rectangle) this.rowPane.getChildren());
-	   		 	    	   s15.setFill(Color.rgb(255,255,0));
-	   		 		        numofYellowSquares++;  
-	   		 	       }
-	        }
-	        if(xviewscene==196) {
-	        	
-	        	this.rowPane=this.Pane4;
-		        // the square at the rowPane
-  	 	       
-  	 	       if(yviewscene==0) {
-  	 	    	r = ((Rectangle) this.rowPane.getChildren());
-  	 	    	   s16.setFill(Color.rgb(255,255,0));
-  	 		        numofYellowSquares++;  
-  	 	       }
-  	 	       else if(yviewscene==171) {
-  	 	    	r = ((Rectangle) this.rowPane.getChildren());
-  	 	    	   s17.setFill(Color.rgb(255,255,0));
-  	 		        numofYellowSquares++;  
-  	 	       }
-  	 	      else if(yviewscene==285) {
-  	 	    	r = ((Rectangle) this.rowPane.getChildren());
-  	 	    	   s18.setFill(Color.rgb(255,255,0));
-  	 		        numofYellowSquares++;  
-  	 	       }
-  	 	     else if(yviewscene==399) {
-  	 	    	r = ((Rectangle) this.rowPane.getChildren());
-  	 	    	   s19.setFill(Color.rgb(255,255,0));
-  	 		        numofYellowSquares++;  
-  	 	       }
-	        }
-	        if(xviewscene==245) {
-	        	r = ((Rectangle) this.rowPane.getChildren());
-	        	this.rowPane=this.Pane5;
-		 	       
- 		 	       if(yviewscene==0) {
- 		 	    	 r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s20.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
- 		 	       else if(yviewscene==114) {
- 		 	    	 r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s21.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
- 		 	      else if(yviewscene==228) {
- 		 	    	r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s22.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
- 		 	     else if(yviewscene==342) {
- 		 	    	r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s23.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
-	        }
-	        if(xviewscene==294) {
-	        	this.rowPane=this.Pane6;
-	    		        // the square at the rowPane
-		     	 	       
-		     	 	       if(yviewscene==0) {
-		     	 	    	 r = ((Rectangle) this.rowPane.getChildren());
-		     	 	    	   s24.setFill(Color.rgb(255,255,0));
-		     	 		        numofYellowSquares++;  
-		     	 	       }
-		     	 	       else if(yviewscene==171) {
-		     	 	    	 r = ((Rectangle) this.rowPane.getChildren());
-		     	 	    	   s25.setFill(Color.rgb(255,255,0));
-		     	 		        numofYellowSquares++;  
-		     	 	       }
-		     	 	      else if(yviewscene==285) {
-		     	 	    	r = ((Rectangle) this.rowPane.getChildren());
-		     	 	    	   s26.setFill(Color.rgb(255,255,0));
-		     	 		        numofYellowSquares++;  
-		     	 	       }
-		     	 	     else if(yviewscene==399) {
-		     	 	    	r = ((Rectangle) this.rowPane.getChildren());
-		     	 	    	   s27.setFill(Color.rgb(255,255,0));
-		     	 		        numofYellowSquares++;  
-		     	 	       }
-	        }
-	        if(xviewscene==343) {
-	        	this.rowPane=this.Pane7;
-		 	       
- 		 	       if(yviewscene==0) {
- 		 	    	 r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s28.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
- 		 	       else if(yviewscene==114) {
- 		 	    	 r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s29.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
- 		 	      else if(yviewscene==228) {
- 		 	    	r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s30.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
- 		 	     else if(yviewscene==342) {
- 		 	    	r = ((Rectangle) this.rowPane.getChildren());
- 		 	    	   s31.setFill(Color.rgb(255,255,0));
- 		 		        numofYellowSquares++;  
- 		 	       }
-	        }
-	        
-	        
-	        }
-			
-		}
-		
-	}
+	// this function take the square cordetaties: 0<=x<8 & 0<=x<8
+	//this function returns a rectangle r in the scenebuilder that appropriate to the cordetaties x and y 
+//	public Rectangle getRectangle(int x, int y) {
+//	        int xviewscene=x*49;//cheks the func	
+//	        int yviewscene=	y*57;//cheks the func
+//	        
+//			if(xviewscene==0) {
+//	        	this.rowPane=this.Pane0;
+//		        // the square at the rowPane
+//	 	       if(yviewscene==0) {
+//		 	       return s0;
+//	 	    	     
+//	 	       }
+//	 	       else if(yviewscene==171) {
+//	 	    	  return s1;	 	       }
+//	 	      else if(yviewscene==285) {
+//	 	    	 return s2;	 	       }
+//	 	     else if(yviewscene==399) {
+//	 	    	return s3;	 	       }
+// 
+//	        }
+//	        if(xviewscene==49) {
+//	        	this.rowPane=this.Pane1;
+//	        			 	       
+//		 	       if(yviewscene==0) {
+//		 	    	  return s4;		 	       }
+//		 	       else if(yviewscene==114) {
+//		 	    	  return s5;		 	       }
+//		 	      else if(yviewscene==228) {
+//		 	    	 return s6;		 	       }
+//		 	     else if(yviewscene==342) {
+//		 	    	return s7;		 	       }
+//	 
+//	        }
+//	        if(xviewscene==98) {
+//	        	this.rowPane=this.Pane2;
+//	    		       
+//	     	 	       if(yviewscene==0) {
+//	     	 	    	 // the square at the rowPane
+//	     	 	    	 return s8;	     	 	       }
+//	     	 	       else if(yviewscene==171) {
+//	     	 	    	 return s9;	     	 	       }
+//	     	 	      else if(yviewscene==285) {
+//	     	 	    	return s10;	     	 	       }
+//	     	 	     else if(yviewscene==399) {
+//	     	 	    	return s11;	     	 	       }
+//	        }
+//	        if(xviewscene==147) {
+//	        	this.rowPane=this.Pane3;
+//	        			 	       
+//	   		 	       if(yviewscene==0) {
+//	   		 	    	return s12;	   		 	       }
+//	   		 	       else if(yviewscene==114) {
+//	   		 	    	return s13;	   		 	       }
+//	   		 	      else if(yviewscene==228) {
+//	   		 	    	return s14;	   		 	       }
+//	   		 	     else if(yviewscene==342) {
+//	   		 	    	return s15;	   		 	       }
+//	        }
+//	        if(xviewscene==196) {
+//	        	
+//	        	this.rowPane=this.Pane4;
+//		        // the square at the rowPane
+//  	 	       
+//  	 	       if(yviewscene==0) {
+//  	 	    	return s16;  	 	       }
+//  	 	       else if(yviewscene==171) {
+//  	 	    	return s17;  	 	       }
+//  	 	      else if(yviewscene==285) {
+//  	 	    	return s18;  	 	       }
+//  	 	     else if(yviewscene==399) {
+//  	 	    	return s19;  	 	       }
+//	        }
+//	        if(xviewscene==245) {
+//	        	
+//	        	this.rowPane=this.Pane5;   
+// 		 	       if(yviewscene==0) {
+// 		 	    	 return s20; 		 	       }
+// 		 	       else if(yviewscene==114) {
+// 		 	    	 return s21; 		 	       }
+// 		 	      else if(yviewscene==228) {
+// 		 	    	return s22; 		 	       }
+// 		 	     else if(yviewscene==342) {
+// 		 	    	return s23; 		 	       }
+//	        }
+//	        if(xviewscene==294) {
+//	        	this.rowPane=this.Pane6;
+//	    		        // the square at the rowPane
+//		     	 	       
+//		     	 	       if(yviewscene==0) {
+//		     	 	    	 return s24;		     	 	       }
+//		     	 	       else if(yviewscene==171) {
+//		     	 	    	 return s25;		     	 	       }
+//		     	 	      else if(yviewscene==285) {
+//		     	 	    	return s26;		     	 	       }
+//		     	 	     else if(yviewscene==399) {
+//		     	 	    	return s27;		     	 	       }
+//	        }
+//	        if(xviewscene==343) {
+//	        	this.rowPane=this.Pane7;
+//		 	       
+// 		 	       if(yviewscene==0) {
+// 		 	    	 return s28; 		 	       }
+// 		 	       else if(yviewscene==114) {
+// 		 	    	 return s29; 		 	       }
+// 		 	      else if(yviewscene==228) {
+// 		 	    	return s30; 		 	       }
+// 		 	     else if(yviewscene==342) {
+// 		 	    	return s31; 		 	       }
+//	        }
+//	        
+//	        return null;
+//		
+//	}
 	
 	
 	

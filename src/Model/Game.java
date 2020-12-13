@@ -274,59 +274,59 @@ public class Game {
 				if(x==0)
 					return false;
 				else if(x==1 && y==0) {
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK )
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK  || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK )
 						return false;
 
 				}
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if( Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==7 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==7 && y==4) {
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if( Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==7 && y==6) {
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if( Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==6 && y==7) {
-					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==4 && y==7) {
-					if(Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==6 && y==5) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==6 && y==1) {//10 
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				else if(x==1 && y==6) {//11 
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 
 				else if(x==1 && y==2) {//12 
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK ||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 
 				else{
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
+					if( Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK)
 						return false;
 				}
 				//set the soldier in the location given
@@ -338,59 +338,59 @@ public class Game {
 				if(x==7)
 					return false;
 				else if(x==1 && y==0) {
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE )
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 
 				}
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 
 				else if(x==3 && y==0) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 
 				else if(x==6 && y==7) {
-					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==4 && y==7) {
-					if(Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==6 && y==5) {
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if( Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==6 && y==1) { 
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==1 && y==6) { 
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 
 				else if(x==1 && y==2) {
-					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==0 && y==1) {
-					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==0 && y==3) { 
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE ||Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else if(x==0 && y==7) {
-					if(Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				else{
-					if(Board[x-2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE || Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x+2][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
+					if(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE|| Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE||Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE)
 						return false;
 				}
 				//set the soldier in the location given
