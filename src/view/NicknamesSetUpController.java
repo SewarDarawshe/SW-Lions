@@ -90,7 +90,7 @@ public class NicknamesSetUpController implements Initializable{
 
 		} catch (Exception e) {
 			// TODO: handle exception
-		}
+			}
         }
     	
     }
@@ -115,5 +115,6 @@ public class NicknamesSetUpController implements Initializable{
 		// TODO Auto-generated method stub
 		
 	}
+	
 
 }

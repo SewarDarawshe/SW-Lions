@@ -79,7 +79,7 @@ public class Soldier {
 
 	
 	//function that moves the black soldier
-	public int moveBlackSoldier( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
+	public int moveBlack( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
 	{
 		//check if its possible    
 
@@ -133,8 +133,8 @@ public class Soldier {
 	}
 
 
-	//function that Moves a white soldier
-	public int moveWhiteSoldier( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
+	//function that Moves a white piece in a specified direction
+	public int moveWhite( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
 	{
 		//check if its possible    
 
@@ -188,7 +188,7 @@ public class Soldier {
 	}
 
 	// returns -1 if the queen is not dead an 0 if the queen dead
-	//i and j the location that has choosen
+	//i and j the location that has chosen
 	//color is the color of the queen .
 	public int checkQueenDead(int i,int j,Square[][] Board, Soldier_COLOR_AtSquare color)
 	{
@@ -230,7 +230,7 @@ public class Soldier {
 		else
 			return -1;
 	}
-	//i and j the location that has choosen
+	//i and j the location that has chosen
 	//color is the color of the queen its 1 if black and 2 if white.
 	//this method  return -1 if not queen and move the queen and return 0 if queen and moved;
 
