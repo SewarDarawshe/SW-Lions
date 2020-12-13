@@ -141,7 +141,7 @@ public class Soldier {
 		if(sourceY==0 && targetY==1 && targetX==(sourceX-1) && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
 		{
 			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
             this.getLocation().setX(targetX);
 			this.getLocation().setY(targetY);
 			return 0;
@@ -150,7 +150,7 @@ public class Soldier {
 		if(sourceY==7 && targetY==6 && targetX==(sourceX-1) && Board[targetX][targetY].getSoldierColor() == Soldier_COLOR_AtSquare.EMPTY)
 		{
 			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
             this.getLocation().setX(targetX);
 			this.getLocation().setY(targetY);
 			return 0;
@@ -159,7 +159,7 @@ public class Soldier {
 		{
 
 			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
             this.getLocation().setX(targetX);
 			this.getLocation().setY(targetY);
 			return 0;
@@ -168,7 +168,7 @@ public class Soldier {
 		{
 
 			Board[sourceX][sourceY].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+            Board[targetX][targetY].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
             this.getLocation().setX(targetX);
 			this.getLocation().setY(targetY);
 			return 0;

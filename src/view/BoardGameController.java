@@ -249,7 +249,7 @@ public class BoardGameController implements Initializable{
 
     @FXML
     private Pane boardPane = new Pane();
-
+   
     @FXML
     void MoveToSquare(MouseEvent event) {
     	
@@ -291,55 +291,134 @@ public class BoardGameController implements Initializable{
 		}
 		return num;
 	}
-
+    
+    //this function trasfer the layout cordenate to 0<c<7
+   /* private int TransForCordinateNumforSoldier(int c) {
+    	int num=0;
+		while(c>=30) {
+			c=c-60;
+			num++;
+		}
+		return num;
+	}
+    */
 
     
     private int MoveSoldierToTarget() {
     	if(soldier!=null && target!=null) {
-    	//turns the soldier cordenaties to: 0<x<7 & 0<y<7
-       	//double soldierXSquare=soldier.getParent().getLayoutY();
-    	int sourcex=TransForCordinateNum((int) soldier.getLayoutY());
-    	System.out.printf("the row is:",sourcex);
+    		int sourcex=TransForCordinateNum((int)this.soldier.getLayoutY()-30);
+    	System.out.printf("the row is: %d\n",sourcex);
 
-    	double soldierYSquare=soldier.getLayoutX();
-    	int sourcey=TransForCordinateNum((int)soldierYSquare);
-    	System.out.printf("the col is:",sourcey);
+    	
+    	int sourcey=TransForCordinateNum((int)this.soldier.getLayoutX()-30);
+    	System.out.printf("the col is: %d\n",sourcey);
     	
     	
     	//turns the square target cordenaties to: 0<x<7 & 0<y<7
     	//System.out.println(target.getLayoutX());
+    	int targetx=TransForCordinateNum((int)target.getLayoutY());
+		System.out.printf("move to row:%d\n",targetx);
+		
     	int targety=TransForCordinateNum((int) target.getLayoutX());
 		System.out.printf("move to col num:%d\n",targety);
+		
+		
 
-    	double oldRow = target.getLayoutY();
+    	//double oldRow = target.getLayoutY();
     	//System.out.println(oldRow);
-    	int targetx=TransForCordinateNum((int)oldRow);
-		System.out.printf("move to row:%d\n",targetx);
+    	
 		//moving the black soldier to target square
 		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK) {
 			for(int i=0; i<g.getBlackPieces().length; i++) {
 				if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey) {
-				int isOk =(g.getBlackPieces()[i]).moveBlackSoldier( sourcex, sourcey, targetx,targety,board);
+				int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
 				if(isOk==0) {
-					//if(sourcex)
-					// turns the number of the x array to layoutY(the row that the soldier want to go to.
-					//double targetXInView=TurnstheX(targetx);
-					//double targetYInView=TurnstheY(targety);
+				
+					System.out.println("is ok");
+					if(sourcex+1==targetx && targety==sourcey-1)
+					{
+						
+						double soldiersourcex=this.soldier.getLayoutX();
+						double soldiersourcey=this.soldier.getLayoutY();
+
+						
+						this.soldier.setLayoutX(soldiersourcex-60);
+						this.soldier.setLayoutY(soldiersourcey+60);
+						//this.soldier.setVisible(false);
 					
-					this.soldier.setLayoutX(60*targety);
-					System.out.printf("y:%f\n",60*targety);
+					}
 					
-					this.soldier.setLayoutX(60*targetx);
-					System.out.printf("x:%f\n",60*targetx);
+					if(sourcex==targetx-1 && sourcey==targety-1)
+					{
+						double soldiersourcex=this.soldier.getLayoutX();
+						double soldiersourcey=this.soldier.getLayoutY();
+
+						
+						this.soldier.setLayoutX(soldiersourcex+60);
+						this.soldier.setLayoutY(soldiersourcey+60);
+						//this.soldier.setVisible(false);
+
+					
+					}
+					
+					
+					
 
 					
 										
 				}
+				else
+					System.out.println("not ok");
 				}
 			}
 			
 		}
-		
+		//moving the black soldier to target square
+		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE) {
+			for(int i=0; i<g.getWhitePieces().length; i++) {
+				if(g.getWhitePieces()[i].getLocation().getX()== sourcex && g.getWhitePieces()[i].getLocation().getY()== sourcey) {
+				int isOk =(g.getWhitePieces()[i]).moveWhite( sourcex, sourcey, targetx,targety,board);
+				if(isOk==0) {
+				
+					System.out.println("is ok");
+					if(sourcex==targetx+1 && targety-1==sourcey)
+					{
+						
+						double soldiersourcex=this.soldier.getLayoutX();
+						double soldiersourcey=this.soldier.getLayoutY();
+
+						
+						this.soldier.setLayoutX(soldiersourcex+60);
+						this.soldier.setLayoutY(soldiersourcey-60);
+						//this.soldier.setVisible(false);
+					
+					}
+					
+					if(sourcex==targetx+1 && sourcey==targety+1)
+					{
+						double soldiersourcex=this.soldier.getLayoutX();
+						double soldiersourcey=this.soldier.getLayoutY();
+
+						
+						this.soldier.setLayoutX(soldiersourcex-60);
+						this.soldier.setLayoutY(soldiersourcey-60);
+						//this.soldier.setVisible(false);
+
+					
+					}
+					
+					
+					
+
+					
+										
+				}
+				else
+					System.out.println("not ok");
+				}
+			}
+			
+		}
 		
 		this.soldier=null;
 		this.target=null;
