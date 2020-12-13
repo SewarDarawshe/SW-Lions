@@ -19,30 +19,30 @@ import javafx.stage.Stage;
 
 public class NicknamesSetUpController implements Initializable{
 
-    private static String whitename;
-    private static String blackname;
+	private static String whitename;
+	private static String blackname;
 
-    @FXML
-    private Button exitbutton;
-
-    
-    @FXML
-    private Button StartGameButton; 
-    
-    @FXML
-    private Button homePageButton;
-    @FXML
-    private AnchorPane Pane;
-    @FXML
-    private TextField WhiteNickName;
-
-    @FXML
-    private TextField BlackNickName;
+	@FXML
+	private Button exitbutton;
 
 
+	@FXML
+	private Button StartGameButton; 
+
+	@FXML
+	private Button homePageButton;
+	@FXML
+	private AnchorPane Pane;
+	@FXML
+	private TextField WhiteNickName;
+
+	@FXML
+	private TextField BlackNickName;
 
 
-    public static String getWhitename() {
+
+
+	public static String getWhitename() {
 		return whitename;
 	}
 
@@ -59,51 +59,51 @@ public class NicknamesSetUpController implements Initializable{
 	}
 
 	@FXML
-    void exit(ActionEvent event) {
-    	((Stage) Pane.getScene().getWindow()).close();
+	void exit(ActionEvent event) {
+		((Stage) Pane.getScene().getWindow()).close();
 
-    }
+	}
 
-    @FXML
-    void openHomePage(ActionEvent event) {
-    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+	@FXML
+	void openHomePage(ActionEvent event) {
+		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		MainBoardController temp=new MainBoardController();
 		try {
-		temp.start(stage);	
+			temp.start(stage);	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
-    }
-    
-    @FXML
-    void StartGame(ActionEvent event)
-    {
-    	whitename =WhiteNickName.getText();
-    	blackname =BlackNickName.getText();
-    	if(!whitename.isEmpty() && !blackname.isEmpty()) {
-    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-		BoardGameController temp=new BoardGameController();
-        
-		try {
-		temp.start(stage);	
+	}
 
-		} catch (Exception e) {
-			// TODO: handle exception
+	@FXML
+	void StartGame(ActionEvent event)
+	{
+		whitename =WhiteNickName.getText();
+		blackname =BlackNickName.getText();
+		if(!whitename.isEmpty() && !blackname.isEmpty()) {
+			Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+			BoardGameController temp=new BoardGameController();
+
+			try {
+				temp.start(stage);	
+
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
-        }
-    	
-    }
-    
-    public void start(Stage primaryStage) {
+		}
+
+	}
+
+	public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/NicknamesSetupScreen.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
-			
-			
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,8 +113,8 @@ public class NicknamesSetUpController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 
 }

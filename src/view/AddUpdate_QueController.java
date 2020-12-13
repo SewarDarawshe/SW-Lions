@@ -66,99 +66,71 @@ public class AddUpdate_QueController implements Initializable {
 
 	private Question old;
 	@FXML
-    private Button ReturntoSettingsBTN;
+	private Button ReturntoSettingsBTN;
 
-    
 
-    @FXML
-    void returnSettings(ActionEvent event) {
-    	
-    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-		SettingsController temp=new SettingsController();
-		try {
-			temp.start(stage);	
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-    	
-    	
 
-    }
-	
 	public void start(Stage primaryStage,Question q) {
 		try {
-			
+
 			Parent root = FXMLLoader.load(getClass().getResource("/view/Add-Update_Que.fxml"));
-		
+
 			Scene scene = new Scene(root);		
 			primaryStage.setTitle("Add-Update Page");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	public void setq(Question q)
-	{
-		 this.old=q;
-		
-	}
-	public Question getq()
-	{
-		return old;
 	}
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//	old = SettingsController.
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
-this.old=MainBoardController.SettingsController.getQue();
+		this.old=MainBoardController.SettingsController.getQue();
 		// initiate to empty values
 		resetFields();
 
 		// update question
-				if (old != null) {
-					QueText.setText(old.getText());
+		if (old != null) {
+			QueText.setText(old.getText());
 
-					Ans1RD.setSelected(old.getAnswers().get(0).getisCorrect());
-					Ans1TEXT.setText(old.getAnswers().get(0).getText());
+			Ans1RD.setSelected(old.getAnswers().get(0).getisCorrect());
+			Ans1TEXT.setText(old.getAnswers().get(0).getText());
 
-					Ans2RD.setSelected(old.getAnswers().get(1).getisCorrect());
-					Ans2TEXT.setText(old.getAnswers().get(1).getText());
+			Ans2RD.setSelected(old.getAnswers().get(1).getisCorrect());
+			Ans2TEXT.setText(old.getAnswers().get(1).getText());
 
-					Ans3RD.setSelected(old.getAnswers().get(2).getisCorrect());
-					Ans3TEXT.setText(old.getAnswers().get(2).getText());
+			Ans3RD.setSelected(old.getAnswers().get(2).getisCorrect());
+			Ans3TEXT.setText(old.getAnswers().get(2).getText());
 
-					Ans4RD.setSelected(old.getAnswers().get(3).getisCorrect());
-					Ans4TEXT.setText(old.getAnswers().get(3).getText());
+			Ans4RD.setSelected(old.getAnswers().get(3).getisCorrect());
+			Ans4TEXT.setText(old.getAnswers().get(3).getText());
 
-					difficultyCombo.getSelectionModel().select(old.getDifficulty());
-				}
+			difficultyCombo.getSelectionModel().select(old.getDifficulty());
+		}
 
 
 	}
-	private void resetFields() {
-		QueText.setText("");
+	@FXML
+	void returnSettings(ActionEvent event) {
 
-		Ans1TEXT.setText("");
-		Ans2TEXT.setText("");
-		Ans3TEXT.setText("");
-		Ans4TEXT.setText("");
-
-		Ans1RD.setSelected(false);
-		Ans2RD.setSelected(false);
-		Ans3RD.setSelected(false);
-		Ans4RD.setSelected(false);
-
-		difficultyCombo.getSelectionModel().clearSelection();
+		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+		SettingsController temp=new SettingsController();
+		try {
+			temp.start(stage);	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 	
 	@FXML
 	void addQuestion(ActionEvent event) {
-		
-		
+
+
 		String q = QueText.getText().trim();
 		String ans1 = Ans1TEXT.getText().trim();
 		String ans2 = Ans2TEXT.getText().trim();
@@ -196,12 +168,12 @@ this.old=MainBoardController.SettingsController.getQue();
 									}
 									// new question
 									else {
-									if(	Sysdata.getInstance().addQuestion(question))
-										erorLabel.setText("Question added successfully. Add another?");
-									else System.out.println("a5");
+										if(	Sysdata.getInstance().addQuestion(question))
+											erorLabel.setText("Question added successfully. Add another?");
+										else System.out.println("a5");
 									}
 
-								//	ViewLogic.questionsManagementController.setQuestionTable();
+									
 									resetFields();
 
 								} else
@@ -220,6 +192,36 @@ this.old=MainBoardController.SettingsController.getQue();
 			erorLabel.setText("Please enter a question");
 	}
 
+
+
+	public void setq(Question q)
+	{
+		this.old=q;
+
 	}
+	public Question getq()
+	{
+		return old;
+	}
+	
+
+	
+	private void resetFields() {
+		QueText.setText("");
+
+		Ans1TEXT.setText("");
+		Ans2TEXT.setText("");
+		Ans3TEXT.setText("");
+		Ans4TEXT.setText("");
+
+		Ans1RD.setSelected(false);
+		Ans2RD.setSelected(false);
+		Ans3RD.setSelected(false);
+		Ans4RD.setSelected(false);
+
+		difficultyCombo.getSelectionModel().clearSelection();
+	}
+
+}
 
 

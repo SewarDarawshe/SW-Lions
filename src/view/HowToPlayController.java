@@ -16,38 +16,38 @@ import javafx.stage.Stage;
 
 public class HowToPlayController implements Initializable{
 
-    @FXML
-    private Button HomePageButton;
+	@FXML
+	private Button HomePageButton;
 
-    @FXML
-    private Button ExitButton;
-    @FXML
-    private AnchorPane Pane;
+	@FXML
+	private Button ExitButton;
+	@FXML
+	private AnchorPane Pane;
 
-   
 
-    @FXML
-    void Exit(ActionEvent event) {
-    	((Stage) Pane.getScene().getWindow()).close();
 
-    }
-   
+	@FXML
+	void Exit(ActionEvent event) {
+		((Stage) Pane.getScene().getWindow()).close();
 
-    @FXML
-    void OpenHomePage(ActionEvent event) {
-    	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+	}
+
+
+	@FXML
+	void OpenHomePage(ActionEvent event) {
+		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		MainBoardController temp=new MainBoardController();
 		try {
-		temp.start(stage);	
+			temp.start(stage);	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-    }
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 	public void start(Stage primaryStage) {
 		try {

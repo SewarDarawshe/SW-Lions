@@ -16,15 +16,15 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class MainBoardController implements Initializable {
-	
-	
+
+
 	protected static SettingsController SettingsController;
-	
+
 
 	@FXML
 	private Button letsPlayButton;
-	  @FXML
-	    private AnchorPane Pane;
+	@FXML
+	private AnchorPane Pane;
 
 
 	@FXML
@@ -39,7 +39,7 @@ public class MainBoardController implements Initializable {
 		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		HowToPlayController temp=new HowToPlayController();
 		try {
-		temp.start(stage);	
+			temp.start(stage);	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -51,11 +51,11 @@ public class MainBoardController implements Initializable {
 		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		NicknamesSetUpController temp=new NicknamesSetUpController();
 		try {
-		temp.start(stage);	
+			temp.start(stage);	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 	}
 
 	@FXML
@@ -63,7 +63,7 @@ public class MainBoardController implements Initializable {
 		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		ResultsBoardController temp=new ResultsBoardController();
 		try {
-		temp.start(stage);	
+			temp.start(stage);	
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
