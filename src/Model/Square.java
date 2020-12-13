@@ -15,6 +15,7 @@ public class Square {
 	private int X;
 	private int Y;
 	private Soldier_COLOR_AtSquare SoldierColor;
+	private Soldier s;
 	private SQUARE_COLOR squareColor;
 
 
@@ -22,13 +23,26 @@ public class Square {
 
 	// -------------------------------Constructors-------------------------------
 
-	public Square(int x, int y, Soldier_COLOR_AtSquare color) {
+//	public Square(int x, int y, Soldier_COLOR_AtSquare color) {
+//		super();
+//		X = x;
+//		Y = y;
+//		SoldierColor = color;
+//		squareColor= SQUARE_COLOR.BLACK;
+//	}
+//	
+	
+
+	public Square(int x, int y, Soldier_COLOR_AtSquare soldierColor, Soldier s) {
 		super();
 		X = x;
 		Y = y;
-		SoldierColor = color;
-		squareColor= SQUARE_COLOR.BLACK;
+		SoldierColor = soldierColor;
+		this.s = s;
+		this.squareColor= SQUARE_COLOR.BLACK;
 	}
+
+
 
 	// -------------------------------Getters And Setters-------------------------
 
@@ -39,6 +53,14 @@ public class Square {
 		return X;
 	}
 
+
+	public Soldier getS() {
+		return s;
+	}
+
+	public void setS(Soldier s) {
+		this.s = s;
+	}
 
 	public void setX(int x) {
 		this.X = x;

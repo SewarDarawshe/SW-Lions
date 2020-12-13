@@ -79,7 +79,7 @@ public class Soldier {
 
 	
 	//function that moves the black soldier
-	public int moveBlack( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
+	public int moveBlackSoldier( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
 	{
 		//check if its possible    
 
@@ -133,8 +133,8 @@ public class Soldier {
 	}
 
 
-	//function that Moves a white piece in a specified direction
-	public int moveWhite( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
+	//function that Moves a white soldier
+	public int moveWhiteSoldier( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
 	{
 		//check if its possible    
 

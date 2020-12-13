@@ -29,7 +29,7 @@
                               <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="49.0" layoutX="342.0" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle fx:id="s3" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="399.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
                               <Rectangle fx:id="s0" arcHeight="5.0" arcWidth="5.0" fill="#000000b0" height="49.0" layoutX="57.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="56.875" />
-                              <Circle fx:id="b0" fill="#080808" layoutX="85.0" layoutY="24.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Circle fx:id="b0" fill="#080808" layoutX="85.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fx:id="b1" fill="#080808" layoutX="199.0" layoutY="24.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fx:id="b3" fill="#080808" layoutX="426.0" layoutY="25.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
                               <Circle fx:id="b2" fill="#080808" layoutX="312.0" layoutY="24.0" onMousePressed="#MoveSoldier" radius="23.0" stroke="BLACK" strokeType="INSIDE" />
