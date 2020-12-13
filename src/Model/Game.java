@@ -157,7 +157,7 @@ public class Game {
 				}
 			}
 		}
-		{
+		
 			// we arrange the basic soldiers to there places 12 black 12 white
 
 			Board[0][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
@@ -183,7 +183,7 @@ public class Game {
 			Board[5][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 			Board[5][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 			Board[5][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][5].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+			Board[5][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 			int whitei=0;
 			if(whitei<WhitePieces.length)
 			{
@@ -243,8 +243,6 @@ public class Game {
 			blackPlayer.setPoints(0);
 		}
 
-
-	}
 
 
 	public boolean AddPlayer(String wp,String bp)

@@ -35,8 +35,6 @@ import utils.Soldier_COLOR_AtSquare;
 
 public class BoardGameController implements Initializable{
 	private Square[][] board;
-    private static final String Yellow = null;
-    
 	private int numofYellowSquares=0;
     public Game g;
     private Rectangle r=null;
@@ -331,11 +329,10 @@ public class BoardGameController implements Initializable{
 						
 						double soldiersourcex=this.soldier.getLayoutX();
 						double soldiersourcey=this.soldier.getLayoutY();
-
-						
 						this.soldier.setLayoutX(soldiersourcex-60);
 						this.soldier.setLayoutY(soldiersourcey+60);
-						//this.soldier.setVisible(false);
+						board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+						board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 					
 					}
 					
@@ -343,12 +340,10 @@ public class BoardGameController implements Initializable{
 					{
 						double soldiersourcex=this.soldier.getLayoutX();
 						double soldiersourcey=this.soldier.getLayoutY();
-
-						
 						this.soldier.setLayoutX(soldiersourcex+60);
 						this.soldier.setLayoutY(soldiersourcey+60);
-						//this.soldier.setVisible(false);
-
+						board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+						board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 					
 					}
 					
@@ -363,10 +358,6 @@ public class BoardGameController implements Initializable{
 							}
 						}
 					}
-					
-					
-					
-
 					
 										
 				}
@@ -390,23 +381,20 @@ public class BoardGameController implements Initializable{
 						
 						double soldiersourcex=this.soldier.getLayoutX();
 						double soldiersourcey=this.soldier.getLayoutY();
-
-						
 						this.soldier.setLayoutX(soldiersourcex+60);
 						this.soldier.setLayoutY(soldiersourcey-60);
-						//this.soldier.setVisible(false);
-					
+						board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+						board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);					
 					}
 					
 					if(sourcex==targetx+1 && sourcey==targety+1)
 					{
 						double soldiersourcex=this.soldier.getLayoutX();
 						double soldiersourcey=this.soldier.getLayoutY();
-
-						
 						this.soldier.setLayoutX(soldiersourcex-60);
 						this.soldier.setLayoutY(soldiersourcey-60);
-						//this.soldier.setVisible(false);
+						board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+						board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 
 					
 					}
@@ -443,30 +431,14 @@ public class BoardGameController implements Initializable{
    
     	
     }
-	
- // this function turn the y from : 0<x<7 to: 0<colNumInView<399
-    private double TurnstheY(int targety) {
-    	int colNum=0;
-    		while(targety>0) {
-    			colNum=colNum+57;
-    			targety--;
 
-    		}
+    public void eat() {
+    	//TODO
 
-    	return colNum;
-    	}
-// this function turn the x from : 0<x<7 to: 0<rowNumInView<343
-private double TurnstheX(int targetx) {
-	int colNum=0;
-		while(targetx>0) {
-			colNum=colNum+49;
-			targetx--;
-
-		}
-
-	return colNum;
 	}
 
+    
+    
 public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/BoardGame.fxml"));
@@ -504,6 +476,7 @@ public void start(Stage primaryStage) {
 			g = new Game(white, black,d,t);
 			g.initiateGame();
 			this.board=g.getBoard();
+			System.out.println(board[0][1]);
 //			for(int r=0; r<8;r++) {
 //				for(int c=0; c<8;c++) {
 //					//the board is null!!!
@@ -511,7 +484,7 @@ public void start(Stage primaryStage) {
 //
 //				}
 //			}
-			while(numofYellowSquares<3) {
+		while(numofYellowSquares<3) {
 		CheckAndDoYellowSquares();
 		}
 			
@@ -523,18 +496,20 @@ public void start(Stage primaryStage) {
 		Random rand = new Random();
 		int x = rand.nextInt(8); 
         int y = rand.nextInt(8);
-        Rectangle yellowr;
-        if(g.getBoard()[x][y]!=null) 
+        if(board[x][y]!=null) 
         {
-        if(g.getBoard()[x][y].getSquareColor()!=null) {
-        if(g.getBoard()[x][y].getSquareColor()==SQUARE_COLOR.BLACK && g.getBoard()[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY ) {
-        	g.getBoard()[x][y].setSquareColor(SQUARE_COLOR.YELLOW);
-        	yellowr=getRectangle(x,y);
-        	if(yellowr!=null) {
-        	yellowr.setFill(Color.rgb(255,255,0));
+        	System.out.println(board[x][y].getSoldierColor());
+        if(board[x][y].getSquareColor()!=null) {
+        	System.out.println(board[x][y].getSquareColor());
+        if(board[x][y].getSquareColor()==SQUARE_COLOR.BLACK && board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY ) {
+        	System.out.println(board[x][y].getSoldierColor());
+        	board[x][y].setSquareColor(SQUARE_COLOR.YELLOW);
+        	setRectangleToYellow(x,y);
+        	
     	    numofYellowSquares++;
-        	}
-        }}
+    	    System.out.println(numofYellowSquares);
+        }
+        }
 	}
         
 	
@@ -650,6 +625,144 @@ public Rectangle getRectangle(int x, int y) {
 }
 	
 	
+
+public void setRectangleToYellow(int x, int y) {
+    int xviewscene=x*60;//cheks the func	
+    int yviewscene=	y*60;//cheks the func
+    
+	if(xviewscene==60 && yviewscene==0) {
+		s0.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==180 && yviewscene==0) {
+		s1.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==300 && yviewscene==0) {
+		s2.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==420 && yviewscene==0) {
+		s3.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==0 && yviewscene==60) {
+		s4.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==120 && yviewscene==60) {
+		s5.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==240 && yviewscene==60) {
+		s6.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==360 && yviewscene==60) {
+		s7.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==60 && yviewscene==120) {
+		s8.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==180 && yviewscene==120) {
+		s9.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==300 && yviewscene==120) {
+		s10.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==420 && yviewscene==120) {
+		s11.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==0 && yviewscene==180) {
+		s12.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==120 && yviewscene==180) {
+		s13.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==240 && yviewscene==180) {
+		s14.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==360 && yviewscene==180) {
+		s15.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==60 && yviewscene==240) {
+		s16.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==180 && yviewscene==240) {
+		s17.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==300 && yviewscene==240) {
+		s18.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==420 && yviewscene==240) {
+		s19.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==0 && yviewscene==300) {
+		s20.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==120 && yviewscene==300) {
+		s21.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==240 && yviewscene==300) {
+		s22.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==360 && yviewscene==300) {
+		s23.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==60 && yviewscene==360) {
+		s24.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==180 && yviewscene==360) {
+		s25.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==300 && yviewscene==360) {
+		s26.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==420 && yviewscene==360) {
+		s27.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==0 && yviewscene==420) {
+		s28.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==120 && yviewscene==420) {
+		s29.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==240 && yviewscene==420) {
+		s30.setFill(Color.rgb(255,255,0));
+		return;
+	}
+	if(xviewscene==360 && yviewscene==420) {
+		s31.setFill(Color.rgb(255,255,0));
+		return;
+	}
+
+    
+    return;
+
+}
 
 
 
