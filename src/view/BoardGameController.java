@@ -320,7 +320,8 @@ public class BoardGameController implements Initializable{
 		//moving the black soldier to target square
 		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK) {
 			for(int i=0; i<g.getBlackPieces().length; i++) {
-				if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey) {
+				if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey
+						&&!g.getBlackPieces()[i].isIsQueen()) {
 				int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
 				if(isOk==0) {
 				
@@ -376,9 +377,10 @@ public class BoardGameController implements Initializable{
 			
 		}
 		//moving the black soldier to target square
-		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE) {
+		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE ) {
 			for(int i=0; i<g.getWhitePieces().length; i++) {
-				if(g.getWhitePieces()[i].getLocation().getX()== sourcex && g.getWhitePieces()[i].getLocation().getY()== sourcey) {
+				if(g.getWhitePieces()[i].getLocation().getX()== sourcex && g.getWhitePieces()[i].getLocation().getY()== sourcey
+						&&!g.getWhitePieces()[i].isIsQueen()) {
 				int isOk =(g.getWhitePieces()[i]).moveWhite( sourcex, sourcey, targetx,targety,board);
 				if(isOk==0) {
 				
@@ -509,151 +511,143 @@ public void start(Stage primaryStage) {
 //
 //				}
 //			}
-//			while(numofYellowSquares<3) {
-//			CheckAndDoYellowSquares();
-//			}
+			while(numofYellowSquares<3) {
+		CheckAndDoYellowSquares();
+		}
 			
 
 		}
 		
 	}
-	// this function add a new yellow square to the board
-//	public void CheckAndDoYellowSquares() {
-//			Random rand = new Random();
-//			int x = rand.nextInt(8); 
-//	        int y = rand.nextInt(8);
-//	        Rectangle yellowr;
-//	        if(g.getBoard()[x][y]!=null)
-//	        if(g.getBoard()[x][y].getSquareColor()!=null) {
-//	        if(g.getBoard()[x][y].getSquareColor()==SQUARE_COLOR.BLACK && g.getBoard()[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY ) {
-//	        	g.getBoard()[x][y].setSquareColor(SQUARE_COLOR.YELLOW);
-//	        	yellowr=getRectangle(x,y);
-//	        	if(yellowr!=null) {
-//	        	yellowr.setFill(Color.rgb(255,255,0));
-//	    	    numofYellowSquares++;
-//	        	}
-//	        }
-//		}
-//	        
-//		
-//	}
+	public void CheckAndDoYellowSquares() {
+		Random rand = new Random();
+		int x = rand.nextInt(8); 
+        int y = rand.nextInt(8);
+        Rectangle yellowr;
+        if(g.getBoard()[x][y]!=null) 
+        {
+        if(g.getBoard()[x][y].getSquareColor()!=null) {
+        if(g.getBoard()[x][y].getSquareColor()==SQUARE_COLOR.BLACK && g.getBoard()[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY ) {
+        	g.getBoard()[x][y].setSquareColor(SQUARE_COLOR.YELLOW);
+        	yellowr=getRectangle(x,y);
+        	if(yellowr!=null) {
+        	yellowr.setFill(Color.rgb(255,255,0));
+    	    numofYellowSquares++;
+        	}
+        }}
+	}
+        
 	
+}
+
+
+// this function take the square cordetaties: 0<=x<8 & 0<=x<8
+//this function returns a rectangle r in the scenebuilder that appropriate to the cordetaties x and y 
+public Rectangle getRectangle(int x, int y) {
+        int xviewscene=x*60;//cheks the func	
+        int yviewscene=	y*60;//cheks the func
+        
+		if(xviewscene==60 && yviewscene==0) {
+			return s0;
+		}
+		if(xviewscene==180 && yviewscene==0) {
+			return s1;
+		}
+		if(xviewscene==300 && yviewscene==0) {
+			return s2;
+		}
+		if(xviewscene==420 && yviewscene==0) {
+			return s3;
+		}
+		if(xviewscene==0 && yviewscene==60) {
+			return s4;
+		}
+		if(xviewscene==120 && yviewscene==60) {
+			return s5;
+		}
+		if(xviewscene==240 && yviewscene==60) {
+			return s6;
+		}
+		if(xviewscene==360 && yviewscene==60) {
+			return s7;
+		}
+		if(xviewscene==60 && yviewscene==120) {
+			return s8;
+		}
+		if(xviewscene==180 && yviewscene==120) {
+			return s9;
+		}
+		if(xviewscene==300 && yviewscene==120) {
+			return s10;
+		}
+		if(xviewscene==420 && yviewscene==120) {
+			return s11;
+		}
+		if(xviewscene==0 && yviewscene==180) {
+			return s12;
+		}
+		if(xviewscene==120 && yviewscene==180) {
+			return s13;
+		}
+		if(xviewscene==240 && yviewscene==180) {
+			return s14;
+		}
+		if(xviewscene==360 && yviewscene==180) {
+			return s15;
+		}
+		if(xviewscene==60 && yviewscene==240) {
+			return s16;
+		}
+		if(xviewscene==180 && yviewscene==240) {
+			return s17;
+		}
+		if(xviewscene==300 && yviewscene==240) {
+			return s18;
+		}
+		if(xviewscene==420 && yviewscene==240) {
+			return s19;
+		}
+		if(xviewscene==0 && yviewscene==300) {
+			return s20;
+		}
+		if(xviewscene==120 && yviewscene==300) {
+			return s21;
+		}
+		if(xviewscene==240 && yviewscene==300) {
+			return s22;
+		}
+		if(xviewscene==360 && yviewscene==300) {
+			return s23;
+		}
+		if(xviewscene==60 && yviewscene==360) {
+			return s24;
+		}
+		if(xviewscene==180 && yviewscene==360) {
+			return s25;
+		}
+		if(xviewscene==300 && yviewscene==360) {
+			return s26;
+		}
+		if(xviewscene==420 && yviewscene==360) {
+			return s27;
+		}
+		if(xviewscene==0 && yviewscene==420) {
+			return s28;
+		}
+		if(xviewscene==120 && yviewscene==420) {
+			return s29;
+		}
+		if(xviewscene==240 && yviewscene==420) {
+			return s30;
+		}
+		if(xviewscene==360 && yviewscene==420) {
+			return s31;
+		}
+
+        
+        return null;
 	
-	// this function take the square cordetaties: 0<=x<8 & 0<=x<8
-	//this function returns a rectangle r in the scenebuilder that appropriate to the cordetaties x and y 
-//	public Rectangle getRectangle(int x, int y) {
-//	        int xviewscene=x*49;//cheks the func	
-//	        int yviewscene=	y*57;//cheks the func
-//	        
-//			if(xviewscene==0) {
-//	        	this.rowPane=this.Pane0;
-//		        // the square at the rowPane
-//	 	       if(yviewscene==0) {
-//		 	       return s0;
-//	 	    	     
-//	 	       }
-//	 	       else if(yviewscene==171) {
-//	 	    	  return s1;	 	       }
-//	 	      else if(yviewscene==285) {
-//	 	    	 return s2;	 	       }
-//	 	     else if(yviewscene==399) {
-//	 	    	return s3;	 	       }
-// 
-//	        }
-//	        if(xviewscene==49) {
-//	        	this.rowPane=this.Pane1;
-//	        			 	       
-//		 	       if(yviewscene==0) {
-//		 	    	  return s4;		 	       }
-//		 	       else if(yviewscene==114) {
-//		 	    	  return s5;		 	       }
-//		 	      else if(yviewscene==228) {
-//		 	    	 return s6;		 	       }
-//		 	     else if(yviewscene==342) {
-//		 	    	return s7;		 	       }
-//	 
-//	        }
-//	        if(xviewscene==98) {
-//	        	this.rowPane=this.Pane2;
-//	    		       
-//	     	 	       if(yviewscene==0) {
-//	     	 	    	 // the square at the rowPane
-//	     	 	    	 return s8;	     	 	       }
-//	     	 	       else if(yviewscene==171) {
-//	     	 	    	 return s9;	     	 	       }
-//	     	 	      else if(yviewscene==285) {
-//	     	 	    	return s10;	     	 	       }
-//	     	 	     else if(yviewscene==399) {
-//	     	 	    	return s11;	     	 	       }
-//	        }
-//	        if(xviewscene==147) {
-//	        	this.rowPane=this.Pane3;
-//	        			 	       
-//	   		 	       if(yviewscene==0) {
-//	   		 	    	return s12;	   		 	       }
-//	   		 	       else if(yviewscene==114) {
-//	   		 	    	return s13;	   		 	       }
-//	   		 	      else if(yviewscene==228) {
-//	   		 	    	return s14;	   		 	       }
-//	   		 	     else if(yviewscene==342) {
-//	   		 	    	return s15;	   		 	       }
-//	        }
-//	        if(xviewscene==196) {
-//	        	
-//	        	this.rowPane=this.Pane4;
-//		        // the square at the rowPane
-//  	 	       
-//  	 	       if(yviewscene==0) {
-//  	 	    	return s16;  	 	       }
-//  	 	       else if(yviewscene==171) {
-//  	 	    	return s17;  	 	       }
-//  	 	      else if(yviewscene==285) {
-//  	 	    	return s18;  	 	       }
-//  	 	     else if(yviewscene==399) {
-//  	 	    	return s19;  	 	       }
-//	        }
-//	        if(xviewscene==245) {
-//	        	
-//	        	this.rowPane=this.Pane5;   
-// 		 	       if(yviewscene==0) {
-// 		 	    	 return s20; 		 	       }
-// 		 	       else if(yviewscene==114) {
-// 		 	    	 return s21; 		 	       }
-// 		 	      else if(yviewscene==228) {
-// 		 	    	return s22; 		 	       }
-// 		 	     else if(yviewscene==342) {
-// 		 	    	return s23; 		 	       }
-//	        }
-//	        if(xviewscene==294) {
-//	        	this.rowPane=this.Pane6;
-//	    		        // the square at the rowPane
-//		     	 	       
-//		     	 	       if(yviewscene==0) {
-//		     	 	    	 return s24;		     	 	       }
-//		     	 	       else if(yviewscene==171) {
-//		     	 	    	 return s25;		     	 	       }
-//		     	 	      else if(yviewscene==285) {
-//		     	 	    	return s26;		     	 	       }
-//		     	 	     else if(yviewscene==399) {
-//		     	 	    	return s27;		     	 	       }
-//	        }
-//	        if(xviewscene==343) {
-//	        	this.rowPane=this.Pane7;
-//		 	       
-// 		 	       if(yviewscene==0) {
-// 		 	    	 return s28; 		 	       }
-// 		 	       else if(yviewscene==114) {
-// 		 	    	 return s29; 		 	       }
-// 		 	      else if(yviewscene==228) {
-// 		 	    	return s30; 		 	       }
-// 		 	     else if(yviewscene==342) {
-// 		 	    	return s31; 		 	       }
-//	        }
-//	        
-//	        return null;
-//		
-//	}
-	
+}
 	
 	
 
