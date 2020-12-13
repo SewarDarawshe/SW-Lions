@@ -146,13 +146,13 @@ public class Game {
 				if(row%2!=0) 
 					for(int col=0;col<8;col++)
 					{
-						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY);
+						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY,null);
 					}
 				else
 				{
 					for(int col=1;col<8;col++)
 					{
-						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY);
+						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY,null);
 					}
 				}
 			}
@@ -763,6 +763,8 @@ public class Game {
 			return true;
 		return false;
 	}
+	
+	
 
 	@Override
 	public String toString() {

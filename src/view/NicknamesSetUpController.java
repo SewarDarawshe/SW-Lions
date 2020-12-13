@@ -81,17 +81,20 @@ public class NicknamesSetUpController implements Initializable{
     {
     	whitename =WhiteNickName.getText();
     	blackname =BlackNickName.getText();
-
+    	if(!whitename.isEmpty() && !blackname.isEmpty()) {
     	Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		BoardGameController temp=new BoardGameController();
+        
 		try {
 		temp.start(stage);	
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+        }
     	
     }
+    
     public void start(Stage primaryStage) {
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("/view/NicknamesSetupScreen.fxml"));
