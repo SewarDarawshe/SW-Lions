@@ -150,7 +150,12 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Circle w1= new Circle();
+	
+	private Circle[] blackcircles = new Circle[12];// this array include the black circles
+	private Circle[] whitecircles = new Circle[12];// this array include the white circles
+	
 
+	
 	@FXML
 	private Rectangle s0 = new Rectangle();
 
@@ -259,6 +264,7 @@ public class BoardGameController implements Initializable{
 	@FXML
 	void MoveSoldier(MouseEvent event) {
 		this.soldier=(Circle) event.getTarget();
+		//Circle c = getCircle(210,150);
 
 	}
 
@@ -289,6 +295,16 @@ public class BoardGameController implements Initializable{
 			num++;
 		}
 		return num;
+	}
+	
+	//this function trasfer the cordenate from the row and column( 0<c<7) to layout x and layouty
+	private int TransForScene(int c) {
+		int layout=0;
+		while(c>0) {
+			layout=layout+60;
+			c--;
+		}
+		return layout;
 	}
 
 
@@ -358,13 +374,36 @@ public class BoardGameController implements Initializable{
 
 
 						}
-						else
-							System.out.println("not ok");
+						else if(targety==sourcey+2 && targetx+2==sourcex) {
+							System.out.println("else1");
+							if(board[sourcex-1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
+								for(int j=0; j<g.getWhitePieces().length; j++) {
+									if(g.getWhitePieces()[j].getLocation().getX()== sourcex-1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
+										// remove the soldier
+										System.out.println("HEREEEEE");
+										g.getWhitePieces()[j].setIsAlive(false);
+										board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										Circle c=getSoldierOnScene(sourcex-60,sourcey+60);// nzed hmara
+										if(c!=null)
+										if(c.getFill()==Color.BLACK)
+											c.setVisible(false);
+										
+										//move the soldier
+										this.soldier.setLayoutX(sourcex+120);
+										this.soldier.setLayoutY(sourcey-120);
+										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);	
+									}
+							}
+							}
+						}
+							//System.out.println("not ok");
+							
 					}
 				}
 
 			}
-			//moving the black soldier to target square
+			//moving the white soldier to target square
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE ) {
 				for(int i=0; i<g.getWhitePieces().length; i++) {
 					if(g.getWhitePieces()[i].getLocation().getX()== sourcex && g.getWhitePieces()[i].getLocation().getY()== sourcey
@@ -412,8 +451,72 @@ public class BoardGameController implements Initializable{
 
 
 						}
-						else
-							System.out.println("not ok");
+						// eaten to the up right side
+						else if(targety==sourcey+2 && targetx+2==sourcex) {
+							System.out.println("else1");
+							if(board[sourcex-1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
+								System.out.println("if2");
+								for(int j=0; j<g.getBlackPieces().length; j++) {
+									if(g.getBlackPieces()[j].getLocation().getX()== sourcex-1 && g.getBlackPieces()[j].getLocation().getY()== sourcey+1) {
+										// remove the soldier
+										System.out.println("HEREEEEE");
+										g.getBlackPieces()[j].setIsAlive(false);
+										board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										int xcsene= TransForScene(sourcex)-30;//nzed 3l func
+										System.out.println(xcsene);
+								
+										int yscene=TransForScene(sourcey)+90;//...
+										System.out.println(yscene);
+										Circle c=getSoldierOnScene(xcsene+60,yscene-60);
+										//**************
+										this.soldier.setLayoutX(xcsene+120);
+										this.soldier.setLayoutY(yscene-120);
+										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+										
+										if(c!=null)
+										if(c.getFill()==Color.BLACK);
+										c.setVisible(false);
+										
+										//move the soldier
+											
+									}
+							}
+							}
+						}
+						//eaten to the up left side
+						else if(targety==sourcey-2 && targetx+2==sourcex) {
+							System.out.println("else1");
+							if(board[sourcex-1][sourcey-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
+								System.out.println("if2");
+								for(int j=0; j<g.getBlackPieces().length; j++) {
+									if(g.getBlackPieces()[j].getLocation().getX()== sourcex-1 && g.getBlackPieces()[j].getLocation().getY()== sourcey-1) {
+										// remove the soldier
+										System.out.println("HEREEEEE");
+										g.getBlackPieces()[j].setIsAlive(false);
+										board[sourcex-1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										int xcsene= TransForScene(sourcex)-90;//nzed 3l func
+										System.out.println(xcsene);
+								
+										int yscene=TransForScene(sourcey)+30;//...
+										System.out.println(yscene);
+										Circle c=getSoldierOnScene(xcsene-60,yscene-60);
+										//**************
+										this.soldier.setLayoutX(xcsene-120);
+										this.soldier.setLayoutY(yscene-120);
+										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+										
+										if(c!=null) {
+										if(c.getFill()==Color.BLACK);
+										c.setVisible(false);
+										}
+										//move the soldier
+											
+									}
+							}
+							}
+						}
 					}
 				}
 
@@ -429,8 +532,24 @@ public class BoardGameController implements Initializable{
 
 	}
 
+	private Circle getSoldierOnScene(int sourcex, int sourcey) {
+		//getting the soldier circle from the whiteCircles
+		for(int i=0;i<12;i++) {
+			if(whitecircles[i].getLayoutX()==sourcex && whitecircles[i].getLayoutY()==sourcey)
+				return whitecircles[i];
+			}
+		
+		//getting the soldier circle from the blackCircles
+		for(int i=0;i<12;i++) {
+			if(blackcircles[i].getLayoutX()==sourcex && blackcircles[i].getLayoutY()==sourcey)
+				return blackcircles[i];
+			}
+		return null;
+		
+	}
+
 	public void eat() {
-		//TODO
+		//ToDo
 
 	}
 
@@ -479,7 +598,33 @@ public class BoardGameController implements Initializable{
 
 			}
 
-
+// uploading the circle Squares to the array of the circles
+        blackcircles[0]=b0;
+        blackcircles[1]=b1;
+        blackcircles[2]=b2;
+        blackcircles[3]=b3;
+        blackcircles[4]=b4;
+        blackcircles[5]=b5;
+        blackcircles[6]=b6;
+        blackcircles[7]=b7;
+        blackcircles[8]=b8;
+        blackcircles[9]=b9;
+        blackcircles[10]=b10;
+        blackcircles[11]=b11;
+        whitecircles[0]=w0;
+        whitecircles[1]=w1;
+        whitecircles[2]=w2;
+        whitecircles[3]=w3;
+        whitecircles[4]=w4;
+        whitecircles[5]=w5;
+        whitecircles[6]=w6;
+        whitecircles[7]=w7;
+        whitecircles[8]=w8;
+        whitecircles[9]=w9;
+        whitecircles[10]=w10;
+        whitecircles[11]=w11;
+        
+        
 		}
 
 	}
