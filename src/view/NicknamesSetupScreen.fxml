@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.GaussianBlur?>
 <?import javafx.scene.image.Image?>
@@ -37,6 +38,7 @@
                   <Font name="Cooper Black" size="19.0" />
                </font>
             </Text>
+           
             <Button fx:id="StartGameButton" layoutX="208.0" layoutY="301.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="62.0" prefWidth="185.0" style="-fx-background-color: peru;" text="Start the game" textFill="#783131">
                <font>
                   <Font name="Cooper Black" size="19.0" />
@@ -54,6 +56,11 @@
             </Button>
             <TextField fx:id="WhiteNickName" layoutX="407.0" layoutY="133.0" />
             <TextField fx:id="BlackNickName" layoutX="407.0" layoutY="188.0" />
+            <Label id="ErrorLbl" layoutX="190.0" layoutY="273.0" prefHeight="17.0" prefWidth="214.0">
+               <font>
+                  <Font name="Cooper Black" size="17.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
