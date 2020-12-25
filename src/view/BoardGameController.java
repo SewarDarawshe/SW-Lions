@@ -310,6 +310,10 @@ public class BoardGameController implements Initializable{
 
 	private int MoveSoldierToTarget() {
 		if(soldier!=null && target!=null) {
+			int firstsourcex=(int) this.soldier.getLayoutX();
+			int firstsourcey=(int) this.soldier.getLayoutY();
+			int firsttargetx=(int) target.getLayoutX();
+			int firsttargety=(int) target.getLayoutX();
 			int sourcex=TransForCordinateNum((int)this.soldier.getLayoutY()-30);
 			System.out.printf("the row is: %d\n",sourcex);
 
@@ -374,29 +378,68 @@ public class BoardGameController implements Initializable{
 
 
 						}
-						else if(targety==sourcey+2 && targetx+2==sourcex) {
+						// right black eat
+						else if(targety==sourcey+2 && targetx==sourcex+2) {
 							System.out.println("else1");
-							if(board[sourcex-1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
+							if(board[sourcex+1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
 								for(int j=0; j<g.getWhitePieces().length; j++) {
-									if(g.getWhitePieces()[j].getLocation().getX()== sourcex-1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
+									if(g.getWhitePieces()[j].getLocation().getX()== sourcex+1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
 										// remove the soldier
 										System.out.println("HEREEEEE");
 										g.getWhitePieces()[j].setIsAlive(false);
-										board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										Circle c=getSoldierOnScene(sourcex-60,sourcey+60);// nzed hmara
-										if(c!=null)
-										if(c.getFill()==Color.BLACK)
-											c.setVisible(false);
-										
-										//move the soldier
-										this.soldier.setLayoutX(sourcex+120);
-										this.soldier.setLayoutY(sourcey-120);
+										board[sourcex+1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+										int xcsene= (firstsourcex)+60;//nzed 3l func
+										System.out.println(xcsene);
+								
+										int yscene=(firstsourcey)+60;//...
+										System.out.println(yscene);
+										Circle c=getSoldierOnScene(xcsene,yscene);
+										//**************
+										this.soldier.setLayoutX(firstsourcex+120);
+										this.soldier.setLayoutY(firstsourcey+120);
 										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);	
+										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+										
+										if(c!=null)
+										if(c.getFill()==Color.BLACK);
+										c.setVisible(false);
+										
+										//move the soldier	
 									}
 							}
 							}
 						}
+						else
+							 if(targety==sourcey-2 && targetx==sourcex+2) {
+									System.out.println("else1");
+									if(board[sourcex+1][sourcey-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
+										for(int j=0; j<g.getWhitePieces().length; j++) {
+											if(g.getWhitePieces()[j].getLocation().getX()== sourcex+1 && g.getWhitePieces()[j].getLocation().getY()== sourcey-1) {
+												// remove the soldier
+												System.out.println("HEREEEEE");
+												g.getWhitePieces()[j].setIsAlive(false);
+												board[sourcex+1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+												int xcsene= (firstsourcex)-60;//nzed 3l func
+												System.out.println(xcsene);
+										
+												int yscene=(firstsourcey)+60;//...
+												System.out.println(yscene);
+												Circle c=getSoldierOnScene(xcsene,yscene);
+												//**************
+												this.soldier.setLayoutX(firstsourcex-120);
+												this.soldier.setLayoutY(firstsourcey+120);
+												board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+												board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+												
+												if(c!=null)
+												if(c.getFill()==Color.WHITE);
+												c.setVisible(false);
+												
+												//move the soldier	
+											}
+									}
+									}
+								}
 							//System.out.println("not ok");
 							
 					}
@@ -462,15 +505,15 @@ public class BoardGameController implements Initializable{
 										System.out.println("HEREEEEE");
 										g.getBlackPieces()[j].setIsAlive(false);
 										board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										int xcsene= TransForScene(sourcex)-30;//nzed 3l func
+										int xcsene= (firstsourcex)+60;//nzed 3l func
 										System.out.println(xcsene);
 								
-										int yscene=TransForScene(sourcey)+90;//...
+										int yscene=(firstsourcey)-60;//...
 										System.out.println(yscene);
-										Circle c=getSoldierOnScene(xcsene+60,yscene-60);
+										Circle c=getSoldierOnScene(xcsene,yscene);
 										//**************
-										this.soldier.setLayoutX(xcsene+120);
-										this.soldier.setLayoutY(yscene-120);
+										this.soldier.setLayoutX(firstsourcex+120);
+										this.soldier.setLayoutY(firstsourcey-120);
 										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 										
@@ -495,15 +538,15 @@ public class BoardGameController implements Initializable{
 										System.out.println("HEREEEEE");
 										g.getBlackPieces()[j].setIsAlive(false);
 										board[sourcex-1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										int xcsene= TransForScene(sourcex)-90;//nzed 3l func
+										int xcsene= (firstsourcex)-60;//nzed 3l func
 										System.out.println(xcsene);
 								
-										int yscene=TransForScene(sourcey)+30;//...
+										int yscene=(firstsourcey)-60;//...
 										System.out.println(yscene);
-										Circle c=getSoldierOnScene(xcsene-60,yscene-60);
+										Circle c=getSoldierOnScene(xcsene,yscene);
 										//**************
-										this.soldier.setLayoutX(xcsene-120);
-										this.soldier.setLayoutY(yscene-120);
+										this.soldier.setLayoutX(xcsene-60);
+										this.soldier.setLayoutY(yscene-60);
 										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 										
