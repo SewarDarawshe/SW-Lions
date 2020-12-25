@@ -1,6 +1,6 @@
 package view;
 
-import java.awt.Label;
+//import java.awt.Label;
 import java.net.URL;
 
 import java.util.ResourceBundle;
@@ -16,9 +16,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 
 public class NicknamesSetUpController implements Initializable{
 
@@ -42,6 +44,7 @@ public class NicknamesSetUpController implements Initializable{
 	@FXML
 	private TextField BlackNickName;
 	
+	@FXML
 	private Label ErrorLbl;
 
 
@@ -86,20 +89,25 @@ public class NicknamesSetUpController implements Initializable{
 	{
 		whitename =WhiteNickName.getText();
 		blackname =BlackNickName.getText();
-		if(!whitename.isEmpty() && !blackname.isEmpty()) {
+		if(!whitename.isEmpty() && !blackname.isEmpty())
+		{
 			Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 			BoardGameController temp=new BoardGameController();
-			
-			try {
+			temp.start(stage);	
+
+			/*try {
 				temp.start(stage);	
 
 			} catch (Exception e) {
 				// TODO: handle exception
 				ErrorLbl.setText("Please Enter Valid Players' Nicknames!"); //Not Working
 			}
-		}
+		}*/
 		
-
+		}
+		else {
+			ErrorLbl.setText("Please Enter Valid Player's Nicknames!");
+		}
 	}
 
 	public void start(Stage primaryStage) {

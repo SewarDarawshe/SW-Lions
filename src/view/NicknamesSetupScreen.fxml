@@ -56,7 +56,7 @@
             </Button>
             <TextField fx:id="WhiteNickName" layoutX="407.0" layoutY="133.0" />
             <TextField fx:id="BlackNickName" layoutX="407.0" layoutY="188.0" />
-            <Label id="ErrorLbl" layoutX="190.0" layoutY="273.0" prefHeight="17.0" prefWidth="214.0">
+            <Label id="ErrorLbl" fx:id="ErrorLbl" alignment="CENTER" layoutX="77.0" layoutY="253.0" prefHeight="40.0" prefWidth="433.0">
                <font>
                   <Font name="Cooper Black" size="17.0" />
                </font>
