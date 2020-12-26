@@ -38,7 +38,7 @@ public class BoardGameController implements Initializable{
 	private int numofYellowSquares=0;
 	public Game g;
 	private Rectangle r=null;
-	//soldier that has choosen to be moved
+	//soldier that has chosen to be moved
 	private Circle soldier=null;
 	// target square the soldier want to turn to
 	private Rectangle target=null;
@@ -287,7 +287,7 @@ public class BoardGameController implements Initializable{
 
 
 	}
-	//this function trasfer the layout cordenate to 0<c<7
+	//this function trnasfer the layout coordinate to 0<c<7
 	private int TransForCordinateNum(int c) {
 		int num=0;
 		while(c>=30) {
@@ -297,7 +297,7 @@ public class BoardGameController implements Initializable{
 		return num;
 	}
 	
-	//this function trasfer the cordenate from the row and column( 0<c<7) to layout x and layouty
+	//this function transfer the coordinate from the row and column( 0<c<7) to layout x and layouty
 	private int TransForScene(int c) {
 		int layout=0;
 		while(c>0) {
@@ -322,7 +322,7 @@ public class BoardGameController implements Initializable{
 			System.out.printf("the col is: %d\n",sourcey);
 
 
-			//turns the square target cordenaties to: 0<x<7 & 0<y<7
+			//turns the square target coordinates to: 0<x<7 & 0<y<7
 			//System.out.println(target.getLayoutX());
 			int targetx=TransForCordinateNum((int)target.getLayoutY());
 			System.out.printf("move to row:%d\n",targetx);
@@ -710,11 +710,11 @@ public class BoardGameController implements Initializable{
 	}
 
 
-	// this function take the square cordetaties: 0<=x<8 & 0<=x<8
-	//this function returns a rectangle r in the scenebuilder that appropriate to the cordetaties x and y 
+	// this function take the square coordinates: 0<=x<8 & 0<=x<8
+	//this function returns a rectangle r in the scene-builder that appropriate to the cordetaties x and y 
 	public Rectangle getRectangle(int x, int y) {
-		int xviewscene=x*60;//cheks the func	
-		int yviewscene=	y*60;//cheks the func
+		int xviewscene=x*60;//checks the function	
+		int yviewscene=	y*60;//checks the function
 
 		if(xviewscene==60 && yviewscene==0) {
 			return s0;
@@ -821,8 +821,8 @@ public class BoardGameController implements Initializable{
 
 
 	public void setRectangleToYellow(int x, int y) {
-		int xviewscene=x*60;//cheks the func	
-		int yviewscene=	y*60;//cheks the func
+		int xviewscene=x*60;//checks the function	
+		int yviewscene=	y*60;//checks the function
 
 		if(xviewscene==60 && yviewscene==0) {
 			s0.setFill(Color.rgb(255,255,0));
