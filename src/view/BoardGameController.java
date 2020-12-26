@@ -330,13 +330,14 @@ public class BoardGameController implements Initializable{
 			int targety=TransForCordinateNum((int) target.getLayoutX());
 			System.out.printf("move to col num:%d\n",targety);
 
-
+           
 
 			//moving the black soldier to target square
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK )  {
 				for(int i=0; i<g.getBlackPieces().length; i++) {
-					if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey
-							&&!g.getBlackPieces()[i].isIsQueen()) {
+					if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey)
+							 {
+						if(!g.getBlackPieces()[i].isIsQueen()) {
 						System.out.println("okkkkkkkkkk");
 						int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
 						if(isOk==0) {
@@ -453,13 +454,15 @@ public class BoardGameController implements Initializable{
 							
 					}
 				}
+				}
 
 			}
 			//moving the white soldier to target square
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE) {
 				for(int i=0; i<g.getWhitePieces().length; i++) {
 					if(g.getWhitePieces()[i].getLocation().getX()== sourcex && g.getWhitePieces()[i].getLocation().getY()== sourcey
-							&&!g.getWhitePieces()[i].isIsQueen()) {
+						) {
+						if(!g.getWhitePieces()[i].isIsQueen()) {
 						int isOk =(g.getWhitePieces()[i]).moveWhite( sourcex, sourcey, targetx,targety,board);
 						if(isOk==0) {
 
@@ -574,6 +577,7 @@ public class BoardGameController implements Initializable{
 							}
 							}
 						}
+					}
 					}
 				}
 
