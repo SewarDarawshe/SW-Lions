@@ -184,6 +184,17 @@ public class Game {
 			Board[5][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 			Board[5][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 			Board[5][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+			Board[3][0].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[3][2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[3][4].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[3][6].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[4][1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[4][3].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[4][5].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			Board[4][7].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+			
+			
+			
 			int whitei=0;
 			if(whitei<WhitePieces.length)
 			{
@@ -194,6 +205,7 @@ public class Game {
 						{
 							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
 							WhitePieces[whitei]=s;
+							//System.out.printf("the white soldier is at: %d %d", row,j);
 							whitei++;
 
 						}
@@ -202,7 +214,7 @@ public class Game {
 						for(int j=1;j<8;j+=2)
 						{
 							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
-
+							//System.out.printf("the white soldier is at: %d %d", row,j);
 							WhitePieces[whitei]=s;	
 							whitei++;
 						}
@@ -220,7 +232,7 @@ public class Game {
 						for(int j=0;j<8;j+=2)
 						{
 							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
-
+							//System.out.printf("the black soldier is at: %d %d", row,j);
 							BlackPieces[Blacki]=s;	
 							Blacki++;
 						}
@@ -229,7 +241,7 @@ public class Game {
 						for(int j=1;j<8;j+=2)
 						{
 							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
-
+							//System.out.printf("the black soldier is at: %d %d", row,j);
 							BlackPieces[Blacki]=s;	
 							Blacki++;
 						}

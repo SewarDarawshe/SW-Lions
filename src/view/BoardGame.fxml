@@ -45,7 +45,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="300.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="420.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-            <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="120.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="RED" height="60.0" layoutX="120.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="240.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="360.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
@@ -165,7 +165,19 @@
                   <Font name="Cooper Black" size="12.0" />
                </font>
             </Button>
+<<<<<<< HEAD
+            <Label fx:id="TurnLbl" layoutX="24.0" layoutY="218.0" prefHeight="25.0" prefWidth="146.0" textAlignment="CENTER" textFill="#060606">
+               <font>
+                  <Font name="Cooper Black" size="12.0" />
+               </font></Label>
+=======
             <Label fx:id="TurnLbl" layoutX="24.0" layoutY="218.0" prefHeight="25.0" prefWidth="146.0" />
+            <Button layoutX="313.0" layoutY="527.0" mnemonicParsing="false" style="-fx-background-color: peru;" text="Resume game" textFill="#783131" textOverrun="WORD_ELLIPSIS">
+               <font>
+                  <Font name="Cooper Black" size="12.0" />
+               </font>
+            </Button>
+>>>>>>> 0e29270f93a5392949e9294d467a277de043e17c
          </children>
       </Pane>
    </children>

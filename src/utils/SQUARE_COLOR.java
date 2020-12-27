@@ -1,7 +1,7 @@
 package utils;
 
 public enum SQUARE_COLOR {
-	BLACK,YELLOW;
+	BLACK,YELLOW,RED,GREEN,ORANGE,BLUE;
 
 
 }

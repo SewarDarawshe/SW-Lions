@@ -34,9 +34,12 @@ import utils.SQUARE_COLOR;
 import utils.Soldier_COLOR_AtSquare;
 
 public class BoardGameController implements Initializable{
+	private Soldier_COLOR_AtSquare turn=Soldier_COLOR_AtSquare.WHITE;
 	private Square[][] board;
 	private int numofYellowSquares=0;
 	public Game g;
+	private String whiteName;//the white player name
+	private String blackName;//the black player name
 	private Rectangle r=null;
 	//soldier that has chosen to be moved
 	private Circle soldier=null;
@@ -44,7 +47,10 @@ public class BoardGameController implements Initializable{
 	private Rectangle target=null;
 	//this Pane is the CurrentRowPane: help us at the CheckAndDoYellow methods
 	private Pane rowPane=null;
-
+    
+	@FXML
+    private Label TurnLbl;
+    
 	@FXML
 	private Text BlackPlayerNic= new Text();
 
@@ -264,7 +270,22 @@ public class BoardGameController implements Initializable{
 	@FXML
 	void MoveSoldier(MouseEvent event) {
 		this.soldier=(Circle) event.getTarget();
-		//Circle c = getCircle(210,150);
+		int firstsourcex=(int) this.soldier.getLayoutX();
+		int firstsourcey=(int) this.soldier.getLayoutY();
+		int sourcex=TransForCordinateNum((int)this.soldier.getLayoutY()-30);
+		System.out.printf("the row of the soldier is: %d\n",sourcex);
+		int sourcey=TransForCordinateNum((int)this.soldier.getLayoutX()-30);
+		System.out.printf("the col of the soldier is: %d\n",sourcey);
+		//turn is WHITE
+		if(turn==Soldier_COLOR_AtSquare.WHITE && board[sourcex][sourcey].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
+			this.soldier=null;
+		}
+		// turn=BLACK
+		if(turn==Soldier_COLOR_AtSquare.BLACK && board[sourcex][sourcey].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
+			this.soldier=null;
+		}
+		
+		
 
 	}
 
@@ -455,7 +476,8 @@ public class BoardGameController implements Initializable{
 					}
 				}
 				}
-
+				turn = Soldier_COLOR_AtSquare.WHITE;
+				TurnLbl.setText("Its the White turn");
 			}
 			//moving the white soldier to target square
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE) {
@@ -580,11 +602,13 @@ public class BoardGameController implements Initializable{
 					}
 					}
 				}
-
+				turn = Soldier_COLOR_AtSquare.BLACK;
+				TurnLbl.setText("Its the Black turn");
 			}
 
 			this.soldier=null;
 			this.target=null;
+			CheckAndDoRedSquare();
 			return 0;
 		}
 
@@ -634,7 +658,8 @@ public class BoardGameController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty()) {
 			// setting the current player in the board game
-
+			whiteName = NicknamesSetUpController.getWhitename();
+			blackName = NicknamesSetUpController.getBlackname();
 			Player white = new Player(NicknamesSetUpController.getWhitename() , 0);
 			Player black = new Player(NicknamesSetUpController.getBlackname() , 0);
 			WhiteNickText.setEditable(false);
@@ -658,6 +683,15 @@ public class BoardGameController implements Initializable{
 				CheckAndDoYellowSquares();
 
 			}
+			
+			for( int i=0; i<12;i++) {
+				int x=g.getBlackPieces()[i].getLocation().getX();
+				int y=g.getBlackPieces()[i].getLocation().getY();
+				System.out.printf("%d %d\n",x,y);
+			}
+			
+			TurnLbl.setText("Its the White turn");
+			CheckAndDoRedSquare();
 
 // uploading the circle Squares to the array of the circles
         blackcircles[0]=b0;
@@ -708,13 +742,80 @@ public class BoardGameController implements Initializable{
 
 
 	}
+	
+	// this function make red square randomly if there is no option to eat at this turn
+	public void CheckAndDoRedSquare() {
+		if(turn==Soldier_COLOR_AtSquare.WHITE)
+		{
+			Player pw= g.getWhitePlayer();
+			
+		if(g.IsEatable(pw)==false) {
+			for(int i=0; i<g.getWhitePieces().length; i++) {
+				// righ side
+			if(board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+				System.out.println(1);
+				System.out.printf("X:%d Y:%d \n",(g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())+1);
+				Rectangle r= getRectangle((g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())+1);
+				board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())+1].setSquareColor(SQUARE_COLOR.RED);
+				r.setFill(Color.rgb(255,0,0));
+				return;
+			}
+			
+			// left side
+		if(board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+			Rectangle r= getRectangle((g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())-1);
+			System.out.println(2);
+			board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())-1].setSquareColor(SQUARE_COLOR.RED);
+			r.setFill(Color.rgb(255,0,0));
+			return;
+		}
+		
+	}
+
+		}
+		}
+		
+		
+		if(turn==Soldier_COLOR_AtSquare.BLACK)
+		{
+			Player pb= g.getBlackPlayer();
+			
+		if(g.IsEatable(pb)==false) {
+			for(int i=0; i<g.getBlackPieces().length; i++) {
+				// righ side
+			if(board[(g.getBlackPieces()[i].getLocation().getX())+1][(g.getBlackPieces()[i].getLocation().getY())-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+				Rectangle r= getRectangle((g.getBlackPieces()[i].getLocation().getX())+1,(g.getBlackPieces()[i].getLocation().getY())-1);
+				System.out.println(3);
+				board[(g.getWhitePieces()[i].getLocation().getX())+1][(g.getWhitePieces()[i].getLocation().getY())-1].setSquareColor(SQUARE_COLOR.RED);
+				r.setFill(Color.rgb(255,0,0));
+				return;
+			}
+			
+			// left side
+		if(board[(g.getBlackPieces()[i].getLocation().getX())+1][(g.getBlackPieces()[i].getLocation().getY())+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+			Rectangle r= getRectangle((g.getBlackPieces()[i].getLocation().getX())+1,(g.getBlackPieces()[i].getLocation().getY())+1);
+			System.out.println(4);
+			board[(g.getWhitePieces()[i].getLocation().getX())+1][(g.getWhitePieces()[i].getLocation().getY())+1].setSquareColor(SQUARE_COLOR.RED);
+			r.setFill(Color.rgb(255,0,0));
+			return;
+		}
+		
+	}
+
+		}
+		}
+		
+	}
+	
+	
 
 
 	// this function take the square coordinates: 0<=x<8 & 0<=x<8
 	//this function returns a rectangle r in the scene-builder that appropriate to the cordetaties x and y 
 	public Rectangle getRectangle(int x, int y) {
-		int xviewscene=x*60;//checks the function	
-		int yviewscene=	y*60;//checks the function
+		
+		int xviewscene=y*60;//checks the function	
+		int yviewscene=	x*60;//checks the function
 
 		if(xviewscene==60 && yviewscene==0) {
 			return s0;

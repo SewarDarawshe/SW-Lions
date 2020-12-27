@@ -23,16 +23,6 @@ public class Square {
 
 	// -------------------------------Constructors-------------------------------
 
-//	public Square(int x, int y, Soldier_COLOR_AtSquare color) {
-//		super();
-//		X = x;
-//		Y = y;
-//		SoldierColor = color;
-//		squareColor= SQUARE_COLOR.BLACK;
-//	}
-//	
-	
-
 	public Square(int x, int y, Soldier_COLOR_AtSquare soldierColor, Soldier s) {
 		super();
 		X = x;
