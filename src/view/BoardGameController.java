@@ -807,11 +807,25 @@ public class BoardGameController implements Initializable{
 		
 	}
 	
-	
+	public void CheckAndDoBlueSquare() {
+		int cntSoldier=0; //counter for the soldiers
+		int cntQueen=0; //counter for the queens.
+		if(turn==Soldier_COLOR_AtSquare.WHITE) {
+			for(int i=0; i < g.getWhitePieces().length; i++) {
+				if(g.getWhitePieces()[i].getColor() == Soldier_COLOR_AtSquare.WHITE) {
+					cntSoldier++;
+				}
+				if(g.getWhitePieces()[i].isIsQueen() ) {
+					cntSoldier++;
+				}
+				
+			}
+		}
+	}
 
 
 	// this function take the square coordinates: 0<=x<8 & 0<=x<8
-	//this function returns a rectangle r in the scene-builder that appropriate to the cordetaties x and y 
+	//this function returns a rectangle r in the scene-builder that appropriate to the coordinates x and y 
 	public Rectangle getRectangle(int x, int y) {
 		
 		int xviewscene=y*60;//checks the function	
