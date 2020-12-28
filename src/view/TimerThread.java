@@ -7,9 +7,6 @@ import java.time.LocalTime;
 
 import javafx.application.Platform;
 
-
-
-
 public class TimerThread extends Thread {
 	private boolean isPaused;
 	private Duration tmpDuration = Duration.ofNanos(0);

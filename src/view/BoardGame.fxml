@@ -106,11 +106,6 @@
                   <Circle fx:id="w11" fill="WHITE" layoutX="390.0" layoutY="450.0" onMousePressed="#MoveSoldier" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
-            <Label fx:id="BlackTimer" layoutX="478.0" layoutY="2.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
-               <font>
-                  <Font name="Cooper Black" size="20.0" />
-               </font>
-            </Label>
             <Text fx:id="BlackPlayerNic" fill="#783131" layoutX="49.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Black player " wrappingWidth="90.0">
                <font>
                   <Font name="Cooper Black" size="13.0" />
@@ -150,11 +145,6 @@
             <TextField fx:id="WhiteNickText" layoutX="25.0" layoutY="390.0" prefHeight="25.0" prefWidth="137.0" />
             <TextField fx:id="bPointsValue" layoutX="66.0" layoutY="111.0" prefHeight="25.0" prefWidth="57.0" />
             <TextField fx:id="wPointsValue" layoutX="65.0" layoutY="450.0" prefHeight="25.0" prefWidth="57.0" />
-            <Label fx:id="WhiteTimer" layoutX="461.0" layoutY="519.0" prefHeight="37.0" prefWidth="90.0" text=" 00:00:00" textAlignment="CENTER" textFill="#35d8ba">
-               <font>
-                  <Font name="Cooper Black" size="20.0" />
-               </font>
-            </Label>
             <Button fx:id="pauseResumeBTN" layoutX="203.0" layoutY="527.0" mnemonicParsing="false" onAction="#pauseRes" style="-fx-background-color: peru;" text="Pause game" textFill="#783131" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Cooper Black" size="12.0" />
@@ -167,7 +157,21 @@
                </font></Label>
 
             <Label fx:id="TurnLbl" layoutX="24.0" layoutY="218.0" prefHeight="25.0" prefWidth="146.0" />
-            <Text fx:id="gameTimer" layoutX="28.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.66663360595703" />
+            <Text fx:id="gameTimer" fill="#35d8ba" fontSmoothingType="LCD" layoutX="28.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="158.66663360595703">
+               <font>
+                  <Font name="Cooper Black" size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="WhiteTimer" fill="#35d8ba" fontSmoothingType="LCD" layoutX="458.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="158.66663360595703">
+               <font>
+                  <Font name="Cooper Black" size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="BlackTimer" fill="#35d8ba" fontSmoothingType="LCD" layoutX="447.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="158.66663360595703">
+               <font>
+                  <Font name="Cooper Black" size="13.0" />
+               </font>
+            </Text>
 
          </children>
       </Pane>

@@ -3,6 +3,7 @@ package view;
 import java.net.URL;
 
 
+
 import java.sql.Time;
 import java.time.Duration;
 import java.util.Date;
@@ -38,6 +39,8 @@ import utils.SQUARE_COLOR;
 import utils.Soldier_COLOR_AtSquare;
 
 public class BoardGameController implements Initializable{
+	
+	// Helping parameters to complete methods
 	private Soldier_COLOR_AtSquare turn=Soldier_COLOR_AtSquare.WHITE;
 	private Square[][] board;
 	private int numofYellowSquares=0;
@@ -51,11 +54,26 @@ public class BoardGameController implements Initializable{
 	private Rectangle target=null;
 	//this Pane is the CurrentRowPane: help us at the CheckAndDoYellow methods
 	private Pane rowPane=null;
-	private TimerThread thread;
-	private TimerInterface timer;
+	private TimerThread gamethread;
+	private TimerThread whitethread;
+	private TimerThread blackthread;
+	private TimerInterface gametime;
+	private TimerInterface whitetime;
+	private TimerInterface blacktime;
+	private Duration duration;
+	private Circle[] blackcircles = new Circle[12];// this array include the black circles
+	private Circle[] whitecircles = new Circle[12];// this array include the white circles
 
+
+	//GUI parameters
 	@FXML
 	private Text gameTimer;
+	
+	@FXML
+    private Text WhiteTimer;
+
+    @FXML
+    private Text BlackTimer;
 	@FXML
 	private Button pauseResumeBTN;
 	@FXML
@@ -93,7 +111,7 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Button Homepagebutton= new Button();
-	private Duration duration;
+	
 
 	// the circle soldiers
 	@FXML
@@ -167,10 +185,6 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Circle w1= new Circle();
-
-	private Circle[] blackcircles = new Circle[12];// this array include the black circles
-	private Circle[] whitecircles = new Circle[12];// this array include the white circles
-
 
 
 	@FXML
@@ -270,6 +284,105 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Pane boardPane = new Pane();
+	
+	//starting the page methods
+	
+	public void start(Stage primaryStage) {
+		try {
+			Parent root = FXMLLoader.load(getClass().getResource("/view/BoardGame.fxml"));
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("Game Board");
+			primaryStage.setScene(scene);
+			primaryStage.show();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty()) {
+			gametime=new DigitTimerGroup(gameTimer);
+			gamethread = new TimerThread(gametime);
+			gamethread.setDaemon(true);
+			gamethread.start();
+			whitetime=startWhiteTimer();
+			
+	
+			
+			// setting the current player in the board game
+			whiteName = NicknamesSetUpController.getWhitename();
+			blackName = NicknamesSetUpController.getBlackname();
+			Player white = new Player(NicknamesSetUpController.getWhitename() , 0);
+			Player black = new Player(NicknamesSetUpController.getBlackname() , 0);
+			WhiteNickText.setEditable(false);
+			BlackNickText.setEditable(false);
+
+			WhiteNickText.setText(NicknamesSetUpController.getWhitename());
+			BlackNickText.setText(NicknamesSetUpController.getBlackname());
+
+
+
+			wPointsValue.setText(Integer.toString(white.getPoints()));
+			bPointsValue.setText(Integer.toString(black.getPoints()));
+			Date d = new Date();
+			Time t = new Time(0, 0, 0);
+
+			g = new Game(white, black,d,t);
+			g.initiateGame();
+			this.board=g.getBoard();
+
+			while(numofYellowSquares<3) {
+				CheckAndDoYellowSquares();
+
+			}
+
+			for( int i=0; i<12;i++) {
+				int x=g.getBlackPieces()[i].getLocation().getX();
+				int y=g.getBlackPieces()[i].getLocation().getY();
+				System.out.printf("%d %d\n",x,y);
+			}
+
+			TurnLbl.setText("Its the White turn");
+			
+		
+			
+			CheckAndDoRedSquare();
+
+			// uploading the circle Squares to the array of the circles
+			blackcircles[0]=b0;
+			blackcircles[1]=b1;
+			blackcircles[2]=b2;
+			blackcircles[3]=b3;
+			blackcircles[4]=b4;
+			blackcircles[5]=b5;
+			blackcircles[6]=b6;
+			blackcircles[7]=b7;
+			blackcircles[8]=b8;
+			blackcircles[9]=b9;
+			blackcircles[10]=b10;
+			blackcircles[11]=b11;
+			whitecircles[0]=w0;
+			whitecircles[1]=w1;
+			whitecircles[2]=w2;
+			whitecircles[3]=w3;
+			whitecircles[4]=w4;
+			whitecircles[5]=w5;
+			whitecircles[6]=w6;
+			whitecircles[7]=w7;
+			whitecircles[8]=w8;
+			whitecircles[9]=w9;
+			whitecircles[10]=w10;
+			whitecircles[11]=w11;
+
+
+		}
+
+	}
+	
+	//ON ACTION & Helping methods
 
 	@FXML
 	void MoveToSquare(MouseEvent event) {
@@ -489,6 +602,8 @@ public class BoardGameController implements Initializable{
 				}
 				turn = Soldier_COLOR_AtSquare.WHITE;
 				TurnLbl.setText("Its the White turn");
+				blackthread.interrupt();
+				startWhiteTimer();
 			}
 			//moving the white soldier to target square
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE) {
@@ -615,6 +730,8 @@ public class BoardGameController implements Initializable{
 				}
 				turn = Soldier_COLOR_AtSquare.BLACK;
 				TurnLbl.setText("Its the Black turn");
+				whitethread.interrupt();
+				startBlackTimer();
 			}
 
 			this.soldier=null;
@@ -651,113 +768,8 @@ public class BoardGameController implements Initializable{
 
 
 
-	public void start(Stage primaryStage) {
-		try {
-			Parent root = FXMLLoader.load(getClass().getResource("/view/BoardGame.fxml"));
-			Scene scene = new Scene(root);
-			primaryStage.setTitle("Game Board");
-			primaryStage.setScene(scene);
-			primaryStage.show();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty()) {
-			timer=new DigitTimerGroup(gameTimer);
-			thread = new TimerThread(timer);
-			thread.setDaemon(true);
-			thread.start();
-	
-			StartgameTimer();
-			// setting the current player in the board game
-			whiteName = NicknamesSetUpController.getWhitename();
-			blackName = NicknamesSetUpController.getBlackname();
-			Player white = new Player(NicknamesSetUpController.getWhitename() , 0);
-			Player black = new Player(NicknamesSetUpController.getBlackname() , 0);
-			WhiteNickText.setEditable(false);
-			BlackNickText.setEditable(false);
-
-			WhiteNickText.setText(NicknamesSetUpController.getWhitename());
-			BlackNickText.setText(NicknamesSetUpController.getBlackname());
-
-
-
-			wPointsValue.setText(Integer.toString(white.getPoints()));
-			bPointsValue.setText(Integer.toString(black.getPoints()));
-			Date d = new Date();
-			Time t = new Time(0, 0, 0);
-
-			g = new Game(white, black,d,t);
-			g.initiateGame();
-			this.board=g.getBoard();
-
-			while(numofYellowSquares<3) {
-				CheckAndDoYellowSquares();
-
-			}
-
-			for( int i=0; i<12;i++) {
-				int x=g.getBlackPieces()[i].getLocation().getX();
-				int y=g.getBlackPieces()[i].getLocation().getY();
-				System.out.printf("%d %d\n",x,y);
-			}
-
-			TurnLbl.setText("Its the White turn");
-			CheckAndDoRedSquare();
-
-			// uploading the circle Squares to the array of the circles
-			blackcircles[0]=b0;
-			blackcircles[1]=b1;
-			blackcircles[2]=b2;
-			blackcircles[3]=b3;
-			blackcircles[4]=b4;
-			blackcircles[5]=b5;
-			blackcircles[6]=b6;
-			blackcircles[7]=b7;
-			blackcircles[8]=b8;
-			blackcircles[9]=b9;
-			blackcircles[10]=b10;
-			blackcircles[11]=b11;
-			whitecircles[0]=w0;
-			whitecircles[1]=w1;
-			whitecircles[2]=w2;
-			whitecircles[3]=w3;
-			whitecircles[4]=w4;
-			whitecircles[5]=w5;
-			whitecircles[6]=w6;
-			whitecircles[7]=w7;
-			whitecircles[8]=w8;
-			whitecircles[9]=w9;
-			whitecircles[10]=w10;
-			whitecircles[11]=w11;
-
-
-		}
-
-	}
 	
 	
-	public static String formatDuration(Duration duration) {
-		long seconds = duration.getSeconds();
-		long absSeconds = Math.abs(seconds);
-		int nanos = duration.getNano();
-		String positive = String.format("%d:%02d:%02d", absSeconds / 3600, (absSeconds % 3600) / 60,
-				absSeconds % 60, nanos / 1000000);
-		return positive;
-	}
-	private void StartgameTimer() {
-		// TODO Auto-generated method stub
-		duration = Duration.ofNanos(0);
-		gameTimer.setText(formatDuration(duration));
-	gameTimer.getParent().layout();
-
-		
-	}
 
 	public void CheckAndDoYellowSquares() {
 		Random rand = new Random();
@@ -1113,6 +1125,22 @@ public class BoardGameController implements Initializable{
 	void pauseRes(ActionEvent event) {
 
 	}
-
+	
+	public DigitTimerGroup startWhiteTimer() 
+	{
+		whitetime=new DigitTimerGroup(WhiteTimer);
+		whitethread = new TimerThread(whitetime);
+		whitethread.setDaemon(true);
+		whitethread.start();
+		return (DigitTimerGroup) whitetime;
+	}
+	
+	public void startBlackTimer() 
+	{
+		blacktime=new DigitTimerGroup(BlackTimer);
+		blackthread = new TimerThread(blacktime);
+		blackthread.setDaemon(true);
+		blackthread.start();
+	}
 
 }

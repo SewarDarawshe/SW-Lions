@@ -48,4 +48,12 @@ public class DigitTimerGroup implements TimerInterface {
 	text.getParent().layout();
 		
 	}
+
+	@Override
+	public void reset() {
+		// TODO Auto-generated method stub
+		duration = Duration.ofNanos(0);
+		text.setText(formatDuration(duration));
+	}
+	
 }
