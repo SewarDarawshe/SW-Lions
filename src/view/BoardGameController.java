@@ -2,7 +2,9 @@ package view;
 
 import java.net.URL;
 
+
 import java.sql.Time;
+import java.time.Duration;
 import java.util.Date;
 import java.util.Random;
 import java.util.ResourceBundle;
@@ -24,12 +26,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Pane;
-
+import java.time.Duration;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import view.TimerInterface;
+import view.TimerThread;
 import utils.SQUARE_COLOR;
 import utils.Soldier_COLOR_AtSquare;
 
@@ -47,10 +51,16 @@ public class BoardGameController implements Initializable{
 	private Rectangle target=null;
 	//this Pane is the CurrentRowPane: help us at the CheckAndDoYellow methods
 	private Pane rowPane=null;
-    
+	private TimerThread thread;
+	private TimerInterface timer;
+
 	@FXML
-    private Label TurnLbl;
-    
+	private Text gameTimer;
+	@FXML
+	private Button pauseResumeBTN;
+	@FXML
+	private Label TurnLbl;
+
 	@FXML
 	private Text BlackPlayerNic= new Text();
 
@@ -83,6 +93,7 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Button Homepagebutton= new Button();
+	private Duration duration;
 
 	// the circle soldiers
 	@FXML
@@ -156,12 +167,12 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Circle w1= new Circle();
-	
+
 	private Circle[] blackcircles = new Circle[12];// this array include the black circles
 	private Circle[] whitecircles = new Circle[12];// this array include the white circles
-	
 
-	
+
+
 	@FXML
 	private Rectangle s0 = new Rectangle();
 
@@ -284,8 +295,8 @@ public class BoardGameController implements Initializable{
 		if(turn==Soldier_COLOR_AtSquare.BLACK && board[sourcex][sourcey].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
 			this.soldier=null;
 		}
-		
-		
+
+
 
 	}
 
@@ -317,7 +328,7 @@ public class BoardGameController implements Initializable{
 		}
 		return num;
 	}
-	
+
 	//this function transfer the coordinate from the row and column( 0<c<7) to layout x and layouty
 	private int TransForScene(int c) {
 		int layout=0;
@@ -351,94 +362,94 @@ public class BoardGameController implements Initializable{
 			int targety=TransForCordinateNum((int) target.getLayoutX());
 			System.out.printf("move to col num:%d\n",targety);
 
-           
+
 
 			//moving the black soldier to target square
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK )  {
 				for(int i=0; i<g.getBlackPieces().length; i++) {
 					if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey)
-							 {
+					{
 						if(!g.getBlackPieces()[i].isIsQueen()) {
-						System.out.println("okkkkkkkkkk");
-						int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
-						if(isOk==0) {
+							System.out.println("okkkkkkkkkk");
+							int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
+							if(isOk==0) {
 
-							System.out.println("is ok");
-							if(sourcex+1==targetx && targety==sourcey-1)
-							{
-
-								double soldiersourcex=this.soldier.getLayoutX();
-								double soldiersourcey=this.soldier.getLayoutY();
-								this.soldier.setLayoutX(soldiersourcex-60);
-								this.soldier.setLayoutY(soldiersourcey+60);
-								board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-								board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-                                
-							}
-
-							if(sourcex==targetx-1 && sourcey==targety-1)
-							{
-								double soldiersourcex=this.soldier.getLayoutX();
-								double soldiersourcey=this.soldier.getLayoutY();
-								this.soldier.setLayoutX(soldiersourcex+60);
-								this.soldier.setLayoutY(soldiersourcey+60);
-								board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-								board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-
-							}
-
-							if(targetx==7)
-							{
-								this.soldier.setFill(Color.BROWN);
-								for(int j=0;j<g.getBlackPieces().length;j++)
+								System.out.println("is ok");
+								if(sourcex+1==targetx && targety==sourcey-1)
 								{
-									if(g.getBlackPieces()[i].getLocation().getX()== targetx && g.getBlackPieces()[i].getLocation().getY()== targety)
+
+									double soldiersourcex=this.soldier.getLayoutX();
+									double soldiersourcey=this.soldier.getLayoutY();
+									this.soldier.setLayoutX(soldiersourcex-60);
+									this.soldier.setLayoutY(soldiersourcey+60);
+									board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+									board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+
+								}
+
+								if(sourcex==targetx-1 && sourcey==targety-1)
+								{
+									double soldiersourcex=this.soldier.getLayoutX();
+									double soldiersourcey=this.soldier.getLayoutY();
+									this.soldier.setLayoutX(soldiersourcex+60);
+									this.soldier.setLayoutY(soldiersourcey+60);
+									board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+									board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+
+								}
+
+								if(targetx==7)
+								{
+									this.soldier.setFill(Color.BROWN);
+									for(int j=0;j<g.getBlackPieces().length;j++)
 									{
-										g.getBlackPieces()[i].setIsQueen(true);
+										if(g.getBlackPieces()[i].getLocation().getX()== targetx && g.getBlackPieces()[i].getLocation().getY()== targety)
+										{
+											g.getBlackPieces()[i].setIsQueen(true);
+										}
+									}
+								}
+
+
+							}
+							// right black eat
+							else if(targety==sourcey+2 && targetx==sourcex+2) {
+								System.out.println("else1");
+								if(board[sourcex+1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
+									for(int j=0; j<g.getWhitePieces().length; j++) {
+										if(g.getWhitePieces()[j].getLocation().getX()== sourcex+1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
+											// remove the soldier
+											System.out.println("HEREEEEE");
+											g.getWhitePieces()[j].setIsAlive(false);
+											board[sourcex+1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											int xcsene= (firstsourcex)+60;//nzed 3l func
+											System.out.println(xcsene);
+
+											int yscene=(firstsourcey)+60;//...
+											System.out.println(yscene);
+											Circle c=getSoldierOnScene(xcsene,yscene);
+											//**************
+											this.soldier.setLayoutX(firstsourcex+120);
+											this.soldier.setLayoutY(firstsourcey+120);
+											board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+											g.getBlackPieces()[i].getLocation().setX(targetx);
+											g.getBlackPieces()[i].getLocation().setY(targety);
+
+
+
+
+											if(c!=null)
+												if(c.getFill()==Color.BLACK);
+											c.setVisible(false);
+
+											//move the soldier	
+										}
 									}
 								}
 							}
-
-
-						}
-						// right black eat
-						else if(targety==sourcey+2 && targetx==sourcex+2) {
-							System.out.println("else1");
-							if(board[sourcex+1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
-								for(int j=0; j<g.getWhitePieces().length; j++) {
-									if(g.getWhitePieces()[j].getLocation().getX()== sourcex+1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
-										// remove the soldier
-										System.out.println("HEREEEEE");
-										g.getWhitePieces()[j].setIsAlive(false);
-										board[sourcex+1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										int xcsene= (firstsourcex)+60;//nzed 3l func
-										System.out.println(xcsene);
-								
-										int yscene=(firstsourcey)+60;//...
-										System.out.println(yscene);
-										Circle c=getSoldierOnScene(xcsene,yscene);
-										//**************
-										this.soldier.setLayoutX(firstsourcex+120);
-										this.soldier.setLayoutY(firstsourcey+120);
-										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-		                                g.getBlackPieces()[i].getLocation().setX(targetx);
-		                                g.getBlackPieces()[i].getLocation().setY(targety);
-
-                                    
-										
-										
-										if(c!=null)
-										if(c.getFill()==Color.BLACK);
-										c.setVisible(false);
-										
-										//move the soldier	
-									}
-							}
-							}
-						}
-						else
-							 if(targety==sourcey-2 && targetx==sourcex+2) {
+							else
+								if(targety==sourcey-2 && targetx==sourcex+2) {
 									System.out.println("else1");
 									if(board[sourcex+1][sourcey-1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
 										for(int j=0; j<g.getWhitePieces().length; j++) {
@@ -449,7 +460,7 @@ public class BoardGameController implements Initializable{
 												board[sourcex+1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 												int xcsene= (firstsourcex)-60;//nzed 3l func
 												System.out.println(xcsene);
-										
+
 												int yscene=(firstsourcey)+60;//...
 												System.out.println(yscene);
 												Circle c=getSoldierOnScene(xcsene,yscene);
@@ -458,23 +469,23 @@ public class BoardGameController implements Initializable{
 												this.soldier.setLayoutY(firstsourcey+120);
 												board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 												board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-												 g.getBlackPieces()[i].getLocation().setX(targetx);
-					                              g.getBlackPieces()[i].getLocation().setY(targety);
+												g.getBlackPieces()[i].getLocation().setX(targetx);
+												g.getBlackPieces()[i].getLocation().setY(targety);
 
-												
+
 												if(c!=null)
-												if(c.getFill()==Color.WHITE);
+													if(c.getFill()==Color.WHITE);
 												c.setVisible(false);
-												
+
 												//move the soldier	
 											}
-									}
+										}
 									}
 								}
 							//System.out.println("not ok");
-							
+
+						}
 					}
-				}
 				}
 				turn = Soldier_COLOR_AtSquare.WHITE;
 				TurnLbl.setText("Its the White turn");
@@ -483,123 +494,123 @@ public class BoardGameController implements Initializable{
 			if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.WHITE) {
 				for(int i=0; i<g.getWhitePieces().length; i++) {
 					if(g.getWhitePieces()[i].getLocation().getX()== sourcex && g.getWhitePieces()[i].getLocation().getY()== sourcey
-						) {
+							) {
 						if(!g.getWhitePieces()[i].isIsQueen()) {
-						int isOk =(g.getWhitePieces()[i]).moveWhite( sourcex, sourcey, targetx,targety,board);
-						if(isOk==0) {
+							int isOk =(g.getWhitePieces()[i]).moveWhite( sourcex, sourcey, targetx,targety,board);
+							if(isOk==0) {
 
-							System.out.println("is ok");
-							if(sourcex==targetx+1 && targety-1==sourcey)
-							{
-
-								double soldiersourcex=this.soldier.getLayoutX();
-								double soldiersourcey=this.soldier.getLayoutY();
-								this.soldier.setLayoutX(soldiersourcex+60);
-								this.soldier.setLayoutY(soldiersourcey-60);
-								board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-								board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);					
-							}
-
-							if(sourcex==targetx+1 && sourcey==targety+1)
-							{
-								double soldiersourcex=this.soldier.getLayoutX();
-								double soldiersourcey=this.soldier.getLayoutY();
-								this.soldier.setLayoutX(soldiersourcex-60);
-								this.soldier.setLayoutY(soldiersourcey-60);
-								board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-								board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-
-
-							}
-							if(targetx==0)
-							{
-								this.soldier.setFill(Color.BLUE);
-								for(int j=0;j<g.getWhitePieces().length;j++)
+								System.out.println("is ok");
+								if(sourcex==targetx+1 && targety-1==sourcey)
 								{
-									if(g.getWhitePieces()[i].getLocation().getX()== targetx && g.getWhitePieces()[i].getLocation().getY()== targety)
+
+									double soldiersourcex=this.soldier.getLayoutX();
+									double soldiersourcey=this.soldier.getLayoutY();
+									this.soldier.setLayoutX(soldiersourcex+60);
+									this.soldier.setLayoutY(soldiersourcey-60);
+									board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+									board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);					
+								}
+
+								if(sourcex==targetx+1 && sourcey==targety+1)
+								{
+									double soldiersourcex=this.soldier.getLayoutX();
+									double soldiersourcey=this.soldier.getLayoutY();
+									this.soldier.setLayoutX(soldiersourcex-60);
+									this.soldier.setLayoutY(soldiersourcey-60);
+									board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+									board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+
+
+								}
+								if(targetx==0)
+								{
+									this.soldier.setFill(Color.BLUE);
+									for(int j=0;j<g.getWhitePieces().length;j++)
 									{
-										g.getWhitePieces()[i].setIsQueen(true);
+										if(g.getWhitePieces()[i].getLocation().getX()== targetx && g.getWhitePieces()[i].getLocation().getY()== targety)
+										{
+											g.getWhitePieces()[i].setIsQueen(true);
+										}
+									}
+								}
+
+
+
+
+
+							}
+							// eaten to the up right side
+							else if(targety==sourcey+2 && targetx+2==sourcex) {
+								System.out.println("else1");
+								if(board[sourcex-1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
+									System.out.println("if2");
+									for(int j=0; j<g.getBlackPieces().length; j++) {
+										if(g.getBlackPieces()[j].getLocation().getX()== sourcex-1 && g.getBlackPieces()[j].getLocation().getY()== sourcey+1) {
+											// remove the soldier
+											System.out.println("HEREEEEE");
+											g.getBlackPieces()[j].setIsAlive(false);
+											board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											int xcsene= (firstsourcex)+60;//nzed 3l func
+											System.out.println(xcsene);
+
+											int yscene=(firstsourcey)-60;//...
+											System.out.println(yscene);
+											Circle c=getSoldierOnScene(xcsene,yscene);
+											//**************
+											this.soldier.setLayoutX(firstsourcex+120);
+											this.soldier.setLayoutY(firstsourcey-120);
+											board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+											g.getBlackPieces()[i].getLocation().setX(targetx);
+											g.getBlackPieces()[i].getLocation().setY(targety);
+
+
+											if(c!=null)
+												if(c.getFill()==Color.BLACK);
+											c.setVisible(false);
+
+											//move the soldier
+
+										}
 									}
 								}
 							}
+							//eaten to the up left side
+							else if(targety==sourcey-2 && targetx+2==sourcex) {
+								System.out.println("else1");
+								if(board[sourcex-1][sourcey-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
+									System.out.println("if2");
+									for(int j=0; j<g.getBlackPieces().length; j++) {
+										if(g.getBlackPieces()[j].getLocation().getX()== sourcex-1 && g.getBlackPieces()[j].getLocation().getY()== sourcey-1) {
+											// remove the soldier
+											System.out.println("HEREEEEE");
+											g.getBlackPieces()[j].setIsAlive(false);
+											board[sourcex-1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											int xcsene= (firstsourcex)-60;//nzed 3l func
+											System.out.println(xcsene);
 
+											int yscene=(firstsourcey)-60;//...
+											System.out.println(yscene);
+											Circle c=getSoldierOnScene(xcsene,yscene);
+											//**************
+											this.soldier.setLayoutX(xcsene-60);
+											this.soldier.setLayoutY(yscene-60);
+											board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+											g.getBlackPieces()[i].getLocation().setX(targetx);
+											g.getBlackPieces()[i].getLocation().setY(targety);
 
+											if(c!=null) {
+												if(c.getFill()==Color.BLACK);
+												c.setVisible(false);
+											}
+											//move the soldier
 
-
-
-						}
-						// eaten to the up right side
-						else if(targety==sourcey+2 && targetx+2==sourcex) {
-							System.out.println("else1");
-							if(board[sourcex-1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
-								System.out.println("if2");
-								for(int j=0; j<g.getBlackPieces().length; j++) {
-									if(g.getBlackPieces()[j].getLocation().getX()== sourcex-1 && g.getBlackPieces()[j].getLocation().getY()== sourcey+1) {
-										// remove the soldier
-										System.out.println("HEREEEEE");
-										g.getBlackPieces()[j].setIsAlive(false);
-										board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										int xcsene= (firstsourcex)+60;//nzed 3l func
-										System.out.println(xcsene);
-								
-										int yscene=(firstsourcey)-60;//...
-										System.out.println(yscene);
-										Circle c=getSoldierOnScene(xcsene,yscene);
-										//**************
-										this.soldier.setLayoutX(firstsourcex+120);
-										this.soldier.setLayoutY(firstsourcey-120);
-										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-										 g.getBlackPieces()[i].getLocation().setX(targetx);
-			                                g.getBlackPieces()[i].getLocation().setY(targety);
-
-										
-										if(c!=null)
-										if(c.getFill()==Color.BLACK);
-										c.setVisible(false);
-										
-										//move the soldier
-											
-									}
-							}
-							}
-						}
-						//eaten to the up left side
-						else if(targety==sourcey-2 && targetx+2==sourcex) {
-							System.out.println("else1");
-							if(board[sourcex-1][sourcey-1].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK) {
-								System.out.println("if2");
-								for(int j=0; j<g.getBlackPieces().length; j++) {
-									if(g.getBlackPieces()[j].getLocation().getX()== sourcex-1 && g.getBlackPieces()[j].getLocation().getY()== sourcey-1) {
-										// remove the soldier
-										System.out.println("HEREEEEE");
-										g.getBlackPieces()[j].setIsAlive(false);
-										board[sourcex-1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										int xcsene= (firstsourcex)-60;//nzed 3l func
-										System.out.println(xcsene);
-								
-										int yscene=(firstsourcey)-60;//...
-										System.out.println(yscene);
-										Circle c=getSoldierOnScene(xcsene,yscene);
-										//**************
-										this.soldier.setLayoutX(xcsene-60);
-										this.soldier.setLayoutY(yscene-60);
-										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-										g.getBlackPieces()[i].getLocation().setX(targetx);
-			                            g.getBlackPieces()[i].getLocation().setY(targety);
-
-										if(c!=null) {
-										if(c.getFill()==Color.BLACK);
-										c.setVisible(false);
 										}
-										//move the soldier
-											
 									}
-							}
+								}
 							}
 						}
-					}
 					}
 				}
 				turn = Soldier_COLOR_AtSquare.BLACK;
@@ -622,15 +633,15 @@ public class BoardGameController implements Initializable{
 		for(int i=0;i<12;i++) {
 			if(whitecircles[i].getLayoutX()==sourcex && whitecircles[i].getLayoutY()==sourcey)
 				return whitecircles[i];
-			}
-		
+		}
+
 		//getting the soldier circle from the blackCircles
 		for(int i=0;i<12;i++) {
 			if(blackcircles[i].getLayoutX()==sourcex && blackcircles[i].getLayoutY()==sourcey)
 				return blackcircles[i];
-			}
+		}
 		return null;
-		
+
 	}
 
 	public void eat() {
@@ -657,6 +668,12 @@ public class BoardGameController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty()) {
+			timer=new DigitTimerGroup(gameTimer);
+			thread = new TimerThread(timer);
+			thread.setDaemon(true);
+			thread.start();
+	
+			StartgameTimer();
 			// setting the current player in the board game
 			whiteName = NicknamesSetUpController.getWhitename();
 			blackName = NicknamesSetUpController.getBlackname();
@@ -678,51 +695,70 @@ public class BoardGameController implements Initializable{
 			g = new Game(white, black,d,t);
 			g.initiateGame();
 			this.board=g.getBoard();
-		
+
 			while(numofYellowSquares<3) {
 				CheckAndDoYellowSquares();
 
 			}
-			
+
 			for( int i=0; i<12;i++) {
 				int x=g.getBlackPieces()[i].getLocation().getX();
 				int y=g.getBlackPieces()[i].getLocation().getY();
 				System.out.printf("%d %d\n",x,y);
 			}
-			
+
 			TurnLbl.setText("Its the White turn");
 			CheckAndDoRedSquare();
 
-// uploading the circle Squares to the array of the circles
-        blackcircles[0]=b0;
-        blackcircles[1]=b1;
-        blackcircles[2]=b2;
-        blackcircles[3]=b3;
-        blackcircles[4]=b4;
-        blackcircles[5]=b5;
-        blackcircles[6]=b6;
-        blackcircles[7]=b7;
-        blackcircles[8]=b8;
-        blackcircles[9]=b9;
-        blackcircles[10]=b10;
-        blackcircles[11]=b11;
-        whitecircles[0]=w0;
-        whitecircles[1]=w1;
-        whitecircles[2]=w2;
-        whitecircles[3]=w3;
-        whitecircles[4]=w4;
-        whitecircles[5]=w5;
-        whitecircles[6]=w6;
-        whitecircles[7]=w7;
-        whitecircles[8]=w8;
-        whitecircles[9]=w9;
-        whitecircles[10]=w10;
-        whitecircles[11]=w11;
-        
-        
+			// uploading the circle Squares to the array of the circles
+			blackcircles[0]=b0;
+			blackcircles[1]=b1;
+			blackcircles[2]=b2;
+			blackcircles[3]=b3;
+			blackcircles[4]=b4;
+			blackcircles[5]=b5;
+			blackcircles[6]=b6;
+			blackcircles[7]=b7;
+			blackcircles[8]=b8;
+			blackcircles[9]=b9;
+			blackcircles[10]=b10;
+			blackcircles[11]=b11;
+			whitecircles[0]=w0;
+			whitecircles[1]=w1;
+			whitecircles[2]=w2;
+			whitecircles[3]=w3;
+			whitecircles[4]=w4;
+			whitecircles[5]=w5;
+			whitecircles[6]=w6;
+			whitecircles[7]=w7;
+			whitecircles[8]=w8;
+			whitecircles[9]=w9;
+			whitecircles[10]=w10;
+			whitecircles[11]=w11;
+
+
 		}
 
 	}
+	
+	
+	public static String formatDuration(Duration duration) {
+		long seconds = duration.getSeconds();
+		long absSeconds = Math.abs(seconds);
+		int nanos = duration.getNano();
+		String positive = String.format("%d:%02d:%02d", absSeconds / 3600, (absSeconds % 3600) / 60,
+				absSeconds % 60, nanos / 1000000);
+		return positive;
+	}
+	private void StartgameTimer() {
+		// TODO Auto-generated method stub
+		duration = Duration.ofNanos(0);
+		gameTimer.setText(formatDuration(duration));
+	gameTimer.getParent().layout();
+
+		
+	}
+
 	public void CheckAndDoYellowSquares() {
 		Random rand = new Random();
 		int x = rand.nextInt(8); 
@@ -742,71 +778,71 @@ public class BoardGameController implements Initializable{
 
 
 	}
-	
+
 	// this function make red square randomly if there is no option to eat at this turn
 	public void CheckAndDoRedSquare() {
 		if(turn==Soldier_COLOR_AtSquare.WHITE)
 		{
 			Player pw= g.getWhitePlayer();
-			
-		if(g.IsEatable(pw)==false) {
-			for(int i=0; i<g.getWhitePieces().length; i++) {
-				// righ side
-			if(board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-				System.out.println(1);
-				System.out.printf("X:%d Y:%d \n",(g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())+1);
-				Rectangle r= getRectangle((g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())+1);
-				board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())+1].setSquareColor(SQUARE_COLOR.RED);
-				r.setFill(Color.rgb(255,0,0));
-				return;
-			}
-			
-			// left side
-		if(board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-			Rectangle r= getRectangle((g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())-1);
-			System.out.println(2);
-			board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())-1].setSquareColor(SQUARE_COLOR.RED);
-			r.setFill(Color.rgb(255,0,0));
-			return;
-		}
-		
-	}
 
+			if(g.IsEatable(pw)==false) {
+				for(int i=0; i<g.getWhitePieces().length; i++) {
+					// righ side
+					if(board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+						System.out.println(1);
+						System.out.printf("X:%d Y:%d \n",(g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())+1);
+						Rectangle r= getRectangle((g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())+1);
+						board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())+1].setSquareColor(SQUARE_COLOR.RED);
+						r.setFill(Color.rgb(255,0,0));
+						return;
+					}
+
+					// left side
+					if(board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+						Rectangle r= getRectangle((g.getWhitePieces()[i].getLocation().getX())-1,(g.getWhitePieces()[i].getLocation().getY())-1);
+						System.out.println(2);
+						board[(g.getWhitePieces()[i].getLocation().getX())-1][(g.getWhitePieces()[i].getLocation().getY())-1].setSquareColor(SQUARE_COLOR.RED);
+						r.setFill(Color.rgb(255,0,0));
+						return;
+					}
+
+				}
+
+			}
 		}
-		}
-		
-		
+
+
 		if(turn==Soldier_COLOR_AtSquare.BLACK)
 		{
 			Player pb= g.getBlackPlayer();
-			
-		if(g.IsEatable(pb)==false) {
-			for(int i=0; i<g.getBlackPieces().length; i++) {
-				// righ side
-			if(board[(g.getBlackPieces()[i].getLocation().getX())+1][(g.getBlackPieces()[i].getLocation().getY())-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-				Rectangle r= getRectangle((g.getBlackPieces()[i].getLocation().getX())+1,(g.getBlackPieces()[i].getLocation().getY())-1);
-				System.out.println(3);
-				board[(g.getWhitePieces()[i].getLocation().getX())+1][(g.getWhitePieces()[i].getLocation().getY())-1].setSquareColor(SQUARE_COLOR.RED);
-				r.setFill(Color.rgb(255,0,0));
-				return;
+
+			if(g.IsEatable(pb)==false) {
+				for(int i=0; i<g.getBlackPieces().length; i++) {
+					// righ side
+					if(board[(g.getBlackPieces()[i].getLocation().getX())+1][(g.getBlackPieces()[i].getLocation().getY())-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+						Rectangle r= getRectangle((g.getBlackPieces()[i].getLocation().getX())+1,(g.getBlackPieces()[i].getLocation().getY())-1);
+						System.out.println(3);
+						board[(g.getWhitePieces()[i].getLocation().getX())+1][(g.getWhitePieces()[i].getLocation().getY())-1].setSquareColor(SQUARE_COLOR.RED);
+						r.setFill(Color.rgb(255,0,0));
+						return;
+					}
+
+					// left side
+					if(board[(g.getBlackPieces()[i].getLocation().getX())+1][(g.getBlackPieces()[i].getLocation().getY())+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+						Rectangle r= getRectangle((g.getBlackPieces()[i].getLocation().getX())+1,(g.getBlackPieces()[i].getLocation().getY())+1);
+						System.out.println(4);
+						board[(g.getWhitePieces()[i].getLocation().getX())+1][(g.getWhitePieces()[i].getLocation().getY())+1].setSquareColor(SQUARE_COLOR.RED);
+						r.setFill(Color.rgb(255,0,0));
+						return;
+					}
+
+				}
+
 			}
-			
-			// left side
-		if(board[(g.getBlackPieces()[i].getLocation().getX())+1][(g.getBlackPieces()[i].getLocation().getY())+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-			Rectangle r= getRectangle((g.getBlackPieces()[i].getLocation().getX())+1,(g.getBlackPieces()[i].getLocation().getY())+1);
-			System.out.println(4);
-			board[(g.getWhitePieces()[i].getLocation().getX())+1][(g.getWhitePieces()[i].getLocation().getY())+1].setSquareColor(SQUARE_COLOR.RED);
-			r.setFill(Color.rgb(255,0,0));
-			return;
 		}
-		
+
 	}
 
-		}
-		}
-		
-	}
-	
 	public void CheckAndDoBlueSquare() {
 		int cntSoldier=0; //counter for the soldiers
 		int cntQueen=0; //counter for the queens.
@@ -818,7 +854,7 @@ public class BoardGameController implements Initializable{
 				if(g.getWhitePieces()[i].isIsQueen() ) {
 					cntSoldier++;
 				}
-				
+
 			}
 		}
 	}
@@ -827,7 +863,7 @@ public class BoardGameController implements Initializable{
 	// this function take the square coordinates: 0<=x<8 & 0<=x<8
 	//this function returns a rectangle r in the scene-builder that appropriate to the coordinates x and y 
 	public Rectangle getRectangle(int x, int y) {
-		
+
 		int xviewscene=y*60;//checks the function	
 		int yviewscene=	x*60;//checks the function
 
@@ -1072,5 +1108,11 @@ public class BoardGameController implements Initializable{
 		return;
 
 	}
+
+	@FXML
+	void pauseRes(ActionEvent event) {
+
+	}
+
 
 }
