@@ -1123,6 +1123,35 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	void pauseRes(ActionEvent event) {
+		
+		if (!gamethread.isPaused()) {
+			gamethread.pause();
+			if(turn==Soldier_COLOR_AtSquare.WHITE)
+			{
+				whitethread.pause();
+
+			}
+			if(turn==Soldier_COLOR_AtSquare.BLACK)
+			{
+				blackthread.pause();
+
+			}		
+			pauseResumeBTN.setText("Resume");
+		} else {
+			gamethread.resumeTimer();
+			if(turn==Soldier_COLOR_AtSquare.WHITE)
+			{
+				whitethread.resumeTimer();
+
+			}
+			if(turn==Soldier_COLOR_AtSquare.BLACK)
+			{
+				blackthread.resumeTimer();
+
+			}		
+		
+			pauseResumeBTN.setText("Pause");
+		}
 
 	}
 	
