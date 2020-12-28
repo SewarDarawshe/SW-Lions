@@ -267,18 +267,18 @@ public class Game {
 	}
 
 
-	public boolean returnSoldier(Soldier s)
+	public boolean returnSoldier(Soldier s, int x, int y)
 	{
 		if(!s.isIsAlive())
 		{
-			int x;//row number
-			int y;//col number
-
-			Scanner sc = new Scanner(System.in);
-			System.out.println("Enter your row number that you want to return the soldier in: "); 
-			x = sc.nextInt();
-			System.out.println("Enter your column number that you want to return the soldier in: "); 
-			y = sc.nextInt();
+//			int x;//row number
+//			int y;//col number
+//
+//			Scanner sc = new Scanner(System.in);
+//			System.out.println("Enter your row number that you want to return the soldier in: "); 
+//			x = sc.nextInt();
+//			System.out.println("Enter your column number that you want to return the soldier in: "); 
+//			y = sc.nextInt();
 			//If soldier is White soldier
 			if(s.getColor()==Soldier_COLOR_AtSquare.WHITE) {
 				if(x==0)
