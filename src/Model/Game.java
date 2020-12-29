@@ -207,7 +207,6 @@ public class Game {
 							WhitePieces[whitei]=s;
 							//System.out.printf("the white soldier is at: %d %d", row,j);
 							whitei++;
-
 						}
 					}
 					else {
