@@ -569,7 +569,20 @@ public class BoardGameController implements Initializable{
 										if(c.getFill()==Color.BLACK);
 										c.setVisible(false);
 										
-										//move the soldier	
+										//turn to queen	
+										if(targetx==7)	
+										{	
+											this.soldier.setFill(Color.BROWN);	
+											for(int z=0;z<g.getBlackPieces().length;z++)	
+											{	
+												if(g.getBlackPieces()[z].getLocation().getX()== targetx && g.getBlackPieces()[z].getLocation().getY()== targety)	
+												{	
+													g.getBlackPieces()[z].setIsQueen(true);	
+												}	
+											}	
+										}
+										
+										
 									}
 							}
 							}
@@ -603,7 +616,18 @@ public class BoardGameController implements Initializable{
 												if(c.getFill()==Color.WHITE);
 												c.setVisible(false);
 												
-												//move the soldier	
+												//turn to queen	
+												if(targetx==7)	
+												{	
+													this.soldier.setFill(Color.BROWN);	
+													for(int z=0;z<g.getBlackPieces().length;z++)	
+													{	
+														if(g.getBlackPieces()[z].getLocation().getX()== targetx && g.getBlackPieces()[z].getLocation().getY()== targety)	
+														{	
+															g.getBlackPieces()[z].setIsQueen(true);	
+														}	
+													}	
+												}
 											}
 									}
 									}
@@ -611,6 +635,23 @@ public class BoardGameController implements Initializable{
 							//System.out.println("not ok");
 							
 					}
+						
+							// move black queen	
+							else	
+							{	
+								int queenmove= g.getBlackPieces()[i].QueenMove(board, sourcex, sourcey, targetx, targety, Soldier_COLOR_AtSquare.BLACK);	
+								if(queenmove == 0)	
+								{	
+									System.out.println("queen legal move");	
+									Circle c=newlayout(targetx, targety, this.soldier);	
+										
+									this.soldier.setLayoutX(c.getLayoutX());	
+									this.soldier.setLayoutY(c.getLayoutY());	
+								}	
+								else	
+									this.soldier.setVisible(false);	
+							}
+							
 				}
 				}
 				turn = Soldier_COLOR_AtSquare.WHITE;
@@ -698,7 +739,20 @@ public class BoardGameController implements Initializable{
 										if(c.getFill()==Color.BLACK);
 										c.setVisible(false);
 										
-										//move the soldier
+										
+										//turn to queen	
+										if(targetx==0)	
+										{	
+											this.soldier.setFill(Color.BLUE);	
+											for(int z=0;z<g.getWhitePieces().length;z++)	
+											{	
+												if(g.getWhitePieces()[z].getLocation().getX()== targetx && g.getWhitePieces()[z].getLocation().getY()== targety)	
+												{	
+													g.getWhitePieces()[z].setIsQueen(true);	
+												}	
+											}	
+										}	
+										
 											
 									}
 							}
@@ -733,13 +787,41 @@ public class BoardGameController implements Initializable{
 										if(c.getFill()==Color.BLACK);
 										c.setVisible(false);
 										}
-										//move the soldier
+										
+										//turn to queen	
+										if(targetx==0)	
+										{	
+											this.soldier.setFill(Color.BLUE);	
+											for(int z=0;z<g.getWhitePieces().length;z++)	
+											{	
+												if(g.getWhitePieces()[z].getLocation().getX()== targetx && g.getWhitePieces()[z].getLocation().getY()== targety)	
+												{	
+													g.getWhitePieces()[z].setIsQueen(true);	
+												}	
+											}	
+										}	
+										
 											
 									}
 							}
 							}
 						}
 					}
+						// move black queen	
+						else	
+						{	
+							int queenmove= g.getWhitePieces()[i].QueenMove(board, sourcex, sourcey, targetx, targety, Soldier_COLOR_AtSquare.WHITE);	
+							if(queenmove == 0)	
+							{	
+								System.out.println("queen legal move");	
+								Circle c=newlayout(targetx, targety, this.soldier);	
+									
+								this.soldier.setLayoutX(c.getLayoutX());	
+								this.soldier.setLayoutY(c.getLayoutY());	
+							}	
+							else	
+								this.soldier.setVisible(false);	
+						}
 					}
 				}
 				turn = Soldier_COLOR_AtSquare.BLACK;
@@ -1286,6 +1368,84 @@ public class BoardGameController implements Initializable{
 		blackthread = new TimerThread(blacktime);
 		blackthread.setDaemon(true);
 		blackthread.start();
+	}
+	
+	public Circle newlayout(int row,int col,Circle c)	
+	{	
+		if(row==0)	
+		{	
+			c.setLayoutY(30);	
+			if(!((col %2)==0))	
+			{	
+				c.setLayoutX(90+(Math.abs(col-1)*60));	
+			}	
+		}	
+		if(row==1)	
+		{	
+			c.setLayoutY(90);	
+			if(col==0)c.setLayoutX(30);	
+			else	
+				if(((col %2)==0))	
+				{	
+					c.setLayoutX(30+(Math.abs(col)*60));	
+				}	
+		}	
+		if(row==2)	
+		{	
+			c.setLayoutY(150);	
+			if(!((col %2)==0))	
+			{	
+				c.setLayoutX(90+(Math.abs(col-1)*60));	
+			}	
+		}	
+		if(row==3)	
+		{	
+			c.setLayoutY(210);	
+			if(col==0)c.setLayoutX(30);	
+			else	
+				if(((col %2)==0))	
+				{	
+					c.setLayoutX(30+(Math.abs(col)*60));	
+				}	
+		}	
+		if(row==4)	
+		{	
+			c.setLayoutY(270);	
+			if(!((col %2)==0))	
+			{	
+				c.setLayoutX(90+(Math.abs(col-1)*60));	
+			}	
+		}	
+		if(row==5)	
+		{	
+			c.setLayoutY(330);	
+			if(col==0)c.setLayoutX(30);	
+			else	
+				if(((col %2)==0))	
+				{	
+					c.setLayoutX(30+(Math.abs(col)*60));	
+				}	
+		}	
+		if(row==6)	
+		{	
+			c.setLayoutY(390);	
+			if(!((col %2)==0))	
+			{	
+				c.setLayoutX(90+(Math.abs(col-1)*60));	
+			}	
+		}	
+		if(row==7)	
+		{	
+			c.setLayoutY(450);	
+			if(col==0)c.setLayoutX(30);	
+			else	
+				if(((col %2)==0))	
+				{	
+					c.setLayoutX(30+(Math.abs(col)*60));	
+				}	
+		}	
+		System.out.println(c.getLayoutX() +"//"+ c.getLayoutY());	
+		return c;	
 	}
 
 }
