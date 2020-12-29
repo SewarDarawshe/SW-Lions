@@ -12,6 +12,12 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import Model.Game;
 import Model.Player;
 import Model.Soldier;
@@ -85,11 +91,12 @@ public class BoardGameController implements Initializable{
 	private Duration duration;
 	private Circle[] blackcircles = new Circle[12];// this array include the black circles
 	private Circle[] whitecircles = new Circle[12];// this array include the white circles
+	public boolean isLoad;
 	private long endwhite;
 	private long endblack;
 	private long startwhite;
 	private long startblack;
-
+	
 
 	//GUI parameters
 	@FXML
@@ -329,15 +336,16 @@ public class BoardGameController implements Initializable{
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty()) {
+		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty())
+		{
 			gametime=new DigitTimerGroup(gameTimer);
 			gamethread = new TimerThread(gametime);
 			gamethread.setDaemon(true);
 			gamethread.start();
-			whitetime=startWhiteTimer();
-			
-	
-			
+			startWhiteTimer();
+
+
+
 			// setting the current player in the board game
 			whiteName = NicknamesSetUpController.getWhitename();
 			blackName = NicknamesSetUpController.getBlackname();
@@ -353,29 +361,29 @@ public class BoardGameController implements Initializable{
 
 			wPointsValue.setText(Integer.toString(white.getPoints()));
 			bPointsValue.setText(Integer.toString(black.getPoints()));
-			Date d = new Date();
-			Time t = new Time(0, 0, 0);
 
-			g = new Game(white, black,d,t);
-			g.initiateGame();
-			this.board=g.getBoard();
 
-			while(numofYellowSquares<3) {
-				CheckAndDoYellowSquares();
 
-			}
 
-			for( int i=0; i<12;i++) {
-				int x=g.getBlackPieces()[i].getLocation().getX();
-				int y=g.getBlackPieces()[i].getLocation().getY();
-				System.out.printf("%d %d\n",x,y);
-			}
 
-			TurnLbl.setText("Its the White turn");
-			
-		
-			
-			CheckAndDoRedSquare();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 			// uploading the circle Squares to the array of the circles
 			blackcircles[0]=b0;
@@ -404,7 +412,113 @@ public class BoardGameController implements Initializable{
 			whitecircles[11]=w11;
 
 
-		}
+			if(!NicknamesSetUpController.isLoad())
+			{
+
+				Date d = new Date();
+				Time t = new Time(0, 0, 0);
+
+				g = new Game(white, black,d,t);
+				g.initiateGame();
+				this.board=g.getBoard();
+
+				while(numofYellowSquares<3) {
+					CheckAndDoYellowSquares();
+
+				}
+
+				for( int i=0; i<12;i++) {
+					int x=g.getBlackPieces()[i].getLocation().getX();
+					int y=g.getBlackPieces()[i].getLocation().getY();
+					System.out.printf("%d %d\n",x,y);
+				}
+
+				TurnLbl.setText("Its the White turn");
+
+				CheckAndDoRedSquare();
+
+
+
+			}
+
+			else {
+
+				//we are in a load situation
+				Date d = new Date();
+				Time t = new Time(0, 0, 0);
+
+				g = new Game(white, black,d,t);
+
+
+				String contents;
+				try {
+					contents = new String(Files.readAllBytes(Paths.get("loadGame.txt")));
+					String[] arrOfStr=	contents.split(",", -2);
+					g.initiateLOADGame(arrOfStr);
+
+					int whitec=0;
+					int blackc=0;
+					for(int row=0;row<8;row++)
+					{
+
+						for(int col=0;col<8;col+=2)
+						{
+
+							if(g.getBoard()[row][col]!=null&&
+									g.getBoard()[row][col].getSquareColor().equals(SQUARE_COLOR.BLACK)
+									&& !g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.EMPTY))
+							{
+
+								if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.BLACK))
+								{
+									blackcircles[blackc]=newlayout(row, col, blackcircles[blackc]);
+
+									g.getBlackPieces()[blackc].getLocation().setX(row);
+									g.getBlackPieces()[blackc].getLocation().setY(col);
+									
+									g.getBoard()[row][col].setS(g.getBlackPieces()[blackc]);
+									System.out.println(g.getBoard()[row][col].getS());
+
+									g.getBoard()[row][col].getS().setLocation(g.getBoard()[row][col]);
+									
+									System.out.println("this is black:" + row+"-"+col);
+									b11=newlayout(4, 1, b11);
+									blackc++;
+
+								}
+								if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.WHITE))
+								{
+									whitecircles[whitec]=newlayout(row, col, blackcircles[whitec]);
+									g.getWhitePieces()[whitec].getLocation().setX(row);
+									g.getWhitePieces()[whitec].getLocation().setY(col);
+									
+									g.getBoard()[row][col].setS(g.getWhitePieces()[whitec]);
+									System.out.println(g.getBoard()[row][col].getS());
+									g.getBoard()[row][col].getS().setLocation(g.getBoard()[row][col]);
+									whitecircles[whitec].setLayoutX(whitecircles[whitec].getLayoutX());
+									whitecircles[whitec].setLayoutY(whitecircles[whitec].getLayoutY());
+									whitec++;
+									System.out.println("this is white:" + row+"-"+col);
+								}
+
+
+							}
+							else System.out.println("aaaaaaaaaaaaaaaa");
+						}
+
+					}
+
+
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+
+
+			}
+
+		}	
 
 	}
 	

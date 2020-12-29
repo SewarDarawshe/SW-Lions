@@ -26,10 +26,11 @@ public class NicknamesSetUpController implements Initializable{
 
 	private static String whitename;
 	private static String blackname;
-
+	private static boolean isLoad=false;
 	@FXML
 	private Button exitbutton;
-
+	 @FXML
+	    private Button loadgameBTN;
 
 	@FXML
 	private Button StartGameButton; 
@@ -83,7 +84,13 @@ public class NicknamesSetUpController implements Initializable{
 		}
 
 	}
+	public static boolean isLoad() {
+		return isLoad;
+	}
 
+	public static void setLoad(boolean isLoad) {
+		NicknamesSetUpController.isLoad = isLoad;
+	}
 	@FXML
 	void StartGame(ActionEvent event)
 	{
@@ -124,6 +131,26 @@ public class NicknamesSetUpController implements Initializable{
 		}
 
 	}
+	 @FXML
+	    void LoadGame(ActionEvent event) {
+		  isLoad=true;
+		  
+		   whitename =WhiteNickName.getText();
+			blackname =BlackNickName.getText();
+			if(!whitename.isEmpty() && !blackname.isEmpty())
+			{
+				Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+				BoardGameController temp=new BoardGameController();
+				temp.start(stage);	
+
+				
+			
+			}
+			else {
+				ErrorLbl.setText("Please Enter Valid Player's Nicknames!");
+			}
+
+	    }
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

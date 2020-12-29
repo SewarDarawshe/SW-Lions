@@ -1,5 +1,10 @@
 package Model;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Time;
 
 
@@ -9,7 +14,11 @@ import java.util.Scanner;
 
 import Model.Player;
 import utils.Soldier_COLOR_AtSquare;
+import view.BoardGameController;
+import view.NicknamesSetUpController;
+import utils.E_COLOR;
 import utils.E_Difficulty;
+import utils.SQUARE_COLOR;
 
 /**
  *  * Game class -not responsible of game controllers
@@ -48,7 +57,7 @@ public class Game {
 		whitePlayer=white;
 		blackPlayer=black;
 	}
-	
+
 	public Game(Date gameDate, Player whitePlayer, Player blackPlayer) {
 		super();
 		Board =new Square[8][8];
@@ -147,112 +156,203 @@ public class Game {
 					for(int col=0;col<8;col++)
 					{
 						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY,null);
+						Board[row][col].setSquareColor(SQUARE_COLOR.BLACK);
+					
 					}
 				else
 				{
 					for(int col=1;col<8;col++)
 					{
 						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY,null);
+						Board[row][col].setSquareColor(SQUARE_COLOR.BLACK);
+						
 					}
 				}
 			}
 		}
+
+
+
+
+		// we arrange the basic soldiers to there places 12 black 12 white
+
+		Board[0][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[0][3].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[0][5].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[0][7].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[1][0].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[1][2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[1][4].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[1][6].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[2][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[2][3].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[2][5].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[2][7].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+		Board[7][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[7][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[7][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[7][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[6][1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[6][3].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[6][5].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[6][7].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[5][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[5][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[5][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[5][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+		Board[3][0].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[3][2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[3][4].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[3][6].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[4][1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[4][3].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[4][5].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		Board[4][7].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
+
+
+		int whitei=0;
+		if(whitei<WhitePieces.length)
+		{
+			for(int row=5;row<8;row++)
+			{
+				if(row%2!=0) {
+					for(int j=0;j<8;j+=2)
+					{
+						Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
+						Board[row][j].setS(s);
+						
+						WhitePieces[whitei]=s;
+						//System.out.printf("the white soldier is at: %d %d", row,j);
+						whitei++;
+
+					}
+				}
+				else {
+					for(int j=1;j<8;j+=2)
+					{
+						Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
+						//System.out.printf("the white soldier is at: %d %d", row,j);
+						Board[row][j].setS(s);
+						WhitePieces[whitei]=s;	
+						whitei++;
+					}
+
+				}
+			}
+		}
+		int Blacki=0;
+		if(Blacki<BlackPieces.length)
+		{
+
+			for(int row=0;row<3;row++)
+			{
+				if(row%2!=0) {
+					for(int j=0;j<8;j+=2)
+					{
+						Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
+						//System.out.printf("the black soldier is at: %d %d", row,j);
+						Board[row][j].setS(s);
+					
+						BlackPieces[Blacki]=s;	
+						Blacki++;
+					}
+				}
+				else {
+					for(int j=1;j<8;j+=2)
+					{
+						Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
+						//System.out.printf("the black soldier is at: %d %d", row,j);
+						Board[row][j].setS(s);
+						BlackPieces[Blacki]=s;	
+						
+						Blacki++;
+					}
+
+				}
+			}			
+
+		}
+
+		// setting the points to 0 
+		whitePlayer.setPoints(0);
+		blackPlayer.setPoints(0);
+
+	}
+
+	public void initiateLOADGame(String[] arrOfStr)
+	{   int place=0;
+
+	this.initiateGame();
+
+	
 		
-			// we arrange the basic soldiers to there places 12 black 12 white
-
-			Board[0][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[0][3].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[0][5].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[0][7].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][0].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][4].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[1][6].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][1].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][3].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][5].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[2][7].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-			Board[7][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[7][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[7][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[7][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][1].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][3].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][5].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[6][7].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][0].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][4].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[5][6].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-			Board[3][0].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[3][2].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[3][4].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[3][6].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[4][1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[4][3].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[4][5].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-			Board[4][7].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+		for(int row=0;row<8&&place<arrOfStr.length;row++)
+		{
 			
-			
-			
-			int whitei=0;
-			if(whitei<WhitePieces.length)
+			for(int col=0;col<8&&place<arrOfStr.length;col+=2)
 			{
-				for(int row=5;row<8;row++)
-				{
-					if(row%2!=0) {
-						for(int j=0;j<8;j+=2)
+				
+				 if(Board[row][col]!=null&&Board[row][col].getSquareColor().equals(SQUARE_COLOR.BLACK))
+					 
+				 {
+					 place++;
+				
+					 if(arrOfStr[place].equals("0"))
 						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
-							WhitePieces[whitei]=s;
-							//System.out.printf("the white soldier is at: %d %d", row,j);
-							whitei++;
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+							
 						}
-					}
-					else {
-						for(int j=1;j<8;j+=2)
+						if(arrOfStr[place].equals("1"))
 						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.WHITE);
-							//System.out.printf("the white soldier is at: %d %d", row,j);
-							WhitePieces[whitei]=s;	
-							whitei++;
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+							
+						
+
+						}
+						if(arrOfStr[place].equals("2"))
+						{
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							
+
+						}
+						if(arrOfStr[place].equals("11"))
+						{
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+							
+
+							Board[row][col].getS().setIsQueen(true);
+							
+						}
+						if(arrOfStr[place].equals("22"))
+						{
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							Board[row][col].getS().setIsQueen(true);
+							
+
+						}
+						if(arrOfStr[place].equals("B"))
+						{
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							
+
+						}
+						if(arrOfStr[place].equals("W"))
+						{
+							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 						}
 
 					}
-				}
-			}
-			int Blacki=0;
-			if(Blacki<BlackPieces.length)
-			{
+					 
+					 
+					 
+				 }
+			
+	}
+	}
 
-				for(int row=0;row<3;row++)
-				{
-					if(row%2!=0) {
-						for(int j=0;j<8;j+=2)
-						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
-							//System.out.printf("the black soldier is at: %d %d", row,j);
-							BlackPieces[Blacki]=s;	
-							Blacki++;
-						}
-					}
-					else {
-						for(int j=1;j<8;j+=2)
-						{
-							Soldier s=new Soldier(true,Board[row][j], Soldier_COLOR_AtSquare.BLACK);
-							//System.out.printf("the black soldier is at: %d %d", row,j);
-							BlackPieces[Blacki]=s;	
-							Blacki++;
-						}
 
-					}
-				}			
 
-			}
-			// setting the points to 0 
-			whitePlayer.setPoints(0);
-			blackPlayer.setPoints(0);
-		}
 
 
 
@@ -270,14 +370,14 @@ public class Game {
 	{
 		if(!s.isIsAlive())
 		{
-//			int x;//row number
-//			int y;//col number
-//
-//			Scanner sc = new Scanner(System.in);
-//			System.out.println("Enter your row number that you want to return the soldier in: "); 
-//			x = sc.nextInt();
-//			System.out.println("Enter your column number that you want to return the soldier in: "); 
-//			y = sc.nextInt();
+			//			int x;//row number
+			//			int y;//col number
+			//
+			//			Scanner sc = new Scanner(System.in);
+			//			System.out.println("Enter your row number that you want to return the soldier in: "); 
+			//			x = sc.nextInt();
+			//			System.out.println("Enter your column number that you want to return the soldier in: "); 
+			//			y = sc.nextInt();
 			//If soldier is White soldier
 			if(s.getColor()==Soldier_COLOR_AtSquare.WHITE) {
 				if(x==0)
@@ -772,8 +872,8 @@ public class Game {
 			return true;
 		return false;
 	}
-	
-	
+
+
 
 	@Override
 	public String toString() {
