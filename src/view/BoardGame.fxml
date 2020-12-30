@@ -45,7 +45,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="300.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutX="420.0" layoutY="180.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="s12" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
-            <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="RED" height="60.0" layoutX="120.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+            <Rectangle fx:id="s13" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="120.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="s14" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="240.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle fx:id="s15" arcHeight="5.0" arcWidth="5.0" fill="#5e5b5b" height="60.0" layoutX="360.0" layoutY="180.0" onMousePressed="#MoveToSquare" stroke="BLACK" strokeType="INSIDE" width="60.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="60.0" layoutY="240.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />

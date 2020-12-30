@@ -422,10 +422,10 @@ public class BoardGameController implements Initializable{
 				g.initiateGame();
 				this.board=g.getBoard();
 
-				while(numofYellowSquares<3) {
-					CheckAndDoYellowSquares();
-
-				}
+//				while(numofYellowSquares<3) {
+//					CheckAndDoYellowSquares();
+//
+//				}
 
 				for( int i=0; i<12;i++) {
 					int x=g.getBlackPieces()[i].getLocation().getX();
@@ -435,7 +435,7 @@ public class BoardGameController implements Initializable{
 
 				TurnLbl.setText("Its the White turn");
 
-				CheckAndDoRedSquare();
+				//CheckAndDoRedSquare();
 
 
 
@@ -671,9 +671,11 @@ public class BoardGameController implements Initializable{
 							if(board[sourcex+1][sourcey+1].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE) {
 								for(int j=0; j<g.getWhitePieces().length; j++) {
 									if(g.getWhitePieces()[j].getLocation().getX()== sourcex+1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
-										// remove the soldier
+										// remove the white soldier
 										System.out.println("HEREEEEE");
 										g.getWhitePieces()[j].setIsAlive(false);
+										g.getWhitePieces()[j].getLocation().setX(-1);
+										g.getWhitePieces()[j].getLocation().setY(-1);
 										board[sourcex+1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										int xcsene= (firstsourcex)+60;//nzed 3l func
 										System.out.println(xcsene);
@@ -693,7 +695,8 @@ public class BoardGameController implements Initializable{
 										
 										
 										if(c!=null)
-										if(c.getFill()==Color.BLACK);
+											//ethar and maisa
+										if(c.getFill()==Color.WHITE);
 										c.setVisible(false);
 										
 										//turn to queen	
@@ -723,6 +726,8 @@ public class BoardGameController implements Initializable{
 												// remove the soldier
 												System.out.println("HEREEEEE");
 												g.getWhitePieces()[j].setIsAlive(false);
+												g.getWhitePieces()[j].getLocation().setX(-1);
+												g.getWhitePieces()[j].getLocation().setY(-1);
 												board[sourcex+1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 												int xcsene= (firstsourcex)-60;//nzed 3l func
 												System.out.println(xcsene);
@@ -859,6 +864,8 @@ public class BoardGameController implements Initializable{
 										// remove the soldier
 										System.out.println("HEREEEEE");
 										g.getBlackPieces()[j].setIsAlive(false);
+										g.getBlackPieces()[j].getLocation().setX(-1);
+										g.getBlackPieces()[j].getLocation().setY(-1);
 										board[sourcex-1][sourcey+1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										int xcsene= (firstsourcex)+60;//nzed 3l func
 										System.out.println(xcsene);
@@ -871,8 +878,8 @@ public class BoardGameController implements Initializable{
 										this.soldier.setLayoutY(firstsourcey-120);
 										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-										 g.getBlackPieces()[i].getLocation().setX(targetx);
-			                                g.getBlackPieces()[i].getLocation().setY(targety);
+										g.getWhitePieces()[i].getLocation().setX(targetx);
+			                            g.getWhitePieces()[i].getLocation().setY(targety);
 
 										
 										if(c!=null)
@@ -908,6 +915,8 @@ public class BoardGameController implements Initializable{
 										// remove the soldier
 										System.out.println("HEREEEEE");
 										g.getBlackPieces()[j].setIsAlive(false);
+										g.getBlackPieces()[j].getLocation().setX(-1);
+										g.getBlackPieces()[j].getLocation().setY(-1);
 										board[sourcex-1][sourcey-1].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										int xcsene= (firstsourcex)-60;//nzed 3l func
 										System.out.println(xcsene);
@@ -920,8 +929,9 @@ public class BoardGameController implements Initializable{
 										this.soldier.setLayoutY(yscene-60);
 										board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 										board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-										g.getBlackPieces()[i].getLocation().setX(targetx);
-			                            g.getBlackPieces()[i].getLocation().setY(targety);
+			                            
+			                            g.getWhitePieces()[i].getLocation().setX(targetx);
+			                            g.getWhitePieces()[i].getLocation().setY(targety);
 
 										if(c!=null) {
 										if(c.getFill()==Color.BLACK);
@@ -983,8 +993,8 @@ public class BoardGameController implements Initializable{
 
 			this.soldier=null;
 			this.target=null;
-			CheckAndDoRedSquare();
-			CheckAndDoBlueSquare();
+			//CheckAndDoRedSquare();
+			//CheckAndDoBlueSquare();
 			return 0;
 		}
            
