@@ -94,7 +94,7 @@ public class NicknamesSetUpController implements Initializable{
 	@FXML
 	void StartGame(ActionEvent event)
 	{
-		System.out.println("aha");
+		
 		whitename =WhiteNickName.getText();
 		blackname =BlackNickName.getText();
 		if(!whitename.isEmpty() && !blackname.isEmpty())
@@ -103,14 +103,7 @@ public class NicknamesSetUpController implements Initializable{
 			BoardGameController temp=new BoardGameController();
 			temp.start(stage);	
 
-			/*try {
-				temp.start(stage);	
-
-			} catch (Exception e) {
-				// TODO: handle exception
-				ErrorLbl.setText("Please Enter Valid Players' Nicknames!"); //Not Working
-			}
-		}*/
+			
 		
 		}
 		else {

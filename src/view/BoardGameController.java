@@ -338,11 +338,7 @@ public class BoardGameController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty())
 		{
-			gametime=new DigitTimerGroup(gameTimer);
-			gamethread = new TimerThread(gametime);
-			gamethread.setDaemon(true);
-			gamethread.start();
-			startWhiteTimer();
+			
 
 
 
@@ -361,29 +357,6 @@ public class BoardGameController implements Initializable{
 
 			wPointsValue.setText(Integer.toString(white.getPoints()));
 			bPointsValue.setText(Integer.toString(black.getPoints()));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 			// uploading the circle Squares to the array of the circles
 			blackcircles[0]=b0;
@@ -410,7 +383,11 @@ public class BoardGameController implements Initializable{
 			whitecircles[9]=w9;
 			whitecircles[10]=w10;
 			whitecircles[11]=w11;
-
+			gametime=new DigitTimerGroup(gameTimer);
+			gamethread = new TimerThread(gametime);
+			gamethread.setDaemon(true);
+			gamethread.start();
+		
 
 			if(!NicknamesSetUpController.isLoad())
 			{
@@ -421,7 +398,7 @@ public class BoardGameController implements Initializable{
 				g = new Game(white, black,d,t);
 				g.initiateGame();
 				this.board=g.getBoard();
-
+				startWhiteTimer();
 //				while(numofYellowSquares<3) {
 //					CheckAndDoYellowSquares();
 //
@@ -448,7 +425,7 @@ public class BoardGameController implements Initializable{
 				Time t = new Time(0, 0, 0);
 
 				g = new Game(white, black,d,t);
-
+				this.board=g.getBoard();
 
 				String contents;
 				try {
@@ -458,57 +435,93 @@ public class BoardGameController implements Initializable{
 
 					int whitec=0;
 					int blackc=0;
-					for(int row=0;row<8;row++)
-					{
 
-						for(int col=0;col<8;col+=2)
+						for(int row=0;row<8;row++)
 						{
-
-							if(g.getBoard()[row][col]!=null&&
-									g.getBoard()[row][col].getSquareColor().equals(SQUARE_COLOR.BLACK)
-									&& !g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.EMPTY))
+							if(row%2!=0) 
+								for(int col=0;col<8;col+=2)
+								{
+									if(g.getBoard()[row][col].getSoldierColor()!=null&&whitec<12 && blackc<12)
+									{
+									if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.BLACK))
+									{
+										System.out.println(g.getBoard()[row][col]);
+									
+										blackcircles[blackc]=newlayout(row, col, blackcircles[blackc]);
+										blackc++;
+									}
+									
+										
+										else {
+											if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.WHITE))
+											{System.out.println(g.getBoard()[row][col]);
+												whitecircles[whitec]=newlayout(row, col, whitecircles[whitec]);
+												whitec++;
+											}
+											
+										}
+												
+												
+												
+												
+									}
+									}
+								
+							else
 							{
-
-								if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.BLACK))
+								for(int col=1;col<8;col+=2)
 								{
-									blackcircles[blackc]=newlayout(row, col, blackcircles[blackc]);
-
-									g.getBlackPieces()[blackc].getLocation().setX(row);
-									g.getBlackPieces()[blackc].getLocation().setY(col);
+									if(g.getBoard()[row][col].getSoldierColor()!=null&&whitec<12 && blackc<12)
+									{
+									if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.BLACK))
+									{System.out.println(g.getBoard()[row][col]);
+										blackcircles[blackc]=newlayout(row, col, blackcircles[blackc]);
+										blackc++;
+									}
 									
-									g.getBoard()[row][col].setS(g.getBlackPieces()[blackc]);
-									System.out.println(g.getBoard()[row][col].getS());
-
-									g.getBoard()[row][col].getS().setLocation(g.getBoard()[row][col]);
+										else {
+											if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.WHITE))
+											{System.out.println(g.getBoard()[row][col]);
+												whitecircles[whitec]=newlayout(row, col, whitecircles[whitec]);
+												whitec++;
+											}
+											
+										}
+												
+												
+												
+												
 									
-									System.out.println("this is black:" + row+"-"+col);
-									b11=newlayout(4, 1, b11);
-									blackc++;
-
+									}
 								}
-								if(g.getBoard()[row][col].getSoldierColor().equals(Soldier_COLOR_AtSquare.WHITE))
-								{
-									whitecircles[whitec]=newlayout(row, col, blackcircles[whitec]);
-									g.getWhitePieces()[whitec].getLocation().setX(row);
-									g.getWhitePieces()[whitec].getLocation().setY(col);
-									
-									g.getBoard()[row][col].setS(g.getWhitePieces()[whitec]);
-									System.out.println(g.getBoard()[row][col].getS());
-									g.getBoard()[row][col].getS().setLocation(g.getBoard()[row][col]);
-									whitecircles[whitec].setLayoutX(whitecircles[whitec].getLayoutX());
-									whitecircles[whitec].setLayoutY(whitecircles[whitec].getLayoutY());
-									whitec++;
-									System.out.println("this is white:" + row+"-"+col);
-								}
-
-
 							}
-							else System.out.println("aaaaaaaaaaaaaaaa");
-						}
-
+							
+							
+						
 					}
-
-
+						while(blackc<12)
+						{
+							blackcircles[blackc].setVisible(false);
+							blackc++;
+						}
+						while(whitec<12)
+						{
+							whitecircles[whitec].setVisible(false);
+							whitec++;
+						}
+						
+						
+						if(arrOfStr[arrOfStr.length-1].equals("B"))
+						{
+							TurnLbl.setText("Its the Black turn");
+							startBlackTimer();
+						}
+						if(arrOfStr[arrOfStr.length-1].equals("W"))
+						{
+							TurnLbl.setText("Its the White turn");
+							startWhiteTimer();
+						}
+					
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -623,11 +636,11 @@ public class BoardGameController implements Initializable{
 					if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey)
 							 {
 						if(!g.getBlackPieces()[i].isIsQueen()) {
-						System.out.println("okkkkkkkkkk");
+						
 						int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
 						if(isOk==0) {
 
-							System.out.println("is ok");
+						
 							if(sourcex+1==targetx && targety==sourcey-1)
 							{
 
@@ -672,7 +685,7 @@ public class BoardGameController implements Initializable{
 								for(int j=0; j<g.getWhitePieces().length; j++) {
 									if(g.getWhitePieces()[j].getLocation().getX()== sourcex+1 && g.getWhitePieces()[j].getLocation().getY()== sourcey+1) {
 										// remove the white soldier
-										System.out.println("HEREEEEE");
+									
 										g.getWhitePieces()[j].setIsAlive(false);
 										g.getWhitePieces()[j].getLocation().setX(-1);
 										g.getWhitePieces()[j].getLocation().setY(-1);
@@ -764,7 +777,7 @@ public class BoardGameController implements Initializable{
 									}
 									}
 								}
-							//System.out.println("not ok");
+						
 							
 					}
 						
@@ -801,6 +814,7 @@ public class BoardGameController implements Initializable{
 				}
 				turn = Soldier_COLOR_AtSquare.WHITE;
 				TurnLbl.setText("Its the White turn");
+				if(blackthread!=null)
 				blackthread.interrupt();
 				startWhiteTimer();
 
@@ -987,6 +1001,7 @@ public class BoardGameController implements Initializable{
 				}
 				turn = Soldier_COLOR_AtSquare.BLACK;
 				TurnLbl.setText("Its the Black turn");
+				if(whitethread!=null)
 				whitethread.interrupt();
 				startBlackTimer();
 			}

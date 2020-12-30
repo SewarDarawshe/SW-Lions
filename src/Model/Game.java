@@ -289,64 +289,116 @@ public class Game {
 		
 		for(int row=0;row<8&&place<arrOfStr.length;row++)
 		{
-			
-			for(int col=0;col<8&&place<arrOfStr.length;col+=2)
-			{
-				
-				 if(Board[row][col]!=null&&Board[row][col].getSquareColor().equals(SQUARE_COLOR.BLACK))
-					 
-				 {
-					 place++;
-				
+			if(row%2!=0) {
+				for(int j=0;j<8 &&place<arrOfStr.length;j+=2)
+				{
+					
 					 if(arrOfStr[place].equals("0"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+							
+							place++;
 							
 						}
+					 else
 						if(arrOfStr[place].equals("1"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
-							
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+							place++;
 						
 
 						}
+						else
 						if(arrOfStr[place].equals("2"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-							
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							place++;
 
 						}
+						else
 						if(arrOfStr[place].equals("11"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 							
 
-							Board[row][col].getS().setIsQueen(true);
-							
+							Board[row][j].getS().setIsQueen(true);
+							place++;
 						}
+						else
 						if(arrOfStr[place].equals("22"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-							Board[row][col].getS().setIsQueen(true);
-							
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							Board[row][j].getS().setIsQueen(true);
+							place++;
 
 						}
+						else
 						if(arrOfStr[place].equals("B"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
-							
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							place++;
 
 						}
+						else
 						if(arrOfStr[place].equals("W"))
 						{
-							Board[row][col].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							place++;
 						}
 
-					}
+				}
+			}
+			else {
+				for(int j=1;j<8 && place<arrOfStr.length;j+=2)
+				{
+					
+					 if(arrOfStr[place].equals("0"))
+						{
+						
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+							place++;
+						}
+					 else
+						if(arrOfStr[place].equals("1"))
+						{
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+							
+							place++;
+
+						}
+						else
+						if(arrOfStr[place].equals("2"))
+						{
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							place++;
+
+						}
+						else
+						if(arrOfStr[place].equals("11"))
+						{
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
+							
+
+							Board[row][j].getS().setIsQueen(true);
+							place++;
+						}
+						else
+						if(arrOfStr[place].equals("22"))
+						{
+							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
+							Board[row][j].getS().setIsQueen(true);
+							place++;
+
+						}
+						
+				}
+				
+			}
+			
 					 
 					 
 					 
-				 }
+		
 			
 	}
 	}
