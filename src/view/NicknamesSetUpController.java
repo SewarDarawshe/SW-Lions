@@ -94,6 +94,7 @@ public class NicknamesSetUpController implements Initializable{
 	@FXML
 	void StartGame(ActionEvent event)
 	{
+		System.out.println("aha");
 		whitename =WhiteNickName.getText();
 		blackname =BlackNickName.getText();
 		if(!whitename.isEmpty() && !blackname.isEmpty())

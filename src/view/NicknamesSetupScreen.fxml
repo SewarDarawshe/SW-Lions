@@ -38,11 +38,6 @@
                   <Font name="Cooper Black" size="19.0" />
                </font>
             </Text>
-           
-             <Button fx:id="StartGameButton" layoutX="208.0" layoutY="262.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="62.0" prefWidth="185.0" style="-fx-background-color: peru;" text="Start new game" textFill="#783131"> <font>
-                  <Font name="Cooper Black" size="19.0" />
-               </font>
-            </Button>
             <Button fx:id="exitbutton" layoutX="532.0" layoutY="353.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: peru;" text="Exit" textFill="#783131" textOverrun="WORD_ELLIPSIS">
                <font>
                   <Font name="Cooper Black" size="12.0" />
@@ -61,6 +56,11 @@
                </font>
             </Label>
              <Button fx:id="loadgameBTN" layoutX="194.0" layoutY="333.0" mnemonicParsing="false" onAction="#LoadGame" prefHeight="62.0" prefWidth="213.0" style="-fx-background-color: peru;" text="Load existing game" textFill="#783131">
+               <font>
+                  <Font name="Cooper Black" size="19.0" />
+               </font>
+            </Button>
+            <Button fx:id="StartGameButton" layoutX="194.0" layoutY="253.0" mnemonicParsing="false" onAction="#StartGame" prefHeight="62.0" prefWidth="213.0" style="-fx-background-color: peru;" text="Start Game" textFill="#783131">
                <font>
                   <Font name="Cooper Black" size="19.0" />
                </font>
