@@ -119,7 +119,7 @@ public class AddUpdate_QueController implements Initializable {
 	void returnSettings(ActionEvent event) {
 
 		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-		SettingsController temp=new SettingsController();
+		ManageQuestionsController temp=new ManageQuestionsController();
 		try {
 			temp.start(stage);	
 		} catch (Exception e) {

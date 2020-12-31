@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class MainBoardController implements Initializable {
 
 
-	protected static SettingsController SettingsController;
+	protected static ManageQuestionsController SettingsController;
 
 
 	@FXML
