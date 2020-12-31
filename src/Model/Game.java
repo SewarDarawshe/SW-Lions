@@ -641,7 +641,7 @@ public class Game {
 							return true;	
 					}
 				}
-				//case the soldier is Queen
+				//case the soldier is white Queen
 				else if(WhitePieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
 					while(Board[x-1][y+1].getSoldierColor()==null) {

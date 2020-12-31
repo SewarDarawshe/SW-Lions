@@ -75,6 +75,7 @@ public class BoardGameController implements Initializable{
 	public Game g;
 	private String whiteName;//the white player name
 	private String blackName;//the black player name
+	private String theWinner;// the name of the winner
 	private Rectangle r=null;
 	//soldier that has chosen to be moved
 	private Circle soldier=null;
@@ -711,14 +712,15 @@ public class BoardGameController implements Initializable{
 												int yscene=(firstsourcey)+60;//...
 												System.out.println(yscene);
 												Circle c=getSoldierOnScene(xcsene,yscene);
-												//******
+												//**
 												this.soldier.setLayoutX(firstsourcex+120);
 												this.soldier.setLayoutY(firstsourcey+120);
 												board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 												board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 												g.getBlackPieces()[i].getLocation().setX(targetx);
 												g.getBlackPieces()[i].getLocation().setY(targety);
-
+												g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+												bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 
 
 
@@ -763,14 +765,15 @@ public class BoardGameController implements Initializable{
 													int yscene=(firstsourcey)+60;//...
 													System.out.println(yscene);
 													Circle c=getSoldierOnScene(xcsene,yscene);
-													//******
+													//**
 													this.soldier.setLayoutX(firstsourcex-120);
 													this.soldier.setLayoutY(firstsourcey+120);
 													board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 													board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 													g.getBlackPieces()[i].getLocation().setX(targetx);
 													g.getBlackPieces()[i].getLocation().setY(targety);
-
+													g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+													bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 
 													if(c!=null)
 														if(c.getFill()==Color.WHITE);
@@ -902,14 +905,15 @@ public class BoardGameController implements Initializable{
 												int yscene=(firstsourcey)-60;//...
 												System.out.println(yscene);
 												Circle c=getSoldierOnScene(xcsene,yscene);
-												//******
+												//**
 												this.soldier.setLayoutX(firstsourcex+120);
 												this.soldier.setLayoutY(firstsourcey-120);
 												board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 												board[targetx][targety].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 												g.getWhitePieces()[i].getLocation().setX(targetx);
 												g.getWhitePieces()[i].getLocation().setY(targety);
-
+												g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+												wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 
 												if(c!=null)
 													if(c.getFill()==Color.BLACK);
@@ -953,7 +957,7 @@ public class BoardGameController implements Initializable{
 												int yscene=(firstsourcey)-60;//...
 												System.out.println(yscene);
 												Circle c=getSoldierOnScene(xcsene,yscene);
-												//******
+												//**
 												this.soldier.setLayoutX(xcsene-60);
 												this.soldier.setLayoutY(yscene-60);
 												board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
@@ -961,7 +965,8 @@ public class BoardGameController implements Initializable{
 
 												g.getWhitePieces()[i].getLocation().setX(targetx);
 												g.getWhitePieces()[i].getLocation().setY(targety);
-
+												g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+												wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 												if(c!=null) {
 													if(c.getFill()==Color.BLACK);
 													c.setVisible(false);
@@ -1073,10 +1078,55 @@ public class BoardGameController implements Initializable{
 				}
 			}
 		}
+		if(theGameisEnd()==true) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Game is End");
+			alert.setHeaderText("The game is ending, we hope you have fun!");
+		}
 		return -1;
 
 
 	}
+
+	private boolean theGameisEnd() {
+		
+		int bcountdead=0; // the number of black soldiers that have dead 
+		int wcountdead=0; // the number of white soldiers that have dead 
+
+		for(int i=0; i<g.getBlackPieces().length;i++) {
+			if(g.getBlackPieces()[i].isIsAlive()==false) {
+				bcountdead++;
+			}
+			
+		}
+		if(bcountdead==12) {
+			theWinner=whiteName;
+			return true;
+		}
+		
+		for(int i=0; i<g.getWhitePieces().length;i++) {
+			if(g.getWhitePieces()[i].isIsAlive()==false) {
+				wcountdead++;
+			}
+			
+		}
+		if(wcountdead==12) {
+			theWinner=blackName;
+			return true;
+		}
+		
+		if(g.IsBlocked(g.getWhitePlayer())==true) {
+			theWinner=blackName;
+			return true;
+		}
+		
+		if(g.IsBlocked(g.getBlackPlayer())==true) {
+			theWinner=whiteName;
+			return true;
+		}
+		return false;
+	}
+
 
 	private Circle getSoldierOnScene(int sourcex, int sourcey) {
 		//getting the soldier circle from the whiteCircles
