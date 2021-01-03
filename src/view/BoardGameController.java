@@ -1332,8 +1332,9 @@ public boolean wasinYellow=false;
 		CheckAndDoBlueSquare();
 		if(theGameisEnd()==true) {
 			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Game is End");
-			alert.setHeaderText("The game is ending, we hope you have fun!");
+			alert.setTitle("Game Ended");
+			alert.setHeaderText("The game ended, The winner is");
+			alert.setContentText(theWinner);
 		}
 		}
 		return -1;
@@ -1342,44 +1343,104 @@ public boolean wasinYellow=false;
 	}
 
 	private boolean theGameisEnd() {
-		
-		int bcountdead=0; // the number of black soldiers that have dead 
-		int wcountdead=0; // the number of white soldiers that have dead 
 
+		int bcountdead=0; // the number of black soldiers that have died 
+		int wcountdead=0; // the number of white soldiers that have died 
+		//count the dead soldiers for the black player
 		for(int i=0; i<g.getBlackPieces().length;i++) {
 			if(g.getBlackPieces()[i].isIsAlive()==false) {
 				bcountdead++;
 			}
-			
 		}
-		if(bcountdead==12) {
-			theWinner=whiteName;
-			return true;
+		//checks if all the soldiers of the black player is dead
+		if(bcountdead == 12) {
+			//white player have more points than the black player
+			if(g.getWhitePlayer().getPoints() > g.getBlackPlayer().getPoints()) {
+				theWinner = whiteName;
+				Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+				return true;
+			//black player have more points than the white player
+			}else if(g.getBlackPlayer().getPoints() > g.getWhitePlayer().getPoints()) {
+						theWinner = blackName;
+						Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+						return true;
+			//if the players have the same points value			
+			}else if(g.getWhitePlayer().getPoints() == g.getBlackPlayer().getPoints()) {
+						theWinner = "Draw";
+						Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+						return true;	
+			}
 		}
-		
+		//count the dead soldiers for the white player
 		for(int i=0; i<g.getWhitePieces().length;i++) {
 			if(g.getWhitePieces()[i].isIsAlive()==false) {
 				wcountdead++;
 			}
+		}
+		//checks if all the soldiers of the white player is dead
+		if(wcountdead == 12) {
+			if(g.getWhitePlayer().getPoints() > g.getBlackPlayer().getPoints()) {
+				theWinner = whiteName;
+				Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+				return true;
+			}else if(g.getBlackPlayer().getPoints() > g.getWhitePlayer().getPoints()) {
+						theWinner = blackName;
+						Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+						return true;
+			}else if(g.getWhitePlayer().getPoints() == g.getBlackPlayer().getPoints()) {
+						theWinner = "Draw";
+						Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+						return true;
+			}
+		}
+		//checks if all the soldiers of the white player are blocked
+		if(g.IsBlocked(g.getWhitePlayer())==true) {
+			if(bcountdead == 12) {
+				if(g.getWhitePlayer().getPoints() > g.getBlackPlayer().getPoints()) {
+					theWinner = whiteName;
+					return true;
+				}else if(g.getBlackPlayer().getPoints() > g.getWhitePlayer().getPoints()) {
+							theWinner = blackName;
+							Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+							return true;
+				}else if(g.getWhitePlayer().getPoints() == g.getBlackPlayer().getPoints()) {
+							theWinner = "Draw";
+							Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+							return true;		
+				}
+			}
+		}
 			
+		//checks if all the soldiers of the black player are blocked
+		if(g.IsBlocked(g.getBlackPlayer())==true) {
+			if(bcountdead == 12) {
+				if(g.getWhitePlayer().getPoints() > g.getBlackPlayer().getPoints()) {
+					theWinner = whiteName;
+					Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+					return true;
+				}else if(g.getBlackPlayer().getPoints() > g.getWhitePlayer().getPoints()) {
+							theWinner = blackName;
+							Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+							return true;
+				}else if(g.getWhitePlayer().getPoints() == g.getBlackPlayer().getPoints()) {
+							theWinner = "Draw";
+							Sysdata.getInstance().addGameHistory(g.getWhitePlayer(), g.getBlackPlayer(), g.getGameDate());
+
+							return true;	
+				}
+			}
 		}
-		if(wcountdead==12) {
-			theWinner=blackName;
-			return true;
-		}
-		
-//		if(g.IsBlocked(g.getWhitePlayer())==true) {
-//			theWinner=blackName;
-//			return true;
-//		}
-//		
-//		if(g.IsBlocked(g.getBlackPlayer())==true) {
-//			theWinner=whiteName;
-//			return true;
-//		}
 		return false;
 	}
-
 
 	private Circle getSoldierOnScene(int sourcex, int sourcey) {
 		//getting the soldier circle from the whiteCircles

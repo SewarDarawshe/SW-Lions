@@ -51,10 +51,9 @@ public class Game {
 	//---------------------------Constructor----------------------
 
 	//only to the results board
-		public Game(Date gameDate, Time queueTime, String whiteNic, String blackNic, int whitePoint, int blackPoints) {
+		public Game(Date gameDate, String whiteNic, String blackNic, int whitePoint, int blackPoints) {
 			super();
 			GameDate = gameDate;
-			QueueTime = queueTime;
 			this.whiteNic = whiteNic;
 			this.blackNic = blackNic;
 			this.whitePoint = whitePoint;
@@ -77,6 +76,11 @@ public class Game {
 		GameDate = gameDate;
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
+		this.whiteNic=whitePlayer.getNickName();
+		this.blackNic=blackPlayer.getNickName();
+		this.whitePoint=whitePlayer.getPoints();
+		this.blackPoints=blackPlayer.getPoints();
+
 		WhitePieces =new Soldier[12];
 		BlackPieces =new Soldier[12];
 	}

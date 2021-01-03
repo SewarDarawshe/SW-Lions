@@ -276,6 +276,7 @@ public class Sysdata {
 			GamesHistory.add(g);
 			writeHistoryToJSON();
 			readHistoryJSON();
+			
 			return true;
 		}
 		return false;
@@ -295,7 +296,7 @@ public class Sysdata {
 	 * array list.
 	 */
 	@SuppressWarnings("deprecation")
-	private static void readHistoryJSON() {
+	private static  void readHistoryJSON() {
 		GamesHistory = new ArrayList<Game>();
 		try {
 			if (GamesHistory.isEmpty())
