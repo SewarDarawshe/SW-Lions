@@ -70,9 +70,10 @@ public class AddUpdate_QueController implements Initializable {
 	@FXML
 	private Button ReturntoSettingsBTN;
 
-    private ButtonGroup group;
+	private ButtonGroup group;
 
-    
+	private boolean sameque=false;
+
 	public void start(Stage primaryStage,Question q) {
 		try {
 
@@ -92,8 +93,8 @@ public class AddUpdate_QueController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//	old = SettingsController.
-		
-	
+
+
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
 		this.old=MainBoardController.ManageQuestions.getQue();
 		// initiate to empty values
@@ -131,7 +132,7 @@ public class AddUpdate_QueController implements Initializable {
 			// TODO: handle exception
 		}
 	}
-	
+
 	@FXML
 	void addQuestion(ActionEvent event) {
 
@@ -146,62 +147,80 @@ public class AddUpdate_QueController implements Initializable {
 		boolean ans2Correct = Ans2RD.isSelected();
 		boolean ans3Correct = Ans3RD.isSelected();
 		boolean ans4Correct = Ans4RD.isSelected();
-int count=0;
-if(ans1Correct)count++;
-if(ans2Correct)count++;
-if(ans3Correct)count++;
-if(ans4Correct)count++;
+		int count=0;
+		if(ans1Correct)count++;
+		if(ans2Correct)count++;
+		if(ans3Correct)count++;
+		if(ans4Correct)count++;
 
 		E_Difficulty diff = difficultyCombo.getSelectionModel().getSelectedItem();
-
+System.out.println(ans1);
+System.out.println(ans2);
+System.out.println(ans3);
+System.out.println(ans4);
 		if (!q.isEmpty()) {
-			if (!ans1.isEmpty()) {
-				if (!ans2.isEmpty()) {
-					if (!ans3.isEmpty()) {
-						if (!ans4.isEmpty()) {
-							if(count==1)
-							{
-							if (ans1Correct || ans2Correct || ans3Correct || ans4Correct) {
-								if (diff != null) {
+			for(Question qu:Sysdata.getInstance().getQuestionsarr())
+			{
+				if(qu.getText().equals(q))sameque=true;
+			}
+			if(!sameque)
+			{
+				if (!ans1.isEmpty()) {
+					if (!ans2.isEmpty()) {
+						if (!ans3.isEmpty()) {
+							if (!ans4.isEmpty()) {
+								if(!ans1.equals(ans2)||! ans1.equals(ans3)||!ans1.equals(ans4)||
+										!ans2.equals(ans1)||!ans2.equals(ans3)||!ans2.equals(ans4)||
+										!ans3.equals(ans1)||!ans3.equals(ans3)||!ans3.equals(ans4)||
+										!ans4.equals(ans1)||!ans4.equals(ans2)||!ans4.equals(ans3))
+								{
+									if(count==1)
+									{
+										if (ans1Correct || ans2Correct || ans3Correct || ans4Correct) {
+											if (diff != null) {
 
-									ArrayList<Answer> answers = new ArrayList<>(4);
-									answers.add(new Answer( ans1, ans1Correct));
-									answers.add(new Answer( ans2, ans2Correct));
-									answers.add(new Answer( ans3, ans3Correct));
-									answers.add(new Answer( ans4, ans4Correct));
+												ArrayList<Answer> answers = new ArrayList<>(4);
+												answers.add(new Answer( ans1, ans1Correct));
+												answers.add(new Answer( ans2, ans2Correct));
+												answers.add(new Answer( ans3, ans3Correct));
+												answers.add(new Answer( ans4, ans4Correct));
 
-									Question question = new Question(q, diff, answers);
+												Question question = new Question(q, diff, answers);
 
-									// update question
-									if (old != null) {
-										Sysdata.getInstance().editQuestion(old, question);
-										erorLabel.setText("Question updated successfully. Add a new question?");
-										old = null;
-									}
-									// new question
-									else {
-										if(	Sysdata.getInstance().addQuestion(question))
-											erorLabel.setText("Question added successfully. Add another?");
-										else System.out.println("a5");
-									}
+												// update question
+												if (old != null) {
+													Sysdata.getInstance().editQuestion(old, question);
+													erorLabel.setText("Question updated successfully. Add a new question?");
+													old = null;
+												}
+												// new question
+												else {
+													if(	Sysdata.getInstance().addQuestion(question))
+														erorLabel.setText("Question added successfully. Add another?");
+													else System.out.println("a5");
+												}
 
-									
-									resetFields();
 
-								} else
-									erorLabel.setText("Please select a difficulty level");
+												resetFields();
+
+											} else
+												erorLabel.setText("Please select a difficulty level");
+										} else
+											erorLabel.setText("Please select the correct answer");
+									}else
+										erorLabel.setText("Please select just one answer ");
+								}else
+									erorLabel.setText("Please enter different answers ");
 							} else
-								erorLabel.setText("Please select the correct answer");
-							}else
-								erorLabel.setText("Please select just one answer ");
+								erorLabel.setText("Please enter answer 4");
 						} else
-							erorLabel.setText("Please enter answer 4");
+							erorLabel.setText("Please enter answer 3");							
 					} else
-						erorLabel.setText("Please enter answer 3");							
+						erorLabel.setText("Please enter answer 2");
 				} else
-					erorLabel.setText("Please enter answer 2");
-			} else
-				erorLabel.setText("Please enter answer 1");
+					erorLabel.setText("Please enter answer 1");
+			}else
+				erorLabel.setText("the Question is already in the database !");
 		} else
 			erorLabel.setText("Please enter a question");
 	}
@@ -217,9 +236,9 @@ if(ans4Correct)count++;
 	{
 		return old;
 	}
-	
 
-	
+
+
 	private void resetFields() {
 		QueText.setText("");
 
