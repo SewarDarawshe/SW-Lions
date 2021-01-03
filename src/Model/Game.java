@@ -614,37 +614,46 @@ public class Game {
 	 * this method checks if the player can eat any soldier in his current turn
 	 */
 
-	public boolean IsEatable(Player p)
+	public boolean IsEatable(Player p, Soldier[] Pieces)
 	{
+		int whiteCountEatable=0;
+		int blackCountEatable=0;
+		int whiteIsAlive=0;
+		int blackIsAlive=0;
+
 		//case player is White
 		if(p.getColor()==Soldier_COLOR_AtSquare.WHITE) {
+			
 
-			for(int i=0;i<WhitePieces.length; i++)
+			for(int i=0;i<Pieces.length; i++)
 			{
 				//get the location of the player
-				int x=WhitePieces[i].getLocation().getX();
-				int y=WhitePieces[i].getLocation().getY();
-				if(WhitePieces[i].isIsQueen()==false)
+				int x=Pieces[i].getLocation().getX();
+				int y=Pieces[i].getLocation().getY();
+				if(Pieces[i].isIsQueen()==false)
 				{
-					if(y==0||y==1) {
-						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==null) {
-							return true;
+					if(y==0) {
+						if(x-2>0 && x-1>0 && (Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+							whiteCountEatable++;
 						}
 					}
-					if(y==6||y==7) {
-						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==null) {
-							return true;
+					if(y==7) {
+						if(x-2>0 && x-1>0 && y-2>0 && y-1>0 &&(Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+							whiteCountEatable++;
 						}
 					}
-					else {
-						if(((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==null)|| ((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==null)) 
-							return true;	
+					else if(y>0 && y<7){
+						System.out.println(x);
+						System.out.println(y);
+						if(x-2>0  &&  ((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)|| ((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)) 
+							whiteCountEatable++;
 					}
+				
 				}
 				//case the soldier is white Queen
-				else if(WhitePieces[i].isIsQueen()==true) {
+				else if(Pieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
-					while(Board[x-1][y+1].getSoldierColor()==null) {
+					while(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y++;
 						// case the queen arrived the edge of the board
@@ -662,10 +671,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y+1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						whiteCountEatable++;
 					//case the queen is moving up left
-					while(Board[x-1][y-1].getSoldierColor()==null) {
+					while(Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y--;
 						// case the queen arrived the edge of the board
@@ -679,10 +688,10 @@ public class Game {
 
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y-1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						whiteCountEatable++;
 					//case the queen is moving right down
-					while(Board[x+1][y+1].getSoldierColor()==null) {
+					while(Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y++;
 
@@ -696,10 +705,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y+1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						whiteCountEatable++;
 					//case the queen is moving left down
-					while(Board[x+1][y-1].getSoldierColor()==null) {
+					while(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y--;
 
@@ -716,47 +725,55 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y-1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						whiteCountEatable++;
 				}
 
 			}
+			
+			for(int i=0;i<Pieces.length; i++) {
+				if(Pieces[i].isIsAlive()==true)
+					whiteIsAlive++;
+			}
+			if(whiteCountEatable>0)
+				return true;
+			return false;
 
 		}
 		//case player is Black
-		if(p.getColor()==Soldier_COLOR_AtSquare.BLACK) {
+		else if(p.getColor()==Soldier_COLOR_AtSquare.BLACK) {
 
-			for(int i=0;i<BlackPieces.length; i++) {
+			for(int i=0;i<Pieces.length; i++) {
 				//get the location of the soldier
-				int x=BlackPieces[i].getLocation().getX();
-				int y=BlackPieces[i].getLocation().getY();
-				if(BlackPieces[i].isIsQueen()==false)
+				int x=Pieces[i].getLocation().getX();
+				int y=Pieces[i].getLocation().getY();
+				if(Pieces[i].isIsQueen()==false)
 				{
 
-					if(y==0||y==1) {
-						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==null) {
+					if(y==0) {
+						if(x+2<7 && (Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 
-							return true;
+							blackCountEatable++;
 						}
 
 					}
-					if(y==6||y==7) {
-						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==null) {
+					if(y==6) {
+						if(x+2<7 && (Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 
-							return true;
+							blackCountEatable++;
 						}
 
 					}
-					else {
-						if(((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==null)|| ((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==null)) {
-							return true;
+					else if(y>1 && y<7){
+						if(x+2<7 && ((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)|| ((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)) {
+							blackCountEatable++;
 						}
 					}
 				}
 
-				else if(BlackPieces[i].isIsQueen()==true) {
+				else if(Pieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
-					while(Board[x-1][y+1].getSoldierColor()==null) {
+					while(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y++;
 						// case the queen arrived the edge of the board
@@ -774,10 +791,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y+1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						blackCountEatable++;
 					//case the queen is moving up left
-					while(Board[x-1][y-1].getSoldierColor()==null) {
+					while(Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y--;
 						// case the queen arrived the edge of the board
@@ -791,10 +808,10 @@ public class Game {
 
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y-1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						blackCountEatable++;
 					//case the queen is moving right down
-					while(Board[x+1][y+1].getSoldierColor()==null) {
+					while(Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y++;
 
@@ -808,10 +825,10 @@ public class Game {
 						}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y+1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						blackCountEatable++;
 					//case the queen is moving left down
-					while(Board[x+1][y-1].getSoldierColor()==null) {
+					while(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y--;
 						// case the queen arrived the edge of the board
@@ -826,104 +843,119 @@ public class Game {
 							x++;
 						}
 					}
-					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y-1].getSoldierColor()==null)
-						return true;
+					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
+						blackCountEatable++;
 				}
 
 			}
 
 		}
+		for(int i=0;i<Pieces.length; i++) {
+			if(Pieces[i].isIsAlive()==true)
+				blackIsAlive++;
+		}
+
+		if(blackCountEatable>0)
+			return true;
 		return false;
 	}
 
 	// this function return true if all the rival soldier is blocked
-	// Player p is the rival player
-	// Queen not checked
-	public boolean IsBlocked(Player p)
-	{
-		int countBlockedSoldier=0;//counter for blocked soldiers
-		int countSolidersinGame=0;//counter for soldiers in the game
-		int x=0;
-		int y=0;
-		if(p.equals(blackPlayer)) {
-			for(int i=0;i<BlackPieces.length;i++) {
-				if(BlackPieces[i]!=null)
-					countSolidersinGame++;
-			}
+		// Player p is the rival player
+		// Queen not checked
+		public boolean IsBlocked(Player p)
+		{
+			int countBlockedSoldier=0;//counter for blocked soldiers
+			int countSolidersinGame=0;//counter for soldiers in the game
+			int x=0;
+			int y=0;
+			if(p.equals(blackPlayer)) {
+				for(int i=0;i<BlackPieces.length;i++) {
+					if(BlackPieces[i]!=null)
+						countSolidersinGame++;
+				}
 
-			for(int i=0;i<BlackPieces.length;i++) {
-				if(BlackPieces[i]!=null)
-				{
-					//get the location of the soldier
-					x=BlackPieces[i].getLocation().getX();
-					y=BlackPieces[i].getLocation().getY();
-					if(x==0 && y==7) {
-						if(Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else if(x==7 && y==0) {
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else if(y==0) {
-						//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else if(y==7) {
-						//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else {
-						if(Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
-								&& Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
+				for(int i=0;i<BlackPieces.length;i++) {
+					if(BlackPieces[i]!=null)
+					{
+						//get the location of the soldier
+						x=BlackPieces[i].getLocation().getX();
+						y=BlackPieces[i].getLocation().getY();
+						if(x==0 && y==7) {
+							if(x+1<8 && y+1<8 && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else if(x==7 && y==0) {
+							if(x+1<8 && y+1<8 && Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else if(y==0) {
+							//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
+							if(x+1<8 && y+1<8 && Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else if(y==7) {
+							//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
+							if(x+1<8 && y+1<8 && Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else{
+							System.out.println("Sewaarrrr");
+							if(x==0  && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
+									 &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+							else
+							{
+
+								if(x+1<8 && y+1<8 && x<8 && y<8 && x>0 && y>0 &&  Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
+									&& Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						}
 					}
 				}
 			}
-		}
-		if(p.equals(whitePlayer)) {
-			for(int i=0;i<WhitePieces.length;i++) {
-				if(WhitePieces[i]!=null)
-					countSolidersinGame++;
-			}
-			for(int i=0;i<WhitePieces.length;i++) {
-				if(WhitePieces[i]!=null)
-				{
-					x=WhitePieces[i].getLocation().getX();
-					y=WhitePieces[i].getLocation().getY();
+			if(p.equals(whitePlayer)) {
+				for(int i=0;i<WhitePieces.length;i++) {
+					if(WhitePieces[i]!=null)
+						countSolidersinGame++;
+				}
+				for(int i=0;i<WhitePieces.length;i++) {
+					if(WhitePieces[i]!=null)
+					{
+						x=WhitePieces[i].getLocation().getX();
+						y=WhitePieces[i].getLocation().getY();
 
-					if(x==0 && y==7) {
-						if(Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else if(x==7 && y==0) {
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else if(y==0) {
-						//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else if(y==7) {
-						//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
-						if(Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
-					}
-					else {  
-						if(y+1<8 &&Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
-								&& Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
-							countBlockedSoldier++;
+						if(x==0 && y==7) {
+							if(x+1<8 && y+1<8 && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else if(x==7 && y==0) {
+							if(x+1<8 && y+1<8 && Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else if(y==0) {
+							//Checking if the soldiers of the first column is blocked  from two directions UP and DOWN
+							if(x+1<8 && y+1<8 && Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else if(y==7) {
+							//Checking if the soldiers of the last column is blocked  from two directions UP and DOWN
+							if(x+1<8 && y+1<8 && Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
+						else {  
+							if(y+1<8 && x+1<8 && x>0 && y>0 && Board[x-1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY && Board[x+1][y-1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY 
+									&& Board[x-1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY &&Board[x+1][y+1].getSoldierColor()!=Soldier_COLOR_AtSquare.EMPTY)
+								countBlockedSoldier++;
+						}
 					}
 				}
 			}
+			if(countBlockedSoldier==countSolidersinGame)
+				return true;
+			return false;
 		}
-		if(countBlockedSoldier==countSolidersinGame)
-			return true;
-		return false;
-	}
 
 
 
