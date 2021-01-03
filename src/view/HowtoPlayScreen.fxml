@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane fx:id="Pane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HowToPlayController">
    <children>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;">
@@ -28,20 +27,12 @@
                   <Font name="Cooper Black" size="28.0" />
                </font>
             </Text>
-            <Text fill="#783131" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use ARROW KEYS/Mouse to move your soldier" wrappingWidth="259.4368896484375">
+            <Text fill="#783131" layoutX="14.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Use Mouse to move your soldier" wrappingWidth="259.4368896484375">
                <font>
                   <Font name="Cooper Black" size="13.0" />
                </font>
             </Text>
-            <ImageView fitHeight="82.0" fitWidth="106.0" layoutX="14.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../resources/keys.png" />
-               </image>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </ImageView>
-            <ImageView fitHeight="61.0" fitWidth="106.0" layoutX="120.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="61.0" fitWidth="106.0" layoutX="29.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/mouse-.png" />
                </image>
@@ -171,7 +162,7 @@
                   <DropShadow />
                </effect>
             </ImageView>
-            <Text fill="#783131" layoutX="385.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Learn where you can move." wrappingWidth="164.10357666015625">
+            <Text fill="#783131" layoutX="385.0" layoutY="358.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hint" wrappingWidth="164.10357666015625">
                <font>
                   <Font name="Cooper Black" size="13.0" />
                </font>

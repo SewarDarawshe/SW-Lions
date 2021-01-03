@@ -445,19 +445,9 @@ public class Game {
 				}
 				
 			}
-			
-					 
-					 
-					 
-		
-			
+				
 	}
 	}
-
-
-
-
-
 
 	public boolean AddPlayer(String wp,String bp)
 	{
@@ -473,14 +463,6 @@ public class Game {
 	{
 		if(!s.isIsAlive())
 		{
-			//			int x;//row number
-			//			int y;//col number
-			//
-			//			Scanner sc = new Scanner(System.in);
-			//			System.out.println("Enter your row number that you want to return the soldier in: "); 
-			//			x = sc.nextInt();
-			//			System.out.println("Enter your column number that you want to return the soldier in: "); 
-			//			y = sc.nextInt();
 			//If soldier is White soldier
 			if(s.getColor()==Soldier_COLOR_AtSquare.WHITE) {
 				if(x==0)
@@ -696,7 +678,7 @@ public class Game {
 					else if(y>0 && y<7){
 						System.out.println(x);
 						System.out.println(y);
-						if(x-2>0  &&  ((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)|| ((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)) 
+						if((x-2)>0  && (y-2)>0 &&(x-1)>0  && (y-1)>0 &&  ((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)|| ((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)) 
 							whiteCountEatable++;
 					}
 				
@@ -704,7 +686,7 @@ public class Game {
 				//case the soldier is white Queen
 				else if(Pieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
-					while(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+					while( Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y++;
 						// case the queen arrived the edge of the board
