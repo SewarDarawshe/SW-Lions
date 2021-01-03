@@ -62,7 +62,7 @@ public class popUpQueController implements Initializable{
     @FXML
     private Button submitBTN;
     private Question question;
-    public void start(Stage primaryStage,Question q) {
+    public void start(Stage primaryStage) {
 		try {
 
 			Parent root = FXMLLoader.load(getClass().getResource("/view/popUpQue.fxml"));
@@ -81,6 +81,7 @@ public class popUpQueController implements Initializable{
     void submitQUE(ActionEvent event) {
     	int count=0;
     	int correctAnsID = 0;
+ 
 		try {
 			
 			if(Ans1RD.isSelected())
@@ -125,18 +126,31 @@ public class popUpQueController implements Initializable{
 			int points =E_Difficulty.Addedpoints(question.getDifficulty());
 			if(MainBoardController.BoardGame.turn.equals(Soldier_COLOR_AtSquare.BLACK))
 			{
+				
 				MainBoardController.BoardGame.g.getBlackPlayer().
 				setPoints(MainBoardController.BoardGame.g.getBlackPlayer().getPoints()+points);
+				
+				MainBoardController.BoardGame.bPointsValue.
+				setText((Integer.toString(MainBoardController.BoardGame.g.getBlackPlayer().getPoints())));
+				handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
+						"You received " + points + " points");
+				MainBoardController.BoardGame.changeturntowhite();
 			}
 		
-			if(MainBoardController.BoardGame.turn.equals(Soldier_COLOR_AtSquare.WHITE))
+			else if(MainBoardController.BoardGame.turn.equals(Soldier_COLOR_AtSquare.WHITE))
 			{
 				MainBoardController.BoardGame.g.getWhitePlayer().
 				setPoints(MainBoardController.BoardGame.g.getWhitePlayer().getPoints()+points);
+				MainBoardController.BoardGame.wPointsValue.
+				setText((Integer.toString(MainBoardController.BoardGame.g.getWhitePlayer().getPoints())));
+				handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
+						"You received " + points + " points");
+
+				MainBoardController.BoardGame.changeturntoBlack();
 			}
 		
-			handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
-					"You received " + points + " points");
+			
+			
 		}
 			
 			else {
@@ -145,18 +159,32 @@ public class popUpQueController implements Initializable{
 				{
 					MainBoardController.BoardGame.g.getBlackPlayer().
 					setPoints(MainBoardController.BoardGame.g.getBlackPlayer().getPoints()-points);
+					MainBoardController.BoardGame.bPointsValue.
+					setText((Integer.toString(MainBoardController.BoardGame.g.getBlackPlayer().getPoints())));
+					handleAlertAndWindow(AlertType.ERROR, "Oh no! :(",
+							"You lost " + question.getPenalty() + " points");
+
+					MainBoardController.BoardGame.changeturntowhite();
 				}
 			
-				if(MainBoardController.BoardGame.turn.equals(Soldier_COLOR_AtSquare.WHITE))
-				{
+				else if(MainBoardController.BoardGame.turn.equals(Soldier_COLOR_AtSquare.WHITE))
+				{			
+
 					MainBoardController.BoardGame.g.getWhitePlayer().
 					setPoints(MainBoardController.BoardGame.g.getWhitePlayer().getPoints()-points);
+					MainBoardController.BoardGame.wPointsValue.
+					setText((Integer.toString(MainBoardController.BoardGame.g.getWhitePlayer().getPoints())));
+					handleAlertAndWindow(AlertType.ERROR, "Oh no! :(",
+							"You lost " + question.getPenalty() + " points");
+					
+
+					MainBoardController.BoardGame.changeturntoBlack();
 				}
 				
 				
 
-				handleAlertAndWindow(AlertType.ERROR, "Uh oh! :(",
-						"You lost " + points + " points");
+			
+				
 			}
 		
 
@@ -171,6 +199,7 @@ public class popUpQueController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
+		
 		question=Sysdata.getInstance().fetchQuestion();
 		erorLabel.setVisible(false);
 		
@@ -182,15 +211,15 @@ public class popUpQueController implements Initializable{
 		Ans1TEXT.setEditable(false);
 
 		Ans2RD.setSelected(false);
-		Ans2TEXT.setText(question.getAnswers().get(0).getText());
+		Ans2TEXT.setText(question.getAnswers().get(1).getText());
 		Ans2TEXT.setEditable(false);
 
 		Ans3RD.setSelected(false);
-		Ans3TEXT.setText(question.getAnswers().get(0).getText());
+		Ans3TEXT.setText(question.getAnswers().get(2).getText());
 		Ans3TEXT.setEditable(false);
 
 		Ans4RD.setSelected(false);
-		Ans4TEXT.setText(question.getAnswers().get(0).getText());
+		Ans4TEXT.setText(question.getAnswers().get(3).getText());
 		Ans4TEXT.setEditable(false);
 		
 		difficultyTEXT.setText(question.getDifficulty().toString());

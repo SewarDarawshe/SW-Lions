@@ -93,9 +93,9 @@ public class BoardGameController implements Initializable{
 	private TimerThread gamethread;
 	private TimerThread whitethread;
 	private TimerThread blackthread;
-	private TimerInterface gametime;
-	private TimerInterface whitetime;
-	private TimerInterface blacktime;
+	public TimerInterface gametime;
+	public TimerInterface whitetime;
+	public TimerInterface blacktime;
 	private Duration duration;
 	private Circle[] blackcircles = new Circle[12];// this array include the black circles
 	private Circle[] whitecircles = new Circle[12];// this array include the white circles
@@ -104,7 +104,7 @@ public class BoardGameController implements Initializable{
 	private long endblack;
 	private long startwhite;
 	private long startblack;
-
+public boolean wasinYellow=false;
 
 	//GUI parameters
 	@FXML
@@ -139,10 +139,10 @@ public class BoardGameController implements Initializable{
 	private TextField WhiteNickText = new TextField();
 
 	@FXML
-	private TextField bPointsValue = new TextField();
+	public TextField bPointsValue = new TextField();
 
 	@FXML
-	private TextField wPointsValue= new TextField();
+	public TextField wPointsValue= new TextField();
 
 	@FXML
 	private AnchorPane Pane = new AnchorPane();
@@ -733,6 +733,7 @@ public class BoardGameController implements Initializable{
 												g.getBlackPieces()[i].getLocation().setX(targetx);
 												g.getBlackPieces()[i].getLocation().setY(targety);
 												g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+												System.out.println("736");
 												bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 												redSoldier=null;
 
@@ -787,6 +788,7 @@ public class BoardGameController implements Initializable{
 													g.getBlackPieces()[i].getLocation().setX(targetx);
 													g.getBlackPieces()[i].getLocation().setY(targety);
 													g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+													System.out.println("791");
 													bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 													redSoldier=null;
 													
@@ -1146,6 +1148,7 @@ public class BoardGameController implements Initializable{
 				}
 				else if(turn==Soldier_COLOR_AtSquare.BLACK) {
 					g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+50);
+					System.out.println("1151");
 					bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 					this.soldier= newlayout(targetx,targety,this.soldier);
 					//2+3
@@ -1182,7 +1185,21 @@ public class BoardGameController implements Initializable{
 					
 					return 0;
 				}
-			}
+			}if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.YELLOW) {
+				popUpQueController popup=new popUpQueController();
+				Stage stage= new Stage();
+				wasinYellow=true;
+				
+				try {
+					System.out.println("in the yellow try");
+					popup.start(stage);	
+				
+
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+		
+				
 			if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.RED) {
 				if(turn==Soldier_COLOR_AtSquare.WHITE) {
 					turn=Soldier_COLOR_AtSquare.WHITE;
@@ -1250,11 +1267,14 @@ public class BoardGameController implements Initializable{
 		
 			}
 			}
+		}
 		
 		catch (Exception e) {
 				//ToDo
 			}
 		finally {
+			if(!wasinYellow) {
+				
 			int diffPoints=0;// the points that should be decreased or increased to the player
 			//checking for the white player that have finished his turn
 			if(turn==Soldier_COLOR_AtSquare.BLACK) {
@@ -1282,17 +1302,19 @@ public class BoardGameController implements Initializable{
 				if(convert>60) {
 					diffPoints=(int)convert-60;
 					g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()-diffPoints);
+					System.out.println("1337");
 					bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 					
 				}
 				if(convert<60) {
 					diffPoints=60-(int)convert;
 					g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+diffPoints);
+					System.out.println("1344");
 					bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 					
 				}
 				}
-			
+			}
 			// Resert the colored square to black(orange/green/red/blue)
 		for(int i=0; i<8; i++) {
 			for(int j=0; j<8; j++) {
@@ -1988,6 +2010,43 @@ for(int i=0; i<g.getBlackPieces().length; i++) {
 		}	
 		return c;	
 	}
-	
+	public void changeturntowhite()
+	{
+		turn = Soldier_COLOR_AtSquare.WHITE;
+		
+		blackgreentimer.stop();
+		blackorangetimer.stop();
+		TurnLbl.setText("Its the White turn");
+		if(blackthread!=null)
+			blackthread.interrupt();
+		startWhiteTimer();
+		
+		endblack=System.nanoTime();
+		startwhite=System.nanoTime();
+		
+		
+		
+		this.soldier=null;
+		this.target=null;
+	}
+	public void changeturntoBlack()
+	{
+		turn = Soldier_COLOR_AtSquare.BLACK;
+		
+		whitegreentimer.stop();
+		whiteorangetimer.stop();
+		TurnLbl.setText("Its the Black turn");
+		if(whitethread!=null)
+			whitethread.interrupt();
+		startBlackTimer();
+		
+		endwhite=System.nanoTime();
+		startblack=System.nanoTime();
+		
+		
+		
+		this.soldier=null;
+		this.target=null;
+	}
 
 }
