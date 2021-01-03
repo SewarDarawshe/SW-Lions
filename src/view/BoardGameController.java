@@ -71,7 +71,7 @@ import utils.Soldier_COLOR_AtSquare;
 public class BoardGameController implements Initializable{
 
 	// Helping parameters to complete methods
-	private Soldier_COLOR_AtSquare turn=Soldier_COLOR_AtSquare.WHITE;
+	public Soldier_COLOR_AtSquare turn=Soldier_COLOR_AtSquare.WHITE;
 	private Square[][] board;
 	private int numofYellowSquares=0;
 	public Game g;
@@ -347,7 +347,7 @@ public class BoardGameController implements Initializable{
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty())
 		{
 
-
+			MainBoardController.BoardGame=this;
 
 
 			// setting the current player in the board game

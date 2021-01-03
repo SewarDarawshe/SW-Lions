@@ -111,7 +111,7 @@ public class ManageQuestionsController  implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		MainBoardController.SettingsController=this;
+		MainBoardController.ManageQuestions=this;
 		questionIDColumn.setCellValueFactory(new PropertyValueFactory<>("number")); // According to variable name
 		questionColumn.setCellValueFactory(new PropertyValueFactory<>("text")); // Same here
 		questionDifficultyColumn.setCellValueFactory(new PropertyValueFactory<>("difficulty")); // Same here

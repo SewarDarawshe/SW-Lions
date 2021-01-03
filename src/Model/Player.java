@@ -1,4 +1,6 @@
 package Model;
+import java.util.Date;
+
 import utils.Soldier_COLOR_AtSquare;
 
 
@@ -11,7 +13,7 @@ public class Player {
 	private String NickName;
 	private int Points;
 	private Soldier_COLOR_AtSquare Color;
-
+	
 	
 	// -------------------------------Constructors-------------------------------
 
@@ -19,6 +21,7 @@ public class Player {
 		super();
 		this.NickName = nickName;
 		this.Points = points;
+		
 	}
 	
 	// -------------------------------Getters And Setters-------------------------
@@ -39,7 +42,7 @@ public class Player {
 		this.Points = points;
 	}
 	
-
+	
 
 	public Soldier_COLOR_AtSquare getColor() {
 		return Color;

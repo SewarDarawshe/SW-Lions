@@ -47,7 +47,7 @@ public class Sysdata {
 	private static Player WhitePlayer;
 
 	private ArrayList<Question> QuestionsArray = new ArrayList<>();
-	private ArrayList<Game> GamesHistory = new ArrayList<>();
+	private static ArrayList<Game> GamesHistory = new ArrayList<>();
 
 	public static Sysdata getInstance() {
 		if (instance == null)
@@ -225,17 +225,17 @@ public class Sysdata {
 	}
 
 	/*
-	 * given a difficulty returns a random question with the requested difficulty.
+	 * given a difficulty returns a random question 
 	 */
-	public Question fetchQuestion(E_Difficulty diff) {
-		ArrayList<Question> arr = fetchQuestionsArr(diff);
+	public Question fetchQuestion() {
+		ArrayList<Question> arr = getQuestionsarr();
 		Random rand = new Random();
 		int s = arr.size();
 		if (s > 0) {
 			Question choosenQuestion = arr.get(rand.nextInt(s));
 			return choosenQuestion;
 		} else {
-			System.out.println("there are no questions with difficulty " + diff.toString());
+			System.out.println("can't return random question");
 			return null;
 		}
 	}
@@ -259,7 +259,7 @@ public class Sysdata {
 	 * getHistory reads the JSON file with the previous games and returns an array
 	 * list containing them.
 	 */
-	public ArrayList<Game> getHistory() {
+	public static ArrayList<Game> getHistory() {
 		readHistoryJSON();
 		return GamesHistory;
 	}
@@ -295,7 +295,7 @@ public class Sysdata {
 	 * array list.
 	 */
 	@SuppressWarnings("deprecation")
-	private void readHistoryJSON() {
+	private static void readHistoryJSON() {
 		GamesHistory = new ArrayList<Game>();
 		try {
 			if (GamesHistory.isEmpty())

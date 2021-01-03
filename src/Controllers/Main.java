@@ -25,8 +25,6 @@ public class Main extends Application {
 			Parent root=FXMLLoader.load(getClass().getResource("/view/MainBoardScreen.fxml"));
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Home Page");
-			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			System.out.println("Aaaaa");
 			primaryStage.setScene(scene);
 			primaryStage.show();
 	

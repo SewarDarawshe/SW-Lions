@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="view.popUpQueController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="500.0">
+         <children>
+            <TextField fx:id="QueText" layoutX="31.0" layoutY="25.0" prefHeight="34.0" prefWidth="437.0" />
+            <RadioButton fx:id="Ans1RD" layoutX="51.0" layoutY="91.0" mnemonicParsing="false" textFill="#783131" />
+            <TextField fx:id="Ans1TEXT" layoutX="89.0" layoutY="87.0" prefHeight="25.0" prefWidth="372.0" />
+            <RadioButton fx:id="Ans2RD" layoutX="51.0" layoutY="135.0" mnemonicParsing="false" textFill="#783131" />
+            <TextField fx:id="Ans2TEXT" layoutX="89.0" layoutY="131.0" prefHeight="25.0" prefWidth="372.0" />
+            <RadioButton fx:id="Ans3RD" layoutX="51.0" layoutY="177.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="16.0" textFill="#783131" />
+            <TextField fx:id="Ans3TEXT" layoutX="89.0" layoutY="174.0" prefHeight="25.0" prefWidth="372.0" />
+            <RadioButton fx:id="Ans4RD" layoutX="51.0" layoutY="217.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="16.0" textFill="#783131" />
+            <TextField fx:id="Ans4TEXT" layoutX="89.0" layoutY="217.0" prefHeight="25.0" prefWidth="372.0" />
+            <Label fx:id="erorLabel" layoutX="72.0" layoutY="304.0" prefHeight="20.0" prefWidth="356.0" style="-fx-background-color: #21ffd7;" textAlignment="CENTER" textFill="#bb8b25">
+               <font>
+                  <Font name="Cooper Black" size="17.0" />
+               </font>
+            </Label>
+            <TextField fx:id="difficultyTEXT" layoutX="126.0" layoutY="252.0" />
+            <Label layoutX="16.0" layoutY="255.0" text="Difficulty:" textFill="#783131">
+               <font>
+                  <Font name="Cooper Black" size="16.0" />
+               </font>
+            </Label>
+            <Button fx:id="submitBTN" layoutX="166.0" layoutY="331.0" mnemonicParsing="false" onAction="#submitQUE" prefHeight="32.0" prefWidth="142.0" style="-fx-background-color: peru;" text="Submit" textFill="#783131">
+               <font>
+                  <Font name="Cooper Black" size="17.0" />
+               </font>
+            </Button>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.ButtonGroup;
+
 import Controllers.Sysdata;
 import Model.Answer;
 import Model.Question;
@@ -68,8 +70,9 @@ public class AddUpdate_QueController implements Initializable {
 	@FXML
 	private Button ReturntoSettingsBTN;
 
+    private ButtonGroup group;
 
-
+    
 	public void start(Stage primaryStage,Question q) {
 		try {
 
@@ -89,8 +92,10 @@ public class AddUpdate_QueController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		//	old = SettingsController.
+		
+	
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
-		this.old=MainBoardController.SettingsController.getQue();
+		this.old=MainBoardController.ManageQuestions.getQue();
 		// initiate to empty values
 		resetFields();
 
@@ -141,6 +146,11 @@ public class AddUpdate_QueController implements Initializable {
 		boolean ans2Correct = Ans2RD.isSelected();
 		boolean ans3Correct = Ans3RD.isSelected();
 		boolean ans4Correct = Ans4RD.isSelected();
+int count=0;
+if(ans1Correct)count++;
+if(ans2Correct)count++;
+if(ans3Correct)count++;
+if(ans4Correct)count++;
 
 		E_Difficulty diff = difficultyCombo.getSelectionModel().getSelectedItem();
 
@@ -149,6 +159,8 @@ public class AddUpdate_QueController implements Initializable {
 				if (!ans2.isEmpty()) {
 					if (!ans3.isEmpty()) {
 						if (!ans4.isEmpty()) {
+							if(count==1)
+							{
 							if (ans1Correct || ans2Correct || ans3Correct || ans4Correct) {
 								if (diff != null) {
 
@@ -180,6 +192,8 @@ public class AddUpdate_QueController implements Initializable {
 									erorLabel.setText("Please select a difficulty level");
 							} else
 								erorLabel.setText("Please select the correct answer");
+							}else
+								erorLabel.setText("Please select just one answer ");
 						} else
 							erorLabel.setText("Please enter answer 4");
 					} else

@@ -42,11 +42,24 @@ public class Game {
 	private Soldier[] WhitePieces;
 	private Soldier[] BlackPieces;
 
-
+	// in the use for the results board only
+		private String whiteNic;
+		private String blackNic;
+		private int whitePoint;
+		private int blackPoints;
 
 	//---------------------------Constructor----------------------
 
-
+	//only to the results board
+		public Game(Date gameDate, Time queueTime, String whiteNic, String blackNic, int whitePoint, int blackPoints) {
+			super();
+			GameDate = gameDate;
+			QueueTime = queueTime;
+			this.whiteNic = whiteNic;
+			this.blackNic = blackNic;
+			this.whitePoint = whitePoint;
+			this.blackPoints = blackPoints;
+		}
 	public Game(Player white,Player black, Date gamedate, Time queueTime) {
 		super();
 		Board =new Square[8][8];
@@ -68,7 +81,41 @@ public class Game {
 		BlackPieces =new Soldier[12];
 	}
 	//---------------Getters and Setters--------------------------
+	public String getWhiteNic() {
+		return whiteNic;
+	}
 
+	public void setWhiteNic(String whiteNic) {
+		this.whiteNic = whiteNic;
+	}
+
+	public String getBlackNic() {
+		return blackNic;
+	}
+
+	public void setBlackNic(String blackNic) {
+		this.blackNic = blackNic;
+	}
+
+	public int getWhitePoint() {
+		return whitePoint;
+	}
+
+	public void setWhitePoint(int whitePoint) {
+		this.whitePoint = whitePoint;
+	}
+
+	public int getBlackPoints() {
+		return blackPoints;
+	}
+
+	public void setBlackPoints(int blackPoints) {
+		this.blackPoints = blackPoints;
+	}
+
+	public Date getGameDate() {
+		return GameDate;
+	}
 	public Square[][] getBoard() {
 		return Board;
 	}
@@ -963,7 +1010,9 @@ public class Game {
 	public String toString() {
 		return "Game [GameDate=" + GameDate + ", whitePlayer=" + whitePlayer + ", blackPlayer=" + blackPlayer + "]";
 	}
-
+	public String resultstoString() {
+		return "Game [GameDate=" + GameDate + ",time=" + QueueTime + ", blackPlayer=" + blackNic + "whitep="+whiteNic+" Bpoint:"+blackPoints+"wpoint"+whitePoint+"}";
+	}
 
 
 }

@@ -18,7 +18,9 @@ import javafx.stage.Stage;
 public class MainBoardController implements Initializable {
 
 
-	protected static ManageQuestionsController SettingsController;
+	protected static ManageQuestionsController ManageQuestions;
+	protected static BoardGameController BoardGame;
+
 
 
 	@FXML
