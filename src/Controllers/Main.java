@@ -9,7 +9,7 @@ import Model.Game;
 import Model.Player;
 import Model.Question;
 import Model.Soldier;
-import Model.Square;
+import Model.SquareObject;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;

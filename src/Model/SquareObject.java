@@ -7,7 +7,7 @@ import utils.Soldier_COLOR_AtSquare;
 /*
  * @author Maisa Mansour
  */
-public class Square {
+public abstract class SquareObject {
 
 	// -------------------------------Class Members------------------------------
 
@@ -23,7 +23,7 @@ public class Square {
 
 	// -------------------------------Constructors-------------------------------
 
-	public Square(int x, int y, Soldier_COLOR_AtSquare soldierColor, Soldier s) {
+	public SquareObject(int x, int y, Soldier_COLOR_AtSquare soldierColor, Soldier s) {
 		super();
 		X = x;
 		Y = y;
@@ -32,7 +32,7 @@ public class Square {
 		this.squareColor= SQUARE_COLOR.BLACK;
 	}
 
-
+	
 
 	// -------------------------------Getters And Setters-------------------------
 
@@ -69,11 +69,7 @@ public class Square {
 
 
 
-	public Square(int x, int y) {
-		super();
-		X = x;
-		Y = y;
-	}
+
 
 	public Soldier_COLOR_AtSquare getSoldierColor() {
 		return SoldierColor;

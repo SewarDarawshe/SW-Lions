@@ -11,12 +11,12 @@ public class Soldier {
 
 	private boolean IsAlive;
 	private boolean IsQueen;
-	private Square Location;
+	private SquareObject Location;
 	private Soldier_COLOR_AtSquare Color;
 
 	// -------------------------------Constructors-------------------------------
 
-	public Soldier(boolean isAlive, Square location, Soldier_COLOR_AtSquare color) {
+	public Soldier(boolean isAlive, SquareObject location, Soldier_COLOR_AtSquare color) {
 		super();
 		this.IsAlive = isAlive;
 		this.IsQueen = false;
@@ -24,7 +24,7 @@ public class Soldier {
 		this.Color=color;
 	}
 	
-	public Soldier( Square location, Soldier_COLOR_AtSquare color) {
+	public Soldier( SquareObject location, Soldier_COLOR_AtSquare color) {
 		super();
 		this.IsAlive = true;
 		this.IsQueen = false;
@@ -58,11 +58,11 @@ public class Soldier {
 		this.IsQueen = isQueen;
 	}
 
-	public Square getLocation() {
+	public SquareObject getLocation() {
 		return Location;
 	}
 
-	public void setLocation(Square location) {
+	public void setLocation(SquareObject location) {
 		this.Location = location;
 	}
 
@@ -78,8 +78,9 @@ public class Soldier {
 
 	
 	//function that moves the black soldier
-	public int moveBlack( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
+	public int moveBlack( int sourceX,int sourceY,int targetX,int targetY, SquareObject[][] Board)
 	{
+		
 		//check if its possible    
 if(checkSoldierDead(sourceX, sourceY, targetX, targetY, Board, Soldier_COLOR_AtSquare.BLACK) == 0) {
 	return -1;
@@ -132,8 +133,14 @@ if(checkSoldierDead(sourceX, sourceY, targetX, targetY, Board, Soldier_COLOR_AtS
 
 
 	//function that Moves a white piece in a specified direction
-	public int moveWhite( int sourceX,int sourceY,int targetX,int targetY, Square[][] Board)
+	public int moveWhite( int sourceX,int sourceY,int targetX,int targetY, SquareObject[][] Board)
 	{
+		System.out.println(sourceX);
+		System.out.println(sourceY);
+		System.out.println(targetX);
+		System.out.println(targetY);
+		System.out.println(Board[targetX][targetY].getSoldierColor());
+
 		//check if its possible 
 		if (checkSoldierDead(sourceX, sourceY, targetX, targetY, Board,Soldier_COLOR_AtSquare.WHITE) ==0) 
 		{
@@ -198,7 +205,7 @@ if(checkSoldierDead(sourceX, sourceY, targetX, targetY, Board, Soldier_COLOR_AtS
 
 	}
 	
-	public int checkSoldierDead(int sourcex,int sourcey,int targetx,int targety,Square[][] Board, Soldier_COLOR_AtSquare color)
+	public int checkSoldierDead(int sourcex,int sourcey,int targetx,int targety,SquareObject[][] Board, Soldier_COLOR_AtSquare color)
 	{
 		
 
@@ -264,7 +271,7 @@ if(checkSoldierDead(sourceX, sourceY, targetX, targetY, Board, Soldier_COLOR_AtS
 	// returns -1 if the queen is not dead an 0 if the queen dead
 		//i and j the location that has chosen
 		//color is the color of the queen .
-		public int checkQueenDead(int sourcex,int sourcey,int targetx,int targety,Square[][] Board, Soldier_COLOR_AtSquare color)
+		public int checkQueenDead(int sourcex,int sourcey,int targetx,int targety,SquareObject[][] Board, Soldier_COLOR_AtSquare color)
 		{
 
           if(sourcex >1 && sourcey >1) {
@@ -332,7 +339,7 @@ if(checkSoldierDead(sourceX, sourceY, targetX, targetY, Board, Soldier_COLOR_AtS
 		//color is the color of the queen its 1 if black and 2 if white.
 		//this method  return -1 if not queen and move the queen and return 0 if queen and moved;
 
-		public int QueenMove(Square[][] Board,int sourcex,int sourcey,int targetx,int targety, Soldier_COLOR_AtSquare color) {
+		public int QueenMove(SquareObject[][] Board,int sourcex,int sourcey,int targetx,int targety, Soldier_COLOR_AtSquare color) {
 
 			int tempx=sourcex,tempy=sourcey;
 			
@@ -528,7 +535,7 @@ if(checkSoldierDead(sourceX, sourceY, targetX, targetY, Board, Soldier_COLOR_AtS
 
 	}
 		
-		public int QueenEat(Square[][] Board,int sourcex,int sourcey,int targetx,int targety, Soldier_COLOR_AtSquare color) {
+		public int QueenEat(SquareObject[][] Board,int sourcex,int sourcey,int targetx,int targety, Soldier_COLOR_AtSquare color) {
 
 			int tempx=sourcex,tempy=sourcey;
 			

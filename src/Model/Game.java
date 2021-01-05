@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.File;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,11 +13,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import Controllers.SquareFactory;
 import Model.Player;
 import utils.Soldier_COLOR_AtSquare;
 import view.BoardGameController;
 import view.NicknamesSetUpController;
-import utils.E_COLOR;
+
 import utils.E_Difficulty;
 import utils.SQUARE_COLOR;
 
@@ -34,7 +36,7 @@ public class Game {
 
 	// -------------------------------Class Members------------------------------
 
-	private Square[][] Board;
+	private SquareObject[][] Board;
 	private Date GameDate;
 	private Player whitePlayer;
 	private Player blackPlayer;
@@ -61,7 +63,7 @@ public class Game {
 		}
 	public Game(Player white,Player black, Date gamedate, Time queueTime) {
 		super();
-		Board =new Square[8][8];
+		Board =new SquareObject[8][8];
 		GameDate = gamedate;
 		QueueTime = queueTime;
 		WhitePieces =new Soldier[12];
@@ -72,7 +74,7 @@ public class Game {
 
 	public Game(Date gameDate, Player whitePlayer, Player blackPlayer) {
 		super();
-		Board =new Square[8][8];
+		Board =new SquareObject[8][8];
 		GameDate = gameDate;
 		this.whitePlayer = whitePlayer;
 		this.blackPlayer = blackPlayer;
@@ -120,10 +122,10 @@ public class Game {
 	public Date getGameDate() {
 		return GameDate;
 	}
-	public Square[][] getBoard() {
+	public SquareObject[][] getBoard() {
 		return Board;
 	}
-	public void setBoard(Square[][] board) {
+	public void setBoard(SquareObject[][] board) {
 		Board = board;
 	}
 
@@ -206,16 +208,15 @@ public class Game {
 				if(row%2!=0) 
 					for(int col=0;col<8;col++)
 					{
-						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY,null);
-						Board[row][col].setSquareColor(SQUARE_COLOR.BLACK);
+						Board[row][col]= SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,row, col,Soldier_COLOR_AtSquare.EMPTY,null);
 					
 					}
 				else
 				{
 					for(int col=1;col<8;col++)
 					{
-						Board[row][col]=new Square(row, col,Soldier_COLOR_AtSquare.EMPTY,null);
-						Board[row][col].setSquareColor(SQUARE_COLOR.BLACK);
+						Board[row][col]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,row, col,Soldier_COLOR_AtSquare.EMPTY,null);
+						
 						
 					}
 				}
