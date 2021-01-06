@@ -687,6 +687,7 @@ public class Game {
 				//case the soldier is white Queen
 				else if(Pieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
+					   if(x>0) {
 					while( Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y++;
@@ -704,10 +705,12 @@ public class Game {
 							y++;
 						}
 					}
+					   }
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						whiteCountEatable++;
 					//case the queen is moving up left
+					if(x>0 & y>0) {
 					while(Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y--;
@@ -719,12 +722,14 @@ public class Game {
 							y--;
 							x=7;
 						}
-
+                  
+					}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						whiteCountEatable++;
 					//case the queen is moving right down
+					if(x<7 && y<7) {
 					while(Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y++;
@@ -738,10 +743,12 @@ public class Game {
 							x++;
 						}
 					}
+				}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						whiteCountEatable++;
 					//case the queen is moving left down
+					if(y>0) {
 					while(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y--;
@@ -757,6 +764,7 @@ public class Game {
 							y=7;
 							x++;
 						}
+					}
 					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.BLACK && Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
@@ -807,6 +815,7 @@ public class Game {
 
 				else if(Pieces[i].isIsQueen()==true) {
 					//case the queen is moving up right
+					if(x>0) {
 					while(Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y++;
@@ -824,10 +833,12 @@ public class Game {
 							y++;
 						}
 					}
+				}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						blackCountEatable++;
 					//case the queen is moving up left
+					if(x>0 && y>0) {
 					while(Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x--;
 						y--;
@@ -841,10 +852,12 @@ public class Game {
 						}
 
 					}
+				}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x-1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						blackCountEatable++;
 					//case the queen is moving right down
+					if(x<7 && y<7) {
 					while(Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y++;
@@ -858,10 +871,13 @@ public class Game {
 							x++;
 						}
 					}
+					}
 					//check if the soldier near is a rival soldier and there is an empty square after him.
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y+1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						blackCountEatable++;
 					//case the queen is moving left down
+					if(y>0) 
+					{
 					while(Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 						x++;
 						y--;
@@ -876,6 +892,8 @@ public class Game {
 							y=7;
 							x++;
 						}
+						
+					}
 					}
 					if(Board[x][y].getSoldierColor()==Soldier_COLOR_AtSquare.WHITE && Board[x+1][y-1].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY)
 						blackCountEatable++;
