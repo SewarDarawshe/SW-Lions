@@ -2,7 +2,7 @@ package view;
 
 import java.time.Duration;
 
-public interface TimerInterface {
+public abstract interface TimerInterface {
 	
 	public void SetDuration(Duration duration);
 	public void nexLap();

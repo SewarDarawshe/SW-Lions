@@ -976,34 +976,40 @@ public class BoardGameController implements Initializable{
 
 					//moving the white soldier to yellow Square
 					if(turn==Soldier_COLOR_AtSquare.WHITE) {
-						this.soldier= newlayout(targetx,targety,this.soldier);
 						
+						moveWhite(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey);
 						for(int j=0; j<g.getWhitePieces().length; j++) {
-							if(g.getWhitePieces()[j].getLocation().getX()== sourcex && g.getWhitePieces()[j].getLocation().getY()== sourcey)
+							if(g.getWhitePieces()[j].getLocation().getX()== targetx && g.getWhitePieces()[j].getLocation().getY()== targety)
 							{
-								board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+								
+
 								board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK
 										, targetx, targety, Soldier_COLOR_AtSquare.WHITE, g.getWhitePieces()[j]);
-								g.getWhitePieces()[j].getLocation().setX(targetx);
-								g.getWhitePieces()[j].getLocation().setY(targety);
+								
 							}
 						}
-					}
+					
+					
 
 					//moving the black soldier to yellow Square
-					if(turn==Soldier_COLOR_AtSquare.BLACK) {
-						this.soldier= newlayout(targetx,targety,this.soldier);
+					}else if(turn==Soldier_COLOR_AtSquare.BLACK) {
+						
+						moveBlack(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey);
+
 						for(int j=0; j<g.getBlackPieces().length; j++) {
-							if(g.getBlackPieces()[j].getLocation().getX()== sourcex && g.getBlackPieces()[j].getLocation().getY()== sourcey)
+							if(g.getBlackPieces()[j].getLocation().getX()== targetx && g.getBlackPieces()[j].getLocation().getY()== targety)
 							{
-								board[sourcex][sourcey].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+								
 								board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK
 										, targetx, targety, Soldier_COLOR_AtSquare.BLACK, g.getBlackPieces()[j]);								g.getBlackPieces()[j].getLocation().setX(targetx);
-										g.getBlackPieces()[j].getLocation().setY(targety);
+										
 							}
 						}
-					}
+					
 
+						
+					}
+System.out.println(board[targetx][targety].getSquareColor());
 					// returning the yellow square to black square
 					Rectangle r1= getRectangle(targetx,targety);
 					r1.setFill(Color.rgb(94,91,91));
@@ -1168,7 +1174,7 @@ public class BoardGameController implements Initializable{
 					if(board[i][j]!=null) {
 						if(board[i][j].getSquareColor()==SQUARE_COLOR.YELLOW) {
 							numofYellowSquares++;
-
+System.out.println(numofYellowSquares);
 						}
 					}
 					}
@@ -1248,13 +1254,16 @@ public class BoardGameController implements Initializable{
 						{
 							this.soldier.setVisible(false);
 						}
+						
 
 						//  white eat right
 						else if(targety==sourcey+2 && targetx+2==sourcex) {
+							System.out.println("white eat right");
 							movewhitetoRight(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey, i);
 						}
 						//write left eat
 						else if(targety==sourcey-2 && targetx+2==sourcex) {
+							System.out.println("write left eat");
 							moveWhitetoLeft(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey, i);
 						}
 					}
@@ -1275,6 +1284,7 @@ public class BoardGameController implements Initializable{
 	private void moveBlack(int sourcex, int sourcey, int targetx, int targety, int firstsourcex, int firstsourcey) {
 		//moving the black soldier to target square
 		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK )  {
+			System.out.println("in black");
 			for(int i=0; i<g.getBlackPieces().length; i++) {
 				if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey)
 				{
@@ -1332,11 +1342,13 @@ public class BoardGameController implements Initializable{
 
 						// right black eat
 						else if(targety==sourcey+2 && targetx==sourcex+2) {
+							System.out.println("right black eat");
 							rightBlackeat(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey, i);
 
 						}
 						else
 							//Left black eat
+							System.out.println("left black eat");
 							if(targety==sourcey-2 && targetx==sourcex+2) {
 								leftBlackeat(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey, i);
 							}
@@ -1357,13 +1369,6 @@ public class BoardGameController implements Initializable{
 
 			
 
-
-			if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.ORANGE) {
-				// returning the orange square to black square
-				Rectangle r1= getRectangle(targetx,targety);
-				board[targetx][targety].setSquareColor(SQUARE_COLOR.BLACK);
-				r1.setFill(Color.rgb(94,91,91));
-			}
 
 
 		}
