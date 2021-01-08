@@ -671,12 +671,14 @@ public class BoardGameController implements Initializable{
 					//moving the black soldier to target square
 					if(turn==Soldier_COLOR_AtSquare.BLACK) {
 						moveBlack(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+						changeturntowhite();
 					}
 
 
 					//moving the white soldier to target square
-					if(turn==Soldier_COLOR_AtSquare.WHITE) {
+					else if(turn==Soldier_COLOR_AtSquare.WHITE) {
 						moveWhite(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+						changeturntoBlack();
 					}
 
 					if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.ORANGE) {
@@ -709,7 +711,8 @@ public class BoardGameController implements Initializable{
 						System.out.println("after while");
 						for(int i=0;i<8;i++)
 							for(int j=0;j<8;j++)
-							{if(board[i][j]!=null && board[i][j].getSquareColor()==SQUARE_COLOR.BLACK && board[i][j].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
+							{
+								if(board[i][j]!=null && board[i][j].getSquareColor()==SQUARE_COLOR.BLACK && board[i][j].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 								if(g.returnSoldier(s,i,j)){
 									returnForBlack+="row:"+i+"col:"+j+":) \n";
 								}
@@ -772,7 +775,6 @@ public class BoardGameController implements Initializable{
 										
 						
 						    }
-						    if(turn == Soldier_COLOR_AtSquare.BLACK) {
 						    	moveBlack(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
 								//1
 								board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
@@ -797,12 +799,12 @@ public class BoardGameController implements Initializable{
 									}
 
 								}
-							}
+								changeturntowhite();
+							
 					
-						
 					}
 					//takint the first dead soldier at the white pieces
-					if(turn == Soldier_COLOR_AtSquare.WHITE) {
+					else if(turn == Soldier_COLOR_AtSquare.WHITE) {
 						System.out.println("wbbbbb");
 
 						while(s==null && index<12) {
@@ -826,7 +828,7 @@ public class BoardGameController implements Initializable{
 							}
 						System.out.println("after for");
 
-					}
+					
 				
 					 Dialog<Pair<Integer, Integer>> dialog = new Dialog<>();
 					 dialog.setTitle("Choose where to return the solider ");
@@ -881,8 +883,6 @@ public class BoardGameController implements Initializable{
 
 							
 							if(isReturned) {
-								
-								 if(turn == Soldier_COLOR_AtSquare.WHITE) {
 									moveWhite(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
 									//1
 									board[x][y].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
@@ -913,16 +913,11 @@ public class BoardGameController implements Initializable{
 										}
 
 									}
-								}
-
-
-							
-
-
-				
-
-
-				}}
+		
+				}
+							changeturntoBlack();		
+					}
+				}
 				else if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.GREEN) {
 					if(turn==Soldier_COLOR_AtSquare.WHITE) {
 						g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+50);
@@ -982,6 +977,7 @@ public class BoardGameController implements Initializable{
 					//moving the white soldier to yellow Square
 					if(turn==Soldier_COLOR_AtSquare.WHITE) {
 						this.soldier= newlayout(targetx,targety,this.soldier);
+						
 						for(int j=0; j<g.getWhitePieces().length; j++) {
 							if(g.getWhitePieces()[j].getLocation().getX()== sourcex && g.getWhitePieces()[j].getLocation().getY()== sourcey)
 							{
@@ -1164,6 +1160,21 @@ public class BoardGameController implements Initializable{
 
 
 			}
+			
+			// counting the yellow square at the board
+			numofYellowSquares=0;
+			for(int i=0; i<8; i++) {
+				for(int j=0; j<8; j++) {
+					if(board[i][j]!=null) {
+						if(board[i][j].getSquareColor()==SQUARE_COLOR.YELLOW) {
+							numofYellowSquares++;
+
+						}
+					}
+					}
+				}
+			
+			
 			while(numofYellowSquares<3) {
 				CheckAndDoYellowSquares();
 
@@ -1255,7 +1266,7 @@ public class BoardGameController implements Initializable{
 				}
 			}
 
-			changeturntoBlack();
+			
 		}
 
 	}
@@ -1344,7 +1355,7 @@ public class BoardGameController implements Initializable{
 
 			}
 
-			changeturntowhite();
+			
 
 
 			if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.ORANGE) {
