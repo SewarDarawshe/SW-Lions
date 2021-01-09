@@ -1084,59 +1084,8 @@ public class BoardGameController implements Initializable{
 					}
 				}
 				if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.YELLOW) {
-					numofYellowSquares--;
-					popUpQueController popup=new popUpQueController();
-					Stage stage= new Stage();
-					wasinYellow=true;
-
-					//moving the white soldier to yellow Square
-					if(turn==Soldier_COLOR_AtSquare.WHITE) {
-						
-						moveWhite(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey);
-						for(int j=0; j<g.getWhitePieces().length; j++) {
-							if(g.getWhitePieces()[j].getLocation().getX()== targetx && g.getWhitePieces()[j].getLocation().getY()== targety)
-							{
-								
-
-								board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK
-										, targetx, targety, Soldier_COLOR_AtSquare.WHITE, g.getWhitePieces()[j]);
-								
-							}
-						}
+					SoldierChooseYellow(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
 					
-					
-
-					//moving the black soldier to yellow Square
-					}else if(turn==Soldier_COLOR_AtSquare.BLACK) {
-						
-						moveBlack(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey);
-
-						for(int j=0; j<g.getBlackPieces().length; j++) {
-							if(g.getBlackPieces()[j].getLocation().getX()== targetx && g.getBlackPieces()[j].getLocation().getY()== targety)
-							{
-								
-								board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK
-										, targetx, targety, Soldier_COLOR_AtSquare.BLACK, g.getBlackPieces()[j]);								g.getBlackPieces()[j].getLocation().setX(targetx);
-										
-							}
-						}
-					
-
-						
-					}
-System.out.println(board[targetx][targety].getSquareColor());
-					// returning the yellow square to black square
-					Rectangle r1= getRectangle(targetx,targety);
-					r1.setFill(Color.rgb(94,91,91));
-
-					try {
-						System.out.println("in the yellow try");
-						popup.start(stage);	
-
-
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
 
 				}		
 				if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.RED) {
@@ -2828,10 +2777,16 @@ System.out.println(numofYellowSquares);
 		
 		//case player is White
 		if(s.getColor()==Soldier_COLOR_AtSquare.WHITE) {
+			
 
 				//get the location of the player
 				int x=s.getLocation().getX();
 				int y=s.getLocation().getY();
+				//Choosing to eat at yellow square
+				if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.YELLOW) {
+					SoldierChooseYellow(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+					
+				}
 				if(s.isIsQueen()==false)
 				{
 					if((y==0 && x==1) || (y==1 && x==0)) {
@@ -2858,6 +2813,7 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -2903,6 +2859,7 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -2948,6 +2905,7 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -2991,6 +2949,7 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3037,6 +2996,8 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 									g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3081,6 +3042,8 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 									g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3126,6 +3089,8 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()== x&& g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 									g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -3169,6 +3134,8 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 									g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3214,6 +3181,8 @@ System.out.println(numofYellowSquares);
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 									//1
+									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 									g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 									//2
 									g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -3259,6 +3228,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3300,6 +3271,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3344,6 +3317,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -3385,6 +3360,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -3430,6 +3407,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -3473,6 +3452,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x-2);
@@ -3516,6 +3497,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3559,6 +3542,8 @@ System.out.println(numofYellowSquares);
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 											//1
+											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 											g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 											//2
 											g.getWhitePieces()[i].getLocation().setX(x+2);
@@ -3685,6 +3670,13 @@ System.out.println(numofYellowSquares);
 			//get the location of the player
 			int x=s.getLocation().getX();
 			int y=s.getLocation().getY();
+			
+			//Choosing to eat at yellow square
+			if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.YELLOW) {
+				SoldierChooseYellow(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+				
+			}
+			
 			if(s.isIsQueen()==false)
 			{
 				if((y==0 && x==1) || (y==1 && x==0)) {
@@ -3711,6 +3703,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -3757,6 +3751,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -3802,6 +3798,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -3846,6 +3844,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -3892,6 +3892,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -3936,6 +3938,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -3981,6 +3985,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -4024,6 +4030,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -4069,6 +4077,8 @@ System.out.println(numofYellowSquares);
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x&& g.getBlackPieces()[i].getLocation().getY()==y) {
 								//1
+								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 								g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 								//2
 								g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -4114,6 +4124,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -4155,6 +4167,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -4199,6 +4213,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -4242,6 +4258,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -4286,6 +4304,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x-2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -4328,6 +4348,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x-2);
@@ -4370,6 +4392,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x+2][y-2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -4414,6 +4438,8 @@ System.out.println(numofYellowSquares);
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
 										//1
+										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+
 										g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.BLACK);
 										//2
 										g.getBlackPieces()[i].getLocation().setX(x+2);
@@ -4533,6 +4559,63 @@ System.out.println(numofYellowSquares);
 		}
 		return;
 		
+		
+	}
+	
+	public void SoldierChooseYellow(int sourcex, int sourcey, int targetx, int targety,int firstsourcex,int firstsourcey){
+		numofYellowSquares--;
+		popUpQueController popup=new popUpQueController();
+		Stage stage= new Stage();
+		wasinYellow=true;
+
+		//moving the white soldier to yellow Square
+		if(turn==Soldier_COLOR_AtSquare.WHITE) {
+			
+			moveWhite(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey);
+			for(int j=0; j<g.getWhitePieces().length; j++) {
+				if(g.getWhitePieces()[j].getLocation().getX()== targetx && g.getWhitePieces()[j].getLocation().getY()== targety)
+				{
+					
+
+					board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK
+							, targetx, targety, Soldier_COLOR_AtSquare.WHITE, g.getWhitePieces()[j]);
+					
+				}
+			}
+		
+		
+
+		//moving the black soldier to yellow Square
+		}else if(turn==Soldier_COLOR_AtSquare.BLACK) {
+			
+			moveBlack(sourcex, sourcey, targetx, targety, firstsourcex, firstsourcey);
+
+			for(int j=0; j<g.getBlackPieces().length; j++) {
+				if(g.getBlackPieces()[j].getLocation().getX()== targetx && g.getBlackPieces()[j].getLocation().getY()== targety)
+				{
+					
+					board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK
+							, targetx, targety, Soldier_COLOR_AtSquare.BLACK, g.getBlackPieces()[j]);								g.getBlackPieces()[j].getLocation().setX(targetx);
+							
+				}
+			}
+		
+
+			
+		}
+System.out.println(board[targetx][targety].getSquareColor());
+		// returning the yellow square to black square
+		Rectangle r1= getRectangle(targetx,targety);
+		r1.setFill(Color.rgb(94,91,91));
+
+		try {
+			System.out.println("in the yellow try");
+			popup.start(stage);	
+
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 
