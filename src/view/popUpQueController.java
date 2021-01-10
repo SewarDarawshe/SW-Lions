@@ -1,10 +1,14 @@
 package view;
 
 import java.net.URL;
+
 import java.util.ResourceBundle;
 
+import Controllers.*;
+import Controllers.SoundController;
 import Controllers.Sysdata;
 import Model.Question;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -132,8 +136,11 @@ public class popUpQueController implements Initializable{
 				
 				MainBoardController.BoardGame.bPointsValue.
 				setText((Integer.toString(MainBoardController.BoardGame.g.getBlackPlayer().getPoints())));
+				SoundController.playSound(SoundController.class.getResource(utils.Sound.Correct), 80);
 				handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
 						"You received " + points + " points");
+				
+			
 				MainBoardController.BoardGame.changeturntowhite();
 			}
 		
@@ -143,8 +150,10 @@ public class popUpQueController implements Initializable{
 				setPoints(MainBoardController.BoardGame.g.getWhitePlayer().getPoints()+points);
 				MainBoardController.BoardGame.wPointsValue.
 				setText((Integer.toString(MainBoardController.BoardGame.g.getWhitePlayer().getPoints())));
+				SoundController.playSound(SoundController.class.getResource(utils.Sound.Correct), 80);
 				handleAlertAndWindow(AlertType.INFORMATION, "Congrats! :D",
 						"You received " + points + " points");
+				
 
 				MainBoardController.BoardGame.changeturntoBlack();
 			}
@@ -161,8 +170,10 @@ public class popUpQueController implements Initializable{
 					setPoints(MainBoardController.BoardGame.g.getBlackPlayer().getPoints()-points);
 					MainBoardController.BoardGame.bPointsValue.
 					setText((Integer.toString(MainBoardController.BoardGame.g.getBlackPlayer().getPoints())));
+					SoundController.playSound(SoundController.class.getResource(utils.Sound.Wrong), 80);
 					handleAlertAndWindow(AlertType.ERROR, "Oh no! :(",
 							"You lost " + question.getPenalty() + " points");
+				
 
 					MainBoardController.BoardGame.changeturntowhite();
 				}
@@ -174,9 +185,11 @@ public class popUpQueController implements Initializable{
 					setPoints(MainBoardController.BoardGame.g.getWhitePlayer().getPoints()-points);
 					MainBoardController.BoardGame.wPointsValue.
 					setText((Integer.toString(MainBoardController.BoardGame.g.getWhitePlayer().getPoints())));
+					SoundController.playSound(SoundController.class.getResource(utils.Sound.Wrong), 80);
 					handleAlertAndWindow(AlertType.ERROR, "Oh no! :(",
 							"You lost " + question.getPenalty() + " points");
-					
+				
+
 
 					MainBoardController.BoardGame.changeturntoBlack();
 				}

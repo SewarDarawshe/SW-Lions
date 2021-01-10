@@ -1,5 +1,6 @@
 package Controllers;
 
+import java.io.File;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +18,8 @@ import utils.E_Difficulty;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Main extends Application {
 	@Override
@@ -24,11 +27,13 @@ public class Main extends Application {
 		try {
 			Parent root=FXMLLoader.load(getClass().getResource("/view/MainBoardScreen.fxml"));
 			Scene scene = new Scene(root);
-			primaryStage.setTitle("Home Page");
+			
+			 //Initialising path of the media file, replace this with your file path   
+	       SoundController.playMusic();
+	        primaryStage.setTitle("Home Page");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-	
-		
+	     
 			
 		} catch(Exception e) {
 			e.printStackTrace();

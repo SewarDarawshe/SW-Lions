@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.ButtonGroup;
 
+import Controllers.SoundController;
 import Controllers.Sysdata;
 import Model.Answer;
 import Model.Question;
@@ -21,6 +22,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import utils.E_Difficulty;
@@ -73,6 +76,51 @@ public class AddUpdate_QueController implements Initializable {
 	private ButtonGroup group;
 
 	private boolean sameque=false;
+	 @FXML
+	    private ToggleButton MusicBTN;
+	 private boolean music = true;
+	
+	   
+		public boolean isMusic() {
+			return music;
+		}
+
+		public void setMusic(boolean music) {
+			this.music = music;
+			if(music)MusicBTN.setGraphic(new ImageView("/resources/goOff.png"));
+			else MusicBTN.setGraphic(new ImageView("/resources/goOn.png"));
+				
+		}
+
+		@FXML
+		void soundControl(ActionEvent event) {
+			
+		if(isMusic())
+		{
+			SoundController.stopMusic();
+			setMusic(false);
+		
+		}else {
+			setMusic(true);
+			SoundController.playMusic();
+			
+			
+
+		}
+
+		}
+
+
+	private static MainBoardController MainBoardController;
+	public static MainBoardController getMainBoardController() {
+		return MainBoardController;
+	}
+
+	public static void setMainBoardController(MainBoardController mainBoardController) {
+		MainBoardController = mainBoardController;
+	}
+	
+
 
 	public void start(Stage primaryStage,Question q) {
 		try {
@@ -94,7 +142,13 @@ public class AddUpdate_QueController implements Initializable {
 		// TODO Auto-generated method stub
 		//	old = SettingsController.
 
-
+		if(MainBoardController.isMusic())
+		{
+			setMusic(true);
+		}else 			
+			setMusic(false);
+		MusicBTN.setText("");
+		
 		difficultyCombo.getItems().setAll(E_Difficulty.values());
 		this.old=MainBoardController.ManageQuestions.getQue();
 		// initiate to empty values

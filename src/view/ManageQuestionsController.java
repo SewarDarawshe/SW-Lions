@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import Controllers.SoundController;
 import Controllers.Sysdata;
 import Model.Answer;
 import Model.Question;
@@ -24,9 +25,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -88,7 +91,51 @@ public class ManageQuestionsController  implements Initializable {
 	  @FXML
 	    private Button opensettingsBTN;
 	    
-	    
+	  @FXML
+	    private ToggleButton MusicBTN;
+	 private boolean music = true;
+	
+	   
+		public boolean isMusic() {
+			return music;
+		}
+
+		public void setMusic(boolean music) {
+			this.music = music;
+			if(music)MusicBTN.setGraphic(new ImageView("/resources/goOff.png"));
+			else MusicBTN.setGraphic(new ImageView("/resources/goOn.png"));
+				
+		}
+
+		@FXML
+		void soundControl(ActionEvent event) {
+			
+		if(isMusic())
+		{
+			SoundController.stopMusic();
+			setMusic(false);
+		
+		}else {
+			setMusic(true);
+			SoundController.playMusic();
+			
+			
+
+		}
+
+		}
+
+
+	private static MainBoardController MainBoardController;
+	public static MainBoardController getMainBoardController() {
+		return MainBoardController;
+	}
+
+	public static void setMainBoardController(MainBoardController mainBoardController) {
+		MainBoardController = mainBoardController;
+	}
+	
+
 
 	
 	
@@ -111,6 +158,12 @@ public class ManageQuestionsController  implements Initializable {
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		if(MainBoardController.isMusic())
+		{
+			setMusic(true);
+		}else 			
+			setMusic(false);
+		MusicBTN.setText("");
 		MainBoardController.ManageQuestions=this;
 		questionIDColumn.setCellValueFactory(new PropertyValueFactory<>("number")); // According to variable name
 		questionColumn.setCellValueFactory(new PropertyValueFactory<>("text")); // Same here
@@ -188,6 +241,7 @@ public class ManageQuestionsController  implements Initializable {
 		Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 		AddUpdate_QueController temp=new AddUpdate_QueController();
 		try {
+			AddUpdate_QueController.setMainBoardController(this.getMainBoardController());
 			temp.start(stage,question);	
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -208,6 +262,7 @@ public class ManageQuestionsController  implements Initializable {
 			AddUpdate_QueController temp=new AddUpdate_QueController();
 			try {
 
+				AddUpdate_QueController.setMainBoardController(this.getMainBoardController());
 
 
 				temp.setq(question);

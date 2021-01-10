@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.*;
 
+import Controllers.SoundController;
 import Controllers.SquareFactory;
 import Controllers.Sysdata; 
 import java.sql.Time;
@@ -39,6 +40,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -65,6 +67,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -140,6 +143,8 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Label WhitePoints= new Label();
+	 @FXML
+	    private ToggleButton MusicBTN;
 
 	@FXML
 	private TextField BlackNickText = new TextField();
@@ -334,7 +339,37 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Pane boardPane = new Pane();
+	private static MainBoardController MainBoardController;
+	public static MainBoardController getMainBoardController() {
+		return MainBoardController;
+	}
 
+	public static void setMainBoardController(MainBoardController mainBoardController) {
+		MainBoardController = mainBoardController;
+	}
+	
+	private boolean music = true;
+	private boolean soundfx = true;
+   
+	public boolean isMusic() {
+		return music;
+	}
+
+	public void setMusic(boolean music) {
+		this.music = music;
+		if(music)MusicBTN.setGraphic(new ImageView("/resources/goOff.png"));
+		else MusicBTN.setGraphic(new ImageView("/resources/goOn.png"));
+			
+	}
+
+	public boolean isSoundfx() {
+		return soundfx;
+	}
+
+	public void setSoundfx(boolean soundfx) {
+		this.soundfx = soundfx;
+		SoundController.setSoundFX(soundfx);
+	}
 	//starting the page methods
 
 	public void start(Stage primaryStage) {
@@ -349,12 +384,35 @@ public class BoardGameController implements Initializable{
 			e.printStackTrace();
 		}
 	}
+	@FXML
+	void soundControl(ActionEvent event) {
+		
+	if(isMusic())
+	{
+		SoundController.stopMusic();
+		setMusic(false);
+	
+	}else {
+		setMusic(true);
+		SoundController.playMusic();
+		
+		
 
+	}
+
+	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty())
 		{
+			if(MainBoardController.isMusic())
+			{
+				setMusic(true);
+			}else 			
+				setMusic(false);
+			MusicBTN.setText("");
+		
 
 			MainBoardController.BoardGame=this;
 

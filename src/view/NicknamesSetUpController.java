@@ -5,6 +5,7 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
+import Controllers.SoundController;
 import Model.Player;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +17,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -47,8 +50,50 @@ public class NicknamesSetUpController implements Initializable{
 	
 	@FXML
 	private Label ErrorLbl;
+	 @FXML
+	    private ToggleButton MusicBTN;
+	 private boolean music = true;
+	
+	   
+		public boolean isMusic() {
+			return music;
+		}
+
+		public void setMusic(boolean music) {
+			this.music = music;
+			if(music)MusicBTN.setGraphic(new ImageView("/resources/goOff.png"));
+			else MusicBTN.setGraphic(new ImageView("/resources/goOn.png"));
+				
+		}
+
+		@FXML
+		void soundControl(ActionEvent event) {
+			
+		if(isMusic())
+		{
+			SoundController.stopMusic();
+			setMusic(false);
+		
+		}else {
+			setMusic(true);
+			SoundController.playMusic();
+			
+			
+
+		}
+
+		}
 
 
+	private static MainBoardController MainBoardController;
+	public static MainBoardController getMainBoardController() {
+		return MainBoardController;
+	}
+
+	public static void setMainBoardController(MainBoardController mainBoardController) {
+		MainBoardController = mainBoardController;
+	}
+	
 
 
 	public static String getWhitename() {
@@ -99,8 +144,13 @@ public class NicknamesSetUpController implements Initializable{
 		blackname =BlackNickName.getText();
 		if(!whitename.isEmpty() && !blackname.isEmpty())
 		{
+			
 			Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 			BoardGameController temp=new BoardGameController();
+	temp.setMainBoardController(this.getMainBoardController());
+
+				
+		//	temp.setMusic(MainBoardController.);
 			temp.start(stage);	
 
 			
@@ -149,7 +199,12 @@ public class NicknamesSetUpController implements Initializable{
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-
+		if(MainBoardController.isMusic())
+		{
+			setMusic(true);
+		}else 			
+			setMusic(false);
+		MusicBTN.setText("");
 	}
 
 
