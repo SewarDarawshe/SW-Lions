@@ -160,10 +160,10 @@ public class SettingsController implements Initializable{
 			if (dialogButton == loginButtonType) {
 				return new Pair<>(Username.getText(), Password.getText());
 
-
-
-
-			}
+			}else 
+				if (dialogButton == ButtonType.CANCEL) {
+					dialog.close();
+				}
 			return null;
 		});
 
@@ -232,13 +232,15 @@ public class SettingsController implements Initializable{
 			if (dialogButton == loginButtonType) {
 				return new Pair<>(Username.getText(), Password.getText());
 
+			}else {
+				if(dialogButton== ButtonType.CANCEL) dialog.close();
 			}
 			return null;
 		});
-
+		
 
 		Optional<Pair<String, String>> result = dialog.showAndWait();
-		if(result!=null) {
+		if(result!=null && result.get().getKey()!=null&&result.get().getValue()!=null) {
 			boolean  isReturned =false;
 			String user=result.get().getKey();
 			String pass = result.get().getValue();
@@ -264,6 +266,9 @@ public class SettingsController implements Initializable{
 
 				if (answer.get().getButtonData() == ButtonData.YES) {
 					Controllers.Sysdata.getInstance().deleteGameHistory();
+				}
+				if (answer.get().getButtonData() == ButtonData.NO) {
+					alert.close();
 				}
 
 			}

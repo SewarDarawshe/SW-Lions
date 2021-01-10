@@ -350,11 +350,14 @@ public class Game {
 			
 		}
 		
+
 		for(int row=0;row<8&&place<arrOfStr.length;row++)
 		{
+			
 			if(row%2!=0) {
 				for(int j=0;j<8 &&place<arrOfStr.length;j+=2)
 				{
+					
 					
 					 if(arrOfStr[place].equals("0"))
 						{
@@ -366,6 +369,8 @@ public class Game {
 					 else
 						if(arrOfStr[place].equals("1"))
 						{
+							
+							
 							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 							place++;
 						
@@ -381,6 +386,7 @@ public class Game {
 						else
 						if(arrOfStr[place].equals("11"))
 						{
+							
 							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 							
 
@@ -439,6 +445,7 @@ public class Game {
 						else
 						if(arrOfStr[place].equals("11"))
 						{
+							
 							Board[row][j].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
 							
 

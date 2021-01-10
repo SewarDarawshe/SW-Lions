@@ -19,7 +19,13 @@ import javafx.scene.media.MediaPlayer;
 import utils.Sound;
 import view.MainBoardController;
 import view.ManageQuestionsController;
-
+/**
+ * Class public class SoundController - controlling the sound's
+ * 
+ * @author Sewar Drawshe
+ * 
+ * 
+ */
 public class SoundController {
 	private static boolean soundFX = true;
 	public static Clip clip;

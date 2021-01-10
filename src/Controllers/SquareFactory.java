@@ -11,7 +11,13 @@ import utils.Soldier_COLOR_AtSquare;
 import Model.SquareObject;
 import Model.YellowSquare;
 import utils.SQUARE_COLOR;
-
+/**
+ * Class public class SquareFactory - create square objects
+ * 
+ * @author Sewar Drawshe
+ * 
+ * 
+ */
 public class SquareFactory {
 	
 	
