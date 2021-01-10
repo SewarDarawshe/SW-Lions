@@ -406,7 +406,9 @@ public class BoardGameController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty())
 		{
-			if(MainBoardController.isMusic())
+			MainBoardController.BoardGame=this;
+
+			if(this.MainBoardController.isMusic())
 			{
 				setMusic(true);
 			}else 			
@@ -414,7 +416,6 @@ public class BoardGameController implements Initializable{
 			MusicBTN.setText("");
 		
 
-			MainBoardController.BoardGame=this;
 
 
 			// setting the current player in the board game
@@ -495,8 +496,7 @@ public class BoardGameController implements Initializable{
 
 			}
 
-			else {
-
+			else {this.getMainBoardController();
 				//we are in a load situation
 				Date d = new Date();
 				Time t = new Time(0, 0, 0);
