@@ -691,29 +691,37 @@ public class Game {
 					if(y==0 && (x==7|| x==5||x==3)) {
 						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 							canEat=Pieces[i];
+							return canEat;
 						}
 					}
 					
 					if(y==1 && (x==6|| x==4|| x==2)) {
 						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 					
 					if(y==7 && (x==6|| x==4|| x==2)) {
 						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 					
 					if(y==6 && (x==7|| x==5|| x==3)) {
 						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 					
 					if(y>1 && y<6 && x>1 && x<8){
 						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
 							canEat=Pieces[i];						}
 						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];return canEat;
+							}
 					}
 
 				
@@ -820,28 +828,40 @@ public class Game {
 
 					if(y==0 && (x==1|| x==3||x==5)) {
 						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+						}
 					}
 					
 					if(y==1 && (x==0|| x==4|| x==2)) {
 						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 					
 					if(y==7 && (x==0|| x==4|| x==2)) {
 						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 					
 					if(y==6 && (x==1|| x==5|| x==3)) {
 						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 					if(y>1 && y<6 && x>=0 && x<6){
 						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							canEat=Pieces[i];						}
+							canEat=Pieces[i];
+							return canEat;
+							}
 					}
 				}
 
@@ -935,7 +955,7 @@ public class Game {
 
 		}
 
-		return null;
+		return canEat;
 	}
 	
 	/*
