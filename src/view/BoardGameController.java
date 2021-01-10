@@ -808,13 +808,6 @@ public class BoardGameController implements Initializable{
 	}
 
 
-
-	private Object getWhitePieces() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	@FXML
 	void exit(ActionEvent event) {
 		((Stage) Pane.getScene().getWindow()).close();
@@ -865,6 +858,17 @@ public class BoardGameController implements Initializable{
 
 				int targety=TransForCordinateNum((int) target.getLayoutX());
 				System.out.printf("move to col num:%d\n",targety);
+				
+				if(turn==Soldier_COLOR_AtSquare.BLACK) {
+				DeadBlack(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+				System.out.println("WB#####DEEEEEENNNNNNNNN");
+				}
+				
+				if(turn==Soldier_COLOR_AtSquare.WHITE) {
+				DeadWhite(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+				System.out.println("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFf");
+				}
+				
 
 				if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.BLACK || board[targetx][targety].getSquareColor()==SQUARE_COLOR.ORANGE) {
 					//moving the black soldier to target square
@@ -876,7 +880,7 @@ public class BoardGameController implements Initializable{
 
 
 					//moving the white soldier to target square
-					else if(turn==Soldier_COLOR_AtSquare.WHITE) {
+					else if(turn==Soldier_COLOR_AtSquare.WHITE) {						
 						moveWhite(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
 						if(eatSoldier==null)
 						changeturntoBlack();
@@ -895,7 +899,6 @@ public class BoardGameController implements Initializable{
 				}
 
 				else if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.BLUE) {
-
 					Soldier s=null;
 					int index=0;
 					String returnForWhite=null;
@@ -1120,6 +1123,7 @@ public class BoardGameController implements Initializable{
 					}
 				}
 				else if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.GREEN) {
+					
 					if(turn==Soldier_COLOR_AtSquare.WHITE) {
 						g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+50);
 						wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
@@ -1139,7 +1143,6 @@ public class BoardGameController implements Initializable{
 						Rectangle r1= getRectangle(targetx,targety);
 
 						r1.setFill(Color.rgb(94,91,91));
-
 						changeturntoBlack();
 						return 0;
 					}
@@ -1163,7 +1166,6 @@ public class BoardGameController implements Initializable{
 						Rectangle r1= getRectangle(targetx,targety);
 						board[targetx][targety].setSquareColor(SQUARE_COLOR.BLACK);
 						r1.setFill(Color.rgb(94,91,91));
-
 						changeturntowhite();
 
 						return 0;
@@ -1171,12 +1173,9 @@ public class BoardGameController implements Initializable{
 				}
 				if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.YELLOW) {
 					SoldierChooseYellow(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
-					
-
 				}		
 				if(board[targetx][targety].getSquareColor()==SQUARE_COLOR.RED) {
 					if(turn==Soldier_COLOR_AtSquare.WHITE) {
-
 						redSoldier=this.soldier;
 						// returning the red square to black square
 						board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,
@@ -1199,9 +1198,7 @@ public class BoardGameController implements Initializable{
 						changeturntowhite();
 					}	
 					if(turn==Soldier_COLOR_AtSquare.BLACK) {
-
 						redSoldier=this.soldier;
-						
 						// returning the red square to black square
 						Rectangle r2= getRectangle(targetx,targety);
 						board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,
@@ -1452,38 +1449,7 @@ public class BoardGameController implements Initializable{
 								}
 							}
 
-							else
-								if(g.IsEatable(pb, g.getBlackPieces())!=null)
-								{
-								System.out.println("Kan lazm tmoot");
 
-								Soldier c= g.IsEatable(pb,g.getBlackPieces());
-								System.out.println(c);
-								if( ( g.getBlackPieces()[i].getLocation().getX()!= c.getLocation().getX()) &&  g.getBlackPieces()[i].getLocation().getY() != c.getLocation().getY())
-								{
-								
-									System.out.println("Kan lazm tmoot!!!!!!!!!!!!!!!");
-
-									for(int j=0; j<g.getBlackPieces().length;j++)
-									{
-										if( (g.getBlackPieces()[j].getLocation().getX() == c.getLocation().getX()) && g.getBlackPieces()[j].getLocation().getY() == c.getLocation().getY())
-										{
-											System.out.println("yes you killed");
-								//	int xScene=getXOnScene();
-									//int yScene=getYOnScene();
-									//Circle f= getSoldierOnScene(xScene,yScene);
-									//f.setVisible(false);
-									g.getBlackPieces()[j].setIsAlive(false);
-									g.getBlackPieces()[j].getLocation().setX(-1);
-									g.getBlackPieces()[j].getLocation().setY(-1);
-									board[c.getLocation().getX()][c.getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
-										}
-										
-									}
-
-									
-								}
-							}
 					}
 					
 
@@ -4880,6 +4846,141 @@ System.out.println(numofYellowSquares);
 		CheckAndDoBlueSquare();
 		CheckAndDoRedSquare();
 		
+	}
+	
+	public void DeadBlack(int sourcex,int sourcey,int targetx,int targety,int firstsourcex,int firstsourcey){
+		//**************************
+		Player pb= g.getBlackPlayer();
+		if(g.IsEatable(pb, g.getBlackPieces())!=null)
+		{
+		System.out.println("Kan lazm tmoot");
+
+		Soldier c= g.IsEatable(pb,g.getBlackPieces());
+		System.out.println(c);
+		if( ( sourcex!= (c.getLocation().getX()) &&  ( sourcey!= (c.getLocation().getY()))))
+		{
+			System.out.println("Kan lazm tmoot!!!!!!!!!!!!!!!");
+
+			for(int j=0; j<g.getBlackPieces().length;j++)
+			{
+				if( (g.getBlackPieces()[j].getLocation().getX() == c.getLocation().getX()) && g.getBlackPieces()[j].getLocation().getY() == c.getLocation().getY())
+				{
+					System.out.println("yes you killed");
+			int xScene=-1;
+			int yScene=-1;
+			if(c.getLocation().getX()==0)yScene=30;
+			if(c.getLocation().getX()==1)yScene=90;
+			if(c.getLocation().getX()==2)yScene=150;
+			if(c.getLocation().getX()==3)yScene=210;
+			if(c.getLocation().getX()==4)yScene=270;
+			if(c.getLocation().getX()==5)yScene=330;
+			if(c.getLocation().getX()==6)yScene=390;
+			if(c.getLocation().getX()==7)yScene=450;
+			
+			if(c.getLocation().getY()==0)xScene=30;
+			if(c.getLocation().getY()==1)xScene=90;
+			if(c.getLocation().getY()==2)xScene=150;
+			if(c.getLocation().getY()==3)xScene=210;
+			if(c.getLocation().getY()==4)xScene=270;
+			if(c.getLocation().getY()==5)xScene=330;
+			if(c.getLocation().getY()==6)xScene=390;
+			if(c.getLocation().getY()==7)xScene=450;
+											
+
+			Circle f= getSoldierOnScene(xScene,yScene);
+			f.setVisible(false);
+			for(int indexc=0; j<g.getBlackPieces().length;indexc++) {
+				if(c.getLocation().getX()==g.getBlackPieces()[indexc].getLocation().getX() && c.getLocation().getY()==g.getBlackPieces()[indexc].getLocation().getY()) {
+					board[c.getLocation().getX()][c.getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+					g.getBlackPieces()[indexc].setIsAlive(false);
+					System.out.println("1477");
+					g.getBlackPieces()[indexc].getLocation().setX(-1);
+					System.out.println("1479");
+					g.getBlackPieces()[indexc].getLocation().setY(-1);
+					System.out.println("1481");
+					//changeturntowhite();
+					moveBlack(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+					changeturntowhite();
+				}
+				
+			}
+
+				}
+				
+			}
+
+			
+		}
+	}
+		//**************************
+		
+	}
+	
+	public void DeadWhite(int sourcex,int sourcey,int targetx,int targety,int firstsourcex,int firstsourcey) {
+		//**************************
+		Player pw= g.getWhitePlayer();
+		if(g.IsEatable(pw, g.getWhitePieces())!=null)
+		{
+		System.out.println("Kan lazm tmoot");
+
+		Soldier c= g.IsEatable(pw,g.getWhitePieces());
+		System.out.println(c);
+		if( ( sourcex!= (c.getLocation().getX()) &&  ( sourcey!= (c.getLocation().getY()))))
+		{
+			System.out.println("Kan lazm tmoot!!!!!!!!!!!!!!!");
+
+			for(int j=0; j<g.getWhitePieces().length;j++)
+			{
+				if( (g.getWhitePieces()[j].getLocation().getX() == c.getLocation().getX()) && g.getWhitePieces()[j].getLocation().getY() == c.getLocation().getY())
+				{
+					System.out.println("yes you killed");
+			int xScene=-1;
+			int yScene=-1;
+			if(c.getLocation().getX()==0)yScene=30;
+			if(c.getLocation().getX()==1)yScene=90;
+			if(c.getLocation().getX()==2)yScene=150;
+			if(c.getLocation().getX()==3)yScene=210;
+			if(c.getLocation().getX()==4)yScene=270;
+			if(c.getLocation().getX()==5)yScene=330;
+			if(c.getLocation().getX()==6)yScene=390;
+			if(c.getLocation().getX()==7)yScene=450;
+			
+			if(c.getLocation().getY()==0)xScene=30;
+			if(c.getLocation().getY()==1)xScene=90;
+			if(c.getLocation().getY()==2)xScene=150;
+			if(c.getLocation().getY()==3)xScene=210;
+			if(c.getLocation().getY()==4)xScene=270;
+			if(c.getLocation().getY()==5)xScene=330;
+			if(c.getLocation().getY()==6)xScene=390;
+			if(c.getLocation().getY()==7)xScene=450;
+											
+
+			Circle f= getSoldierOnScene(xScene,yScene);
+			f.setVisible(false);
+			for(int indexc=0; j<g.getWhitePieces().length;indexc++) {
+				if(c.getLocation().getX()==g.getWhitePieces()[indexc].getLocation().getX() && c.getLocation().getY()==g.getWhitePieces()[indexc].getLocation().getY()) {
+					board[c.getLocation().getX()][c.getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+					g.getWhitePieces()[indexc].setIsAlive(false);
+					System.out.println("1477");
+					g.getWhitePieces()[indexc].getLocation().setX(-1);
+					System.out.println("1479");
+					g.getWhitePieces()[indexc].getLocation().setY(-1);
+					System.out.println("1481");
+					//changeturntowhite();
+					moveWhite(sourcex,sourcey,targetx,targety,firstsourcex,firstsourcey);
+					changeturntoBlack();
+				}
+				
+			}
+
+				}
+				
+			}
+
+			
+		}
+	}
+		//**************************
 	}
 	
 }
