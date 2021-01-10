@@ -339,6 +339,16 @@ public class BoardGameController implements Initializable{
 
 	@FXML
 	private Pane boardPane = new Pane();
+	
+	
+
+    @FXML
+    private Rectangle blackPicRec;
+
+    @FXML
+    private Rectangle whitePicRec;
+    
+    
 	private static MainBoardController MainBoardController;
 	public static MainBoardController getMainBoardController() {
 		return MainBoardController;
@@ -348,6 +358,16 @@ public class BoardGameController implements Initializable{
 		MainBoardController = mainBoardController;
 	}
 	
+	
+	private static NicknamesSetUpController NicknamesSetUpController;
+	public static NicknamesSetUpController getNicknamesSetUpController() {
+		return NicknamesSetUpController;
+	}
+
+	public static void setNicknamesSetUpController(NicknamesSetUpController nicknamesSetUpController) {
+		System.out.println();
+		NicknamesSetUpController = nicknamesSetUpController;
+	}
 	private boolean music = true;
 	private boolean soundfx = true;
    
@@ -414,7 +434,17 @@ public class BoardGameController implements Initializable{
 				setMusic(false);
 			MusicBTN.setText("");
 		
-			
+
+			if(this.NicknamesSetUpController.blackRec!=null)
+			{
+				
+				blackPicRec.setFill(this.NicknamesSetUpController.blackRec.getFill());
+			}
+			if(this.NicknamesSetUpController.whiteRec!=null)
+			{
+				
+				whitePicRec.setFill(this.NicknamesSetUpController.whiteRec.getFill());
+			}
 
 
 			// setting the current player in the board game
