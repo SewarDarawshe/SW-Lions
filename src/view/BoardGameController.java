@@ -1311,6 +1311,7 @@ public class BoardGameController implements Initializable{
 	private void moveBlack(int sourcex, int sourcey, int targetx, int targety, int firstsourcex, int firstsourcey) {
 		//moving the black soldier to target square
 		if(this.board[sourcex][sourcey].getSoldierColor() == Soldier_COLOR_AtSquare.BLACK )  {
+			Player pb= g.getBlackPlayer();
 			System.out.println("in black");
 			for(int i=0; i<g.getBlackPieces().length; i++) {
 				if(g.getBlackPieces()[i].getLocation().getX()== sourcex && g.getBlackPieces()[i].getLocation().getY()== sourcey)
@@ -1319,7 +1320,7 @@ public class BoardGameController implements Initializable{
 					if(!g.getBlackPieces()[i].isIsQueen()) {
 
 						int isOk =(g.getBlackPieces()[i]).moveBlack( sourcex, sourcey, targetx,targety,board);
-						if(isOk==0) {
+						if(isOk==0 && g.IsEatable(pb,g.getBlackPieces())==null) {
 							if(sourcex+1==targetx && targety==sourcey-1)
 							{
 
@@ -1377,12 +1378,7 @@ public class BoardGameController implements Initializable{
 								return;
 							}
 						}
-//						if(g.eatingMore(eatSoldier)==true) {
-//							eatingAgain(eatSoldier,sourcex,sourcey,targetx,targety);
-//							eatSoldier=null;
-//							return;
-//
-//							}
+
 
 						}
 						else
@@ -1398,26 +1394,48 @@ public class BoardGameController implements Initializable{
 									}
 								}
 							}
+							
+							else 
+								System.out.println("Kan lazm tmoot");
+								if(g.IsEatable(pb,g.getBlackPieces())!=null)
+										{
+									System.out.println("Kan lazm tmoot!!!!!!!!!!!!!!!");
 
+									for(int j=0; j<g.getBlackPieces().length; j++) {
+										if(g.getBlackPieces()[j].getLocation().getX()== g.IsEatable(pb,g.getBlackPieces()).getLocation().getX() && g.getBlackPieces()[j].getLocation().getY()== g.IsEatable(pb,g.getBlackPieces()).getLocation().getY()) {
+											// remove the soldier
+											g.getBlackPieces()[j].setIsAlive(false);
+											g.getBlackPieces()[j].getLocation().setX(-1);
+											g.getBlackPieces()[j].getLocation().setY(-1);
+											board[g.getBlackPieces()[j].getLocation().getX()][g.getBlackPieces()[j].getLocation().getY()].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
+											Circle c=getSoldierOnScene(g.getBlackPieces()[j].getLocation().getX(),g.getBlackPieces()[j].getLocation().getY());
+											//**
+						
+											if(c!=null) {
+											
+												c.setVisible(false);
+											}
+										}
+									
 
-					}
+					
 
 					// move black queen	
-					else	
+					else 	
 					{
 						MoveBlackQueen(sourcex, sourcey, targetx, targety, i);
 					}
 
+				
+									}
+										}
+					}
 				}
-
-
 			}
+		}
+		
 
 			
-
-
-
-		}
 
 	}
 
@@ -1583,7 +1601,7 @@ public class BoardGameController implements Initializable{
 		{
 			
 			Player pw=g.getWhitePlayer();
-			if(g.IsEatable(pw,g.getWhitePieces())==false) {
+			if(g.IsEatable(pw,g.getWhitePieces())==null) {
 				System.out.println("1407");
 				for(int i=0; i<g.getWhitePieces().length; i++) {
 					// righ side
@@ -1624,7 +1642,7 @@ public class BoardGameController implements Initializable{
 		{
 			Player pb= g.getBlackPlayer();
 
-			if(g.IsEatable(pb,g.getBlackPieces())==false) {
+			if(g.IsEatable(pb,g.getBlackPieces())==null) {
 				for(int i=0; i<g.getBlackPieces().length; i++) {
 					// righ side
 

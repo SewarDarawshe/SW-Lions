@@ -44,7 +44,6 @@ public class Game {
 	private Time QueueTime;	
 	private Soldier[] WhitePieces;
 	private Soldier[] BlackPieces;
-
 	// in the use for the results board only
 		private String whiteNic;
 		private String blackNic;
@@ -675,14 +674,11 @@ public class Game {
 	 * this method checks if the player can eat any soldier in his current turn
 	 */
 
-	public boolean IsEatable(Player p, Soldier[] Pieces)
-	{
-		int whiteCountEatable=0;
-		int blackCountEatable=0;
-		int whiteIsAlive=0;
-		int blackIsAlive=0;
-
+	public Soldier IsEatable(Player p, Soldier[] Pieces)
+	{		
+		Soldier canEat=null;
 		//case player is White
+
 		if(p.getColor()==Soldier_COLOR_AtSquare.WHITE) {
 			
 			for(int i=0;i<Pieces.length; i++)
@@ -694,35 +690,30 @@ public class Game {
 				{
 					if(y==0 && (x==7|| x==5||x==3)) {
 						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							whiteCountEatable++;
+							canEat=Pieces[i];
 						}
 					}
 					
 					if(y==1 && (x==6|| x==4|| x==2)) {
 						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							whiteCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					
 					if(y==7 && (x==6|| x==4|| x==2)) {
 						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							whiteCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					
 					if(y==6 && (x==7|| x==5|| x==3)) {
 						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							whiteCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					
 					if(y>1 && y<6 && x>1 && x<8){
 						if((Board[x-1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							whiteCountEatable++;
-						}
+							canEat=Pieces[i];						}
 						if((Board[x-1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.BLACK) && Board[x-2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							whiteCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 
 				
@@ -815,8 +806,6 @@ public class Game {
 //				}
 
 			}
-			if(whiteCountEatable>0)
-				return true;
 
 		}
 		//case player is Black
@@ -831,34 +820,28 @@ public class Game {
 
 					if(y==0 && (x==1|| x==3||x==5)) {
 						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							blackCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					
 					if(y==1 && (x==0|| x==4|| x==2)) {
 						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							blackCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					
 					if(y==7 && (x==0|| x==4|| x==2)) {
 						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							blackCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					
 					if(y==6 && (x==1|| x==5|| x==3)) {
 						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							blackCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 					if(y>1 && y<6 && x>=0 && x<6){
 						if((Board[x+1][y-1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y-2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							blackCountEatable++;
-						}
+							canEat=Pieces[i];						}
 						if((Board[x+1][y+1].getSoldierColor())==(Soldier_COLOR_AtSquare.WHITE) && Board[x+2][y+2].getSoldierColor()==Soldier_COLOR_AtSquare.EMPTY) {
-							blackCountEatable++;
-						}
+							canEat=Pieces[i];						}
 					}
 				}
 
@@ -951,10 +934,8 @@ public class Game {
 			}
 
 		}
-		
-		if(blackCountEatable>0)
-			return true;
-		return false;
+
+		return null;
 	}
 	
 	/*
