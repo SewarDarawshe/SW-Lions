@@ -185,6 +185,7 @@ public class NicknamesSetUpController implements Initializable{
 			{
 				Stage stage=(Stage)((Node)event.getSource()).getScene().getWindow();
 				BoardGameController temp=new BoardGameController();
+				temp.setMainBoardController(this.getMainBoardController());
 				temp.start(stage);	
 
 				
