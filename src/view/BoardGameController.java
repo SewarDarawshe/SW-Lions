@@ -406,15 +406,15 @@ public class BoardGameController implements Initializable{
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if (!NicknamesSetUpController.getWhitename().isEmpty() && !NicknamesSetUpController.getBlackname().isEmpty())
 		{
-			if(MainBoardController.isMusic())
+			MainBoardController.BoardGame=this;
+			if(this.MainBoardController.isMusic())
 			{
 				setMusic(true);
 			}else 			
 				setMusic(false);
 			MusicBTN.setText("");
 		
-
-			MainBoardController.BoardGame=this;
+			
 
 
 			// setting the current player in the board game
@@ -623,7 +623,7 @@ public class BoardGameController implements Initializable{
 						startwhite=System.nanoTime();
 						startWhiteTimer();
 					}
-					//	CheckAndDoRedSquare();
+					CheckAndDoRedSquare();
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -1150,7 +1150,6 @@ public class BoardGameController implements Initializable{
 					if(turn==Soldier_COLOR_AtSquare.WHITE) {
 
 						redSoldier=this.soldier;
-						changeturntowhite();
 						// returning the red square to black square
 						board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,
 								targetx, targety, Soldier_COLOR_AtSquare.WHITE, null);
@@ -1169,12 +1168,12 @@ public class BoardGameController implements Initializable{
 								g.getWhitePieces()[j].getLocation().setY(targety);
 							}
 						}
-
+						changeturntowhite();
 					}	
 					if(turn==Soldier_COLOR_AtSquare.BLACK) {
 
 						redSoldier=this.soldier;
-						changeturntoBlack();
+						
 						// returning the red square to black square
 						Rectangle r2= getRectangle(targetx,targety);
 						board[targetx][targety]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,
@@ -1193,7 +1192,7 @@ public class BoardGameController implements Initializable{
 							}
 						}
 
-
+						changeturntoBlack();
 					}
 
 				}
@@ -1206,112 +1205,7 @@ public class BoardGameController implements Initializable{
 			//ToDo
 		}
 		finally {
-			if(!wasinYellow) {
-
-				int diffPoints=0;// the points that should be decreased or increased to the player
-				//checking for the white player that have finished his turn
-				if(turn==Soldier_COLOR_AtSquare.BLACK) {
-					long elapsedTime = endwhite - startwhite;
-					long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
-					System.out.printf("The timer for the white is:%d",convert);
-					if(convert>60) {
-						diffPoints=(int)convert-60;
-						g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()-diffPoints);
-						wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
-
-					}
-					if(convert<60) {
-						diffPoints=60-(int)convert;
-						g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+diffPoints);
-						wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
-
-					}
-				}
-				if(turn==Soldier_COLOR_AtSquare.WHITE) {
-					long elapsedTime = endblack - startblack;
-					long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
-					System.out.printf("The timer for the black is:%d",convert);
-
-					if(convert>60) {
-						diffPoints=(int)convert-60;
-						g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()-diffPoints);
-						System.out.println("1337");
-						bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
-
-					}
-					if(convert<60) {
-						diffPoints=60-(int)convert;
-						g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+diffPoints);
-						System.out.println("1344");
-						bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
-
-					}
-				}
-			}
-			// Resert the colored square to black(orange/green/red/blue)
-			for(int i=0; i<8; i++) {
-				for(int j=0; j<8; j++) {
-					if(board[i][j]!=null) {
-						if(board[i][j].getSquareColor()==SQUARE_COLOR.GREEN || board[i][j].getSquareColor()==SQUARE_COLOR.ORANGE || board[i][j].getSquareColor()==SQUARE_COLOR.RED || board[i][j].getSquareColor()==SQUARE_COLOR.BLUE) {
-							board[i][j]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,
-									i, j, Soldier_COLOR_AtSquare.EMPTY, null);
-							Rectangle colored= getRectangle(i,j);
-							if(colored!=null)
-								colored.setFill(Color.rgb(94,91,91));
-
-						}
-					}
-				}
-			}
-
-			if(theGameisEnd()==true) {
-
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("Game Ended");
-				alert.setHeaderText("The game ended, The winner is");
-				alert.setContentText(theWinner);
-				//alert.show();
-
-				// open main menu after ok is pressed
-				Optional<ButtonType> result = alert.showAndWait();
-				//music();
-				if (result.get() == ButtonType.OK) {
-					((Stage) Pane.getScene().getWindow()).close();
-					Stage stage=new  Stage();
-					MainBoardController temp=new MainBoardController();
-					try {
-						temp.start(stage);	
-					} catch (Exception e) {
-						// TODO: handle exception
-					}
-				}
-
-
-
-			}
-			
-			// counting the yellow square at the board
-			numofYellowSquares=0;
-			for(int i=0; i<8; i++) {
-				for(int j=0; j<8; j++) {
-					if(board[i][j]!=null) {
-						if(board[i][j].getSquareColor()==SQUARE_COLOR.YELLOW) {
-							numofYellowSquares++;
-System.out.println(numofYellowSquares);
-						}
-					}
-					}
-				}
-			
-			
-			while(numofYellowSquares<3) {
-				CheckAndDoYellowSquares();
-
-			}
-
-			CheckAndDoBlueSquare();
-			//CheckAndDoRedSquare();
-
+			finallyFunction();
 
 		}
 		return -1;
@@ -2870,6 +2764,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
@@ -2881,6 +2778,7 @@ System.out.println(numofYellowSquares);
 								}
 								
 								}
+							
 							
 							if(g.eatingMore(eatSoldier)==true) {
 							eatingAgain(eatSoldier,sourcex,sourcey,targetx,targety);
@@ -2916,6 +2814,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
@@ -2962,6 +2863,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x-2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
@@ -3006,6 +2910,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 									g.getBoard()[x+2][y+2].setSoldierColor(Soldier_COLOR_AtSquare.WHITE);
@@ -3053,6 +2960,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3099,6 +3009,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3146,6 +3059,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()== x&& g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3191,6 +3107,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3238,6 +3157,9 @@ System.out.println(numofYellowSquares);
 								//move the soldier
 							for(int i=0;i<g.getWhitePieces().length;i++) {
 								if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+									//setPoints
+									g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+									wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 									//1
 									g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3285,6 +3207,10 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3328,6 +3254,10 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
+											
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3374,6 +3304,9 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3417,6 +3350,9 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3464,6 +3400,9 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3509,6 +3448,9 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3554,6 +3496,9 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3599,6 +3544,9 @@ System.out.println(numofYellowSquares);
 										//move the soldier
 									for(int i=0;i<g.getWhitePieces().length;i++) {
 										if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
+											//setPoints
+											g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+											wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 											//1
 											g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3630,6 +3578,9 @@ System.out.println(numofYellowSquares);
 					for(int i=0;i<g.getWhitePieces().length;i++) {
 						if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 								MoveWhiteQueen(sourcex,sourcey,targetx ,targety,i);
+								//setPoints
+								g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+100);
+								wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
 						}
 					}
 					
@@ -3760,6 +3711,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3808,6 +3762,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3855,6 +3812,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3901,6 +3861,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3949,6 +3912,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -3995,6 +3961,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4042,6 +4011,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4087,6 +4059,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4134,6 +4109,9 @@ System.out.println(numofYellowSquares);
 							//move the soldier
 						for(int i=0;i<g.getBlackPieces().length;i++) {
 							if(g.getBlackPieces()[i].getLocation().getX()==x&& g.getBlackPieces()[i].getLocation().getY()==y) {
+								//setPoints
+								g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+								bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 								//1
 								g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4181,6 +4159,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4224,6 +4205,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4270,6 +4254,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4315,6 +4302,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4361,6 +4351,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4405,6 +4398,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4449,6 +4445,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4495,6 +4494,9 @@ System.out.println(numofYellowSquares);
 									//move the soldier
 								for(int i=0;i<g.getBlackPieces().length;i++) {
 									if(g.getBlackPieces()[i].getLocation().getX()==x && g.getBlackPieces()[i].getLocation().getY()==y) {
+										//setPoints
+										g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+										bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 										//1
 										g.getBoard()[x][y].setSoldierColor(Soldier_COLOR_AtSquare.EMPTY);
 
@@ -4525,6 +4527,9 @@ System.out.println(numofYellowSquares);
 				for(int i=0;i<g.getWhitePieces().length;i++) {
 					if(g.getWhitePieces()[i].getLocation().getX()==x && g.getWhitePieces()[i].getLocation().getY()==y) {
 							MoveBlackQueen(sourcex,sourcey,targetx ,targety,i);
+							//setPoints
+							g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+100);
+							bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
 					}
 				}
 				
@@ -4615,6 +4620,7 @@ System.out.println(numofYellowSquares);
 			*/
 			}
 		}
+		finallyFunction();
 		return;
 		
 		
@@ -4678,6 +4684,112 @@ System.out.println(board[targetx][targety].getSquareColor());
 	}
 
 
-	
+	public void finallyFunction(){
+		if(!wasinYellow) {
+
+			int diffPoints=0;// the points that should be decreased or increased to the player
+			//checking for the white player that have finished his turn
+			if(turn==Soldier_COLOR_AtSquare.BLACK) {
+				long elapsedTime = endwhite - startwhite;
+				long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
+				System.out.printf("The timer for the white is:%d",convert);
+				if(convert>60) {
+					diffPoints=(int)convert-60;
+					g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()-diffPoints);
+					wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
+
+				}
+				if(convert<60) {
+					diffPoints=60-(int)convert;
+					g.getWhitePlayer().setPoints(g.getWhitePlayer().getPoints()+diffPoints);
+					wPointsValue.setText((Integer.toString(g.getWhitePlayer().getPoints())));
+
+				}
+			}
+			if(turn==Soldier_COLOR_AtSquare.WHITE) {
+				long elapsedTime = endblack - startblack;
+				long convert = TimeUnit.SECONDS.convert(elapsedTime, TimeUnit.NANOSECONDS);
+				System.out.printf("The timer for the black is:%d",convert);
+
+				if(convert>60) {
+					diffPoints=(int)convert-60;
+					g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()-diffPoints);
+					System.out.println("1337");
+					bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
+
+				}
+				if(convert<60) {
+					diffPoints=60-(int)convert;
+					g.getBlackPlayer().setPoints(g.getBlackPlayer().getPoints()+diffPoints);
+					System.out.println("1344");
+					bPointsValue.setText((Integer.toString(g.getBlackPlayer().getPoints())));
+
+				}
+			}
+		}
+		// Resert the colored square to black(orange/green/red/blue)
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				if(board[i][j]!=null) {
+					if(board[i][j].getSquareColor()==SQUARE_COLOR.GREEN || board[i][j].getSquareColor()==SQUARE_COLOR.ORANGE || board[i][j].getSquareColor()==SQUARE_COLOR.RED || board[i][j].getSquareColor()==SQUARE_COLOR.BLUE) {
+						board[i][j]=SquareFactory.getSquareObject(SQUARE_COLOR.BLACK,
+								i, j, Soldier_COLOR_AtSquare.EMPTY, null);
+						Rectangle colored= getRectangle(i,j);
+						if(colored!=null)
+							colored.setFill(Color.rgb(94,91,91));
+
+					}
+				}
+			}
+		}
+
+		if(theGameisEnd()==true) {
+
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Game Ended");
+			alert.setHeaderText("The game ended, The winner is");
+			alert.setContentText(theWinner);
+			//alert.show();
+
+			// open main menu after ok is pressed
+			Optional<ButtonType> result = alert.showAndWait();
+			//music();
+			if (result.get() == ButtonType.OK) {
+				((Stage) Pane.getScene().getWindow()).close();
+				Stage stage=new  Stage();
+				MainBoardController temp=new MainBoardController();
+				try {
+					temp.start(stage);	
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+
+
+
+		}
+		
+		// counting the yellow square at the board
+		numofYellowSquares=0;
+		for(int i=0; i<8; i++) {
+			for(int j=0; j<8; j++) {
+				if(board[i][j]!=null) {
+					if(board[i][j].getSquareColor()==SQUARE_COLOR.YELLOW) {
+						numofYellowSquares++;
+System.out.println(numofYellowSquares);
+					}
+				}
+				}
+			}
+		
+		while(numofYellowSquares<3) {
+			CheckAndDoYellowSquares();
+
+		}
+
+		CheckAndDoBlueSquare();
+		CheckAndDoRedSquare();
+		
+	}
 	
 }
