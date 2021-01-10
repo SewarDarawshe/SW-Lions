@@ -173,7 +173,7 @@
                   <Font name="Cooper Black" size="13.0" />
                </font>
             </Text>
-            <ToggleButton fx:id="MusicBTN" layoutX="85.0" layoutY="182.0" mnemonicParsing="false" onAction="#soundControl" prefHeight="22.0" prefWidth="20.0" textFill="#783131" />
+            <ToggleButton fx:id="MusicBTN" layoutX="85.0" layoutY="209.0" mnemonicParsing="false" onAction="#soundControl" prefHeight="22.0" prefWidth="20.0" textFill="#783131" />
 
          </children>
       </Pane>
